@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/schemas/character-lite.schema.json",
+  "title": "CharacterDefinitionLite",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "message": { "type": "string" },
+    "client_ready": { "type": "boolean" },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "char_name": { "type": "string" },
+        "char_slug": {
+          "type": "string",
+          "pattern": "^[a-z0-9_]+$"
+        },
+        "archetype": { "type": "string" },
+        "vibe": { "type": "string" }
+      },
+      "required": ["char_name", "char_slug"]
+    },
+    "personality": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "desire": { "type": "string" },
+        "fear": { "type": "string" },
+        "flaw": { "type": "string" },
+        "traits": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "maxItems": 6,
+          "uniqueItems": true
+        },
+        "quirk": { "type": "string" },
+        "values": {
+          "type": "array",
+          "items": { "type": "string" },
+          "maxItems": 5,
+          "uniqueItems": true
+        }
+      },
+      "required": ["desire", "fear", "flaw", "traits"]
+    },
+    "physical": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "species": { "type": "string" },
+        "age_range": {
+          "type": "string",
+          "enum": ["child", "teen", "young_adult", "adult", "middle_aged", "elder"]
+        },
+        "gender": {
+          "type": "string",
+          "enum": ["male", "female", "nonbinary", "unspecified"]
+        },
+        "height_category": { "type": "string", "enum": ["short", "average", "tall"] },
+        "build": {
+          "type": "string",
+          "enum": ["slim", "average", "muscular", "heavy", "lithe", "stocky", "other"]
+        },
+        "skin_tone": { "$ref": "#/definitions/colorOrNamed" },
+        "hair_color": { "$ref": "#/definitions/colorOrNamed" },
+        "hair_style": { "type": "string" },
+        "eye_color": { "$ref": "#/definitions/colorOrNamed" },
+        "distinctive_features": {
+          "type": "array",
+          "items": { "type": "string" },
+          "maxItems": 6,
+          "uniqueItems": true
+        },
+        "aesthetic_vibe": { "type": "string" }
+      },
+      "required": ["age_range", "height_category", "build", "skin_tone", "hair_color", "eye_color"]
+    }
+  },
+  "required": ["client_ready", "identity", "personality", "physical"],
+  "definitions": {
+    "colorHex": {
+      "type": "string",
+      "pattern": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$"
+    },
+    "colorOrNamed": {
+      "anyOf": [
+        { "$ref": "#/definitions/colorHex" },
+        { "type": "string" }
+      ]
+    }
+  }
+}

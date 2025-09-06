@@ -1,0 +1,22 @@
+{
+  "name": "pixelart-backbone",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@10.15.1",
+
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "format": "turbo run format",
+    "dev:infra": "docker compose up -d redis",
+    "smoke": "bash ./scripts/smoke-local.sh"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0",
+    "typescript": "^5.6.0",
+    "@types/node": "^20.14.12"
+  }
+}
+

@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022"],
+    "types": ["node"],
+    "strict": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@pixelart/schemas": ["packages/schemas/src/index.ts"],
+      "@pixelart/pipeline": ["packages/pipeline/src/index.ts"],
+      "@pixelart/config":    ["packages/config/src/index.ts"],
+      "@pixelart/adapters":  ["packages/adapters/src/index.ts"]
+    }
+  }
+}

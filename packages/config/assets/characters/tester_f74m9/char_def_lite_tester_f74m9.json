@@ -1,0 +1,24 @@
+{
+  "client_ready": true,
+  "identity": {
+    "char_name": "Tester",
+    "char_slug": "tester_f74m9"
+  },
+  "personality": {
+    "desire": "x",
+    "fear": "y",
+    "flaw": "z",
+    "traits": [
+      "a",
+      "b"
+    ]
+  },
+  "physical": {
+    "age_range": "adult",
+    "height_category": "average",
+    "build": "average",
+    "skin_tone": "tan",
+    "hair_color": "brown",
+    "eye_color": "green"
+  }
+}

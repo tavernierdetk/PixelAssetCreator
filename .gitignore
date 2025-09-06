@@ -1,0 +1,18 @@
+node_modules/
+dist/
+.pnpm-store/
+
+# Env & local config
+.env
+apps/*/.env
+packages/*/.env
+
+# Editor/OS
+.DS_Store
+
+# Generated assets at runtime
+assets/characters/
+
+# Vitest cache
+.vitest/
+coverage/

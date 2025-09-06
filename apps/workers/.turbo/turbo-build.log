@@ -1,0 +1,5 @@
+
+
+> @app/workers@0.1.0 build /Users/alexandredube-cote/entropy/pixelart-backbone/apps/workers
+> tsc -p tsconfig.json
+
