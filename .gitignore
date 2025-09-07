@@ -6,6 +6,8 @@ dist/
 .env
 apps/*/.env
 packages/*/.env
+assets/project/project_settings.json
+
 
 # Editor/OS
 .DS_Store

@@ -1,47 +1,82 @@
-import express, { Request, Response } from "express";
+// apps/api/src/app.ts
+import express, { type Express, type NextFunction, type Request, type Response } from "express";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
+import rateLimit from "express-rate-limit";
 
-import * as schemas from "@pixelart/schemas";          // ← robust to CJS or ESM
-import type { CharacterLite } from "@pixelart/schemas";
 import { portraitQ } from "@pixelart/pipeline";
+
+// Local routes (NodeNext requires .js on local imports)
+import { health } from "./routes/health.js";
+import { admin } from "./routes/admin.js";
 import { intake } from "./routes/intake.js";
 import { jobs } from "./routes/jobs.js";
 import { assets } from "./routes/assets.js";
+import { project } from "./routes/project.js";
+import { assistantRouter } from "./routes/assistant.js";
 
-
-
-// works whether @pixelart/schemas is CJS (default) or ESM (named)
-const validateCharacterLite =
-  (schemas as any).default?.validateCharacterLite ??
-  (schemas as any).validateCharacterLite;
-
-export function createApp() {
+export function createApp(): Express {
   const app = express();
+
+  // Core middleware
   app.use(express.json({ limit: "2mb" }));
-  app.use(cors());
+  app.use(cors({ origin: process.env.API_CORS_ORIGIN ?? "*" }));
   app.use(helmet());
   app.use(morgan("dev"));
+
+  // Basic rate limiting (configurable via env)
+  app.use(
+    rateLimit({
+      windowMs: Number(process.env.RATE_LIMIT_WINDOW_MS ?? 60_000),
+      max: Number(process.env.RATE_LIMIT_MAX ?? 300),
+      standardHeaders: true,
+      legacyHeaders: false,
+    })
+  );
+
+  // Health/Readiness
+  app.use(health);
+  app.get("/health", (_req, res) => res.json({ ok: true })); // legacy alias if needed
+
+  // Optional admin (Bull Board)
+  if ((process.env.ADMIN_ENABLED ?? "false") === "true") {
+    app.use(admin);
+  }
+
+  // Pipeline endpoints
+  app.post(
+    "/pipeline/:slug/portrait",
+    async (req: Request, res: Response, next: NextFunction) => {
+      try {
+        const { slug } = req.params as Record<string, string>;
+        const job = await portraitQ.add("portrait", { slug });
+        return res.status(202).json({ jobId: job.id });
+      } catch (err) {
+        next(err);
+      }
+    }
+  );
+
+  // App routes
   app.use(intake);
   app.use(jobs);
   app.use(assets);
+  app.use(project);
+  app.use(assistantRouter);
+  
 
-  app.get("/health", (_req: Request, res: Response) => res.json({ ok: true }));
-
-  app.post("/validate-lite", (req: Request, res: Response) => {
-    const ok = validateCharacterLite(req.body as CharacterLite);
-    if (!ok) return res.status(400).json({ ok: false, errors: validateCharacterLite.errors });
-    return res.json({ ok: true });
+  // Unified error handler
+  app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {
+    const anyErr = err as any;
+    const code = anyErr?.statusCode ?? 500;
+    res.status(code).json({
+      ok: false,
+      code: anyErr?.code ?? "INTERNAL_ERROR",
+      message: anyErr?.message ?? "Unexpected error",
+    });
   });
 
-  app.post("/pipeline/:slug/portrait", async (req: Request, res: Response) => {
-    const { slug } = req.params as Record<string, string>;
-    const job = await portraitQ.add("portrait", { slug });
-    return res.status(202).json({ jobId: job.id });
-  });
-
-  app.use(intake);
   return app;
 }
 

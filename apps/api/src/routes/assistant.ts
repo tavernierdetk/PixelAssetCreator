@@ -2,7 +2,7 @@
 import { Router, type Request, type Response, type NextFunction } from "express";
 import { readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import { runAssistantTurn } from "@pixelart/assistants";
+import { runAssistantTurn, InvalidAssistantPayloadError } from "@pixelart/assistants";
 
 export const assistantRouter: import("express").Router = Router();
 
@@ -20,14 +20,14 @@ export const assistantRouter: import("express").Router = Router();
  * Calls the assistant which returns a *validated full draft* (not a JSON Patch).
  * Optionally persists the new draft to disk when `persist=true` and `slug` is provided.
  */
-assistantRouter.post(
-  "/assistant/turn",
-  async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const { message, draft, slug, thread, persist } = req.body ?? {};
-      if (!message) {
-        return res.status(400).json({ ok: false, error: "message required" });
-      }
+
+
+assistantRouter.post("/assistant/turn", async (req: Request, res: Response) => {
+  try {
+    const { message, draft, slug, thread, persist } = req.body ?? {};
+    if (!message) {
+      return res.status(400).json({ ok: false, code: "BAD_REQUEST", message: "message required" });
+    }
 
       // Strict: require OpenAI config (no fallback)
       const apiKey = process.env.OPENAI_API_KEY;
@@ -60,28 +60,29 @@ assistantRouter.post(
           .json({ ok: false, error: "draft or slug required" });
       }
 
-      // Ask assistant → returns assistantText + full validated draft
-      const result = await runAssistantTurn({
-        userMessage: message,
-        draft: baseDraft,
-        thread,
-        openai: { apiKey, assistantId },
+
+
+    const result = await runAssistantTurn({
+      userMessage: message,
+      draft: draft ?? baseDraft,
+      thread,
+      openai: { apiKey, assistantId },
+    });
+
+    // optionally persist result.draft here
+
+    return res.json({ ok: true, message: result.assistantText, draft: result.draft });
+
+  } catch (err: any) {
+    if (err instanceof InvalidAssistantPayloadError) {
+      // ← return the validator’s summaries so we can see WHAT failed
+      return res.status(400).json({
+        ok: false,
+        code: "INVALID_ASSISTANT_PAYLOAD",
+        errors: err.errors,
       });
-
-      const newDraft = result.draft;
-
-      // Optionally persist if we loaded by slug
-      if (persist && slug && savePath) {
-        await writeFile(savePath, JSON.stringify(newDraft, null, 2), "utf8");
-      }
-
-      return res.json({
-        ok: true,
-        message: result.assistantText,
-        draft: newDraft,
-      });
-    } catch (err) {
-      next(err as any);
     }
+    console.error("[assistant.turn] unexpected error:", err);
+    return res.status(500).json({ ok: false, code: "INTERNAL_ERROR", message: "assistant_error" });
   }
-);
+});

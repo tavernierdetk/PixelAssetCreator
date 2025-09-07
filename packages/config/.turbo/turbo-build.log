@@ -1,5 +1,5 @@
 
 
-> @config@0.1.0 build /Users/alexandredube-cote/entropy/pixelart-backbone/packages/config
-> tsc -p tsconfig.json
+> @pixelart/config@0.1.0 build /Users/alexandredube-cote/entropy/pixelart-backbone/packages/config
+> tsc -b tsconfig.json
 
