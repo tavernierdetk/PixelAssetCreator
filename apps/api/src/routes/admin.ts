@@ -20,5 +20,6 @@ createBullBoard({
   serverAdapter,
 });
 
-export const admin = Router();
+
+export const admin: import("express").Router = Router();
 admin.use("/admin/queues", serverAdapter.getRouter());

@@ -4,7 +4,7 @@ import { ASSET_ROOT, ensureDir } from "@pixelart/config";
 import { promises as fs } from "node:fs";
 import { join } from "node:path";
 
-export const health = Router();
+export const health: import("express").Router = Router();
 
 health.get("/healthz", (_req: Request, res: Response) => {
   res.json({ ok: true, ts: Date.now() });
