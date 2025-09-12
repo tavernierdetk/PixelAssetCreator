@@ -12,11 +12,14 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
 
-    "baseUrl": ".",
-    "paths": {
-      "@pixelart/pipeline": ["packages/pipeline/src/index.ts"],
-      "@pixelart/config": ["packages/config/src/index.ts"],
-      "@pixelart/adapters": ["packages/adapters/src/index.ts"]
-    }
+    "baseUrl": "."
+    // "paths": {
+    //   "@pixelart/pipeline": ["packages/pipeline/src/index.ts"],
+    //   "@pixelart/adapters": ["packages/adapters/src/index.ts"],
+    //   "@pixelart/schemas": ["packages/schemas/src/index.ts"],
+    //   "@pixelart/validators": ["packages/validators/src/index.ts"],
+    //   "@pixelart/sprite-compose": ["packages/sprite-compose/src/index.ts"],
+    //   "@pixelart/sprite-catalog": ["packages/sprite-catalog/src/index.ts"]
+    // }
   }
 }

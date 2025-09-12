@@ -1,59 +1,27 @@
-// packages/sprite-catalog/src/buildEnumSchema.ts
 import * as fs from "node:fs";
 import * as path from "node:path";
+import { fileURLToPath } from "node:url";
+import { resolveUlpcSheetDefs } from "@pixelart/config";
 
-/**
- * Build a JSON Schema whose enums are derived from the ULPC sheet_definitions.
- *
- * Env:
- *  ULPC_SHEET_DEFS  → absolute path to .../sheet_definitions (wins if set)
- *  ULPC_SCHEMA_OUT  → absolute path to output schema JSON (optional)
- */
+/** Resolve package & monorepo roots from this file (works from src or dist) */
+const THIS_DIR = path.dirname(fileURLToPath(import.meta.url));       // .../packages/sprite-catalog/src OR /dist
+// if running from dist, parent is dist; one up gives package root. if from src, one up gives package root too.
+const PKG_ROOT = path.resolve(THIS_DIR, "..");                       // .../packages/sprite-catalog
+const MONO_ROOT = path.resolve(PKG_ROOT, "..", "..");                // .../<repo-root>
 
-const ROOT = process.cwd();
+/** 1) Resolve ULPC sheet_definitions (env wins; otherwise search relative to repo root) */
+const SHEETDEFS_DIR: string = resolveUlpcSheetDefs({ cwd: MONO_ROOT });
 
-/** 1) Resolve sheet_definitions directory (env wins; else common fallbacks) */
-const CANDIDATES: string[] = [
-  process.env.ULPC_SHEET_DEFS || "",
-  path.join(ROOT, "assets", "ulpc", "sheet_definitions"),
-  path.join(ROOT, "assets", "sheet_definitions"),
-  path.join(
-    ROOT,
-    "..",
-    "Universal-LPC-Spritesheet-Character-Generator",
-    "sheet_definitions"
-  ),
-].filter(Boolean);
-
-const found = CANDIDATES.find((p) => fs.existsSync(p));
-if (!found) {
-  console.error(
-    `[sprite-catalog] sheet_definitions not found.\nTried:\n${CANDIDATES
-      .map((p) => ` - ${p}`)
-      .join(
-        "\n"
-      )}\nSet ULPC_SHEET_DEFS=/absolute/path/to/Universal-LPC-Spritesheet-Character-Generator/sheet_definitions`
-  );
-  process.exit(1);
-}
-const SHEETDEFS_DIR: string = found; // narrowed non-optional
-
-/** 2) Output path (defaults to @pixel/schemas src so it’s bundled there) */
+/** 2) Output path (defaults into @pixelart/schemas src so it’s bundled there) */
 const SCHEMA_OUT: string =
   process.env.ULPC_SCHEMA_OUT ??
-  path.join(
-    ROOT,
-    "packages",
-    "schemas",
-    "src",
-    "ulpc",
-    "ulpc.build.schema.enum.json"
-  );
+  path.join(MONO_ROOT, "packages", "schemas", "src", "ulpc", "ulpc.build.schema.enum.json");
 
-/** Schema skeleton (only parts we mutate are typed explicitly for safety) */
+/** Schema skeleton */
 type VariantSwitch = {
-  if: { properties: { category: { const: string } } };
+  if:   { properties: { category: { const: string } }; required?: ["category"] };
   then: { properties: { variant: { type: "string"; enum: string[] } } };
+  else: false; // ⬅️ non-matching branches must fail
 };
 type EnumSchema = {
   $schema: string;
@@ -123,18 +91,7 @@ const schema: EnumSchema = {
       type: "array",
       items: {
         type: "string",
-        enum: [
-          "spellcast",
-          "thrust",
-          "walk",
-          "slash",
-          "shoot",
-          "hurt",
-          "bow",
-          "climb",
-          "run",
-          "jump",
-        ],
+        enum: ["spellcast", "thrust", "walk", "slash", "shoot", "hurt", "bow", "climb", "run", "jump", "idle", "sit", "emote", "combat"],
       },
       uniqueItems: true,
     },
@@ -164,14 +121,8 @@ const schema: EnumSchema = {
               tint: {
                 type: "object",
                 properties: {
-                  rgb: {
-                    type: "string",
-                    pattern: "^#([0-9A-Fa-f]{6})$",
-                  },
-                  mode: {
-                    type: "string",
-                    enum: ["multiply", "overlay", "screen", "replace"],
-                  },
+                  rgb: { type: "string", pattern: "^#([0-9A-Fa-f]{6})$" },
+                  mode: { type: "string", enum: ["multiply", "overlay", "screen", "replace"] },
                 },
                 additionalProperties: false,
               },
@@ -194,11 +145,7 @@ const schema: EnumSchema = {
           notes: { type: "string" },
           authors: { type: "array", items: { type: "string" }, minItems: 1 },
           licenses: { type: "array", items: { type: "string" }, minItems: 1 },
-          urls: {
-            type: "array",
-            items: { type: "string", format: "uri" },
-            minItems: 1,
-          },
+          urls: { type: "array", items: { type: "string", format: "uri" }, minItems: 1 },
         },
         additionalProperties: false,
       },
@@ -211,7 +158,7 @@ const schema: EnumSchema = {
   },
 };
 
-/** Helpers (sync, simple, fast for build scripts) */
+/*──────── helpers ────────*/
 function walk(dir: string): string[] {
   const out: string[] = [];
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -221,15 +168,14 @@ function walk(dir: string): string[] {
   }
   return out;
 }
-
-function readJson(file: string): unknown | null {
+function readJson(file: string): any | null {
   try {
     return JSON.parse(fs.readFileSync(file, "utf-8"));
   } catch {
     return null;
   }
 }
-
+/** derive category id from *path*, e.g. hair/bedhead/adult */
 function categoryIdFromPath(file: string): string {
   return path
     .relative(SHEETDEFS_DIR, file)
@@ -237,62 +183,69 @@ function categoryIdFromPath(file: string): string {
     .replace(/\.json$/i, "")
     .replace(/\/index$/i, "");
 }
-
-function coerceVariants(def: any): string[] {
-  const src = def?.variants;
-  if (!Array.isArray(src)) return [];
-  const out: string[] = [];
-  for (const item of src) {
-    if (typeof item === "string") {
-      if (item) out.push(item);
-    } else if (item && typeof item === "object") {
-      const cand =
-        item.id ?? item.name ?? item.file ?? item.path ?? item.spritesheet;
-      if (typeof cand === "string" && cand) out.push(cand);
-    }
+/** normalize variant objects to a token id */
+function variantId(v: any): string | null {
+  if (typeof v === "string") return v;
+  if (v && typeof v === "object") {
+    return (v.id ?? v.name ?? v.file ?? v.path ?? null) as string | null;
   }
-  // dedupe + sort
-  return Array.from(new Set(out)).sort((a, b) => a.localeCompare(b));
+  return null;
 }
 
-/** 3) Gather categories + variant switches */
+/*──────── main build ────────*/
 const files = walk(SHEETDEFS_DIR);
 
-const categories: string[] = [];
-const switches: VariantSwitch[] = [];
+// Map category → Set<variant>
+const byCategory = new Map<string, Set<string>>();
 
 for (const f of files) {
-  const def = readJson(f) as any;
+  const def = readJson(f);
   if (!def) continue;
 
-  const id =
-    typeof def.id === "string" && def.id.trim()
-      ? String(def.id)
-      : categoryIdFromPath(f);
+  // We only care about definitions that have "variants".
+  const arr = Array.isArray(def.variants) ? def.variants : null;
+  if (!arr) continue;
 
-  const variants = coerceVariants(def);
-  if (variants.length === 0) continue;
+  const category = (def.id && typeof def.id === "string" ? def.id : categoryIdFromPath(f)) as string;
+  // Normalize category to be path-like (if someone put a display name in id, fall back to path)
+  const catLooksLikePath = category.includes("/") || category.includes("-");
+  const catId = catLooksLikePath ? category : categoryIdFromPath(f);
 
-  categories.push(id);
-  switches.push({
-    if: { properties: { category: { const: id } } },
-    then: { properties: { variant: { type: "string", enum: variants } } },
-  });
+  let set = byCategory.get(catId);
+  if (!set) {
+    set = new Set<string>();
+    byCategory.set(catId, set);
+  }
+
+  for (const v of arr) {
+    const id = variantId(v);
+    if (!id) continue;
+    set.add(String(id));
+  }
 }
 
-categories.sort((a, b) => a.localeCompare(b));
-switches.sort((a, b) =>
-  a.if.properties.category.const.localeCompare(
-    b.if.properties.category.const
-  )
-);
+/* fill schema */
+const allCategories = Array.from(byCategory.keys()).sort();
+schema.$defs.category_enum.enum = allCategories;
 
-schema.$defs.category_enum.enum = categories;
-schema.$defs.variant_enum_switch.oneOf = switches;
+schema.$defs.variant_enum_switch.oneOf = allCategories.map<VariantSwitch>((cat) => {
+  const variants: string[] = Array.from(byCategory.get(cat) ?? new Set<string>())
+    .map((v) => String(v))
+    .sort();
 
-/** 4) Write schema */
+  return {
+    if:   { properties: { category: { const: cat } }, required: ["category"] },
+    then: { properties: { variant: { type: "string", enum: variants } } },
+    else: false,
+  };
+});
+
+/* write */
 fs.mkdirSync(path.dirname(SCHEMA_OUT), { recursive: true });
 fs.writeFileSync(SCHEMA_OUT, JSON.stringify(schema, null, 2), "utf-8");
-console.log(
-  `[sprite-catalog] wrote ${SCHEMA_OUT} with ${categories.length} categories`
-);
+
+console.log("[sprite-catalog] ULPC enum schema written:");
+console.log(`  defs : ${SHEETDEFS_DIR}`);
+console.log(`  out  : ${SCHEMA_OUT}`);
+console.log(`  categories: ${allCategories.length}`);
+console.log(`  switches  : ${schema.$defs.variant_enum_switch.oneOf.length}`);

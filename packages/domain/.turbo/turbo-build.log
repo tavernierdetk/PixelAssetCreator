@@ -1,5 +1,5 @@
 
 
-> @domain@0.1.0 build /Users/alexandredube-cote/entropy/pixelart-backbone/packages/domain
-> tsc -p tsconfig.json
+> @pixelart/domain@0.1.0 build /Users/alexandredube-cote/entropy/pixelart-backbone/packages/domain
+> tsc -b
 

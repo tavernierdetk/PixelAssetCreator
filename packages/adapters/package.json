@@ -8,15 +8,22 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "import": "./dist/index.js"
     }
   },
+  "files": ["dist"],
   "scripts": {
-    "build": "tsc -p tsconfig.json"
+    "build": "tsc -b",
+    "dev": "ts-node src/index.ts" 
   },
   "dependencies": {
     "@pixelart/log": "workspace:*",
     "@pixelart/schemas": "workspace:*",
     "sharp": "^0.34.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2"
   }
 }
+
+

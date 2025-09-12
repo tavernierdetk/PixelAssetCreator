@@ -141,3 +141,13 @@ export async function enqueueIdle(slug: string) {
   if (!r.ok) throw new Error(`enqueueIdle ${r.status}`);
   return r.json() as Promise<{ jobId: string }>;
 }
+
+export async function enqueueULPC(slug: string, build?: unknown) {
+  const res = await fetch(`${API}/pipeline/${encodeURIComponent(slug)}/ulpc`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(build ? { build } : {})
+  });
+  if (!res.ok) throw new Error(`enqueueULPC failed: ${res.status}`);
+  return res.json() as Promise<{ ok: boolean; jobId: string }>;
+}

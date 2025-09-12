@@ -1,16 +1,21 @@
+// packages/validators/src/ulpcBuild.ts
+
+import type { ValidateFunction, ErrorObject } from "ajv";
+import addFormatsImport from "ajv-formats";
+import { ulpc } from "@pixelart/schemas";
 import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 
-// ✅ Type the *default* export, not the module namespace
-const Ajv: typeof import("ajv").default = require("ajv");
-const addFormats: typeof import("ajv-formats").default = require("ajv-formats");
+// ✅ Load Ajv 2020 class at runtime (no TS typings needed for this path)
+const Ajv2020: any = (require("ajv/dist/2020") as any).default ?? require("ajv/dist/2020");
 
-import type { ValidateFunction, ErrorObject } from "ajv";
-import { ulpc } from "@pixelart/schemas";
+// Normalize addFormats ESM/CJS interop so it’s callable
+const addFormats: any = (addFormatsImport as any).default ?? addFormatsImport;
 
 const schema = ulpc.build as unknown;
 
-const ajv = new Ajv({ allErrors: true, strict: false });
+// Use Ajv 2020 so schemas with `$schema: 2020-12` compile without manual metaschema import
+const ajv = new Ajv2020({ allErrors: true, strict: false });
 addFormats(ajv);
 
 const validate = ajv.compile(schema as any) as ValidateFunction<unknown>;

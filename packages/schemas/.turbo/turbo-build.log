@@ -1,5 +1,19 @@
 
 
 > @pixelart/schemas@0.1.0 build /Users/alexandredube-cote/entropy/pixelart-backbone/packages/schemas
-> tsc -b && node scripts/copy-json.mjs
+> tsc -b
 
+[96msrc/index.ts[0m:[93m11[0m:[93m27[0m - [91merror[0m[90m TS6307: [0mFile '/Users/alexandredube-cote/entropy/pixelart-backbone/packages/schemas/src/character-lite.schema.json' is not listed within the file list of project '/Users/alexandredube-cote/entropy/pixelart-backbone/packages/schemas/tsconfig.json'. Projects must list all files or use an 'include' pattern.
+
+[7m11[0m import liteSchemaRaw from "./character-lite.schema.json" with { type: "json" };
+[7m  [0m [91m                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/ulpc/index.ts[0m:[93m1[0m:[93m23[0m - [91merror[0m[90m TS6307: [0mFile '/Users/alexandredube-cote/entropy/pixelart-backbone/packages/schemas/src/ulpc/ulpc.build.schema.enum.json' is not listed within the file list of project '/Users/alexandredube-cote/entropy/pixelart-backbone/packages/schemas/tsconfig.json'. Projects must list all files or use an 'include' pattern.
+
+[7m1[0m import buildJson from "./ulpc.build.schema.enum.json" with { type: "json" };
+[7m [0m [91m                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+Found 2 errors.
+
+[41m[30m ELIFECYCLE [39m[49m [31mCommand failed with exit code 1.[39m

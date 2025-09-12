@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { PortraitsPanel } from "@/components/character/PortraitsPanel";
 import { CharacterForm } from "@/components/character/CharacterForm";
+import { ULPCPanel } from "@/components/character/ULPCPanel";
 
 import type { CharacterDefinitionLite } from "@/types";
 import {
@@ -167,6 +168,9 @@ async function handleGeneratePortrait() {
         cacheBust={imgBust}   // <-- add this
 
       />
+
+      <ULPCPanel slug={slug} files={files} />
+
 
       {/* Definition editor */}
       <Card>

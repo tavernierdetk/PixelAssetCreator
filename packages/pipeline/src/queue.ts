@@ -7,4 +7,5 @@ export const pixelQ = new Queue("pixel", connection);
 export const animsQ = new Queue("anims", connection);
 export const exportQ = new Queue("export", connection);
 export const idleQ = new Queue("idle", connection);
+export const ulpcQ = new Queue("ulpc", connection);
 

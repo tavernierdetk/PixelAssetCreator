@@ -3,22 +3,13 @@
   "compilerOptions": {
     "composite": true,
     "declaration": true,
-    "outDir": "dist",
-    "rootDir": "src",
-
+    "rootDir": "./src",
+    "outDir": "./dist",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "target": "ES2022",
-
-    "strict": true,
-    "skipLibCheck": true,
-
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
-
-    "disableSourceOfProjectReferenceRedirect": true
+    "skipLibCheck": true
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src"],
   "references": [{ "path": "../schemas" }]
 }

@@ -3,20 +3,26 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "default": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
     }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "ts-node src/index.ts" 
   },
   "dependencies": {
     "openai": "^4.104.0",
     "@pixelart/schemas": "workspace:*"
   },
-  "scripts": {
-    "build": "tsc -b"
+  "devDependencies": {
+    "typescript": "^5.9.2"
   }
 }
+
+

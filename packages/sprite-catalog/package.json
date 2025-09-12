@@ -1,21 +1,45 @@
 {
-  "name": "@pixel/sprite-catalog",
+  "name": "@pixelart/sprite-catalog",
   "version": "0.1.0",
+  "private": true,
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
   "scripts": {
     "build": "tsc -b",
     "dev": "tsc -b -w",
     "gen:schema": "node dist/buildEnumSchema.js"
   },
   "dependencies": {
-    "fuse.js": "^7.1.0"
+    "fuse.js": "^7.1.0",
+    "@pixelart/config": "workspace:*" 
+    
+
   },
   "devDependencies": {
     "typescript": "^5.5.0"
   }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

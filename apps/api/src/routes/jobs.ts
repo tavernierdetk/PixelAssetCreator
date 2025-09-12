@@ -1,9 +1,23 @@
 import { Router, type Request, type Response } from "express";
-import { portraitQ as portraitQueue, idleQ as idleQueue } from "@pixelart/pipeline";
+import { portraitQ as portraitQueue, idleQ as idleQueue, ulpcQ } from "@pixelart/pipeline";
+import type { Job, Queue } from "bullmq";
+
+import pino from "pino";
+
+const log = pino({ name: "@api/jobs", transport: { target: "pino-pretty" }});
 
 
 export const jobs: import("express").Router = Router();
+const queues: Queue[] = [portraitQueue, idleQueue, ulpcQ].filter(Boolean) as Queue[];
 
+
+async function findJob(id: string): Promise<Job | null> {
+  for (const q of queues) {
+    const j = await q.getJob(id);
+    if (j) return j;
+  }
+  return null;
+}
 
 // Enqueue portrait generation
 jobs.post("/pipeline/:slug/portrait", async (req: Request, res: Response) => {
@@ -25,30 +39,43 @@ jobs.post("/pipeline/:slug/idle", async (req: Request, res: Response) => {
   res.status(202).json({ jobId: job.id });
 });
 
-jobs.get("/jobs/:id", async (req, res, next) => {
-  try {
-    res.set("Cache-Control", "no-store, no-cache, must-revalidate");
-    res.set("Pragma", "no-cache");
-    res.set("Expires", "0");
-    res.set("ETag", `${Date.now()}-${Math.random()}`);
+jobs.post("/pipeline/:slug/ulpc", async (req, res) => {
+  const slug = req.params.slug;
+  const build = req.body?.build ?? null;
 
-    const id = req.params.id;
-    const job = await portraitQueue.getJob(id);
+  const job = await ulpcQ.add("ulpc", { slug, build }, {
+    attempts: 1,                 // avoid the failed→retry window
+    removeOnComplete: 60,        // keep for 60s; adjust to taste
+    removeOnFail: 3600
+  });
+  res.status(202).json({ ok: true, jobId: job.id });
+});
 
-    if (!job) {
-      // If the job was removed immediately after completion, treat it as "gone"
-      // so clients can stop polling and just refresh assets.
-      return res.status(200).json({ id, state: "gone", progress: 100, returnvalue: null });
-    }
+jobs.get("/jobs/:id", async (req: Request, res: Response) => {
+  res.set("Cache-Control", "no-store, no-cache, must-revalidate");
+  res.set("Pragma", "no-cache");
+  res.set("Expires", "0");
 
-    const state = await job.getState();
-    const progress = job.progress ?? 0;
-    const returnvalue = job.returnvalue ?? null;
+  const id = req.params.id;
+  const job = await findJob(id);
+  if (!job) return res.status(404).json({ ok: false, error: "not_found" });
 
-    res.json({ id, name: job.name, state, progress, returnvalue });
-  } catch (err) {
-    next(err);
-  }
+  const state = await job.getState();
+
+  // include retry + debug info so the client can make a better call
+  res.json({
+    ok: true,
+    id: job.id,
+    name: job.name,
+    state,                       // waiting|active|completed|failed|delayed
+    progress: job.progress ?? 0,
+    returnvalue: job.returnvalue ?? null,
+    attemptsMade: job.attemptsMade ?? 0,
+    attempts: job.opts?.attempts ?? 1,
+    failedReason: (job as any).failedReason ?? null,
+    finishedOn: job.finishedOn ?? null,
+    processedOn: job.processedOn ?? null
+  });
 });
 
 jobs.get("/debug/portrait-counts", async (_req, res) => {

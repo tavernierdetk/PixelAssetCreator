@@ -9,6 +9,9 @@
     "build": "tsc -p tsconfig.json"
   },
   "dependencies": {
+    "@pixelart/pipeline": "workspace:*",
+    "@pixelart/sprite-compose": "workspace:*",
+    "@pixelart/validators": "workspace:*",
     "@pixelart/adapters": "workspace:*",
     "@pixelart/config": "workspace:*",
     "@pixelart/log": "workspace:*",

@@ -1,25 +1,29 @@
 {
   "name": "@pixelart/schemas",
   "version": "0.1.0",
+  "private": true,
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "import": "./dist/index.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "tsc -b && node scripts/copy-json.mjs"
+    "prebuild": "pnpm --filter @pixelart/sprite-catalog build && node ../sprite-catalog/dist/buildEnumSchema.js",
+    "build": "tsc -b",
+    "dev": "ts-node src/index.ts"
   },
   "devDependencies": {
-    "cpy-cli": "^5.0.0",
-    "typescript": "^5.5.0"
+    "typescript": "^5.9.2"
   },
   "dependencies": {
     "ajv": "^8.17.1",
-    "ajv-formats": "^3.0.1"
+    "ajv-formats": "^2.1.1"
   }
 }
