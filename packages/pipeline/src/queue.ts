@@ -6,3 +6,5 @@ export const portraitQ = new Queue("portrait", connection);
 export const pixelQ = new Queue("pixel", connection);
 export const animsQ = new Queue("anims", connection);
 export const exportQ = new Queue("export", connection);
+export const idleQ = new Queue("idle", connection);
+

@@ -10,12 +10,13 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+
     "baseUrl": ".",
     "paths": {
-      "@pixelart/schemas": ["packages/schemas/src/index.ts"],
       "@pixelart/pipeline": ["packages/pipeline/src/index.ts"],
-      "@pixelart/config":    ["packages/config/src/index.ts"],
-      "@pixelart/adapters":  ["packages/adapters/src/index.ts"]
+      "@pixelart/config": ["packages/config/src/index.ts"],
+      "@pixelart/adapters": ["packages/adapters/src/index.ts"]
     }
   }
 }

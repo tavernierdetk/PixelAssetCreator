@@ -10,6 +10,7 @@
         "test": "vitest --run"
     },
     "dependencies": {
+        "@pixelart/schemas": "workspace:*",
         "@tanstack/react-query": "^5.56.2",
         "framer-motion": "^11.2.10",
         "react": "^18.3.1",

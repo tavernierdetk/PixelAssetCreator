@@ -1,0 +1,3 @@
+[submodule "packages/sprite-catalog/vendor/ulpc-src"]
+	path = packages/sprite-catalog/vendor/ulpc-src
+	url = https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator.git

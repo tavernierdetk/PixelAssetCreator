@@ -1,0 +1,21 @@
+{
+  "name": "@pixel/sprite-catalog",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -b -w",
+    "gen:schema": "node dist/buildEnumSchema.js"
+  },
+  "dependencies": {
+    "fuse.js": "^7.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0"
+  }
+}

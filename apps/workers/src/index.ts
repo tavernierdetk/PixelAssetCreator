@@ -2,6 +2,8 @@ import "dotenv/config";
 
 // start real workers (each worker registers itself on import)
 import "./portrait.worker";
+import "./idle.worker";
+
 
 import pino from "pino";
 const logger = pino({ transport: { target: "pino-pretty" } });

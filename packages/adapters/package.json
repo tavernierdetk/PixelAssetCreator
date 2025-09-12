@@ -8,7 +8,6 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
       "default": "./dist/index.js"
     }
   },
@@ -16,6 +15,8 @@
     "build": "tsc -p tsconfig.json"
   },
   "dependencies": {
+    "@pixelart/log": "workspace:*",
+    "@pixelart/schemas": "workspace:*",
     "sharp": "^0.34.3"
   }
 }

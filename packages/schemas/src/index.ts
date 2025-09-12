@@ -1,18 +1,23 @@
-import addFormats from "ajv-formats";
-import Ajv, { type ErrorObject } from "ajv";
+// packages/schemas/src/index.ts
 
-// JSON is loaded via CJS require in this pkg (CJS output)
-const raw = require("./character-lite.schema.json");
+import AjvImport, { type ValidateFunction, type ErrorObject } from "ajv";
+import addFormatsImport from "ajv-formats";
+
+// Normalize default/namespace interop so Ajv is constructable and addFormats is callable
+const Ajv: any = (AjvImport as any).default ?? AjvImport;
+const addFormats: any = (addFormatsImport as any).default ?? addFormatsImport;
+
+// ✅ TS 5.5+ import attributes (replaces `assert { type: "json" }`)
+import liteSchemaRaw from "./character-lite.schema.json" with { type: "json" };
 
 // If the file wraps the actual JSON Schema under `schema`, use that; otherwise use the raw object.
-const liteSchema = (raw && raw.schema) ? raw.schema : raw;
+const liteSchema: unknown = (liteSchemaRaw as any)?.schema ?? liteSchemaRaw;
 
-const ajv = new Ajv({ allErrors: true, strict: false });
+// Ajv instance + formats
+export const ajv = new Ajv({ allErrors: true, strict: false });
 addFormats(ajv);
 
-// Compile the *actual* JSON Schema
-export const validateCharacterLite = ajv.compile<CharacterLite>(liteSchema);
-
+// ---------------- Types ----------------
 export type CharacterLite = {
   client_ready: boolean;
   message?: string;
@@ -47,15 +52,22 @@ export type CharacterLite = {
 
 export type AjvSummary = { message?: string; instancePath?: string; keyword?: string }[];
 
+// Compile the schema
+// (No type arg on an untyped function; cast the result to ValidateFunction<CharacterLite>)
+export const validateCharacterLite =
+  ajv.compile(liteSchema as any) as ValidateFunction<CharacterLite>;
+
 /**
  * Assistant payload validator:
  * - requires `message` to be a string
  * - validates the rest with the existing Character Lite schema
- * This avoids schema duplication and keeps your codebase lean.
  */
-export function validateAssistantChatPayload(input: unknown):
+export function validateAssistantChatPayload(
+  input: unknown
+):
   | { ok: true; message: string; draft: CharacterLite }
-  | { ok: false; errors: AjvSummary } {
+  | { ok: false; errors: AjvSummary }
+{
   if (typeof input !== "object" || input === null) {
     return { ok: false, errors: [{ message: "payload must be object", instancePath: "", keyword: "type" }] };
   }
@@ -70,7 +82,7 @@ export function validateAssistantChatPayload(input: unknown):
   const valid = validateCharacterLite(draft);
   if (!valid) {
     const errs: AjvSummary =
-      (validateCharacterLite.errors as ErrorObject[] | null | undefined)?.map(e => ({
+      (validateCharacterLite.errors as (ErrorObject[] | null | undefined))?.map(e => ({
         message: e.message,
         instancePath: e.instancePath,
         keyword: e.keyword,
@@ -85,3 +97,4 @@ export default {
   validateCharacterLite,
   validateAssistantChatPayload,
 };
+export * as ulpc from "./ulpc/index.js";

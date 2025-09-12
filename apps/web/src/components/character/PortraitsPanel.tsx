@@ -4,6 +4,7 @@ import { fileUrl } from "@/lib/api";
 
 type Slot = "portrait" | "idle";
 
+
 export function PortraitsPanel({
   slug,
   files,
@@ -13,6 +14,7 @@ export function PortraitsPanel({
   onRemove,
   hasDefinition,
   pending = {},
+  cacheBust, // <-- new
 }: {
   slug: string;
   files: string[];
@@ -22,7 +24,10 @@ export function PortraitsPanel({
   onRemove: (slot: Slot) => void;
   hasDefinition: boolean;
   pending?: Partial<Record<Slot | "all", boolean>>;
+  /** cache-busting token (e.g., a timestamp) to force fresh <img> loads */
+  cacheBust?: number;
 }) {
+
   const basenames = (files ?? []).map((f) => f.split("/").pop() || f);
   const fullPortrait = basenames.find((n) =>
     /^(high_res_portrait_|portrait_).*\.(png|webp|jpg|jpeg)$/i.test(n)
@@ -30,6 +35,8 @@ export function PortraitsPanel({
   const idlePixel = basenames.find((n) =>
     /^(idle_static_|idle_pixelated_).*\.(png|webp|jpg|jpeg)$/i.test(n)
   );
+  console.debug("[panel] files", { slug, files });
+  console.debug("[panel] choose", { slug, fullPortrait, idlePixel, cacheBust });
 
   const canGenPortrait = hasDefinition;
   const canGenIdle = Boolean(fullPortrait);
@@ -53,6 +60,7 @@ export function PortraitsPanel({
             onGenerate={onGeneratePortrait}
             onUpload={(f) => onUpload("portrait", f)}
             onRemove={() => onRemove("portrait")}
+            cacheBust={cacheBust}
           />
           <SlotCard
             title="Idle Pixel Image"
@@ -65,6 +73,7 @@ export function PortraitsPanel({
             onUpload={(f) => onUpload("idle", f)}
             onRemove={() => onRemove("idle")}
             pixelated
+            cacheBust={cacheBust}
           />
         </div>
       </CardContent>
@@ -83,6 +92,7 @@ function SlotCard({
   onUpload,
   onRemove,
   pixelated = false,
+  cacheBust,
 }: {
   title: string;
   slug: string;
@@ -94,7 +104,29 @@ function SlotCard({
   onUpload: (file: File) => void;
   onRemove: () => void;
   pixelated?: boolean;
+  cacheBust?: number;
 }) {
+const src =
+  fileName != null
+    ? cacheBust
+      ? `${fileUrl(slug, fileName, cacheBust)}`
+      : fileUrl(slug, fileName)
+    : null;
+
+{src ? (
+  <img
+    className="max-h-[420px] object-contain"
+    style={pixelated ? ({ imageRendering: "pixelated" } as any) : undefined}
+    src={src}
+    alt={title}
+    draggable={false}
+    onLoad={() => console.debug("[img] loaded", { title, src })}
+    onError={() => console.error("[img] error", { title, src })}
+  />
+) : (
+  <div className="text-sm text-slate-500 text-center">{placeholder}</div>
+)}
+
   return (
     <div className="rounded-xl border p-3 bg-slate-50 min-h-64 flex flex-col gap-3">
       <div className="flex items-center justify-between">
@@ -109,12 +141,12 @@ function SlotCard({
             {isGenerating ? "Generating…" : "Generate"}
           </Button>
 
-          <UploadButton onFile={(f) => onUpload(f)} />
+          <UploadButton onFile={(f) => onUpload(f)} disabled={isGenerating} />
 
           <Button
             type="button"
             className="bg-slate-100"
-            disabled={!fileName}
+            disabled={!fileName || isGenerating}
             onClick={onRemove}
             title={!fileName ? "Nothing to remove" : undefined}
           >
@@ -123,29 +155,40 @@ function SlotCard({
         </div>
       </div>
 
-      <div className="flex-1 min-h-64 flex items-center justify-center bg-white rounded-lg border">
-        {fileName ? (
+      <div className="relative flex-1 min-h-64 flex items-center justify-center bg-white rounded-lg border overflow-hidden">
+        {src ? (
           <img
             className="max-h-[420px] object-contain"
             style={pixelated ? ({ imageRendering: "pixelated" } as any) : undefined}
-            src={fileUrl(slug, fileName)}
+            src={src}
             alt={title}
+            draggable={false}
           />
         ) : (
           <div className="text-sm text-slate-500 text-center">{placeholder}</div>
+        )}
+
+        {isGenerating && (
+          <div className="absolute inset-0 grid place-items-center bg-black/40 text-white">
+            <div className="flex items-center gap-2 text-sm">
+              <span className="animate-spin inline-block h-4 w-4 border-2 border-white border-t-transparent rounded-full" />
+              Generating…
+            </div>
+          </div>
         )}
       </div>
     </div>
   );
 }
 
-function UploadButton({ onFile }: { onFile: (f: File) => void }) {
+function UploadButton({ onFile, disabled }: { onFile: (f: File) => void; disabled?: boolean }) {
   return (
     <label className="inline-flex">
       <input
         type="file"
         accept="image/*"
         className="hidden"
+        disabled={disabled}
         onChange={(e) => {
           const f = e.target.files?.[0];
           if (f) onFile(f);
@@ -153,7 +196,7 @@ function UploadButton({ onFile }: { onFile: (f: File) => void }) {
         }}
       />
       <span>
-        <Button type="button" className="border">
+        <Button type="button" className="border" disabled={disabled}>
           Upload
         </Button>
       </span>

@@ -14,6 +14,7 @@
     "@bull-board/express": "^6.12.7",
     "@pixelart/assistants": "workspace:*",
     "@pixelart/config": "workspace:*",
+    "@pixelart/log": "workspace:*",
     "@pixelart/pipeline": "workspace:*",
     "@pixelart/schemas": "workspace:*",
     "bullmq": "^5.58.5",

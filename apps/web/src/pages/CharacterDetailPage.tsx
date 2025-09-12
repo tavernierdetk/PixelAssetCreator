@@ -42,6 +42,7 @@ export default function CharacterDetailPage() {
   const [form, setForm] = useState<CharacterDefinitionLite | null>(null);
   const [traitsText, setTraitsText] = useState("");
 
+
   useEffect(() => {
     if (defQ.data) {
       const d = defQ.data as CharacterDefinitionLite;
@@ -55,6 +56,8 @@ export default function CharacterDetailPage() {
 
   // Pending state for slot actions
   const [pending, setPending] = useState<{ portrait?: boolean; idle?: boolean }>({});
+  const [imgBust, setImgBust] = useState<number>(0);
+
 
   // Save definition
   const saveM = useMutation({
@@ -73,24 +76,48 @@ export default function CharacterDetailPage() {
     },
   });
 
-  // Generate portrait
-  async function handleGeneratePortrait() {
-    setPending((p) => ({ ...p, portrait: true }));
-    try {
-      const { jobId } = await enqueuePortrait(slug);
-      // simple poll loop
-      for (let i = 0; i < 30; i++) {
-        // eslint-disable-next-line no-await-in-loop
-        const j = await getJob(jobId);
-        if (j?.state === "completed" || j?.state === "failed") break;
-        // eslint-disable-next-line no-await-in-loop
-        await new Promise((r) => setTimeout(r, 1500));
-      }
-      await qc.invalidateQueries({ queryKey: ["assets", slug] });
-    } finally {
-      setPending((p) => ({ ...p, portrait: false }));
-    }
+  // ---- helpers ----
+async function pollJobUntilDone(jobId: string, opts?: { timeoutMs?: number; intervalMs?: number }) {
+  const timeoutMs = opts?.timeoutMs ?? 180_000;
+  const intervalMs = opts?.intervalMs ?? 1_500;
+  const t0 = Date.now();
+  let tick = 0;
+  // eslint-disable-next-line no-constant-condition
+  while (true) {
+    const j = await getJob(jobId);
+    console.debug("[portrait] poll", { jobId, tick, state: j?.state, spentMs: Date.now() - t0 });
+    if (j?.state === "completed") return j;
+    if (j?.state === "failed") throw new Error("Portrait generation failed");
+    if (Date.now() - t0 > timeoutMs) throw new Error("Portrait generation timed out");
+    tick++;
+    // eslint-disable-next-line no-await-in-loop
+    await new Promise((r) => setTimeout(r, intervalMs));
   }
+}
+
+  // Generate portrait
+async function handleGeneratePortrait() {
+  setPending((p) => ({ ...p, portrait: true }));
+  try {
+    console.debug("[portrait] enqueue", { slug });
+    const { jobId } = await enqueuePortrait(slug);
+    console.debug("[portrait] enqueued", { jobId });
+
+    await pollJobUntilDone(jobId);
+
+    // hard refresh of assets list (log inside listAssets)
+    await qc.invalidateQueries({ queryKey: ["assets", slug] });
+
+    // bump image cache-buster so <img> src changes even if name is same
+    setImgBust(Date.now());
+    console.debug("[portrait] completed; bust image", { bust: imgBust });
+  } catch (err) {
+    console.error("[portrait] error", err);
+    alert((err as Error).message || "Portrait generation failed");
+  } finally {
+    setPending((p) => ({ ...p, portrait: false }));
+  }
+}
 
   // Generate idle (server may not be implemented yet)
   async function handleGenerateIdle() {
@@ -100,6 +127,7 @@ export default function CharacterDetailPage() {
       await qc.invalidateQueries({ queryKey: ["assets", slug] });
     } catch (e) {
       console.warn("enqueueIdle not implemented yet:", e);
+      alert("Idle generation not implemented yet.");
     } finally {
       setPending((p) => ({ ...p, idle: false }));
     }
@@ -136,6 +164,8 @@ export default function CharacterDetailPage() {
         onGenerateIdle={handleGenerateIdle}
         onUpload={handleUpload}
         onRemove={handleRemove}
+        cacheBust={imgBust}   // <-- add this
+
       />
 
       {/* Definition editor */}

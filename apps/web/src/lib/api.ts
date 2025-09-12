@@ -40,14 +40,21 @@ export async function enqueuePortrait(slug: string): Promise<{ jobId: string }> 
 }
 
 export async function getJob(id: string) {
-  const res = await fetch(`${API}/jobs/${encodeURIComponent(id)}`);
-  if (!res.ok) throw new Error(`getJob ${id}: ${res.status}`);
-  return res.json();
+  const url = `${API}/jobs/${encodeURIComponent(id)}?t=${Date.now()}`;
+  const res = await fetch(url, { cache: "no-store" });
+  const json = await res.json();
+  // DEBUG
+  console.debug("[jobs] get", { id, state: json?.state, url });
+  return json as { id: string; state: string; progress?: number; returnvalue?: unknown };
 }
 
-/** Build a URL to serve a file via the new API endpoint */
-export function fileUrl(slug: string, name: string) {
-  return `${API}/characters/${encodeURIComponent(slug)}/files/${encodeURIComponent(name)}`;
+export function fileUrl(slug: string, name: string, bust?: number | string) {
+  const url = `${API}/characters/${encodeURIComponent(slug)}/files/${encodeURIComponent(name)}${
+    bust ? `?v=${bust}` : ""
+  }`;
+  // DEBUG (log only the first time per call site to avoid spam if needed)
+  console.debug("[assets] fileUrl", { slug, name, url });
+  return url;
 }
 
 async function json<T>(r: Response): Promise<T> {
@@ -83,10 +90,13 @@ export async function getLiteDef(slug: string) {
   return res.json();
 }
 
-export async function listAssets(slug: string): Promise<{ files: string[] }> {
-  const res = await fetch(`${import.meta.env.VITE_API_BASE ?? "http://localhost:4000"}/characters/${slug}/assets`);
-  if (!res.ok) throw new Error(`listAssets ${slug}: ${res.status}`);
-  return res.json();
+export async function listAssets(slug: string) {
+  const url = `${API}/characters/${encodeURIComponent(slug)}/assets?t=${Date.now()}`;
+  const res = await fetch(url, { cache: "no-store" });
+  const json = await res.json();
+  // DEBUG
+  console.debug("[assets] list", { slug, count: json?.files?.length, url });
+  return json as { ok: boolean; files: string[] };
 }
 
 export async function getProjectSettings() {
@@ -122,11 +132,8 @@ export async function deleteAsset(slug: string, slot: "portrait" | "idle") {
   return r.json() as Promise<{ ok: true; deleted: string | null }>;
 }
 
-
 export async function enqueueIdle(slug: string) {
   const r = await fetch(`${API}/pipeline/${slug}/idle`, { method: "POST" });
-
-  // Gracefully handle not-yet-implemented servers
   if (r.status === 404 || r.status === 501) {
     throw new Error("Idle pipeline not implemented on server");
   }

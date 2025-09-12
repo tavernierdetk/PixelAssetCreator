@@ -22,7 +22,12 @@ export function createApp(): Express {
   // Core middleware
   app.use(express.json({ limit: "2mb" }));
   app.use(cors({ origin: process.env.API_CORS_ORIGIN ?? "*" }));
-  app.use(helmet());
+  app.use(
+    helmet({
+      crossOriginResourcePolicy: { policy: "cross-origin" }, // <-- allow <img> from 5173
+      // (keep your other helmet defaults)
+    })
+  );
   app.use(morgan("dev"));
 
   // Basic rate limiting (configurable via env)
@@ -44,19 +49,6 @@ export function createApp(): Express {
     app.use(admin);
   }
 
-  // Pipeline endpoints
-  app.post(
-    "/pipeline/:slug/portrait",
-    async (req: Request, res: Response, next: NextFunction) => {
-      try {
-        const { slug } = req.params as Record<string, string>;
-        const job = await portraitQ.add("portrait", { slug });
-        return res.status(202).json({ jobId: job.id });
-      } catch (err) {
-        next(err);
-      }
-    }
-  );
 
   // App routes
   app.use(intake);

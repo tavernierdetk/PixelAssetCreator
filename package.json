@@ -13,9 +13,9 @@
     "smoke": "bash ./scripts/smoke-local.sh"
   },
   "devDependencies": {
-    "@types/node": "^20.14.12",
+    "@types/node": "^20.19.13",
     "turbo": "^2.0.0",
-    "typescript": "^5.6.0"
+    "typescript": "^5.9.2"
   },
   "dependencies": {
     "fast-json-patch": "^3.1.1",

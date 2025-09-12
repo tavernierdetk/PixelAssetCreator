@@ -1,0 +1,4 @@
+{ 
+    "schema": "ulpc.build/1.0", 
+    "$comment": "placeholder; will be overwritten by sprite-catalog buildEnumSchema" 
+}

@@ -18,5 +18,11 @@
       "default": "./dist/queues.js"
     }
   },
-  "scripts": { "build": "tsc -b tsconfig.json", "test": "vitest run" }
+  "scripts": {
+    "build": "tsc -b tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@pixelart/schemas": "workspace:*"
+  }
 }

@@ -11,6 +11,8 @@
   "dependencies": {
     "@pixelart/adapters": "workspace:*",
     "@pixelart/config": "workspace:*",
+    "@pixelart/log": "workspace:*",
+    "@pixelart/schemas": "workspace:*",
     "bullmq": "^5.58.5",
     "dotenv": "^16.6.1",
     "ioredis": "^5.7.0",
