@@ -24,6 +24,9 @@ export function resolveUlpcSheetDefs(opts?: { cwd?: string; extraCandidates?: st
   return found;
 }
 
-export function resolveUlpcRoot(opts?: { cwd?: string; extraCandidates?: string[] }): string {
-  return path.dirname(resolveUlpcSheetDefs(opts));
+export function resolveUlpcRoot(opts?: { cwd?: string }): string {
+  const defsDir = resolveUlpcSheetDefs(opts);
+  const repoRoot = path.resolve(defsDir, "..");          // .../ulpc-src
+  const sheetsDir = path.join(repoRoot, "spritesheets"); // .../ulpc-src/spritesheets
+  return fs.existsSync(sheetsDir) ? sheetsDir : repoRoot;
 }

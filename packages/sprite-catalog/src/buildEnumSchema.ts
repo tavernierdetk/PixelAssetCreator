@@ -192,6 +192,30 @@ function variantId(v: any): string | null {
   return null;
 }
 
+function extractLayerPaths(def: any): string[] {
+  const out = new Set<string>();
+
+  const visit = (node: any) => {
+    if (!node || typeof node !== "object") return;
+    for (const [, v] of Object.entries(node)) {
+      if (typeof v === "string") {
+        // normalize 'body/bodies/male/' -> 'body/bodies/male'
+        const rel = v.replace(/^\/*/, "").replace(/\/*$/, "");
+        if (rel.includes("/")) out.add(rel);
+      } else if (v && typeof v === "object") {
+        visit(v);
+      }
+    }
+  };
+
+  for (const [k, v] of Object.entries(def)) {
+    if (/^layer_/i.test(k) && v && typeof v === "object") {
+      visit(v);
+    }
+  }
+  return [...out];
+}
+
 /*──────── main build ────────*/
 const files = walk(SHEETDEFS_DIR);
 
@@ -206,22 +230,23 @@ for (const f of files) {
   const arr = Array.isArray(def.variants) ? def.variants : null;
   if (!arr) continue;
 
-  const category = (def.id && typeof def.id === "string" ? def.id : categoryIdFromPath(f)) as string;
-  // Normalize category to be path-like (if someone put a display name in id, fall back to path)
-  const catLooksLikePath = category.includes("/") || category.includes("-");
-  const catId = catLooksLikePath ? category : categoryIdFromPath(f);
-
-  let set = byCategory.get(catId);
-  if (!set) {
-    set = new Set<string>();
-    byCategory.set(catId, set);
+  const candidates = extractLayerPaths(def);
+  if (candidates.length === 0) {
+    const category = (def.id && typeof def.id === "string" ? def.id : categoryIdFromPath(f)) as string;
+    const catLooksLikePath = category.includes("/") || category.includes("-");
+    candidates.push(catLooksLikePath ? category : categoryIdFromPath(f));
   }
 
-  for (const v of arr) {
-    const id = variantId(v);
-    if (!id) continue;
-    set.add(String(id));
+  for (const cat of candidates) {
+    let set = byCategory.get(cat);
+    if (!set) byCategory.set(cat, (set = new Set<string>()));
+    for (const v of arr) {
+      const id = variantId(v);
+      if (id) set.add(String(id));
+    }
   }
+
+
 }
 
 /* fill schema */
