@@ -1,0 +1,24 @@
+{
+  "client_ready": true,
+  "identity": { "char_name": "Mira Vale", "char_slug": "mira_vale", "archetype": "Alchemist", "vibe": "gentle" },
+  "personality": {
+    "desire": "heal others",
+    "fear": "losing knowledge",
+    "flaw": "overtrusting",
+    "traits": ["kind", "patient", "studious"],
+    "values": ["wisdom", "compassion", "discipline"]
+  },
+  "physical": {
+    "species": "human",
+    "age_range": "elder",
+    "gender": "female",
+    "height_category": "average",
+    "build": "lithe",
+    "skin_tone": "pale",
+    "hair_color": "white",
+    "hair_style": "bun",
+    "eye_color": "light brown",
+    "distinctive_features": ["laugh lines"],
+    "aesthetic_vibe": "linen robes"
+  }
+}

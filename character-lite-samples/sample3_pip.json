@@ -1,0 +1,24 @@
+{
+  "client_ready": true,
+  "identity": { "char_name": "Pip", "char_slug": "pip", "archetype": "Tinkerer", "vibe": "playful" },
+  "personality": {
+    "desire": "adventure",
+    "fear": "loud noises",
+    "flaw": "impulsive",
+    "traits": ["clever", "mischievous"],
+    "values": ["creativity", "curiosity"]
+  },
+  "physical": {
+    "species": "human",
+    "age_range": "child",
+    "gender": "nonbinary",
+    "height_category": "short",
+    "build": "slim",
+    "skin_tone": "#E0C0A0",
+    "hair_color": "blonde",
+    "hair_style": "pigtails",
+    "eye_color": "#2244AA",
+    "distinctive_features": ["missing front tooth"],
+    "aesthetic_vibe": "goggles and tools"
+  }
+}

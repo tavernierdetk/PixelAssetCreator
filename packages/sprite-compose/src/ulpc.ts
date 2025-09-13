@@ -39,7 +39,8 @@ function exists(p: string): boolean {
 function readJson<T = any>(file: string): T | null {
   try { return JSON.parse(fs.readFileSync(file, "utf-8")) as T; } catch { return null; }
 }
-function walkPng(root: string, maxDepth = 5): string[] {
+// Increase default scan depth to catch deep categories like head/heads/human/male/idle/*.png
+function walkPng(root: string, maxDepth = 7): string[] {
   const out: string[] = [];
   function go(dir: string, depth: number) {
     if (depth > maxDepth) return;
@@ -49,7 +50,7 @@ function walkPng(root: string, maxDepth = 5): string[] {
       else if (e.isFile() && /\.(png|webp)$/i.test(e.name)) out.push(p);
     }
   }
-  go(root, 0);
+  if (exists(root)) go(root, 0);
   return out;
 }
 
@@ -77,7 +78,26 @@ function pngFromVariantJson(jsonPath: string, obj: any): string | null {
   return null;
 }
 
-async function resolveLayerPng(category: string, variant: string): Promise<string> {
+function animationsFallback(): string[] {
+  const env = process.env.ULPC_ANIMS_FALLBACK;
+  if (env && env.trim()) {
+    return env.split(",").map(s => s.trim()).filter(Boolean);
+  }
+  // sensible default coverage
+  return ["idle","walk","run","slash","thrust","shoot","hurt","jump","sit","emote","climb","combat"];
+}
+
+async function resolveLayerPng(categoryIn: string, variantIn: string): Promise<string> {
+  // Defensive normalization
+  let category = categoryIn.replace(/\/+$/,"");
+  const variant = variantIn;
+  const lowerCat = category.toLowerCase();
+  const lowerVar = variant.toLowerCase();
+  if (lowerCat.endsWith(`/${lowerVar}`)) {
+    // If caller accidentally appended the variant to category, strip it.
+    category = category.slice(0, -(variant.length + 1));
+  }
+
   const defsDir = resolveUlpcSheetDefs();
   const catDir = path.join(defsDir, category);
   const directJson = path.join(catDir, `${variant}.json`);
@@ -115,15 +135,42 @@ async function resolveLayerPng(category: string, variant: string): Promise<strin
     }
   }
 
-  // 3) Fallback scan under ULPC repo root
-  const pngs = walkPng(resolveUlpcRoot(), 4);
+  // 3a) Direct constructed paths under spritesheets root with common animations
+  {
+    const root = resolveUlpcRoot();
+    const prefer = animationsFallback();
+    for (const a of prefer) {
+      // try .png then .webp
+      const p1 = path.join(root, category, a, `${variant}.png`);
+      if (exists(p1)) return p1;
+      const p2 = path.join(root, category, a, `${variant}.webp`);
+      if (exists(p2)) return p2;
+    }
+  }
+
+  // 3b) Broad fallback scan – prefer scanning within the category subtree if present
+  const root = resolveUlpcRoot();
+  const catRoot = path.join(root, category);
+  const scanRoot = exists(catRoot) ? catRoot : root;
+  const pngs = walkPng(scanRoot, exists(catRoot) ? 7 : 7);
   const norm = (s: string) => s.replace(/\\/g, "/").toLowerCase();
+
   const needleCat = `/${category.toLowerCase()}/`;
   const vTok = variant.toLowerCase().replace(/[^a-z0-9]+/g, "");
   const candidates = pngs
     .map(norm)
-    .filter(p => p.includes(needleCat) && (p.includes(vTok) || p.includes(`/${variant.toLowerCase()}`)));
+    .filter(p =>
+      p.includes(needleCat) &&
+      (
+        p.endsWith(`/${lowerVar}.png`) ||
+        p.endsWith(`/${lowerVar}.webp`) ||
+        p.includes(`/${lowerVar}.`) ||
+        p.includes(vTok)
+      )
+    );
+
   if (candidates.length) {
+    // pick the shortest path (usually most specific)
     const best = candidates.sort((a, b) => a.length - b.length)[0];
     return best;
   }

@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",                  // <—
+    "declaration": true,
+    "declarationDir": "dist",          // <— ensures .d.ts at dist/
+    "composite": true,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "resolveJsonModule": true,
+    "verbatimModuleSyntax": true,
+    "emitDeclarationOnly": false
+  },
+  "include": ["src/**/*"],
+  "files": ["src/color_dictionary.v1.json"]
+}

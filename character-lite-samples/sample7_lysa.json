@@ -1,0 +1,24 @@
+{
+  "client_ready": true,
+  "identity": { "char_name": "Lysa Vesh", "char_slug": "lysa_vesh", "archetype": "Ranger", "vibe": "serene" },
+  "personality": {
+    "desire": "protect the wilds",
+    "fear": "urban decay",
+    "flaw": "distant",
+    "traits": ["calm", "precise"],
+    "values": ["balance", "nature"]
+  },
+  "physical": {
+    "species": "lizard",
+    "age_range": "young_adult",
+    "gender": "female",
+    "height_category": "average",
+    "build": "lithe",
+    "skin_tone": "emerald",
+    "hair_color": "dark brown",
+    "hair_style": "braid",
+    "eye_color": "amber",
+    "distinctive_features": ["crest scales"],
+    "aesthetic_vibe": "hunter green"
+  }
+}

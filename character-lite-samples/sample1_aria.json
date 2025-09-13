@@ -1,0 +1,25 @@
+{
+  "client_ready": true,
+  "identity": { "char_name": "Aria Finch", "char_slug": "aria_finch", "archetype": "Scout", "vibe": "upbeat" },
+  "personality": {
+    "desire": "freedom to explore",
+    "fear": "isolation",
+    "flaw": "impatient",
+    "traits": ["curious", "brave", "resourceful"],
+    "quirk": "collects shiny pebbles",
+    "values": ["friendship", "honesty", "adventure"]
+  },
+  "physical": {
+    "species": "human",
+    "age_range": "teen",
+    "gender": "female",
+    "height_category": "average",
+    "build": "average",
+    "skin_tone": "fair",
+    "hair_color": "black",
+    "hair_style": "long",
+    "eye_color": "green",
+    "distinctive_features": ["freckles"],
+    "aesthetic_vibe": "forest wanderer"
+  }
+}

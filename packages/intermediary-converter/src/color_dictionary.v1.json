@@ -1,0 +1,13 @@
+{
+  "black": ["black", "raven"],
+  "brown": ["dark brown", "brown", "light brown", "chestnut"],
+  "auburn": ["chestnut"],
+  "blonde": ["blonde", "sandy", "platinum", "ash", "strawberry"],
+  "red": ["red", "redhead", "ginger", "carrot", "strawberry"],
+  "white": ["white", "gray", "dark gray"],
+  "green": ["green", "emerald"],
+  "blue": ["blue", "navy"],
+  "purple": ["purple", "violet"],
+  "pink": ["pink", "rose"],
+  "gold": ["gold"]
+}

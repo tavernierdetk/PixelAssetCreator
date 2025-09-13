@@ -1,0 +1,24 @@
+{
+  "client_ready": true,
+  "identity": { "char_name": "Sable", "char_slug": "sable", "archetype": "Shade", "vibe": "mysterious" },
+  "personality": {
+    "desire": "secrets",
+    "fear": "sunlight",
+    "flaw": "aloof",
+    "traits": ["stealthy", "observant"],
+    "values": ["freedom", "knowledge"]
+  },
+  "physical": {
+    "species": "skeleton",
+    "age_range": "adult",
+    "gender": "unspecified",
+    "height_category": "average",
+    "build": "slim",
+    "skin_tone": "#CCCCCC",
+    "hair_color": "#000000",
+    "hair_style": "balding",
+    "eye_color": "#66CCFF",
+    "distinctive_features": ["hairline fractures"],
+    "aesthetic_vibe": "tattered cloak"
+  }
+}

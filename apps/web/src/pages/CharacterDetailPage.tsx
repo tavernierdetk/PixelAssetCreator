@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { PortraitsPanel } from "@/components/character/PortraitsPanel";
 import { CharacterForm } from "@/components/character/CharacterForm";
 import { ULPCPanel } from "@/components/character/ULPCPanel";
+import IntermediaryConverter from "@/components/IntermediaryConverter";
 
 import type { CharacterDefinitionLite } from "@/types";
 import {
@@ -43,7 +44,6 @@ export default function CharacterDetailPage() {
   const [form, setForm] = useState<CharacterDefinitionLite | null>(null);
   const [traitsText, setTraitsText] = useState("");
 
-
   useEffect(() => {
     if (defQ.data) {
       const d = defQ.data as CharacterDefinitionLite;
@@ -59,12 +59,15 @@ export default function CharacterDetailPage() {
   const [pending, setPending] = useState<{ portrait?: boolean; idle?: boolean }>({});
   const [imgBust, setImgBust] = useState<number>(0);
 
-
   // Save definition
   const saveM = useMutation({
     mutationFn: async () => {
       if (!form) throw new Error("No form loaded");
-      const traits = traitsText.split(",").map((t) => t.trim()).filter(Boolean).slice(0, 8);
+      const traits = traitsText
+        .split(",")
+        .map((t) => t.trim())
+        .filter(Boolean)
+        .slice(0, 8);
       const next: CharacterDefinitionLite = {
         ...form,
         personality: { ...form.personality, traits },
@@ -78,47 +81,47 @@ export default function CharacterDetailPage() {
   });
 
   // ---- helpers ----
-async function pollJobUntilDone(jobId: string, opts?: { timeoutMs?: number; intervalMs?: number }) {
-  const timeoutMs = opts?.timeoutMs ?? 180_000;
-  const intervalMs = opts?.intervalMs ?? 1_500;
-  const t0 = Date.now();
-  let tick = 0;
-  // eslint-disable-next-line no-constant-condition
-  while (true) {
-    const j = await getJob(jobId);
-    console.debug("[portrait] poll", { jobId, tick, state: j?.state, spentMs: Date.now() - t0 });
-    if (j?.state === "completed") return j;
-    if (j?.state === "failed") throw new Error("Portrait generation failed");
-    if (Date.now() - t0 > timeoutMs) throw new Error("Portrait generation timed out");
-    tick++;
-    // eslint-disable-next-line no-await-in-loop
-    await new Promise((r) => setTimeout(r, intervalMs));
+  async function pollJobUntilDone(jobId: string, opts?: { timeoutMs?: number; intervalMs?: number }) {
+    const timeoutMs = opts?.timeoutMs ?? 180_000;
+    const intervalMs = opts?.intervalMs ?? 1_500;
+    const t0 = Date.now();
+    let tick = 0;
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
+      const j = await getJob(jobId);
+      console.debug("[portrait] poll", { jobId, tick, state: j?.state, spentMs: Date.now() - t0 });
+      if (j?.state === "completed") return j;
+      if (j?.state === "failed") throw new Error("Portrait generation failed");
+      if (Date.now() - t0 > timeoutMs) throw new Error("Portrait generation timed out");
+      tick++;
+      // eslint-disable-next-line no-await-in-loop
+      await new Promise((r) => setTimeout(r, intervalMs));
+    }
   }
-}
 
   // Generate portrait
-async function handleGeneratePortrait() {
-  setPending((p) => ({ ...p, portrait: true }));
-  try {
-    console.debug("[portrait] enqueue", { slug });
-    const { jobId } = await enqueuePortrait(slug);
-    console.debug("[portrait] enqueued", { jobId });
+  async function handleGeneratePortrait() {
+    setPending((p) => ({ ...p, portrait: true }));
+    try {
+      console.debug("[portrait] enqueue", { slug });
+      const { jobId } = await enqueuePortrait(slug);
+      console.debug("[portrait] enqueued", { jobId });
 
-    await pollJobUntilDone(jobId);
+      await pollJobUntilDone(jobId);
 
-    // hard refresh of assets list (log inside listAssets)
-    await qc.invalidateQueries({ queryKey: ["assets", slug] });
+      // hard refresh of assets list (log inside listAssets)
+      await qc.invalidateQueries({ queryKey: ["assets", slug] });
 
-    // bump image cache-buster so <img> src changes even if name is same
-    setImgBust(Date.now());
-    console.debug("[portrait] completed; bust image", { bust: imgBust });
-  } catch (err) {
-    console.error("[portrait] error", err);
-    alert((err as Error).message || "Portrait generation failed");
-  } finally {
-    setPending((p) => ({ ...p, portrait: false }));
+      // bump image cache-buster so <img> src changes even if name is same
+      setImgBust(Date.now());
+      console.debug("[portrait] completed; bust image", { bust: imgBust });
+    } catch (err) {
+      console.error("[portrait] error", err);
+      alert((err as Error).message || "Portrait generation failed");
+    } finally {
+      setPending((p) => ({ ...p, portrait: false }));
+    }
   }
-}
 
   // Generate idle (server may not be implemented yet)
   async function handleGenerateIdle() {
@@ -155,24 +158,7 @@ async function handleGeneratePortrait() {
         }
       />
 
-      {/* Portraits */}
-      <PortraitsPanel
-        slug={slug}
-        files={files}
-        hasDefinition={hasDefinition}
-        pending={pending}
-        onGeneratePortrait={handleGeneratePortrait}
-        onGenerateIdle={handleGenerateIdle}
-        onUpload={handleUpload}
-        onRemove={handleRemove}
-        cacheBust={imgBust}   // <-- add this
-
-      />
-
-      <ULPCPanel slug={slug} files={files} />
-
-
-      {/* Definition editor */}
+      {/* Definition editor — moved to top */}
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between">
@@ -193,6 +179,32 @@ async function handleGeneratePortrait() {
               onTraitsTextChange={setTraitsText}
             />
           )}
+        </CardContent>
+      </Card>
+
+      {/* Portraits */}
+      <PortraitsPanel
+        slug={slug}
+        files={files}
+        hasDefinition={hasDefinition}
+        pending={pending}
+        onGeneratePortrait={handleGeneratePortrait}
+        onGenerateIdle={handleGenerateIdle}
+        onUpload={handleUpload}
+        onRemove={handleRemove}
+        cacheBust={imgBust}
+      />
+
+      {/* ULPC panel */}
+      <ULPCPanel slug={slug} files={files} />
+
+      {/* Intermediary converter — added at bottom */}
+      <Card>
+        <CardHeader>
+          <div className="font-medium">Intermediary → ULPC (Compose)</div>
+        </CardHeader>
+        <CardContent>
+          <IntermediaryConverter />
         </CardContent>
       </Card>
     </div>

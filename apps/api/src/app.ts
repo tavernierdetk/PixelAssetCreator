@@ -15,6 +15,9 @@ import { jobs } from "./routes/jobs.js";
 import { assets } from "./routes/assets.js";
 import { project } from "./routes/project.js";
 import { assistantRouter } from "./routes/assistant.js";
+import { assistantIntermediaryRouter } from "./routes/assistant.intermediary.js";
+import { intermediaryRouter } from "./routes/intermediary.js";
+
 
 export function createApp(): Express {
   const app = express();
@@ -56,7 +59,9 @@ export function createApp(): Express {
   app.use(assets);
   app.use(project);
   app.use(assistantRouter);
-  
+  app.use(assistantIntermediaryRouter);
+  app.use(intermediaryRouter);
+
 
   // Unified error handler
   app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {

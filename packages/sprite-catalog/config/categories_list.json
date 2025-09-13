@@ -1,0 +1,1251 @@
+[
+
+  {
+    "category": "accessory",
+    "items": [
+      "hat_accessory_crest.json",
+      "hat_accessory_crest_centurion.json",
+      "hat_accessory_horns_downward.json",
+      "hat_accessory_horns_short.json",
+      "hat_accessory_horns_upward.json",
+      "hat_accessory_plumage.json",
+      "hat_accessory_plumage_centurion.json",
+      "hat_accessory_plumage_legion.json",
+      "hat_accessory_wings.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "ammo",
+    "items": [
+      "weapon_ranged_bow_arrow.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "apron",
+    "items": [
+      "legs_skirt_overskirt.json",
+      "torso_aprons_apron.json",
+      "torso_aprons_apron_full.json",
+      "torso_aprons_apron_half.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "armour",
+    "items": [
+      "torso_armour_leather.json",
+      "torso_armour_legion.json",
+      "torso_armour_plate.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "arms",
+    "items": [
+      "arms_armour.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "backpack",
+    "items": [
+      "backpack.json",
+      "backpack_basket.json",
+      "backpack_jetpack.json",
+      "backpack_squarepack.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "backpack_straps",
+    "items": [
+      "backpack_straps.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "bandages",
+    "items": [
+      "torso_bandages.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "bandana",
+    "items": [
+      "hat_bandana.json",
+      "hat_bandana2.json",
+      "hat_bandana_pirate.json",
+      "hat_helmet_mail.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "bandana_overlay",
+    "items": [
+      "hat_bandana_pirate_skull.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "bauldron",
+    "items": [
+      "bauldron.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "beard",
+    "items": [
+      "beards_5oclock_shadow.json",
+      "beards_beard.json",
+      "beards_medium.json",
+      "beards_trimmed.json",
+      "beards_winter.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "belt",
+    "items": [
+      "belt_belly.json",
+      "belt_double.json",
+      "belt_leather.json",
+      "belt_loose.json",
+      "belt_other_female.json",
+      "belt_other_male.json"
+    ],
+    "required": false
+  },
+
+  {
+    "category": "bracers",
+    "items": [
+      "arms_bracers.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "buckles",
+    "items": [
+      "buckles.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "cape",
+    "items": [
+      "cape_solid.json",
+      "cape_tattered.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "cape_trim",
+    "items": [
+      "cape_trim.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "cargo",
+    "items": [
+      "backpack_contents_ore.json",
+      "backpack_contents_wood.json",
+      "backpack_jetpack_fins.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "chainmail",
+    "items": [
+      "torso_chainmail.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "charm",
+    "items": [
+      "neck_amulet_cross.json",
+      "neck_amulet_dangle.json",
+      "neck_amulet_spider.json",
+      "neck_amulet_star.json",
+      "neck_charm_box.json",
+      "neck_charm_oval.json",
+      "neck_charm_ring.json",
+      "neck_charm_star.json",
+      "neck_gem_emerald.json",
+      "neck_gem_marquise.json",
+      "neck_gem_natural.json",
+      "neck_gem_pear.json",
+      "neck_gem_pearl.json",
+      "neck_gem_princess.json",
+      "neck_gem_round.json",
+      "neck_gem_trilliant.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "clothes",
+    "items": [
+      "torso_clothes_blouse.json",
+      "torso_clothes_blouse_longsleeve.json",
+      "torso_clothes_child_shirt.json",
+      "torso_clothes_longsleeve.json",
+      "torso_clothes_longsleeve2.json",
+      "torso_clothes_longsleeve2_buttoned.json",
+      "torso_clothes_longsleeve2_cardigan.json",
+      "torso_clothes_longsleeve2_polo.json",
+      "torso_clothes_longsleeve2_scoop.json",
+      "torso_clothes_longsleeve2_vneck.json",
+      "torso_clothes_longsleeve_formal.json",
+      "torso_clothes_longsleeve_formal_striped.json",
+      "torso_clothes_longsleeve_laced.json",
+      "torso_clothes_longsleeve_scoop.json",
+      "torso_clothes_robe.json",
+      "torso_clothes_shortsleeve.json",
+      "torso_clothes_shortsleeve_cardigan.json",
+      "torso_clothes_shortsleeve_polo.json",
+      "torso_clothes_sleeveless.json",
+      "torso_clothes_sleeveless1.json",
+      "torso_clothes_sleeveless2.json",
+      "torso_clothes_sleeveless2_buttoned.json",
+      "torso_clothes_sleeveless2_cardigan.json",
+      "torso_clothes_sleeveless2_polo.json",
+      "torso_clothes_sleeveless2_scoop.json",
+      "torso_clothes_sleeveless2_vneck.json",
+      "torso_clothes_sleeveless_laced.json",
+      "torso_clothes_sleeveless_striped.json",
+      "torso_clothes_sleeveless_tanktop.json",
+      "torso_clothes_tshirt.json",
+      "torso_clothes_tshirt_buttoned.json",
+      "torso_clothes_tshirt_scoop.json",
+      "torso_clothes_tshirt_vneck.json",
+      "torso_clothes_tunic.json",
+      "torso_clothes_tunic_sara.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "dress",
+    "items": [
+      "dress_kimono.json",
+      "dress_kimono_split.json",
+      "dress_sash.json",
+      "dress_slit.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "dress_sleeves",
+    "items": [
+      "dress_kimono_longsleeve.json",
+      "dress_kimono_oversize.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "dress_sleeves_trim",
+    "items": [
+      "dress_kimono_longsleeve_trim.json",
+      "dress_kimono_oversize_trim.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "dress_trim",
+    "items": [
+      "dress_kimono_split_trim.json",
+      "dress_kimono_trim.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "earring_left",
+    "items": [
+      "facial_earring_left.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "earring_right",
+    "items": [
+      "facial_earring_right.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "earrings",
+    "items": [
+      "facial_earrings_emerald.json",
+      "facial_earrings_moon.json",
+      "facial_earrings_pear.json",
+      "facial_earrings_princess.json",
+      "facial_earrings_stud.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "ears",
+    "items": [
+      "head_ears_avyon.json",
+      "head_ears_big.json",
+      "head_ears_down.json",
+      "head_ears_dragon.json",
+      "head_ears_elven.json",
+      "head_ears_hang.json",
+      "head_ears_long.json",
+      "head_ears_lykon.json",
+      "head_ears_medium.json",
+      "head_ears_zabos.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "ears_inner",
+    "items": [
+      "head_ears_avyon_skin.json",
+      "head_ears_lykon_skin.json",
+      "head_ears_zabos_skin.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "expression",
+    "items": [
+      "face_angry.json",
+      "face_angry2.json",
+      "face_blush.json",
+      "face_closed.json",
+      "face_closing.json",
+      "face_eyeroll.json",
+      "face_happy.json",
+      "face_happy2.json",
+      "face_look_l.json",
+      "face_look_r.json",
+      "face_neutral.json",
+      "face_sad.json",
+      "face_sad2.json",
+      "face_shame.json",
+      "face_shock.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "expression_crying",
+    "items": [
+      "face_tears.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "eye_color",
+    "items": [
+      "eye_color.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "eyebrows",
+    "items": [
+      "eyebrows_thick.json",
+      "eyebrows_thin.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "eyes",
+    "items": [
+      "eyes_child.json",
+      "eyes_cyclops.json",
+      "eyes_elderly_anger.json",
+      "eyes_elderly_closing.json",
+      "eyes_elderly_default.json",
+      "eyes_elderly_eyeroll.json",
+      "eyes_elderly_look_l.json",
+      "eyes_elderly_look_r.json",
+      "eyes_elderly_sad.json",
+      "eyes_elderly_shame.json",
+      "eyes_elderly_shock.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "facial_eyes",
+    "items": [
+      "facial_eyepatch2_left.json",
+      "facial_eyepatch2_right.json",
+      "facial_eyepatch_ambi.json",
+      "facial_eyepatch_left.json",
+      "facial_eyepatch_right.json",
+      "facial_eyepatch_small_left.json",
+      "facial_eyepatch_small_right.json",
+      "facial_glasses.json",
+      "facial_glasses_halfmoon.json",
+      "facial_glasses_nerd.json",
+      "facial_glasses_round.json",
+      "facial_glasses_secretary.json",
+      "facial_glasses_shades.json",
+      "facial_glasses_sunglasses.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "facial_left",
+    "items": [
+      "facial_monocle_left.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "facial_left_trim",
+    "items": [
+      "facial_monocle_left_frame.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "facial_mask",
+    "items": [
+      "facial_mask_plain.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "facial_right",
+    "items": [
+      "facial_monocle_right.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "facial_right_trim",
+    "items": [
+      "facial_monocle_right_frame.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "fins",
+    "items": [
+      "head_fins_fin.json",
+      "head_fins_fin_short.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "furry_ears",
+    "items": [
+      "head_ears_cat.json",
+      "head_ears_wolf.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "furry_ears_skin",
+    "items": [
+      "head_ears_cat_skin.json",
+      "head_ears_wolf_skin.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "gloves",
+    "items": [
+      "arms_gloves.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "hair",
+    "items": [
+      "hair_afro.json",
+      "hair_balding.json",
+      "hair_bangs.json",
+      "hair_bangs_bun.json",
+      "hair_bangslong.json",
+      "hair_bangslong2.json",
+      "hair_bangsshort.json",
+      "hair_bedhead.json",
+      "hair_bob.json",
+      "hair_bob_side_part.json",
+      "hair_braid.json",
+      "hair_braid2.json",
+      "hair_bunches.json",
+      "hair_buzzcut.json",
+      "hair_cornrows.json",
+      "hair_cowlick.json",
+      "hair_cowlick_tall.json",
+      "hair_curls_large.json",
+      "hair_curls_large_xlong.json",
+      "hair_curly_long.json",
+      "hair_curly_short.json",
+      "hair_curly_short2.json",
+      "hair_curtains.json",
+      "hair_curtains_long.json",
+      "hair_dreadlocks_long.json",
+      "hair_dreadlocks_short.json",
+      "hair_flat_top_fade.json",
+      "hair_flat_top_straight.json",
+      "hair_half_up.json",
+      "hair_halfmessy.json",
+      "hair_high_and_tight.json",
+      "hair_high_ponytail.json",
+      "hair_idol.json",
+      "hair_jewfro.json",
+      "hair_lob.json",
+      "hair_long.json",
+      "hair_long_band.json",
+      "hair_long_center_part.json",
+      "hair_long_messy.json",
+      "hair_long_messy2.json",
+      "hair_long_straight.json",
+      "hair_long_tied.json",
+      "hair_longhawk.json",
+      "hair_loose.json",
+      "hair_messed.json",
+      "hair_messy1.json",
+      "hair_messy2.json",
+      "hair_messy3.json",
+      "hair_mop.json",
+      "hair_natural.json",
+      "hair_page.json",
+      "hair_page2.json",
+      "hair_parted.json",
+      "hair_parted2.json",
+      "hair_parted3.json",
+      "hair_parted_side_bangs.json",
+      "hair_parted_side_bangs2.json",
+      "hair_pigtails.json",
+      "hair_pigtails_bangs.json",
+      "hair_pixie.json",
+      "hair_plain.json",
+      "hair_ponytail.json",
+      "hair_ponytail2.json",
+      "hair_princess.json",
+      "hair_relm_ponytail.json",
+      "hair_relm_short.json",
+      "hair_relm_xlong.json",
+      "hair_sara.json",
+      "hair_shorthawk.json",
+      "hair_shoulderl.json",
+      "hair_shoulderr.json",
+      "hair_single.json",
+      "hair_spiked.json",
+      "hair_spiked2.json",
+      "hair_spiked_beehive.json",
+      "hair_spiked_liberty.json",
+      "hair_spiked_liberty2.json",
+      "hair_spiked_porcupine.json",
+      "hair_swoop.json",
+      "hair_swoop_side.json",
+      "hair_topknot_long.json",
+      "hair_topknot_long2.json",
+      "hair_topknot_short.json",
+      "hair_topknot_short2.json",
+      "hair_twists_fade.json",
+      "hair_twists_straight.json",
+      "hair_unkempt.json",
+      "hair_wavy.json",
+      "hair_wavy_child.json",
+      "hair_xlong.json",
+      "hair_xlong_wavy.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "hairextl",
+    "items": [
+      "hairext_braidl.json",
+      "hairext_long_straightl.json",
+      "hairext_long_wavyl.json",
+      "hairext_xlong_bangl.json",
+      "hairext_xlong_braidl.json",
+      "hairext_xlong_curlyl.json",
+      "hairext_xlong_wavyl.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "hairextr",
+    "items": [
+      "hairext_braidr.json",
+      "hairext_long_straightr.json",
+      "hairext_long_wavyr.json",
+      "hairext_xlong_bangr.json",
+      "hairext_xlong_braidr.json",
+      "hairext_xlong_curlyr.json",
+      "hairext_xlong_wavyr.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "hairtie",
+    "items": [
+      "hat_headband_hairtie.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "hairtie_rune",
+    "items": [
+      "hat_headband_hairtie_rune.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "hat",
+    "items": [
+      "hat_bicorne_athwart_admiral.json",
+      "hat_bicorne_athwart_basic.json",
+      "hat_bicorne_athwart_captain.json",
+      "hat_bicorne_athwart_commodore.json",
+      "hat_bicorne_foreaft.json",
+      "hat_bicorne_foreaft_commodore.json",
+      "hat_cap_bonnie.json",
+      "hat_cap_bonnie_tilt.json",
+      "hat_cap_cavalier.json",
+      "hat_cap_leather.json",
+      "hat_formal_bowler.json",
+      "hat_formal_crown.json",
+      "hat_formal_tiara.json",
+      "hat_formal_tophat.json",
+      "hat_helmet_armet.json",
+      "hat_helmet_armet_simple.json",
+      "hat_helmet_barbarian.json",
+      "hat_helmet_barbarian_nasal.json",
+      "hat_helmet_barbarian_viking.json",
+      "hat_helmet_barbuta.json",
+      "hat_helmet_barbuta_simple.json",
+      "hat_helmet_bascinet.json",
+      "hat_helmet_bascinet_pigface.json",
+      "hat_helmet_bascinet_pigface_raised.json",
+      "hat_helmet_bascinet_round.json",
+      "hat_helmet_close.json",
+      "hat_helmet_flattop.json",
+      "hat_helmet_greathelm.json",
+      "hat_helmet_horned.json",
+      "hat_helmet_kettle.json",
+      "hat_helmet_legion.json",
+      "hat_helmet_maximus.json",
+      "hat_helmet_morion.json",
+      "hat_helmet_nasal.json",
+      "hat_helmet_norman.json",
+      "hat_helmet_pointed.json",
+      "hat_helmet_spangenhelm.json",
+      "hat_helmet_spangenhelm_viking.json",
+      "hat_helmet_sugarloaf.json",
+      "hat_helmet_sugarloaf_simple.json",
+      "hat_helmet_xeon.json",
+      "hat_holiday_christmas.json",
+      "hat_hood_cloth.json",
+      "hat_hood_hijab.json",
+      "hat_hood_sack_cloth.json",
+      "hat_magic_celestial.json",
+      "hat_magic_celestial_moon.json",
+      "hat_magic_large.json",
+      "hat_magic_wizard.json",
+      "hat_tricorne.json",
+      "hat_tricorne_captain.json",
+      "hat_tricorne_lieutenant.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "hat_accessory",
+    "items": [
+      "hat_bicorne_athwart_admiral_cockade.json",
+      "hat_cap_bonnie_feather.json",
+      "hat_cap_cavalier_feather.json",
+      "hat_cap_leather_feather.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "hat_buckle",
+    "items": [
+      "hat_magic_wizard_buckle.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "hat_overlay",
+    "items": [
+      "hat_bicorne_athwart_basic_skull.json",
+      "hat_bicorne_athwart_captain_skull.json",
+      "hat_tricorne_captain_skull.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "hat_trim",
+    "items": [
+      "hat_bicorne_athwart_admiral_trim.json",
+      "hat_bicorne_athwart_commodore_trim.json",
+      "hat_bicorne_foreaft_commodore_trim.json",
+      "hat_cap_bonnie_trim.json",
+      "hat_holiday_elf.json",
+      "hat_holiday_santa.json",
+      "hat_magic_celestial_moon_trim.json",
+      "hat_magic_celestial_trim.json",
+      "hat_magic_wizard_belt.json",
+      "hat_tricorne_captain_trim.json",
+      "hat_tricorne_lieutenant_trim.json",
+      "hat_tricorne_stitched.json",
+      "hat_tricorne_thatch.json"
+    ],
+    "required": false
+  },
+
+  {
+    "category": "headcover",
+    "items": [
+      "hat_headband_kerchief.json",
+      "hat_headband_thick.json",
+      "hat_headband_tied.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "headcover_rune",
+    "items": [
+      "hat_headband_thick_rune.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "horns",
+    "items": [
+      "head_horns_backwards.json",
+      "head_horns_curled.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "jacket",
+    "items": [
+      "torso_jacket_collared.json",
+      "torso_jacket_frock.json",
+      "torso_jacket_iverness.json",
+      "torso_jacket_santa.json",
+      "torso_jacket_tabard.json",
+      "torso_jacket_trench.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "jacket_collar",
+    "items": [
+      "torso_jacket_frock_collar.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "jacket_pockets",
+    "items": [
+      "torso_jacket_pockets.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "jacket_trim",
+    "items": [
+      "torso_jacket_frock_buttons.json",
+      "torso_jacket_frock_lace.json",
+      "torso_jacket_frock_lapel.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "legs",
+    "items": [
+      "legs_armour.json",
+      "legs_childpants.json",
+      "legs_childskirts.json",
+      "legs_cuffed.json",
+      "legs_formal.json",
+      "legs_formal_striped.json",
+      "legs_fur.json",
+      "legs_hose.json",
+      "legs_leggings.json",
+      "legs_leggings2.json",
+      "legs_pantaloons.json",
+      "legs_pants.json",
+      "legs_pants2.json",
+      "legs_pregnantpants.json",
+      "legs_shorts.json",
+      "legs_shorts_short.json",
+      "legs_skirt_belle.json",
+      "legs_skirt_straight.json",
+      "legs_skirts_legion.json",
+      "legs_skirts_plain.json",
+      "legs_skirts_slit.json",
+      "legs_widepants.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "mustache",
+    "items": [
+      "beards_bigstache.json",
+      "beards_chevron.json",
+      "beards_french.json",
+      "beards_handlebar.json",
+      "beards_horseshoe.json",
+      "beards_lampshade.json",
+      "beards_mustache.json",
+      "beards_walrus.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "neck",
+    "items": [
+      "neck_bowtie.json",
+      "neck_bowtie2.json",
+      "neck_capeclip.json",
+      "neck_capetie.json",
+      "neck_cravat.json",
+      "neck_jabot.json",
+      "neck_necktie.json",
+      "neck_scarf.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "necklace",
+    "items": [
+      "neck_necklace.json",
+      "neck_necklace_beaded_large.json",
+      "neck_necklace_beaded_small.json",
+      "neck_necklace_chain.json",
+      "neck_necklace_simple.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "nose",
+    "items": [
+      "head_nose_big.json",
+      "head_nose_button.json",
+      "head_nose_elderly.json",
+      "head_nose_large.json",
+      "head_nose_straight.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "overalls",
+    "items": [
+      "torso_aprons_overalls.json",
+      "torso_aprons_suspenders.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "ponytail",
+    "items": [
+      "hairext_topknot_long.json",
+      "hairext_topknot_relm.json",
+      "hairext_topknot_short.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "prosthesis_hand",
+    "items": [
+      "prosthesis_hook.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "prosthesis_leg",
+    "items": [
+      "prosthesis_peg_leg.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "quiver",
+    "items": [
+      "quiver.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "ring",
+    "items": [
+      "arms_hands_ring_stud.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "sash",
+    "items": [
+      "belt_obi.json",
+      "belt_sash.json",
+      "belt_sash_narrow.json",
+      "belt_waistband.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "sash_obi",
+    "items": [
+      "belt_sash_obi.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "sash_tie",
+    "items": [
+      "belt_obi_knot_left.json",
+      "belt_obi_knot_right.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "shadow",
+    "items": [
+      "shadow.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "shield",
+    "items": [
+      "shield.json",
+      "shield_crusader.json",
+      "shield_heater_revised_wood.json",
+      "shield_heater_wood.json",
+      "shield_kite.json",
+      "shield_plus.json",
+      "shield_scutum.json",
+      "shield_spartan.json",
+      "shield_two_engrailed.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "shield_paint",
+    "items": [
+      "shield_heater_paint.json",
+      "shield_heater_revised_paint.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "shield_pattern",
+    "items": [
+      "shield_heater_pattern.json",
+      "shield_heater_pattern_barry.json",
+      "shield_heater_pattern_bend.json",
+      "shield_heater_pattern_bend_sinister.json",
+      "shield_heater_pattern_bendy.json",
+      "shield_heater_pattern_bendy_sinister.json",
+      "shield_heater_pattern_bordure.json",
+      "shield_heater_pattern_chevron.json",
+      "shield_heater_pattern_chevron_inverted.json",
+      "shield_heater_pattern_chief.json",
+      "shield_heater_pattern_cross.json",
+      "shield_heater_pattern_fess.json",
+      "shield_heater_pattern_lozengy.json",
+      "shield_heater_pattern_pale.json",
+      "shield_heater_pattern_pall.json",
+      "shield_heater_pattern_paly.json",
+      "shield_heater_pattern_per_bend.json",
+      "shield_heater_pattern_per_bend_sinister.json",
+      "shield_heater_pattern_per_chevron.json",
+      "shield_heater_pattern_per_chevron_inverted.json",
+      "shield_heater_pattern_per_fess.json",
+      "shield_heater_pattern_per_pale.json",
+      "shield_heater_pattern_per_saltire.json",
+      "shield_heater_pattern_quarterly.json",
+      "shield_heater_pattern_saltire.json",
+      "shield_heater_revised_pattern_barry.json",
+      "shield_heater_revised_pattern_bend.json",
+      "shield_heater_revised_pattern_bend_sinister.json",
+      "shield_heater_revised_pattern_bendy.json",
+      "shield_heater_revised_pattern_bendy_sinister.json",
+      "shield_heater_revised_pattern_bordure.json",
+      "shield_heater_revised_pattern_chevron.json",
+      "shield_heater_revised_pattern_chevron_inverted.json",
+      "shield_heater_revised_pattern_chief.json",
+      "shield_heater_revised_pattern_cross.json",
+      "shield_heater_revised_pattern_fess.json",
+      "shield_heater_revised_pattern_lozengy.json",
+      "shield_heater_revised_pattern_pale.json",
+      "shield_heater_revised_pattern_pall.json",
+      "shield_heater_revised_pattern_paly.json",
+      "shield_heater_revised_pattern_per_bend.json",
+      "shield_heater_revised_pattern_per_bend_sinister.json",
+      "shield_heater_revised_pattern_per_chevron.json",
+      "shield_heater_revised_pattern_per_chevron_inverted.json",
+      "shield_heater_revised_pattern_per_fess.json",
+      "shield_heater_revised_pattern_per_pale.json",
+      "shield_heater_revised_pattern_per_saltire.json",
+      "shield_heater_revised_pattern_quarterly.json",
+      "shield_heater_revised_pattern_saltire.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "shield_trim",
+    "items": [
+      "shield_heater_revised_trim.json",
+      "shield_heater_trim.json",
+      "shield_scutum_trim.json",
+      "shield_two_engrailed_trim.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "shoes",
+    "items": [
+      "feet_armour.json",
+      "feet_boots_basic.json",
+      "feet_boots_fold.json",
+      "feet_boots_revised.json",
+      "feet_boots_rim.json",
+      "feet_hoofs.json",
+      "feet_sandals.json",
+      "feet_shoes_basic.json",
+      "feet_shoes_ghillies.json",
+      "feet_shoes_revised.json",
+      "feet_shoes_sara.json",
+      "feet_slippers.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "shoes_toe",
+    "items": [
+      "feet_plate_toe.json",
+      "feet_plate_toe_thick.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "shoulders",
+    "items": [
+      "shoulders_epaulets.json",
+      "shoulders_leather.json",
+      "shoulders_legion.json",
+      "shoulders_mantal.json",
+      "shoulders_plate.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "sleeves",
+    "items": [
+      "torso_clothes_longsleeves.json",
+      "torso_clothes_longsleeves2.json",
+      "torso_clothes_longsleeves_cuffed.json",
+      "torso_clothes_shortsleeves.json",
+      "torso_clothes_shortsleeves2.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "socks",
+    "items": [
+      "feet_socks_ankle.json",
+      "feet_socks_high.json",
+      "feet_socks_tabi.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "tail",
+    "items": [
+      "tail_cat.json",
+      "tail_dragon.json",
+      "tail_feather.json",
+      "tail_fin.json",
+      "tail_lizard.json",
+      "tail_lizard_alt.json",
+      "tail_wolf.json",
+      "tail_wolf_fluffy.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "updo",
+    "items": [
+      "hairext_high_bun.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "vest",
+    "items": [
+      "dress_bodice.json",
+      "torso_clothes_corset.json",
+      "torso_clothes_vest.json",
+      "torso_clothes_vest_open.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "visor",
+    "items": [
+      "hat_visor_grated.json",
+      "hat_visor_grated_narrow.json",
+      "hat_visor_horned.json",
+      "hat_visor_pigface.json",
+      "hat_visor_pigface_raised.json",
+      "hat_visor_round.json",
+      "hat_visor_round_raised.json",
+      "hat_visor_slit.json",
+      "hat_visor_slit_narrow.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "weapon",
+    "items": [
+      "tool_rod.json",
+      "tool_smash.json",
+      "tool_thrust.json",
+      "tool_whip.json",
+      "weapon_blunt_club.json",
+      "weapon_blunt_flail.json",
+      "weapon_blunt_mace.json",
+      "weapon_blunt_waraxe.json",
+      "weapon_magic_diamond.json",
+      "weapon_magic_gnarled.json",
+      "weapon_magic_loop.json",
+      "weapon_magic_s.json",
+      "weapon_magic_simple.json",
+      "weapon_magic_wand.json",
+      "weapon_polearm_cane.json",
+      "weapon_polearm_dragonspear.json",
+      "weapon_polearm_halberd.json",
+      "weapon_polearm_longspear.json",
+      "weapon_polearm_scythe.json",
+      "weapon_polearm_spear.json",
+      "weapon_polearm_trident.json",
+      "weapon_ranged_boomerang.json",
+      "weapon_ranged_bow_great.json",
+      "weapon_ranged_bow_normal.json",
+      "weapon_ranged_bow_recurve.json",
+      "weapon_ranged_crossbow.json",
+      "weapon_ranged_slingshot.json",
+      "weapon_sword_arming.json",
+      "weapon_sword_dagger.json",
+      "weapon_sword_glowsword.json",
+      "weapon_sword_katana.json",
+      "weapon_sword_longsword.json",
+      "weapon_sword_longsword_alt.json",
+      "weapon_sword_rapier.json",
+      "weapon_sword_saber.json",
+      "weapon_sword_scimitar.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "weapon_magic_crystal",
+    "items": [
+      "weapon_magic_crystal.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "wheelchair",
+    "items": [
+      "wheelchair.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "wings",
+    "items": [
+      "wings_bat.json",
+      "wings_dragonfly.json",
+      "wings_dragonfly_transparent.json",
+      "wings_feathered.json",
+      "wings_lizard.json",
+      "wings_lizard_alt.json",
+      "wings_lizard_bat.json",
+      "wings_lunar.json",
+      "wings_monarch.json",
+      "wings_pixie.json",
+      "wings_pixie_transparent.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "wings_dots",
+    "items": [
+      "wings_monarch_dots.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "wings_edge",
+    "items": [
+      "wings_monarch_edge.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "wound_arm",
+    "items": [
+      "wound_arm.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "wound_brain",
+    "items": [
+      "wound_brain.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "wound_eye_left",
+    "items": [
+      "wound_eye_left.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "wound_eye_right",
+    "items": [
+      "wound_eye_right.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "wound_mouth",
+    "items": [
+      "wound_mouth.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "wound_ribs",
+    "items": [
+      "wound_ribs.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "wrinkes",
+    "items": [
+      "head_wrinkles.json"
+    ],
+    "required": false
+  },
+  {
+    "category": "wrists",
+    "items": [
+      "wrists_cuffs.json",
+      "wrists_cuffs_lace.json"
+    ],
+    "required": false
+  }
+]

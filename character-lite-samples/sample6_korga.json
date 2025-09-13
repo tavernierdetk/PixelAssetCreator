@@ -1,0 +1,24 @@
+{
+  "client_ready": true,
+  "identity": { "char_name": "Korga", "char_slug": "korga", "archetype": "Berserker", "vibe": "feral" },
+  "personality": {
+    "desire": "dominion",
+    "fear": "weakness",
+    "flaw": "hot-headed",
+    "traits": ["brutal", "unyielding", "proud"],
+    "values": ["strength", "honor"]
+  },
+  "physical": {
+    "species": "orc",
+    "age_range": "young_adult",
+    "gender": "male",
+    "height_category": "tall",
+    "build": "heavy",
+    "skin_tone": "green",
+    "hair_color": "black",
+    "hair_style": "mohawk",
+    "eye_color": "red",
+    "distinctive_features": ["tusks"],
+    "aesthetic_vibe": "spikes and hides"
+  }
+}

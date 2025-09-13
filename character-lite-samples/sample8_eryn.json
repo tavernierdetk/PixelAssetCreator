@@ -1,0 +1,25 @@
+{
+  "client_ready": true,
+  "identity": { "char_name": "Eryn Gale", "char_slug": "eryn_gale", "archetype": "Bard", "vibe": "charismatic" },
+  "personality": {
+    "desire": "inspire crowds",
+    "fear": "silence",
+    "flaw": "vain",
+    "traits": ["witty", "dramatic", "empathetic", "clever"],
+    "quirk": "speaks in rhyme when nervous",
+    "values": ["art", "joy", "loyalty", "freedom", "truth"]
+  },
+  "physical": {
+    "species": "human",
+    "age_range": "middle_aged",
+    "gender": "nonbinary",
+    "height_category": "average",
+    "build": "average",
+    "skin_tone": "tan",
+    "hair_color": "auburn",
+    "hair_style": "shoulder-length waves",
+    "eye_color": "hazel",
+    "distinctive_features": ["silver ear cuff"],
+    "aesthetic_vibe": "festival sparkle"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "client_ready": true,
+  "identity": { "char_name": "Brann Stone", "char_slug": "brann_stone", "archetype": "Warrior", "vibe": "stoic" },
+  "personality": {
+    "desire": "glory in battle",
+    "fear": "failure",
+    "flaw": "stubborn",
+    "traits": ["bold", "loyal", "protective"],
+    "values": ["duty", "courage"]
+  },
+  "physical": {
+    "species": "human",
+    "age_range": "adult",
+    "gender": "male",
+    "height_category": "tall",
+    "build": "muscular",
+    "skin_tone": "bronze",
+    "hair_color": "brown",
+    "hair_style": "buzzcut",
+    "eye_color": "brown",
+    "distinctive_features": ["scar over left eyebrow"],
+    "aesthetic_vibe": "battered armor"
+  }
+}
