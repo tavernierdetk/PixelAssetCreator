@@ -9,6 +9,7 @@ import { PortraitsPanel } from "@/components/character/PortraitsPanel";
 import { CharacterForm } from "@/components/character/CharacterForm";
 import { ULPCPanel } from "@/components/character/ULPCPanel";
 import IntermediaryConverter from "@/components/IntermediaryConverter";
+import AssistantIntermediaryPanel from "@/components/AssistantIntermediaryPanel";
 
 import type { CharacterDefinitionLite } from "@/types";
 import {
@@ -16,11 +17,25 @@ import {
   listAssets,
   updateLiteDef,
   enqueuePortrait,
-  enqueueIdle,
   getJob,
   deleteAsset,
   uploadAsset,
 } from "@/lib/api";
+
+function csvParseUnique(input: string, max: number): string[] {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const raw of input.split(",")) {
+    const s = raw.trim();
+    if (!s) continue;
+    const key = s.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(s);
+    if (out.length >= max) break;
+  }
+  return out;
+}
 
 export default function CharacterDetailPage() {
   const { slug = "" } = useParams();
@@ -43,34 +58,49 @@ export default function CharacterDetailPage() {
   // Local form state
   const [form, setForm] = useState<CharacterDefinitionLite | null>(null);
   const [traitsText, setTraitsText] = useState("");
+  const [valuesText, setValuesText] = useState("");
+  const [featuresText, setFeaturesText] = useState("");
+
+  // Assistant output (intermediary)
+  const [intermediary, setIntermediary] = useState<any | null>(null);
 
   useEffect(() => {
     if (defQ.data) {
       const d = defQ.data as CharacterDefinitionLite;
       setForm(d);
       setTraitsText((d.personality?.traits ?? []).join(", "));
+      setValuesText((d.personality?.values ?? []).join(", "));
+      setFeaturesText((d.physical?.distinctive_features ?? []).join(", "));
     }
   }, [defQ.data]);
 
   const hasDefinition = Boolean(form);
   const files = (assetsQ.data?.files ?? []) as string[];
 
-  // Pending state for slot actions
-  const [pending, setPending] = useState<{ portrait?: boolean; idle?: boolean }>({});
+  // Portrait state
+  const [pending, setPending] = useState<{ portrait?: boolean }>({});
   const [imgBust, setImgBust] = useState<number>(0);
 
   // Save definition
   const saveM = useMutation({
     mutationFn: async () => {
       if (!form) throw new Error("No form loaded");
-      const traits = traitsText
-        .split(",")
-        .map((t) => t.trim())
-        .filter(Boolean)
-        .slice(0, 8);
+
+      const traits = csvParseUnique(traitsText, 6);
+      const values = csvParseUnique(valuesText, 5);
+      const features = csvParseUnique(featuresText, 6);
+
       const next: CharacterDefinitionLite = {
         ...form,
-        personality: { ...form.personality, traits },
+        personality: {
+          ...form.personality,
+          traits,
+          values,
+        },
+        physical: {
+          ...form.physical,
+          distinctive_features: features,
+        },
         identity: { ...form.identity, char_slug: slug }, // enforce slug
       };
       return updateLiteDef(slug, next);
@@ -80,7 +110,6 @@ export default function CharacterDetailPage() {
     },
   });
 
-  // ---- helpers ----
   async function pollJobUntilDone(jobId: string, opts?: { timeoutMs?: number; intervalMs?: number }) {
     const timeoutMs = opts?.timeoutMs ?? 180_000;
     const intervalMs = opts?.intervalMs ?? 1_500;
@@ -89,7 +118,6 @@ export default function CharacterDetailPage() {
     // eslint-disable-next-line no-constant-condition
     while (true) {
       const j = await getJob(jobId);
-      console.debug("[portrait] poll", { jobId, tick, state: j?.state, spentMs: Date.now() - t0 });
       if (j?.state === "completed") return j;
       if (j?.state === "failed") throw new Error("Portrait generation failed");
       if (Date.now() - t0 > timeoutMs) throw new Error("Portrait generation timed out");
@@ -99,22 +127,14 @@ export default function CharacterDetailPage() {
     }
   }
 
-  // Generate portrait
+  // Generate full-art portrait (non-pixel)
   async function handleGeneratePortrait() {
     setPending((p) => ({ ...p, portrait: true }));
     try {
-      console.debug("[portrait] enqueue", { slug });
       const { jobId } = await enqueuePortrait(slug);
-      console.debug("[portrait] enqueued", { jobId });
-
       await pollJobUntilDone(jobId);
-
-      // hard refresh of assets list (log inside listAssets)
       await qc.invalidateQueries({ queryKey: ["assets", slug] });
-
-      // bump image cache-buster so <img> src changes even if name is same
-      setImgBust(Date.now());
-      console.debug("[portrait] completed; bust image", { bust: imgBust });
+      setImgBust(Date.now()); // ensure <img> src changes
     } catch (err) {
       console.error("[portrait] error", err);
       alert((err as Error).message || "Portrait generation failed");
@@ -123,28 +143,16 @@ export default function CharacterDetailPage() {
     }
   }
 
-  // Generate idle (server may not be implemented yet)
-  async function handleGenerateIdle() {
-    setPending((p) => ({ ...p, idle: true }));
-    try {
-      await enqueueIdle(slug); // if 501, this will throw; that's fine during stub phase
-      await qc.invalidateQueries({ queryKey: ["assets", slug] });
-    } catch (e) {
-      console.warn("enqueueIdle not implemented yet:", e);
-      alert("Idle generation not implemented yet.");
-    } finally {
-      setPending((p) => ({ ...p, idle: false }));
-    }
-  }
-
-  // Upload / Remove hooks
-  async function handleUpload(slot: "portrait" | "idle", file: File) {
-    await uploadAsset(slug, slot, file);
+  // Upload / Remove hooks (portrait only)
+  async function handleUploadPortrait(file: File) {
+    await uploadAsset(slug, "portrait", file);
     await qc.invalidateQueries({ queryKey: ["assets", slug] });
+    setImgBust(Date.now());
   }
-  async function handleRemove(slot: "portrait" | "idle") {
-    await deleteAsset(slug, slot);
+  async function handleRemovePortrait() {
+    await deleteAsset(slug, "portrait");
     await qc.invalidateQueries({ queryKey: ["assets", slug] });
+    setImgBust(Date.now());
   }
 
   return (
@@ -158,7 +166,7 @@ export default function CharacterDetailPage() {
         }
       />
 
-      {/* Definition editor — moved to top */}
+      {/* Definition editor */}
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between">
@@ -177,36 +185,52 @@ export default function CharacterDetailPage() {
               onChange={setForm}
               traitsText={traitsText}
               onTraitsTextChange={setTraitsText}
+              valuesText={valuesText}
+              onValuesTextChange={setValuesText}
+              featuresText={featuresText}
+              onFeaturesTextChange={setFeaturesText}
             />
           )}
         </CardContent>
       </Card>
 
-      {/* Portraits */}
-      <PortraitsPanel
-        slug={slug}
-        files={files}
-        hasDefinition={hasDefinition}
-        pending={pending}
-        onGeneratePortrait={handleGeneratePortrait}
-        onGenerateIdle={handleGenerateIdle}
-        onUpload={handleUpload}
-        onRemove={handleRemove}
-        cacheBust={imgBust}
-      />
+      {/* Side-by-side: Portrait ⟷ Intermediary */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <PortraitsPanel
+          slug={slug}
+          files={files}
+          hasDefinition={hasDefinition}
+          pending={pending}
+          onGeneratePortrait={handleGeneratePortrait}
+          onUploadPortrait={handleUploadPortrait}
+          onRemovePortrait={handleRemovePortrait}
+          cacheBust={imgBust}
+        />
+        <AssistantIntermediaryPanel
+          slug={slug}
+          draft={form ?? undefined}
+          onIntermediary={(obj) => setIntermediary(obj)}
+        />
+      </div>
 
-      {/* ULPC panel */}
-      <ULPCPanel slug={slug} files={files} />
-
-      {/* Intermediary converter — added at bottom */}
+      {/* Intermediary → ULPC (Compose). Driven by the generated intermediary. */}
       <Card>
         <CardHeader>
           <div className="font-medium">Intermediary → ULPC (Compose)</div>
         </CardHeader>
         <CardContent>
-          <IntermediaryConverter />
+          <IntermediaryConverter
+            slug={slug}
+            intermediary={intermediary}
+            onComposed={async () => {
+              await qc.invalidateQueries({ queryKey: ["assets", slug] });
+            }}
+          />
         </CardContent>
       </Card>
+
+      {/* ULPC panel */}
+      <ULPCPanel slug={slug} files={files} />
     </div>
   );
 }

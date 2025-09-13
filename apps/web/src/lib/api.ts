@@ -151,3 +151,39 @@ export async function enqueueULPC(slug: string, build?: unknown) {
   if (!res.ok) throw new Error(`enqueueULPC failed: ${res.status}`);
   return res.json() as Promise<{ ok: boolean; jobId: string }>;
 }
+
+export async function assistantGenerateIntermediary(
+  slug: string,
+  draft?: CharacterDefinitionLite
+): Promise<{ ok: boolean; data: any }> {
+  const resp = await fetch(`${API}/assistant/char-intermediary`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      // The intermediary assistant requires a message; use a deterministic default.
+      message:
+        `Generate an IntermediarySelection.v2 for character "${slug || draft?.identity?.char_name || "unknown"}" ` +
+        `from the provided CharacterDefinitionLite. Return ONLY the JSON object.`,
+      baseDraft: draft ?? null,
+      thread: [], // optional
+    }),
+  });
+  if (!resp.ok) throw new Error(`assistant/char-intermediary failed: ${resp.status}`);
+  return resp.json();
+}
+
+export async function convertIntermediary(payload: {
+  slug?: string;
+  intermediary: any;
+  animations?: string[];
+  compose?: boolean;
+  outPath?: string;
+}): Promise<any> {
+  const resp = await fetch(`${API}/assistant/convert-intermediary`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  if (!resp.ok) throw new Error(`convert-intermediary failed: ${resp.status}`);
+  return resp.json();
+}

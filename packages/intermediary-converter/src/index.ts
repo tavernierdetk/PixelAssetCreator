@@ -87,6 +87,50 @@ const COLOR_DICT: Record<string, string[]> = COLOR_DICT_RAW as any;
 // Public API
 // ────────────────────────────────────────────────────────────────────────────
 
+// ────────────────────────────────────────────────────────────────────────────
+// Head/Body variant enforcement helper
+// ────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Single source of truth: body variant.
+ * After body is chosen, force head.variant === body.variant.
+ * Mutates `build.layers` in-place and annotates the head trace entry if changed.
+ */
+function enforceHeadVariantEqualsBody(
+  build: UlpcBuildJson,
+  trace: TraceEntry[]
+): void {
+  if (!build?.layers?.length) return;
+
+  const bodyIdx = build.layers.findIndex(
+    (l) => typeof l.category === "string" && l.category.startsWith("body/bodies/")
+  );
+  const headIdx = build.layers.findIndex(
+    (l) => typeof l.category === "string" && l.category.startsWith("head/heads/")
+  );
+
+  if (bodyIdx === -1 || headIdx === -1) return;
+
+  const body = build.layers[bodyIdx];
+  const head = build.layers[headIdx];
+  if (!body?.variant) return;
+
+  if (head.variant !== body.variant) {
+    const from = head.variant ?? null;
+    head.variant = body.variant;
+
+    // annotate the most recent head trace entry (if any)
+    const headTrace = [...trace]
+      .reverse()
+      .find((t) => t.category === "head" && t.chosenItem != null);
+    if (headTrace) {
+      headTrace.notes.push(
+        `head_variant_overridden_to_body:from=${from ?? "null"}:to=${body.variant}`
+      );
+    }
+  }
+}
+
 
 export async function convertCharIntermediaryToUlpc(
   ci: CharIntermediary,
@@ -257,6 +301,7 @@ export async function convertCharIntermediaryToUlpc(
       }
     }
   }
+  enforceHeadVariantEqualsBody(build, trace);
 
   // 4) Final validation (programmatic, no local Ajv)
   try {

@@ -17,7 +17,7 @@ export function buildPortraitPrompt(def: CharacterLite, settings: ProjectSetting
     `Character: ${i?.char_name ?? "Unnamed"}; age:${p?.age_range}; height:${p?.height_category}; build:${p?.build}.`,
     `Colors: skin ${p?.skin_tone}, hair ${p?.hair_color}, eyes ${p?.eye_color}.`,
     traits ? `Personality hints: ${traits}.` : null,
-    `Pixel-art friendly shapes, clear silhouette, clean edges.`,
+    `Full body-portrait of this character, clear silhouette, clean edges.`,
     `Do NOT add text, watermarks, or borders.`
   ].filter(Boolean).join(" ");
 }

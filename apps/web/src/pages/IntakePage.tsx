@@ -36,17 +36,19 @@ const nav = useNavigate();
 
 
 const [form, setForm] = useState<CharacterDefinitionLite>({
-client_ready: true,
-identity: { char_name: "" },
-personality: { desire: "", fear: "", flaw: "", traits: [] },
-physical: {
-age_range: "adult",
-height_category: "average",
-build: "average",
-skin_tone: "tan",
-hair_color: "brown",
-eye_color: "green",
-},
+  message: "",
+  client_ready: false,
+  identity: { char_name: "", char_slug: "" },
+  personality: { desire: "", fear: "", flaw: "", traits: [] },
+  physical: {
+    age_range: "adult",
+    gender: "unspecified",     // ← REQUIRED
+    height_category: "average",
+    build: "average",
+    skin_tone: "#a36c3f",
+    hair_color: "#5b3b1a",
+    eye_color: "#2e7f4f",
+  },
 });
 const [traitsText, setTraitsText] = useState("");
 

@@ -2,17 +2,43 @@ import { ReactNode } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import type { CharacterDefinitionLite, AgeRange, HeightCategory, Build } from "@/types";
+import type {
+  CharacterDefinitionLite,
+  AgeRange,
+  HeightCategory,
+  Build,
+  Gender,
+} from "@/types";
 
-const AGE_OPTIONS: AgeRange[] = ["child", "teen", "adult", "elder"];
+const AGE_OPTIONS: AgeRange[] = [
+  "child",
+  "teen",
+  "young_adult",
+  "adult",
+  "middle_aged",
+  "elder",
+];
 const HEIGHT_OPTIONS: HeightCategory[] = ["short", "average", "tall"];
-const BUILD_OPTIONS: Build[] = ["slim", "average", "heavy", "muscular"];
+const BUILD_OPTIONS: Build[] = [
+  "slim",
+  "average",
+  "muscular",
+  "heavy",
+  "lithe",
+  "stocky",
+  "other",
+];
+const GENDER_OPTIONS: Gender[] = ["male", "female", "nonbinary", "unspecified"];
 
 export function CharacterForm({
   value,
   onChange,
   traitsText,
   onTraitsTextChange,
+  valuesText,
+  onValuesTextChange,
+  featuresText,
+  onFeaturesTextChange,
   actions,
   disabled = false,
 }: {
@@ -20,14 +46,49 @@ export function CharacterForm({
   onChange: (next: CharacterDefinitionLite) => void;
   traitsText: string;
   onTraitsTextChange: (s: string) => void;
+  valuesText: string;
+  onValuesTextChange: (s: string) => void;
+  featuresText: string;
+  onFeaturesTextChange: (s: string) => void;
   actions?: ReactNode;
   disabled?: boolean;
 }) {
   const set = (patch: Partial<CharacterDefinitionLite>) =>
     onChange({ ...value, ...patch });
 
+  // Helpers to avoid uncontrolled warnings for optional strings
+  const s = (v: unknown) => (typeof v === "string" ? v : "");
+
   return (
     <div className="grid gap-4">
+      {/* Top-line status and message */}
+      <fieldset className="grid sm:grid-cols-2 gap-4">
+        <div className="flex items-center gap-2">
+          <input
+            id="client_ready"
+            type="checkbox"
+            className="h-4 w-4"
+            checked={value.client_ready}
+            onChange={(e) => set({ client_ready: e.target.checked })}
+            disabled={disabled}
+          />
+          <Label htmlFor="client_ready" className="m-0">
+            Client ready
+          </Label>
+        </div>
+        <div>
+          <Label htmlFor="message">Message (notes / prompt)</Label>
+          <Input
+            id="message"
+            value={s(value.message)}
+            onChange={(e) => set({ message: e.target.value })}
+            placeholder="Optional message to guide assistant"
+            disabled={disabled}
+          />
+        </div>
+      </fieldset>
+
+      {/* Identity */}
       <fieldset className="grid sm:grid-cols-2 gap-4">
         <div>
           <Label htmlFor="char_name">Character Name</Label>
@@ -42,21 +103,40 @@ export function CharacterForm({
             required
           />
         </div>
-        <div className="flex items-center gap-2 mt-6 sm:mt-0">
-          <input
-            id="client_ready"
-            type="checkbox"
-            className="h-4 w-4"
-            checked={value.client_ready}
-            onChange={(e) => set({ client_ready: e.target.checked })}
+        <div>
+          <Label htmlFor="archetype">Archetype</Label>
+          <Input
+            id="archetype"
+            value={s(value.identity.archetype)}
+            onChange={(e) =>
+              set({ identity: { ...value.identity, archetype: e.target.value } })
+            }
+            placeholder="e.g., Trickster, Mentor"
             disabled={disabled}
           />
-          <Label htmlFor="client_ready" className="m-0">
-            Client ready
-          </Label>
         </div>
       </fieldset>
 
+      <fieldset className="grid sm:grid-cols-2 gap-4">
+        <div>
+          <Label htmlFor="vibe">Identity Vibe</Label>
+          <Input
+            id="vibe"
+            value={s(value.identity.vibe)}
+            onChange={(e) =>
+              set({ identity: { ...value.identity, vibe: e.target.value } })
+            }
+            placeholder="e.g., Cozy gothic, Solar punk"
+            disabled={disabled}
+          />
+        </div>
+        <div>
+          <Label htmlFor="char_slug">Slug (readonly)</Label>
+          <Input id="char_slug" value={value.identity.char_slug} disabled />
+        </div>
+      </fieldset>
+
+      {/* Personality */}
       <fieldset className="grid sm:grid-cols-3 gap-4">
         <div>
           <Label htmlFor="desire">Desire</Label>
@@ -99,8 +179,35 @@ export function CharacterForm({
         </div>
       </fieldset>
 
+      <fieldset className="grid sm:grid-cols-2 gap-4">
+        <div>
+          <Label htmlFor="quirk">Quirk</Label>
+          <Input
+            id="quirk"
+            value={s(value.personality.quirk)}
+            onChange={(e) =>
+              set({
+                personality: { ...value.personality, quirk: e.target.value },
+              })
+            }
+            placeholder="odd habit, catchphrase..."
+            disabled={disabled}
+          />
+        </div>
+        <div>
+          <Label htmlFor="values">Values (comma-separated, max 5)</Label>
+          <Textarea
+            id="values"
+            value={valuesText}
+            onChange={(e) => onValuesTextChange(e.target.value)}
+            disabled={disabled}
+            placeholder="honesty, curiosity…"
+          />
+        </div>
+      </fieldset>
+
       <div>
-        <Label htmlFor="traits">Traits (comma-separated, max 8)</Label>
+        <Label htmlFor="traits">Traits (comma-separated, min 2 / max 6)</Label>
         <Textarea
           id="traits"
           value={traitsText}
@@ -110,7 +217,30 @@ export function CharacterForm({
         />
       </div>
 
+      {/* Physical */}
       <fieldset className="grid sm:grid-cols-3 gap-4">
+        <div>
+          <Label htmlFor="species">Species</Label>
+          <Input
+            id="species"
+            value={s(value.physical.species)}
+            onChange={(e) =>
+              set({ physical: { ...value.physical, species: e.target.value } })
+            }
+            placeholder="human, elf, android…"
+            disabled={disabled}
+          />
+        </div>
+        <SelectField
+          id="gender"
+          label="Gender"
+          value={value.physical.gender}
+          options={GENDER_OPTIONS}
+          set={(v) =>
+            set({ physical: { ...value.physical, gender: v as Gender } })
+          }
+          disabled={disabled}
+        />
         <SelectField
           id="age"
           label="Age Range"
@@ -121,6 +251,9 @@ export function CharacterForm({
           }
           disabled={disabled}
         />
+      </fieldset>
+
+      <fieldset className="grid sm:grid-cols-3 gap-4">
         <SelectField
           id="height"
           label="Height"
@@ -143,6 +276,18 @@ export function CharacterForm({
           }
           disabled={disabled}
         />
+        <div>
+          <Label htmlFor="hair_style">Hair Style</Label>
+          <Input
+            id="hair_style"
+            value={s(value.physical.hair_style)}
+            onChange={(e) =>
+              set({ physical: { ...value.physical, hair_style: e.target.value } })
+            }
+            placeholder="bob cut, mohawk…"
+            disabled={disabled}
+          />
+        </div>
       </fieldset>
 
       <fieldset className="grid sm:grid-cols-3 gap-4">
@@ -150,9 +295,7 @@ export function CharacterForm({
           id="skin_tone"
           label="Skin Tone"
           value={value.physical.skin_tone}
-          set={(v) =>
-            set({ physical: { ...value.physical, skin_tone: v } })
-          }
+          set={(v) => set({ physical: { ...value.physical, skin_tone: v } })}
           disabled={disabled}
           fallback="#a36c3f"
         />
@@ -160,9 +303,7 @@ export function CharacterForm({
           id="hair_color"
           label="Hair Color"
           value={value.physical.hair_color}
-          set={(v) =>
-            set({ physical: { ...value.physical, hair_color: v } })
-          }
+          set={(v) => set({ physical: { ...value.physical, hair_color: v } })}
           disabled={disabled}
           fallback="#5b3b1a"
         />
@@ -170,12 +311,37 @@ export function CharacterForm({
           id="eye_color"
           label="Eye Color"
           value={value.physical.eye_color}
-          set={(v) =>
-            set({ physical: { ...value.physical, eye_color: v } })
-          }
+          set={(v) => set({ physical: { ...value.physical, eye_color: v } })}
           disabled={disabled}
           fallback="#2e7f4f"
         />
+      </fieldset>
+
+      <fieldset className="grid sm:grid-cols-2 gap-4">
+        <div>
+          <Label htmlFor="distinctive_features">Distinctive Features (comma-separated, max 6)</Label>
+          <Textarea
+            id="distinctive_features"
+            value={featuresText}
+            onChange={(e) => onFeaturesTextChange(e.target.value)}
+            disabled={disabled}
+            placeholder="scar over eyebrow, heterochromia…"
+          />
+        </div>
+        <div>
+          <Label htmlFor="aesthetic_vibe">Physical Aesthetic Vibe</Label>
+          <Input
+            id="aesthetic_vibe"
+            value={s(value.physical.aesthetic_vibe)}
+            onChange={(e) =>
+              set({
+                physical: { ...value.physical, aesthetic_vibe: e.target.value },
+              })
+            }
+            placeholder="noir, baroque, neon synth…"
+            disabled={disabled}
+          />
+        </div>
       </fieldset>
 
       {actions ? <div className="flex items-center gap-2">{actions}</div> : null}

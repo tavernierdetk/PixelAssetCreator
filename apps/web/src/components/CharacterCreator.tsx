@@ -18,8 +18,9 @@ type ChatMsg = { role: "user" | "assistant" | "system"; content: string };
 const LS_KEY = "pa_chars";
 
 const initialDraft: CharacterDefinitionLite = {
+  message: "",
   client_ready: false,
-  identity: { char_name: "" },
+  identity: { char_name: "" }, // slug is set on validate/commit
   personality: {
     desire: "",
     fear: "",
@@ -27,12 +28,17 @@ const initialDraft: CharacterDefinitionLite = {
     traits: [],
   },
   physical: {
+    species: "",
     age_range: "adult",
+    gender: "unspecified",         // REQUIRED by schema/types
     height_category: "average",
     build: "average",
-    skin_tone: "tan",
-    hair_color: "brown",
-    eye_color: "green",
+    skin_tone: "#a36c3f",
+    hair_color: "#5b3b1a",
+    hair_style: "",
+    eye_color: "#2e7f4f",
+    distinctive_features: [],
+    aesthetic_vibe: "",
   },
 };
 
@@ -42,9 +48,10 @@ function isLiteComplete(d: CharacterDefinitionLite): boolean {
     d.client_ready === true &&
       id?.char_name &&
       p?.desire && p?.fear && p?.flaw &&
-      Array.isArray(p?.traits) && p.traits.length >= 1 &&
+      Array.isArray(p?.traits) && p.traits.length >= 2 && // schema minItems: 2
       ph?.age_range && ph?.height_category && ph?.build &&
-      ph?.skin_tone && ph?.hair_color && ph?.eye_color
+      ph?.skin_tone && ph?.hair_color && ph?.eye_color &&
+      ph?.gender // now required
   );
 }
 
@@ -63,6 +70,21 @@ function rememberSlug(slug: string) {
 
 function toSlug(name: string) {
   return name.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+
+function csvParseUnique(input: string, max: number): string[] {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const raw of input.split(",")) {
+    const s = raw.trim();
+    if (!s) continue;
+    const key = s.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(s);
+    if (out.length >= max) break;
+  }
+  return out;
 }
 
 // ───────────────────────────────── component ───────────────────────────────
@@ -90,9 +112,19 @@ export default function CharacterCreator() {
     el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
   }, [messages, isTyping]);
 
-  // Form model
+  // Form model + CSV editors for arrays
   const [form, setForm] = useState<CharacterDefinitionLite>(initialDraft);
   const [traitsText, setTraitsText] = useState("");
+  const [valuesText, setValuesText] = useState("");
+  const [featuresText, setFeaturesText] = useState("");
+
+  // Seed CSV editors from draft once (on mount) — safe for blank initialDraft too
+  useEffect(() => {
+    setTraitsText((form.personality.traits ?? []).join(", "));
+    setValuesText((form.personality.values ?? []).join(", "));
+    setFeaturesText((form.physical.distinctive_features ?? []).join(", "));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Thread for assistant (user/assistant only)
   const threadForAssistant = useMemo(
@@ -107,19 +139,39 @@ export default function CharacterCreator() {
   const canCommit = isLiteComplete(form);
   const derivedSlug = useMemo(() => toSlug(form.identity.char_name || ""), [form.identity.char_name]);
 
-  // ────────────── local helpers ──────────────
+  // ────────────── CSV <→ form helpers ──────────────
   function applyTraitsTextToForm(text: string) {
     setTraitsText(text);
     setForm((prev) => ({
       ...prev,
       personality: {
         ...prev.personality,
-        traits: text.split(",").map((t) => t.trim()).filter(Boolean).slice(0, 8),
+        traits: csvParseUnique(text, 6),
+      },
+    }));
+  }
+  function applyValuesTextToForm(text: string) {
+    setValuesText(text);
+    setForm((prev) => ({
+      ...prev,
+      personality: {
+        ...prev.personality,
+        values: csvParseUnique(text, 5),
+      },
+    }));
+  }
+  function applyFeaturesTextToForm(text: string) {
+    setFeaturesText(text);
+    setForm((prev) => ({
+      ...prev,
+      physical: {
+        ...prev.physical,
+        distinctive_features: csvParseUnique(text, 6),
       },
     }));
   }
 
-  // instant parse for quick feedback
+  // instant parse for quick feedback from chat
   function applyChatDelta(text: string) {
     const m = text.toLowerCase();
     const next: CharacterDefinitionLite = {
@@ -141,7 +193,10 @@ export default function CharacterCreator() {
       fear: pick("fear"),
       flaw: pick("flaw"),
       traits: pick("traits"),
+      values: pick("values"),
+      features: pick("features") || pick("distinctive_features"),
       age: pick("age") || pick("age_range"),
+      gender: pick("gender"),
       height: pick("height") || pick("height_category"),
       build: pick("build"),
       hair: pick("hair") || pick("hair_color"),
@@ -154,19 +209,41 @@ export default function CharacterCreator() {
     if (v.fear) next.personality.fear = v.fear;
     if (v.flaw) next.personality.flaw = v.flaw;
     if (v.traits) applyTraitsTextToForm(v.traits);
+    if (v.values) applyValuesTextToForm(v.values);
+    if (v.features) applyFeaturesTextToForm(v.features);
 
-    const A = ["child", "teen", "adult", "elder"] as const;
+    const A = ["child", "teen", "young_adult", "adult", "middle_aged", "elder"] as const;
     const H = ["short", "average", "tall"] as const;
-    const B = ["slim", "average", "heavy", "muscular"] as const;
+    const B = ["slim", "average", "muscular", "heavy", "lithe", "stocky", "other"] as const;
+    const G = ["male", "female", "nonbinary", "unspecified"] as const;
+
     if (v.age && A.includes(v.age as any)) next.physical.age_range = v.age as any;
     if (v.height && H.includes(v.height as any)) next.physical.height_category = v.height as any;
     if (v.build && B.includes(v.build as any)) next.physical.build = v.build as any;
+    if (v.gender && G.includes(v.gender as any)) next.physical.gender = v.gender as any;
 
     if (v.hair) next.physical.hair_color = v.hair;
     if (v.eyes) next.physical.eye_color = v.eyes;
     if (v.skin) next.physical.skin_tone = v.skin;
 
     setForm(next);
+  }
+
+  // Prepare payload for server (inject slug + arrays from CSV)
+  function serializeForServer(src: CharacterDefinitionLite): CharacterDefinitionLite {
+    return {
+      ...src,
+      identity: { ...src.identity, char_slug: derivedSlug },
+      personality: {
+        ...src.personality,
+        traits: csvParseUnique(traitsText, 6),
+        values: csvParseUnique(valuesText, 5),
+      },
+      physical: {
+        ...src.physical,
+        distinctive_features: csvParseUnique(featuresText, 6),
+      },
+    };
   }
 
   // ────────────── mutations ──────────────
@@ -201,12 +278,9 @@ export default function CharacterCreator() {
     try {
       const res = await assistantTurn({
         message: text,
-        draft: form,
+        draft: serializeForServer(form), // keep assistant in sync with current arrays & slug
         thread: threadForAssistant,
       });
-
-      // Debug: log entire assistant payload
-      console.log("[CharacterCreator] assistantTurn →", res);
 
       // append assistant reply
       if (res?.message) {
@@ -217,6 +291,8 @@ export default function CharacterCreator() {
       if (res?.draft) {
         setForm(res.draft as CharacterDefinitionLite);
         setTraitsText((res.draft.personality?.traits ?? []).join(", "));
+        setValuesText((res.draft.personality?.values ?? []).join(", "));
+        setFeaturesText((res.draft.physical?.distinctive_features ?? []).join(", "));
       }
     } catch (err: any) {
       console.error("[CharacterCreator] assistantTurn error:", err);
@@ -232,6 +308,8 @@ export default function CharacterCreator() {
   function onFormChange(next: CharacterDefinitionLite) {
     setForm(next);
     setTraitsText((next.personality.traits ?? []).join(", "));
+    setValuesText((next.personality.values ?? []).join(", "));
+    setFeaturesText((next.physical.distinctive_features ?? []).join(", "));
   }
 
   // ────────────── UI ──────────────
@@ -242,7 +320,7 @@ export default function CharacterCreator() {
         <CardContent className="p-4 flex flex-col h-[70dvh]">
           <div
             ref={chatRef}
-            className="flex-1 overflow-auto space-y-3 pb-[100px]" // ← ensure 100px bottom padding
+            className="flex-1 overflow-auto space-y-3 pb-[100px]"
           >
             {messages.map((m, i) => (
               <div
@@ -294,28 +372,21 @@ export default function CharacterCreator() {
       <div className="space-y-4">
         <Card className="border rounded-2xl shadow-sm">
           <CardContent className="p-4">
-            {/* Keep your existing CharacterForm; no duplication */}
-            <div className="mb-3">
-              <label className="text-xs text-slate-600">Traits (comma-separated)</label>
-              <input
-                value={traitsText}
-                onChange={(e) => applyTraitsTextToForm(e.target.value)}
-                placeholder="brave,witty"
-                className="mt-1 w-full rounded-xl border px-3 py-2 outline-none focus:ring"
-              />
-            </div>
-
             <CharacterForm
               value={form}
               onChange={onFormChange}
               traitsText={traitsText}
               onTraitsTextChange={applyTraitsTextToForm}
+              valuesText={valuesText}
+              onValuesTextChange={applyValuesTextToForm}
+              featuresText={featuresText}
+              onFeaturesTextChange={applyFeaturesTextToForm}
             />
 
             <div className="mt-4 flex flex-wrap items-center gap-2">
               <Button
                 type="button"
-                onClick={() => mValidate.mutate(form)}
+                onClick={() => mValidate.mutate(serializeForServer(form))}
                 disabled={mValidate.isPending}
               >
                 {mValidate.isPending ? "Validating…" : "Validate"}
@@ -323,7 +394,7 @@ export default function CharacterCreator() {
 
               <Button
                 type="button"
-                onClick={() => mCommit.mutate(form)}
+                onClick={() => mCommit.mutate(serializeForServer(form))}
                 disabled={!canCommit || mCommit.isPending}
                 title={!canCommit ? "Fill required fields first" : ""}
               >
