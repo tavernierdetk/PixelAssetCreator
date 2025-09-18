@@ -7,11 +7,12 @@ type Props = {
   slug: string;
   intermediary: any | null;
   onComposed?: () => void | Promise<void>;
+  onBuild?: (build: any) => void; // ← NEW
 };
 
-const IntermediaryConverter: React.FC<Props> = ({ slug, intermediary, onComposed }) => {
+const IntermediaryConverter: React.FC<Props> = ({ slug, intermediary, onComposed, onBuild }) => {
   const [pending, setPending] = useState(false);
-  const [animations, setAnimations] = useState<string>("idle"); // comma separated
+  const [animations, setAnimations] = useState<string>("idle");
   const [build, setBuild] = useState<any | null>(null);
   const [warnings, setWarnings] = useState<any[] | null>(null);
 
@@ -21,21 +22,18 @@ const IntermediaryConverter: React.FC<Props> = ({ slug, intermediary, onComposed
     if (!intermediary) return;
     setPending(true);
     try {
-      const anims = animations
-        .split(",")
-        .map((s) => s.trim())
-        .filter(Boolean);
-
+      const anims = animations.split(",").map((s) => s.trim()).filter(Boolean);
       const res = await convertIntermediary({
         slug,
         intermediary,
         animations: anims.length ? anims : ["idle"],
-        compose: true, // write composed sheets so ULPC panel updates from files
+        compose: true,
       });
 
       if (res?.ok) {
         setBuild(res.build ?? null);
         setWarnings(res.warnings ?? null);
+        if (res.build && onBuild) onBuild(res.build); // ← feed the editor
         if (onComposed) await onComposed();
       } else {
         setBuild(null);
@@ -53,9 +51,7 @@ const IntermediaryConverter: React.FC<Props> = ({ slug, intermediary, onComposed
   return (
     <div className="space-y-3">
       {!hasIntermediary ? (
-        <p className="text-sm text-slate-600">
-          No intermediary loaded yet. Use the assistant panel above to generate it.
-        </p>
+        <p className="text-sm text-slate-600">No intermediary loaded yet. Use the assistant panel above to generate it.</p>
       ) : (
         <div className="space-y-2">
           <div className="flex items-center gap-2">
@@ -71,13 +67,7 @@ const IntermediaryConverter: React.FC<Props> = ({ slug, intermediary, onComposed
             </Button>
           </div>
 
-          <details className="rounded-xl border p-3">
-            <summary className="cursor-pointer text-sm font-medium">Intermediary (active)</summary>
-            <pre className="mt-2 text-xs bg-slate-50 p-3 rounded-xl overflow-auto">
-              {JSON.stringify(intermediary, null, 2)}
-            </pre>
-          </details>
-
+          {/* Keep the debug sections if you like */}
           {warnings && warnings.length ? (
             <details className="rounded-xl border p-3">
               <summary className="cursor-pointer text-sm font-medium">Warnings</summary>
@@ -86,19 +76,6 @@ const IntermediaryConverter: React.FC<Props> = ({ slug, intermediary, onComposed
               </pre>
             </details>
           ) : null}
-
-          {build ? (
-            <details className="rounded-xl border p-3">
-              <summary className="cursor-pointer text-sm font-medium">Generated Build JSON</summary>
-              <pre className="mt-2 text-xs bg-slate-50 p-3 rounded-xl overflow-auto">
-                {JSON.stringify(build, null, 2)}
-              </pre>
-            </details>
-          ) : null}
-
-          <p className="text-xs text-slate-500">
-            After compose, the ULPC panel below should list new spritesheets automatically.
-          </p>
         </div>
       )}
     </div>

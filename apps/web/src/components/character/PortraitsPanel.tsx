@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { fileUrl } from "@/lib/api";
@@ -22,10 +22,12 @@ export function PortraitsPanel({
   onRemovePortrait: () => Promise<void> | void;
   cacheBust: number;
 }) {
-  const portraitName = useMemo(() => {
-    // server lists filenames; pick the high-res portrait
-    return files.find((f) => /^high_res_portrait_.*\.(png|jpg|jpeg|webp)$/i.test(f)) || null;
-  }, [files]);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  const portraitName = useMemo(
+    () => files.find((f) => /^high_res_portrait_.*\.(png|jpg|jpeg|webp)$/i.test(f)) || null,
+    [files]
+  );
 
   const portraitSrc = useMemo(
     () => (portraitName ? fileUrl(slug, portraitName, cacheBust) : null),
@@ -33,6 +35,7 @@ export function PortraitsPanel({
   );
 
   const isGen = Boolean(pending.portrait);
+  const canRemove = Boolean(portraitSrc) && !isGen;
 
   return (
     <Card className="w-full">
@@ -40,36 +43,31 @@ export function PortraitsPanel({
         <div className="flex items-center justify-between">
           <div className="font-medium">Portrait (Full Art)</div>
           <div className="flex items-center gap-2">
-            <Button
-              type="button"
-              onClick={() => onGeneratePortrait()}
-              disabled={!hasDefinition || isGen}
-            >
+            <Button type="button" onClick={() => onGeneratePortrait()} disabled={!hasDefinition || isGen}>
               {isGen ? "Generating…" : "Generate Portrait"}
             </Button>
 
-            <label className="inline-flex items-center gap-2">
-              <input
-                type="file"
-                accept="image/*"
-                className="hidden"
-                onChange={(e) => {
-                  const f = e.target.files?.[0];
-                  if (f) onUploadPortrait(f);
-                  e.currentTarget.value = "";
-                }}
-              />
-              <span className="px-3 py-2 rounded-xl border border-slate-300 text-sm cursor-pointer">
-                Upload Portrait
-              </span>
-            </label>
-
+            {/* Hidden file input + Button trigger (no asChild prop) */}
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={(e) => {
+                const f = e.target.files?.[0];
+                if (f) onUploadPortrait(f);
+                if (fileInputRef.current) fileInputRef.current.value = "";
+              }}
+            />
             <Button
               type="button"
-              onClick={() => onRemovePortrait()}
-              disabled={!portraitSrc || isGen}
-              className="bg-white border border-slate-300 text-slate-700 hover:bg-slate-50"
+              onClick={() => fileInputRef.current?.click()}
+              disabled={isGen}
             >
+              Upload Portrait
+            </Button>
+
+            <Button type="button" onClick={() => onRemovePortrait()} disabled={!canRemove}>
               Remove Portrait
             </Button>
           </div>
@@ -84,11 +82,10 @@ export function PortraitsPanel({
         ) : !portraitSrc ? (
           <p className="text-sm text-slate-600">No portrait yet.</p>
         ) : (
-          // eslint-disable-next-line @next/next/no-img-element
           <img
             src={portraitSrc}
             alt={`Portrait for ${slug}`}
-            className="max-h-[420px] rounded-xl border border-slate-200"
+            className="max-h-[420px] max-w-full object-contain rounded-xl border border-slate-200"
           />
         )}
       </CardContent>

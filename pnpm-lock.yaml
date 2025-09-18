@@ -30,6 +30,9 @@ importers:
       '@types/node':
         specifier: ^20.19.13
         version: 20.19.13
+      rimraf:
+        specifier: ^5.0.10
+        version: 5.0.10
       turbo:
         specifier: ^2.0.0
         version: 2.5.6
@@ -366,11 +369,14 @@ importers:
         specifier: workspace:*
         version: link:../log
       sharp:
-        specifier: ^0.33.5
+        specifier: ^0.33.3
         version: 0.33.5
     devDependencies:
+      rimraf:
+        specifier: ^5.0.5
+        version: 5.0.10
       typescript:
-        specifier: ^5.5.0
+        specifier: ^5.4.0
         version: 5.9.2
 
   packages/validators:
@@ -2604,6 +2610,10 @@ packages:
   reusify@1.1.0:
     resolution: {integrity: sha512-g6QUff04oZpHs0eG5p83rFLhHeV00ug/Yf9nZM6fLeUrPguBTkTQOdpAWWspMh55TZfVQDPaN3NQJfbVRAxdIw==}
     engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
+
+  rimraf@5.0.10:
+    resolution: {integrity: sha512-l0OE8wL34P4nJH/H2ffoaniAokM2qSmrtXHmlpvYr5AVVX8msAyW0l8NVJFDxlSK4u3Uh/f41cQheDVdnYijwQ==}
+    hasBin: true
 
   rollup@4.50.1:
     resolution: {integrity: sha512-78E9voJHwnXQMiQdiqswVLZwJIzdBKJ1GdI5Zx6XwoFKUIk09/sSrr+05QFzvYb8q6Y9pPV45zzDuYa3907TZA==}
@@ -5105,6 +5115,10 @@ snapshots:
       supports-preserve-symlinks-flag: 1.0.0
 
   reusify@1.1.0: {}
+
+  rimraf@5.0.10:
+    dependencies:
+      glob: 10.4.5
 
   rollup@4.50.1:
     dependencies:

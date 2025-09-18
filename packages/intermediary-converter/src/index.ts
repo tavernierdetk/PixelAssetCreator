@@ -55,7 +55,7 @@ export type UlpcBuildJson = {
   generator: { project: "Universal-LPC-Spritesheet-Character-Generator"; version: string };
   animations: string[];
   layers: Array<{
-    category: string;           // path-like enum
+    category: string;           // path-like enum (PLACEHOLDERS MATERIALIZED)
     variant: string;            // allowed by variant switch
     visible?: boolean;
     z_override?: number;
@@ -84,8 +84,31 @@ const norm = (s: string) => s.toLowerCase().replace(/\s+/g, " ").trim();
 const COLOR_DICT: Record<string, string[]> = COLOR_DICT_RAW as any;
 
 // ────────────────────────────────────────────────────────────────────────────
-// Public API
+// Placeholder materialization helpers
 // ────────────────────────────────────────────────────────────────────────────
+
+function inferHeadLexeme(headType?: string, bodyType?: string): "male" | "female" | "child" {
+  const s = `${headType || ""} ${bodyType || ""}`.toLowerCase();
+  if (/\bfemale\b/.test(s)) return "female";
+  if (/\bchild\b|\bsmall\b|\bteen\b/.test(s)) return "child";
+  // muscular, male, default → male
+  return "male";
+}
+
+/**
+ * Replace known template tokens in category paths.
+ * - ${head} → inferred head lexeme (male|female|child)
+ * - ${expression} → removed (we rely on composer’s directory scan to pick any expression)
+ */
+function materializeCategory(catIn: string, ctx: { head: "male" | "female" | "child" }): string {
+  let out = String(catIn || "");
+  out = out.replace(/\$\{head\}/g, ctx.head);
+  // Remove optional "/${expression}" or "${expression}" segments
+  out = out.replace(/\/?\$\{expression\}/g, "");
+  // Clean up duplicate/trailing slashes
+  out = out.replace(/\/{2,}/g, "/").replace(/\/$/, "");
+  return out;
+}
 
 // ────────────────────────────────────────────────────────────────────────────
 // Head/Body variant enforcement helper
@@ -131,6 +154,9 @@ function enforceHeadVariantEqualsBody(
   }
 }
 
+// ────────────────────────────────────────────────────────────────────────────
+// Public API
+// ────────────────────────────────────────────────────────────────────────────
 
 export async function convertCharIntermediaryToUlpc(
   ci: CharIntermediary,
@@ -153,6 +179,7 @@ export async function convertCharIntermediaryToUlpc(
   }
 
   const bodyType = ci.body_type; // "male" | "muscular" | "female" | "teen" | "child"
+  const headLexeme = inferHeadLexeme(ci.head_type, bodyType);
 
   const build: UlpcBuildJson = {
     schema: "ulpc.build/1.0",
@@ -202,7 +229,7 @@ export async function convertCharIntermediaryToUlpc(
       }
     }
 
-    // 3) if given hex, we could map nearest later (phase 2). For now, fallback.
+    // 3) hex → nearest mapping (phase 2). For now, fallback.
     return { variant: variants[0], note: "fallback_first_variant" };
   }
 
@@ -215,11 +242,14 @@ export async function convertCharIntermediaryToUlpc(
       return entry;
     }
 
-    const catPath = resolveCategoryPath(def);
+    let catPath = resolveCategoryPath(def);
     if (!catPath) {
       entry.notes.push(`no_layer_1_mapping_for:${ci.body_type}`);
       return entry;
     }
+
+    // ---- MATERIALIZE PLACEHOLDERS HERE ----
+    catPath = materializeCategory(catPath, { head: headLexeme });
 
     const { variant, note } = chooseVariant(preferredColour, def.variants);
     if (note) entry.notes.push(note);
@@ -241,7 +271,6 @@ export async function convertCharIntermediaryToUlpc(
   {
     // If the assistant provided a "body" category, use its ordered items; else default to ["body.json"].
     const bodyCatInput = ci.categories.find((c) => c.category === "body");
-
     const preferred = bodyCatInput?.preferred_colour ?? ci?.categories?.find(c => c.category === "body")?.preferred_colour;
     const items = bodyCatInput?.items?.length ? bodyCatInput.items : ["body.json"];
 
@@ -277,7 +306,7 @@ export async function convertCharIntermediaryToUlpc(
     for (const sel of ci.categories) {
       const cat = sel.category;
       if (cat === "body") continue; // already handled
-      // Head is driven by head_type; if the assistant also listed any head-like category, we skip to avoid conflicts.
+      // Head is driven by head_type; if the assistant also listed any head-like category, skip to avoid conflicts.
       if (cat === "head" || cat.startsWith("heads_")) continue;
 
       const items = refMap.get(cat);
@@ -301,6 +330,8 @@ export async function convertCharIntermediaryToUlpc(
       }
     }
   }
+
+  // Keep head variant synced to body variant
   enforceHeadVariantEqualsBody(build, trace);
 
   // 4) Final validation (programmatic, no local Ajv)

@@ -5,7 +5,6 @@ import { resolveUlpcSheetDefs } from "@pixelart/config";
 
 /** Resolve package & monorepo roots from this file (works from src or dist) */
 const THIS_DIR = path.dirname(fileURLToPath(import.meta.url));       // .../packages/sprite-catalog/src OR /dist
-// if running from dist, parent is dist; one up gives package root. if from src, one up gives package root too.
 const PKG_ROOT = path.resolve(THIS_DIR, "..");                       // .../packages/sprite-catalog
 const MONO_ROOT = path.resolve(PKG_ROOT, "..", "..");                // .../<repo-root>
 
@@ -21,7 +20,7 @@ const SCHEMA_OUT: string =
 type VariantSwitch = {
   if:   { properties: { category: { const: string } }; required?: ["category"] };
   then: { properties: { variant: { type: "string"; enum: string[] } } };
-  else: false; // ⬅️ non-matching branches must fail
+  else: false;
 };
 type EnumSchema = {
   $schema: string;
@@ -68,30 +67,30 @@ const schema: EnumSchema = {
     },
     output: {
       type: "object",
+      additionalProperties: false,
       properties: {
         mode: {
           type: "string",
-          enum: ["full", "split_by_animation", "split_by_item", "split_both"],
+          enum: ["full", "split_by_animation", "split_by_frame", "both"]
         },
         frame_size: {
           type: "object",
+          additionalProperties: false,
           properties: {
             w: { type: "integer", minimum: 1 },
-            h: { type: "integer", minimum: 1 },
+            h: { type: "integer", minimum: 1 }
           },
-          additionalProperties: false,
+          required: ["w", "h"]
         },
-        padding: { type: "integer", minimum: 0 },
-        trim: { type: "boolean" },
-        background: { type: "string", enum: ["transparent"] },
-      },
-      additionalProperties: false,
+        zero_pad: { type: "integer", minimum: 1, maximum: 8 },
+        fps: { type: "number", exclusiveMinimum: 0 }
+      }
     },
     animations: {
       type: "array",
       items: {
         type: "string",
-        enum: ["spellcast", "thrust", "walk", "slash", "shoot", "hurt", "bow", "climb", "run", "jump", "idle", "sit", "emote", "combat"],
+        enum: ["spellcast","thrust","walk","slash","shoot","hurt","bow","climb","run","jump","idle","sit","emote","combat"],
       },
       uniqueItems: true,
     },
@@ -169,11 +168,7 @@ function walk(dir: string): string[] {
   return out;
 }
 function readJson(file: string): any | null {
-  try {
-    return JSON.parse(fs.readFileSync(file, "utf-8"));
-  } catch {
-    return null;
-  }
+  try { return JSON.parse(fs.readFileSync(file, "utf-8")); } catch { return null; }
 }
 /** derive category id from *path*, e.g. hair/bedhead/adult */
 function categoryIdFromPath(file: string): string {
@@ -194,12 +189,10 @@ function variantId(v: any): string | null {
 
 function extractLayerPaths(def: any): string[] {
   const out = new Set<string>();
-
   const visit = (node: any) => {
     if (!node || typeof node !== "object") return;
     for (const [, v] of Object.entries(node)) {
       if (typeof v === "string") {
-        // normalize 'body/bodies/male/' -> 'body/bodies/male'
         const rel = v.replace(/^\/*/, "").replace(/\/*$/, "");
         if (rel.includes("/")) out.add(rel);
       } else if (v && typeof v === "object") {
@@ -207,7 +200,6 @@ function extractLayerPaths(def: any): string[] {
       }
     }
   };
-
   for (const [k, v] of Object.entries(def)) {
     if (/^layer_/i.test(k) && v && typeof v === "object") {
       visit(v);
@@ -226,7 +218,6 @@ for (const f of files) {
   const def = readJson(f);
   if (!def) continue;
 
-  // We only care about definitions that have "variants".
   const arr = Array.isArray(def.variants) ? def.variants : null;
   if (!arr) continue;
 
@@ -245,8 +236,6 @@ for (const f of files) {
       if (id) set.add(String(id));
     }
   }
-
-
 }
 
 /* fill schema */

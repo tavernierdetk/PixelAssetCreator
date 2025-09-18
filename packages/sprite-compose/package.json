@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -13,31 +14,17 @@
   },
   "files": ["dist"],
   "scripts": {
-    "build": "tsc -b",
-    "dev": "ts-node src/index.ts" 
+    "clean": "rimraf dist tsconfig.tsbuildinfo",
+    "prebuild": "rimraf dist tsconfig.tsbuildinfo",
+    "build": "tsc -b"
   },
   "dependencies": {
     "@pixelart/log": "workspace:*",
-    "sharp": "^0.33.5",
-    "@pixelart/config": "workspace:*" 
-
+    "@pixelart/config": "workspace:*",
+    "sharp": "^0.33.3"
   },
   "devDependencies": {
-    "typescript": "^5.5.0"
+    "typescript": "^5.4.0",
+    "rimraf": "^5.0.5"
   }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

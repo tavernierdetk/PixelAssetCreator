@@ -50,18 +50,20 @@
     },
     "output": {
       "type": "object",
+      "additionalProperties": false,
       "properties": {
         "mode": {
           "type": "string",
           "enum": [
             "full",
             "split_by_animation",
-            "split_by_item",
-            "split_both"
+            "split_by_frame",
+            "both"
           ]
         },
         "frame_size": {
           "type": "object",
+          "additionalProperties": false,
           "properties": {
             "w": {
               "type": "integer",
@@ -72,23 +74,21 @@
               "minimum": 1
             }
           },
-          "additionalProperties": false
-        },
-        "padding": {
-          "type": "integer",
-          "minimum": 0
-        },
-        "trim": {
-          "type": "boolean"
-        },
-        "background": {
-          "type": "string",
-          "enum": [
-            "transparent"
+          "required": [
+            "w",
+            "h"
           ]
+        },
+        "zero_pad": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8
+        },
+        "fps": {
+          "type": "number",
+          "exclusiveMinimum": 0
         }
-      },
-      "additionalProperties": false
+      }
     },
     "animations": {
       "type": "array",

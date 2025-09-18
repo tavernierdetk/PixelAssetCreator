@@ -1,14 +1,12 @@
+// packages/sprite-compose/tsconfig.json
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "composite": true,
-    "declaration": true,
-    "rootDir": "./src",
     "outDir": "./dist",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "target": "ES2022",
-    "skipLibCheck": true
+    "rootDir": "./src",
+    "declaration": true,
+    "composite": true,
+    "emitDeclarationOnly": false
   },
-  "include": ["src"]
+  "include": ["src/**/*"]
 }

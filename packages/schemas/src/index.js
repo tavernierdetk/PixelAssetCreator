@@ -44,3 +44,5 @@ export default {
     validateAssistantChatPayload,
 };
 export * as ulpc from "./ulpc/index.js";
+export { build, category_reference } from "./ulpc/index.js";
+

@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "prebuild": "pnpm --filter @pixelart/sprite-catalog build && node ../sprite-catalog/dist/buildEnumSchema.js",
-    "build": "tsc -b",
+    "build": "tsc -b && node ./scripts/copy-json.mjs",
     "dev": "ts-node src/index.ts"
   },
   "devDependencies": {
