@@ -26,6 +26,34 @@ export async function readLiteDef(slug: string): Promise<any> {
   return JSON.parse(text);
 }
 
+export async function writeIntermediary(slug: string, data: unknown): Promise<string> {
+  const dir = charDir(slug);
+  await ensureDir(dir);
+  const file = join(dir, "intermediary.json");
+  await fs.writeFile(file, JSON.stringify(data, null, 2), "utf8");
+  return file;
+}
+
+export async function readIntermediary(slug: string): Promise<any> {
+  const file = join(charDir(slug), "intermediary.json");
+  const text = await fs.readFile(file, "utf8");
+  return JSON.parse(text);
+}
+
+export async function writeUlpcBuild(slug: string, data: unknown): Promise<string> {
+  const dir = charDir(slug);
+  await ensureDir(dir);
+  const file = join(dir, "ulpc.json");
+  await fs.writeFile(file, JSON.stringify(data, null, 2), "utf8");
+  return file;
+}
+
+export async function readUlpcBuild(slug: string): Promise<any> {
+  const file = join(charDir(slug), "ulpc.json");
+  const text = await fs.readFile(file, "utf8");
+  return JSON.parse(text);
+}
+
 // ───────────────────────── Project Settings ─────────────────────────
 export const SETTINGS_FILE: string =
   process.env.PROJECT_SETTINGS_FILE ??

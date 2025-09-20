@@ -1,10 +1,11 @@
 // apps/web/src/pages/CharacterDetailPage.tsx
 import { useEffect, useMemo, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { BackHeader } from "@/components/BackHeader";
 import CollapsibleCard from "@/components/CollapsibleCard";
+import { Button } from "@/components/ui/button";
 
 import { PortraitsPanel } from "@/components/character/PortraitsPanel";
 import { CharacterForm } from "@/components/character/CharacterForm";
@@ -23,7 +24,22 @@ import {
   getJob,
   deleteAsset,
   uploadAsset,
+  deleteCharacter,
 } from "@/lib/api";
+
+const LS_KEY = "pa_chars";
+
+function forgetSlug(slug: string) {
+  try {
+    const raw = typeof window !== "undefined" ? window.localStorage.getItem(LS_KEY) : null;
+    if (!raw) return;
+    const arr: string[] = JSON.parse(raw);
+    const next = arr.filter((s) => s !== slug);
+    window.localStorage.setItem(LS_KEY, JSON.stringify(next));
+  } catch {
+    // ignore storage errors
+  }
+}
 
 // ────────────────────────────────────────────────────────────────────────────
 // Page
@@ -31,6 +47,7 @@ import {
 export default function CharacterDetailPage() {
   const { slug = "" } = useParams();
   const qc = useQueryClient();
+  const navigate = useNavigate();
   
 
   // Fetch definition & assets
@@ -68,6 +85,15 @@ export default function CharacterDetailPage() {
     queryFn: () => listAssets(slug),
     enabled: !!slug,
   });
+
+  useEffect(() => {
+    if (assetsQ.data) {
+      setIntermediary(assetsQ.data.intermediary ?? null);
+      if (assetsQ.data.ulpc) {
+        setUlpcBuildDraft(assetsQ.data.ulpc);
+      }
+    }
+  }, [assetsQ.data]);
 
   // Local form state
   const [form, setForm] = useState<CharacterDefinitionLite | null>(null);
@@ -160,8 +186,22 @@ const exportM = useMutation({
       writeBattleVisual: false
     });
   },
-  onSuccess: () => alert("Godot export complete.")
-});
+    onSuccess: () => alert("Godot export complete.")
+  });
+
+  const deleteM = useMutation({
+    mutationFn: async () => {
+      if (!slug) throw new Error("Missing slug");
+      return deleteCharacter(slug);
+    },
+    onSuccess: async () => {
+      forgetSlug(slug);
+      await qc.invalidateQueries({ queryKey: ["gallery"] });
+      await qc.invalidateQueries({ queryKey: ["assets", slug] });
+      await qc.invalidateQueries({ queryKey: ["liteDef", slug] });
+      navigate("/");
+    },
+  });
 
   // Helpers
   async function pollJobUntilDone(jobId: string, opts?: { timeoutMs?: number; intervalMs?: number }) {
@@ -205,9 +245,21 @@ const exportM = useMutation({
     await qc.invalidateQueries({ queryKey: ["assets", slug] });
     setImgBust(Date.now());
   }
-
+  
   async function refreshAssets() {
     await qc.invalidateQueries({ queryKey: ["assets", slug] });
+  }
+
+  async function handleDeleteCharacter() {
+    if (!slug) return;
+    const confirmed = window.confirm(`Delete ${displayName || slug}? This will remove all assets and cannot be undone.`);
+    if (!confirmed) return;
+    try {
+      await deleteM.mutateAsync();
+    } catch (err: any) {
+      console.error("[character.delete] error", err);
+      alert(err?.message || "Failed to delete character.");
+    }
   }
 
   const buildOverrideMemo = useMemo(() => ulpcBuildDraft, [ulpcBuildDraft]);
@@ -216,6 +268,17 @@ const exportM = useMutation({
   return (
     <div className="space-y-6">
       <BackHeader title={`Character: ${displayName}`} />
+
+      <div className="flex justify-end">
+        <Button
+          type="button"
+          onClick={handleDeleteCharacter}
+          disabled={deleteM.isPending}
+          className={`bg-red-600 hover:bg-red-500 text-white ${deleteM.isPending ? "opacity-70" : ""}`}
+        >
+          {deleteM.isPending ? "Deleting…" : "Delete Character"}
+        </Button>
+      </div>
 
       {/* Character Form (collapsible) */}
       <CollapsibleCard

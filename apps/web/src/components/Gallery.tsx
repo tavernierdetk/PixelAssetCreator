@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent } from "@/components/ui/card";
-import { getLiteDef, listAssets } from "@/lib/api";
+import { getLiteDef, listAssets, listCharacters } from "@/lib/api";
 
 type GalleryItem = {
   slug: string;
@@ -14,12 +14,9 @@ type GalleryItem = {
 const LS_KEY = "pa_chars"; // fallback store of known slugs (added by creator on commit)
 
 async function fetchBackendSlugs(): Promise<string[]> {
-  // Optional future backend route: GET /characters -> { slugs: string[] }
   try {
-    const res = await fetch(`${import.meta.env.VITE_API_BASE ?? "http://localhost:4000"}/characters`);
-    if (!res.ok) throw new Error(String(res.status));
-    const data = (await res.json()) as { slugs?: string[] };
-    return data.slugs ?? [];
+    const data = await listCharacters();
+    return Array.isArray(data.slugs) ? data.slugs : [];
   } catch {
     return [];
   }
@@ -69,7 +66,9 @@ export default function CharacterGallery() {
     queryKey: ["gallery", localSlugs],
     queryFn: async () => {
       const backendSlugs = await fetchBackendSlugs();
-      const merged = Array.from(new Set([...backendSlugs, ...localSlugs]));
+      const merged = backendSlugs.length
+        ? backendSlugs
+        : Array.from(new Set([...backendSlugs, ...localSlugs]));
       return hydrate(merged);
     },
   });

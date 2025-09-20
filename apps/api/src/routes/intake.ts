@@ -3,7 +3,6 @@ import * as schemas from "@pixelart/schemas";
 import { writeLiteDef, readLiteDef } from "@pixelart/config";
 import { promises as fs } from "node:fs";
 import { resolve, join } from "node:path";
-import { createReadStream } from "node:fs";
 
 
 // ───────────────────────────────── helpers ─────────────────────────────────
@@ -51,6 +50,41 @@ function assertValidator() {
 // ───────────────────────────────── router ─────────────────────────────────
 
 export const intake: import("express").Router = Router();
+
+/**
+ * GET /characters
+ * Scan ASSET_ROOT for directories containing char_def_lite_<slug>.json
+ * Returns { ok: true, slugs: string[] }
+ */
+intake.get("/characters", async (_req: Request, res: Response) => {
+  try {
+    const root = assetRoot();
+    const entries = await fs.readdir(root, { withFileTypes: true }).catch(() => []);
+    const slugs: string[] = [];
+
+    await Promise.all(
+      entries
+        .filter((entry) => entry.isDirectory())
+        .map(async (entry) => {
+          const slug = entry.name;
+          const defPath = join(root, slug, `char_def_lite_${slug}.json`);
+          try {
+            await fs.access(defPath);
+            slugs.push(slug);
+          } catch {
+            // ignore directories without a lite def
+          }
+        })
+    );
+
+    slugs.sort((a, b) => a.localeCompare(b));
+    return res.json({ ok: true, slugs });
+  } catch (err: any) {
+    return res
+      .status(500)
+      .json({ ok: false, code: "SERVER_ERROR", error: String(err?.message ?? err) });
+  }
+});
 
 /**
  * POST /validate-lite
@@ -213,5 +247,29 @@ intake.get("/characters/:slug/defs/lite", async (req: Request, res: Response) =>
     return res.json(json);
   } catch (e: any) {
     return res.status(404).json({ ok: false, error: e?.message ?? "Not found" });
+  }
+});
+
+/**
+ * DELETE /characters/:slug
+ * Remove the entire character directory (lite def, assets, intermediary, ulpc, etc.)
+ */
+intake.delete("/characters/:slug", async (req: Request, res: Response) => {
+  const slug = req.params.slug;
+  const root = assetRoot();
+  const dir = join(root, slug);
+
+  try {
+    const stat = await fs.stat(dir).catch(() => null);
+    if (!stat || !stat.isDirectory()) {
+      return res.status(404).json({ ok: false, error: "character_not_found" });
+    }
+
+    await fs.rm(dir, { recursive: true, force: true });
+    return res.json({ ok: true, slug });
+  } catch (err: any) {
+    return res
+      .status(500)
+      .json({ ok: false, code: "SERVER_ERROR", error: String(err?.message ?? err) });
   }
 });

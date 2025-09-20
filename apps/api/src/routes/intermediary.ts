@@ -1,17 +1,14 @@
 // apps/api/src/routes/intermediary.ts
 import { Router, type Request, type Response } from "express";
-import { existsSync } from "node:fs";
 import { mkdir } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import os from "node:os";
-
-import { writeFile } from "node:fs/promises";
 
 import {
   convertCharIntermediaryToUlpc,
 } from "@pixelart/intermediary-converter";
 import { composeULPC } from "@pixelart/sprite-compose";
-import { ensureDir, charDir } from "@pixelart/config";
+import { ensureDir, charDir, writeIntermediary, writeUlpcBuild } from "@pixelart/config";
 
 // ✅ import the category reference from the package (no brittle paths)
 import { ulpc as schemasUlpc } from "@pixelart/schemas";
@@ -25,6 +22,10 @@ intermediaryRouter.post(
       const { intermediary, animations, compose, slug, outPath } = req.body ?? {};
       if (!intermediary || typeof intermediary !== "object") {
         return res.status(400).json({ ok: false, code: "BAD_REQUEST", message: "intermediary required" });
+      }
+
+      if (typeof slug !== "string" || !slug.length) {
+        return res.status(400).json({ ok: false, code: "SLUG_REQUIRED", message: "slug is required" });
       }
 
       const catCount = Array.isArray((intermediary as any)?.categories)
@@ -48,6 +49,13 @@ intermediaryRouter.post(
         });
       }
 
+      try {
+        await writeIntermediary(slug, intermediary);
+        console.log("[convert-intermediary] persisted_intermediary", { slug });
+      } catch (err: any) {
+        console.error("[convert-intermediary] persist_intermediary_failed", { slug, error: err?.message });
+      }
+
       const result = await convertCharIntermediaryToUlpc(intermediary, {
         categoryReference,
         animations: Array.isArray(animations) && animations.length ? animations : undefined,
@@ -62,6 +70,13 @@ intermediaryRouter.post(
         return res.status(400).json(result);
       }
       const okResult = result as { ok: true; build: any; trace: any[]; warnings?: any[] };
+
+      try {
+        await writeUlpcBuild(slug, okResult.build);
+        console.log("[convert-intermediary] persisted_ulpc", { slug });
+      } catch (err: any) {
+        console.error("[convert-intermediary] persist_ulpc_failed", { slug, error: err?.message });
+      }
 
       console.log("[convert-intermediary] converter_success", {
         slug,
@@ -100,15 +115,26 @@ intermediaryRouter.post(
         finalOutPath = join(dir, `ulpc_${Date.now()}.png`);
       }
 
-      console.log("[convert-intermediary] compose_start", { slug, finalOutPath });
-      const composed = await composeULPC(okResult.build as any, finalOutPath);
-      console.log("[convert-intermediary] compose_done", {
-        slug,
-        outPath: composed?.outPath ?? finalOutPath,
-        bytes: composed?.bytes ?? null,
-      });
+      let composed: any = null;
+      let composeError: string | null = null;
+      try {
+        console.log("[convert-intermediary] compose_start", { slug, finalOutPath });
+        composed = await composeULPC(okResult.build as any, finalOutPath);
+        console.log("[convert-intermediary] compose_done", {
+          slug,
+          outPath: composed?.outPath ?? finalOutPath,
+          bytes: composed?.bytes ?? null,
+        });
+      } catch (err: any) {
+        composeError = err?.message ?? "compose_failed";
+        console.error("[convert-intermediary] compose_error", {
+          slug,
+          finalOutPath,
+          error: composeError,
+        });
+      }
 
-      return res.json({ ...okResult, composed });
+      return res.json({ ...okResult, composed, composeError });
     } catch (err: any) {
       console.error("[convert-intermediary] unexpected error:", err);
       return res.status(500).json({

@@ -2,6 +2,7 @@ import { Router, type Request, type Response, type Express } from "express";
 import { promises as fs } from "node:fs";
 import { resolve, join, extname } from "node:path";
 import multer from "multer";
+import { readIntermediary, readUlpcBuild } from "@pixelart/config";
 
 export const assets: import("express").Router = Router();
 
@@ -27,8 +28,22 @@ async function listFiles(slug: string) {
 // GET (keep if you already have it)
 assets.get("/characters/:slug/assets", async (req: Request, res: Response) => {
   try {
-    const files = await listFiles(req.params.slug);
-    res.json({ ok: true, files });
+    const { slug } = req.params;
+    const files = await listFiles(slug);
+    let intermediary: any = null;
+    let ulpc: any = null;
+    try {
+      intermediary = await readIntermediary(slug);
+    } catch {
+      intermediary = null;
+    }
+    try {
+      ulpc = await readUlpcBuild(slug);
+    } catch {
+      ulpc = null;
+    }
+
+    res.json({ ok: true, files, intermediary, ulpc });
   } catch (e: any) {
     res.status(500).json({ ok: false, error: String(e?.message ?? e) });
   }

@@ -31,6 +31,20 @@ export async function updateLiteDef(slug: string, def: any) {
   return res.json();
 }
 
+export async function listCharacters(): Promise<{ ok: boolean; slugs: string[] }> {
+  const res = await fetch(`${API}/characters`, { cache: "no-store" });
+  if (!res.ok) throw new Error(`listCharacters ${res.status}`);
+  return res.json();
+}
+
+export async function deleteCharacter(slug: string): Promise<{ ok: boolean; slug: string }> {
+  const res = await fetch(`${API}/characters/${encodeURIComponent(slug)}`, {
+    method: "DELETE",
+  });
+  if (!res.ok) throw new Error(`deleteCharacter ${slug}: ${res.status}`);
+  return res.json();
+}
+
 export async function enqueuePortrait(slug: string): Promise<{ jobId: string }> {
   const res = await fetch(`${API}/pipeline/${encodeURIComponent(slug)}/portrait`, {
     method: "POST",
@@ -90,13 +104,23 @@ export async function getLiteDef(slug: string) {
   return res.json();
 }
 
-export async function listAssets(slug: string) {
+export async function listAssets(slug: string): Promise<{
+  ok: boolean;
+  files: string[];
+  intermediary: any | null;
+  ulpc: any | null;
+}> {
   const url = `${API}/characters/${encodeURIComponent(slug)}/assets?t=${Date.now()}`;
   const res = await fetch(url, { cache: "no-store" });
   const json = await res.json();
   // DEBUG
   console.debug("[assets] list", { slug, count: json?.files?.length, url });
-  return json as { ok: boolean; files: string[] };
+  return {
+    ok: Boolean(json?.ok),
+    files: Array.isArray(json?.files) ? json.files : [],
+    intermediary: json?.intermediary ?? null,
+    ulpc: json?.ulpc ?? null,
+  };
 }
 
 export async function getProjectSettings() {
@@ -165,6 +189,7 @@ export async function assistantGenerateIntermediary(
         `Generate an IntermediarySelection.v2 for character "${slug || draft?.identity?.char_name || "unknown"}" ` +
         `from the provided CharacterDefinitionLite. Return ONLY the JSON object.`,
       baseDraft: draft ?? null,
+      slug,
       thread: [], // optional
     }),
   });
@@ -173,7 +198,7 @@ export async function assistantGenerateIntermediary(
 }
 
 export async function convertIntermediary(payload: {
-  slug?: string;
+  slug: string;
   intermediary: any;
   animations?: string[];
   compose?: boolean;

@@ -5,6 +5,7 @@ import { promises as fs } from "node:fs";
 import { createLogger } from "@pixelart/log";
 import { composeULPC, composeULPCExport } from "@pixelart/sprite-compose";
 import { makeUlpcBuildValidator } from "@pixelart/validators";
+import { writeUlpcBuild } from "@pixelart/config";
 
 const log = createLogger("@workers/ulpc-processor");
 
@@ -13,15 +14,24 @@ const ASSET_ROOT =
 
 async function readBuildIfMissing(slug: string, supplied: any | null) {
   if (supplied) return supplied;
-  const file = path.join(ASSET_ROOT, slug, `ulpc_build_${slug}.json`);
-  try {
-    const txt = await fs.readFile(file, "utf8");
-    const obj = JSON.parse(txt);
-    log.info({ msg: "loaded.build.file", file });
-    return obj;
-  } catch {
-    throw new Error(`ULPC build JSON not provided and not found at ${file}`);
+  const dir = path.join(ASSET_ROOT, slug);
+  const candidates = [
+    path.join(dir, "ulpc.json"),
+    path.join(dir, `ulpc_build_${slug}.json`),
+  ];
+
+  for (const file of candidates) {
+    try {
+      const txt = await fs.readFile(file, "utf8");
+      const obj = JSON.parse(txt);
+      log.info({ msg: "loaded.build.file", file });
+      return obj;
+    } catch {
+      continue;
+    }
   }
+
+  throw new Error(`ULPC build JSON not provided and not found for slug ${slug}`);
 }
 
 export default async function ulpcProcessor(job: Job) {
@@ -35,6 +45,13 @@ export default async function ulpcProcessor(job: Job) {
   const validateBuild = makeUlpcBuildValidator<any>();
   const { output, ...buildSansOutput } = build ?? {};
   validateBuild(buildSansOutput as any);
+
+  try {
+    await writeUlpcBuild(slug, build);
+    log.info({ msg: "ulpc.persisted", slug });
+  } catch (err: any) {
+    log.error({ msg: "ulpc.persist_failed", slug, error: err?.message });
+  }
 
   // 2) Decide path: single-sheet compose vs multi-export (sheets + frames)
   const mode = output?.mode as string | undefined;
