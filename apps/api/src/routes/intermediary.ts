@@ -27,6 +27,18 @@ intermediaryRouter.post(
         return res.status(400).json({ ok: false, code: "BAD_REQUEST", message: "intermediary required" });
       }
 
+      const catCount = Array.isArray((intermediary as any)?.categories)
+        ? (intermediary as any).categories.length
+        : 0;
+      console.log("[convert-intermediary] request", {
+        slug: typeof slug === "string" ? slug : null,
+        animations: Array.isArray(animations) ? animations : null,
+        categories: catCount,
+        bodyType: (intermediary as any)?.body_type,
+        headType: (intermediary as any)?.head_type,
+        compose: Boolean(compose),
+      });
+
       const categoryReference = (schemasUlpc as any)?.category_reference;
       if (!categoryReference) {
         return res.status(500).json({
@@ -43,9 +55,20 @@ intermediaryRouter.post(
       });
 
       if (!result || typeof result !== "object" || (result as any).ok !== true) {
+        console.warn("[convert-intermediary] converter_failed", {
+          slug,
+          errors: (result as any)?.errors ?? null,
+        });
         return res.status(400).json(result);
       }
       const okResult = result as { ok: true; build: any; trace: any[]; warnings?: any[] };
+
+      console.log("[convert-intermediary] converter_success", {
+        slug,
+        layers: Array.isArray(okResult.build?.layers) ? okResult.build.layers.length : 0,
+        animations: okResult.build?.animations,
+        traceEntries: okResult.trace?.length ?? 0,
+      });
 
       if (!compose) {
         return res.json(okResult);
@@ -77,7 +100,13 @@ intermediaryRouter.post(
         finalOutPath = join(dir, `ulpc_${Date.now()}.png`);
       }
 
+      console.log("[convert-intermediary] compose_start", { slug, finalOutPath });
       const composed = await composeULPC(okResult.build as any, finalOutPath);
+      console.log("[convert-intermediary] compose_done", {
+        slug,
+        outPath: composed?.outPath ?? finalOutPath,
+        bytes: composed?.bytes ?? null,
+      });
 
       return res.json({ ...okResult, composed });
     } catch (err: any) {

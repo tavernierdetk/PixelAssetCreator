@@ -17,7 +17,7 @@
     { "path": "../../packages/pipeline" },
     { "path": "../../packages/assistants" },
     { "path": "../../packages/schemas" },
-    { "path": "../../packages/intermediary-converter" }
-
+    { "path": "../../packages/intermediary-converter" },
+    { "path": "../../packages/godot-res" }
   ]
 }

@@ -9,6 +9,14 @@ assistantIntermediaryRouter.post("/assistant/char-intermediary", async (req: Req
     const { message, baseDraft, thread } = req.body ?? {};
     if (!message) return res.status(400).json({ ok: false, code: "BAD_REQUEST", message: "message required" });
 
+    const preview = typeof message === "string" ? message.slice(0, 120) : "";
+    console.log("[assistant.char-intermediary] request", {
+      preview,
+      previewLength: preview.length,
+      hasBaseDraft: Boolean(baseDraft),
+      hasThread: Boolean(thread),
+    });
+
     const apiKey = process.env.OPENAI_API_KEY;
     const assistantId = process.env.OPENAI_CHAR_INTERMEDIARY_ASSISTANT_ID;
     if (!apiKey || !assistantId) {
@@ -24,6 +32,13 @@ assistantIntermediaryRouter.post("/assistant/char-intermediary", async (req: Req
       baseDraft,
       thread,
       openai: { apiKey, assistantId },
+    });
+
+    const catCount = Array.isArray(result?.data?.categories) ? result.data.categories.length : 0;
+    console.log("[assistant.char-intermediary] success", {
+      categories: catCount,
+      bodyType: result?.data?.body_type,
+      headType: result?.data?.head_type,
     });
 
     return res.json({ ok: true, data: result.data });

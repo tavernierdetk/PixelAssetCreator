@@ -1,3 +1,4 @@
+// apps/web/src/pages/CharacterDetailPage.tsx
 import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -10,6 +11,8 @@ import { CharacterForm } from "@/components/character/CharacterForm";
 import { ULPCPanel } from "@/components/character/ULPCPanel";
 import AssistantIntermediaryPanel from "@/components/AssistantIntermediaryPanel";
 import IntermediaryInspector from "@/components/IntermediaryInspector";
+import { exportGodot } from "@/lib/api";
+
 
 import type { CharacterDefinitionLite } from "@/types";
 import {
@@ -36,6 +39,29 @@ export default function CharacterDetailPage() {
     queryFn: () => getLiteDef(slug),
     enabled: !!slug,
   });
+
+  useEffect(() => {
+    if (defQ.data) {
+      const d = defQ.data as CharacterDefinitionLite;
+
+      // ensure stats exists (UI + save consistency)
+      const withStats: CharacterDefinitionLite = {
+        ...d,
+        stats: d.stats ?? {
+          creature_affinity: 10,
+          chaos_mastery: 10,
+          kinesthetic: 10,
+          lucidity: 10,
+          terrain_control: 10,
+        },
+      };
+
+      setForm(withStats);
+      setTraitsText((withStats.personality?.traits ?? []).join(", "));
+      setValuesText((withStats.personality?.values ?? []).join(", "));
+      setFeaturesText((withStats.physical?.distinctive_features ?? []).join(", "));
+    }
+  }, [defQ.data]);
 
   const assetsQ = useQuery({
     queryKey: ["assets", slug],
@@ -111,6 +137,31 @@ export default function CharacterDetailPage() {
       await qc.invalidateQueries({ queryKey: ["liteDef", slug] });
     },
   });
+
+const exportM = useMutation({
+  mutationFn: async () => {
+    if (!form) throw new Error("No form loaded");
+    const idNum =
+      Number((form.identity as any)?.char_id ?? 0) || Date.now();
+
+    return exportGodot(slug, {
+      name: displayName,
+      classTag: (form.identity as any)?.class_tag ?? "Shaper",
+      numericId: idNum,
+      stats: {
+        creature_affinity: form.stats?.creature_affinity ?? 10,
+        chaos_mastery: form.stats?.chaos_mastery ?? 10,
+        kinesthetic: form.stats?.kinesthetic ?? 10,
+        lucidity: form.stats?.lucidity ?? 10,
+        terrain_control: form.stats?.terrain_control ?? 10
+      },
+      defaultFpsBattle: 12,
+      defaultFpsOverworld: 8,
+      writeBattleVisual: false
+    });
+  },
+  onSuccess: () => alert("Godot export complete.")
+});
 
   // Helpers
   async function pollJobUntilDone(jobId: string, opts?: { timeoutMs?: number; intervalMs?: number }) {
@@ -234,6 +285,16 @@ export default function CharacterDetailPage() {
           buildDraft={buildOverrideMemo}
           onChangeBuild={setUlpcBuildDraft}
         />
+        <div className="mt-3">
+          <button
+            type="button"
+            onClick={() => exportM.mutate()}
+            className="px-3 py-2 rounded-xl border text-sm"
+            disabled={exportM.isPending || !form}
+          >
+            {exportM.isPending ? "Exporting to Godot…" : "Export to Godot"}
+          </button>
+        </div>
       </CollapsibleCard>
     </div>
   );

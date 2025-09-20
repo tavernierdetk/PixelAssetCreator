@@ -1,5 +1,5 @@
+// apps/web/src/components/character/PortraitsPanel.tsx
 import { useMemo, useRef } from "react";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { fileUrl } from "@/lib/api";
 
@@ -38,57 +38,55 @@ export function PortraitsPanel({
   const canRemove = Boolean(portraitSrc) && !isGen;
 
   return (
-    <Card className="w-full">
-      <CardHeader>
-        <div className="flex items-center justify-between">
-          <div className="font-medium">Portrait (Full Art)</div>
-          <div className="flex items-center gap-2">
-            <Button type="button" onClick={() => onGeneratePortrait()} disabled={!hasDefinition || isGen}>
-              {isGen ? "Generating…" : "Generate Portrait"}
-            </Button>
+    <div className="w-full border rounded-2xl bg-white overflow-hidden">
+      {/* Header */}
+      <div className="flex items-center justify-between px-4 py-3">
+        <div className="font-medium">Portrait (Full Art)</div>
+        <div className="flex items-center gap-2">
+          <Button type="button" onClick={() => onGeneratePortrait()} disabled={!hasDefinition || isGen}>
+            {isGen ? "Generating…" : "Generate Portrait"}
+          </Button>
 
-            {/* Hidden file input + Button trigger (no asChild prop) */}
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={(e) => {
-                const f = e.target.files?.[0];
-                if (f) onUploadPortrait(f);
-                if (fileInputRef.current) fileInputRef.current.value = "";
-              }}
-            />
-            <Button
-              type="button"
-              onClick={() => fileInputRef.current?.click()}
-              disabled={isGen}
-            >
-              Upload Portrait
-            </Button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={(e) => {
+              const f = e.target.files?.[0];
+              if (f) onUploadPortrait(f);
+              if (fileInputRef.current) fileInputRef.current.value = "";
+            }}
+          />
+          <Button type="button" onClick={() => fileInputRef.current?.click()} disabled={isGen}>
+            Upload Portrait
+          </Button>
 
-            <Button type="button" onClick={() => onRemovePortrait()} disabled={!canRemove}>
-              Remove Portrait
-            </Button>
-          </div>
+          <Button type="button" onClick={() => onRemovePortrait()} disabled={!canRemove}>
+            Remove Portrait
+          </Button>
         </div>
-      </CardHeader>
+      </div>
 
-      <CardContent>
+      {/* Content */}
+      <div className="px-4 pb-4 md:px-5 md:pb-5">
         {isGen ? (
-          <div className="h-64 rounded-xl border border-slate-200 bg-slate-50 animate-pulse flex items-center justify-center text-sm text-slate-600">
+          <div className="rounded-xl border border-slate-200 bg-slate-50 animate-pulse flex items-center justify-center text-sm text-slate-600 min-h-[200px]">
             Generating portrait…
           </div>
         ) : !portraitSrc ? (
           <p className="text-sm text-slate-600">No portrait yet.</p>
         ) : (
-          <img
-            src={portraitSrc}
-            alt={`Portrait for ${slug}`}
-            className="max-h-[420px] max-w-full object-contain rounded-xl border border-slate-200"
-          />
+          <div className="w-full rounded-xl border border-slate-200 bg-white p-2 flex items-center justify-center">
+            <img
+              src={portraitSrc}
+              alt={`Portrait for ${slug}`}
+              className="max-w-full h-auto object-contain rounded-lg"
+              style={{ display: "block" }}
+            />
+          </div>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

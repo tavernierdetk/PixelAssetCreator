@@ -17,6 +17,7 @@ import { project } from "./routes/project.js";
 import { assistantRouter } from "./routes/assistant.js";
 import { assistantIntermediaryRouter } from "./routes/assistant.intermediary.js";
 import { intermediaryRouter } from "./routes/intermediary.js";
+import { godotRouter } from "./routes/godot.js";
 
 
 export function createApp(): Express {
@@ -61,6 +62,8 @@ export function createApp(): Express {
   app.use(assistantRouter);
   app.use(assistantIntermediaryRouter);
   app.use(intermediaryRouter);
+  app.use(godotRouter);
+
 
 
   // Unified error handler

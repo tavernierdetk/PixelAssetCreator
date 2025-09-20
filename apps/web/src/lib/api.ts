@@ -187,3 +187,30 @@ export async function convertIntermediary(payload: {
   if (!resp.ok) throw new Error(`convert-intermediary failed: ${resp.status}`);
   return resp.json();
 }
+
+export async function exportGodot(
+  slug: string,
+  payload: {
+    name: string;
+    classTag: string;
+    numericId: number;
+    stats: {
+      creature_affinity: number;
+      chaos_mastery: number;
+      kinesthetic: number;
+      lucidity: number;
+      terrain_control: number;
+    };
+    defaultFpsBattle: number;
+    defaultFpsOverworld: number;
+    writeBattleVisual?: boolean;
+  }
+): Promise<{ ok: true }> {
+  const res = await fetch(`/api/characters/${encodeURIComponent(slug)}/export-godot`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+  if (!res.ok) throw new Error(await res.text());
+  return res.json();
+}

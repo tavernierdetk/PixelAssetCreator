@@ -191,12 +191,21 @@ export async function convertCharIntermediaryToUlpc(
     layers: [],
   };
 
+  log.info?.({
+    msg: "convert.start",
+    bodyType,
+    headType: ci.head_type,
+    categories: Array.isArray(ci.categories) ? ci.categories.length : 0,
+    animations: build.animations,
+  });
+
   // Helper: load a sheet definition by filename
   async function loadDef(fileName: string): Promise<SheetDef | null> {
     try {
       const buf = await readFile(join(defsDir, fileName), "utf8");
       return JSON.parse(buf) as SheetDef;
-    } catch {
+    } catch (err: any) {
+      log.warn?.({ msg: "sheetdef.load_failed", fileName, error: err?.message });
       return null;
     }
   }
@@ -239,12 +248,14 @@ export async function convertCharIntermediaryToUlpc(
     const def = await loadDef(itemFile);
     if (!def) {
       entry.notes.push(`missing_def:${itemFile}`);
+      log.warn?.({ msg: "item.missing_definition", category, itemFile });
       return entry;
     }
 
     let catPath = resolveCategoryPath(def);
     if (!catPath) {
       entry.notes.push(`no_layer_1_mapping_for:${ci.body_type}`);
+      log.warn?.({ msg: "item.no_layer1_mapping", category, itemFile, bodyType: ci.body_type });
       return entry;
     }
 
@@ -255,6 +266,7 @@ export async function convertCharIntermediaryToUlpc(
     if (note) entry.notes.push(note);
     if (!variant) {
       entry.notes.push("no_variant_resolved");
+      log.warn?.({ msg: "item.no_variant", category, itemFile, preferredColour });
       return entry;
     }
 
@@ -264,6 +276,13 @@ export async function convertCharIntermediaryToUlpc(
     entry.chosenVariant = variant;
 
     build.layers.push({ category: catPath, variant });
+    log.debug?.({
+      msg: "item.resolved",
+      requestCategory: category,
+      itemFile,
+      resolvedCategory: catPath,
+      variant,
+    });
     return entry;
   }
 
@@ -281,6 +300,7 @@ export async function convertCharIntermediaryToUlpc(
       if (tr.chosenItem) { resolved = tr; break; }
     }
     if (!resolved) {
+      log.error?.({ msg: "convert.body_unresolved", attemptedItems: items, preferredColour: preferred });
       return { ok: false, errors: [{ category: "body", reason: "required_category_unresolved" }], trace };
     }
   }
@@ -291,6 +311,7 @@ export async function convertCharIntermediaryToUlpc(
     const tr = await resolveItem("head", headItem, undefined);
     trace.push(tr);
     if (!tr.chosenItem) {
+      log.error?.({ msg: "convert.head_unresolved", headItem });
       return { ok: false, errors: [{ category: "head", item: headItem, reason: "required_category_unresolved" }], trace };
     }
   }
@@ -312,6 +333,11 @@ export async function convertCharIntermediaryToUlpc(
       const items = refMap.get(cat);
       if (!items || !items.length) {
         trace.push({ category: cat, preferred_colour: sel.preferred_colour, chosenItem: null, resolvedPath: null, chosenVariant: null, notes: ["unknown_category_in_reference"] });
+        log.warn?.({
+          msg: "convert.unknown_category",
+          category: cat,
+          preferredColour: sel.preferred_colour,
+        });
         continue; // skip unknown category with a warning trace
       }
 
@@ -327,6 +353,12 @@ export async function convertCharIntermediaryToUlpc(
       if (!resolved) {
         // not fatal for optional categories
         trace.push({ category: cat, preferred_colour: sel.preferred_colour, chosenItem: null, resolvedPath: null, chosenVariant: null, notes: ["no_compatible_item_found"] });
+        log.debug?.({
+          msg: "convert.no_item_resolved",
+          category: cat,
+          preferredColour: sel.preferred_colour,
+          attemptedItems: ordered,
+        });
       }
     }
   }
@@ -340,8 +372,15 @@ export async function convertCharIntermediaryToUlpc(
     validate(build); // throws on invalid
   } catch (e: any) {
     errors.push({ reason: "ulpc_build_validation_failed", detail: e?.message });
+    log.error?.({ msg: "convert.validation_failed", error: e?.message });
     return { ok: false, errors, trace };
   }
+
+  log.info?.({
+    msg: "convert.success",
+    layers: build.layers.length,
+    animations: build.animations,
+  });
 
   return { ok: true, build, trace };
 }

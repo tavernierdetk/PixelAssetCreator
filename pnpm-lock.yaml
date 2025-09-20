@@ -54,6 +54,9 @@ importers:
       '@pixelart/config':
         specifier: workspace:*
         version: link:../../packages/config
+      '@pixelart/godot-res':
+        specifier: workspace:*
+        version: link:../../packages/godot-res
       '@pixelart/intermediary-converter':
         specifier: workspace:*
         version: link:../../packages/intermediary-converter
@@ -295,6 +298,8 @@ importers:
       typescript:
         specifier: ^5.9.2
         version: 5.9.2
+
+  packages/godot-res: {}
 
   packages/intermediary-converter:
     dependencies:

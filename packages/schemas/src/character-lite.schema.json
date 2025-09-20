@@ -76,9 +76,27 @@
         "aesthetic_vibe": { "type": "string" }
       },
       "required": ["age_range", "height_category", "build", "skin_tone", "hair_color", "eye_color"]
+    },
+    "stats": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "creature_affinity": { "type": "integer", "minimum": 0 },
+        "chaos_mastery":     { "type": "integer", "minimum": 0 },
+        "kinesthetic":       { "type": "integer", "minimum": 0 },
+        "lucidity":          { "type": "integer", "minimum": 0 },
+        "terrain_control":   { "type": "integer", "minimum": 0 }
+      },
+      "required": [
+        "creature_affinity",
+        "chaos_mastery",
+        "kinesthetic",
+        "lucidity",
+        "terrain_control"
+      ]
     }
   },
-  "required": ["client_ready", "identity", "personality", "physical"],
+  "required": ["client_ready", "identity", "personality", "physical", "stats"],
   "definitions": {
     "colorHex": {
       "type": "string",

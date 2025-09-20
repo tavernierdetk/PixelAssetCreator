@@ -19,6 +19,7 @@
     "@pixelart/pipeline": "workspace:*",
     "@pixelart/schemas": "workspace:*",
     "@pixelart/sprite-compose": "workspace:*",
+    "@pixelart/godot-res": "workspace:*",
     "bullmq": "^5.58.5",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
