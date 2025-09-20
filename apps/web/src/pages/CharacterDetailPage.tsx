@@ -25,6 +25,8 @@ import {
   deleteAsset,
   uploadAsset,
   deleteCharacter,
+  getUlpcSheetDefs,
+  ComposeWarning,
 } from "@/lib/api";
 
 const LS_KEY = "pa_chars";
@@ -86,6 +88,11 @@ export default function CharacterDetailPage() {
     enabled: !!slug,
   });
 
+  const sheetDefsQ = useQuery({
+    queryKey: ["ulpcSheetDefs"],
+    queryFn: () => getUlpcSheetDefs(),
+  });
+
   useEffect(() => {
     if (assetsQ.data) {
       setIntermediary(assetsQ.data.intermediary ?? null);
@@ -127,6 +134,7 @@ export default function CharacterDetailPage() {
     output: { mode: "full" },
     layers: [],
   });
+  const [layerWarnings, setLayerWarnings] = useState<ComposeWarning[]>([]);
 
   const displayName = (form?.identity?.char_name || (defQ.data as any)?.identity?.char_name || "").trim() || slug;
 
@@ -262,6 +270,11 @@ const exportM = useMutation({
     }
   }
 
+  const updateBuild = (next: any) => {
+    setUlpcBuildDraft(next);
+    setLayerWarnings([]);
+  };
+
   const buildOverrideMemo = useMemo(() => ulpcBuildDraft, [ulpcBuildDraft]);
 
   // ───────────────────────────────── UI ─────────────────────────────────
@@ -328,25 +341,30 @@ const exportM = useMutation({
             slug={slug}
             draft={form ?? undefined}
             onIntermediary={(obj) => setIntermediary(obj)}
+            onWarnings={(warns: ComposeWarning[] | null) => setLayerWarnings(warns ?? [])}
           />
-        </div>
-      </CollapsibleCard>
+    </div>
+  </CollapsibleCard>
 
-      {/* Temporary Intermediary → ULPC inspector (collapsible) */}
+  {/* Temporary Intermediary → ULPC inspector (collapsible) */}
       <IntermediaryInspector
         slug={slug}
         intermediary={intermediary}
-        onUseBuild={(b) => setUlpcBuildDraft(b)}
+        onUseBuild={(b) => updateBuild(b)}
         onComposed={refreshAssets}
+        onWarnings={(warns: ComposeWarning[] | null) => setLayerWarnings(warns ?? [])}
       />
 
-      {/* ULPC editor + preview (collapsible) */}
-      <CollapsibleCard title="ULPC Spritesheet / Export">
+  {/* ULPC editor + preview (collapsible) */}
+  <CollapsibleCard title="ULPC Spritesheet / Export">
         <ULPCPanel
           slug={slug}
           files={files}
           buildDraft={buildOverrideMemo}
-          onChangeBuild={setUlpcBuildDraft}
+          onChangeBuild={updateBuild}
+          sheetCatalog={sheetDefsQ.data ?? null}
+          warnings={layerWarnings}
+          onWarnings={(warns: ComposeWarning[]) => setLayerWarnings(warns ?? [])}
         />
         <div className="mt-3">
           <button

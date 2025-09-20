@@ -49,6 +49,13 @@ const [form, setForm] = useState<CharacterDefinitionLite>({
     hair_color: "#5b3b1a",
     eye_color: "#2e7f4f",
   },
+  stats: {
+    creature_affinity: 10,
+    chaos_mastery: 10,
+    kinesthetic: 10,
+    lucidity: 10,
+    terrain_control: 10,
+  },
 });
 const [traitsText, setTraitsText] = useState("");
 

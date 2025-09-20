@@ -61,7 +61,12 @@ export default async function ulpcProcessor(job: Job) {
     // Multi-animation export path (writes sheets and per-frame folders under outBaseDir)
     log.info({ msg: "export.start", slug, mode, outBaseDir });
     const exported = await composeULPCExport({ build, outBaseDir, slug });
-    log.info({ msg: "export.done", slug, exported });
+    if (exported.warnings?.length) {
+      for (const warn of exported.warnings) {
+        log.warn({ msg: "export.layer_warning", slug, warning: warn });
+      }
+    }
+    log.info({ msg: "export.done", slug, sheets: exported.sheets ?? null, frames: exported.frames ?? null, manifestPath: exported.manifestPath ?? null });
     return {
       ok: true,
       export: {
@@ -69,6 +74,7 @@ export default async function ulpcProcessor(job: Job) {
         frames: exported.frames ?? null,
         manifestPath: exported.manifestPath ?? null,
       },
+      warnings: exported.warnings ?? [],
     };
   }
 
@@ -76,6 +82,11 @@ export default async function ulpcProcessor(job: Job) {
   const outPath = path.join(outBaseDir, `ulpc_spritesheet_${slug}.png`);
   log.info({ msg: "compose.start", slug, outPath });
   const result = await composeULPC(build, outPath);
+  if (result.warnings?.length) {
+    for (const warn of result.warnings) {
+      log.warn({ msg: "compose.layer_warning", slug, warning: warn });
+    }
+  }
   log.info({ msg: "sprite.written", slug, outPath: result.outPath, bytes: result.bytes });
-  return { file: path.basename(outPath), bytes: result.bytes };
+  return { file: path.basename(outPath), bytes: result.bytes, warnings: result.warnings ?? [], skipped: result.skipped };
 }

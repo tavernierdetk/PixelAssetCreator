@@ -2,17 +2,21 @@ import { useMemo, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { getJob, listAssets, fileUrl, enqueueULPC } from "@/lib/api";
-import ULPCBuildEditor, { ULPCControls, ULPCLayers } from "@/components/ULPCBuildEditor";
+import { getJob, fileUrl, enqueueULPC } from "@/lib/api";
+import { ULPCControls, ULPCLayers } from "@/components/ULPCBuildEditor";
+import type { UlpcSheetCatalog, ComposeWarning } from "@/lib/api";
 
 type Props = {
   slug: string;
   files: string[];
   buildDraft: any;                 // controlled
   onChangeBuild: (next: any) => void;
+  sheetCatalog?: UlpcSheetCatalog | null;
+  warnings?: ComposeWarning[];
+  onWarnings?: (warnings: ComposeWarning[]) => void;
 };
 
-export function ULPCPanel({ slug, files, buildDraft, onChangeBuild }: Props) {
+export function ULPCPanel({ slug, files, buildDraft, onChangeBuild, sheetCatalog, warnings, onWarnings }: Props) {
   const qc = useQueryClient();
   const [pending, setPending] = useState<boolean>(false);
   const [bust, setBust] = useState<number>(0);
@@ -58,7 +62,10 @@ export function ULPCPanel({ slug, files, buildDraft, onChangeBuild }: Props) {
   async function handleGenerate() {
     setPending(true);
     try {
-      await runM.mutateAsync();
+      const job = await runM.mutateAsync();
+      const jobWarnings = (job?.returnvalue as any)?.warnings as ComposeWarning[] | undefined;
+      if (Array.isArray(jobWarnings)) onWarnings?.(jobWarnings);
+      else onWarnings?.([]);
     } finally {
       setPending(false);
     }
@@ -78,11 +85,17 @@ export function ULPCPanel({ slug, files, buildDraft, onChangeBuild }: Props) {
       </CardHeader>
 
       <CardContent className="space-y-4">
+        {warnings && warnings.length ? (
+          <div className="rounded-xl border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-800">
+            Compose completed with {warnings.length} warning{warnings.length === 1 ? "" : "s"}. Affected layers are highlighted below.
+          </div>
+        ) : null}
+
         {/* Top grid: controls (left) + preview (right) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* LEFT: controls (Animations / Output / Body&Head) */}
           <div className="rounded-xl border p-3 bg-slate-50">
-            <ULPCControls value={buildDraft} onChange={onChangeBuild} />
+            <ULPCControls value={buildDraft} onChange={onChangeBuild} sheetCatalog={sheetCatalog} />
           </div>
 
           {/* RIGHT: preview */}
@@ -102,7 +115,7 @@ export function ULPCPanel({ slug, files, buildDraft, onChangeBuild }: Props) {
 
         {/* Bottom (full width): layers */}
         <div className="rounded-xl border p-3 bg-slate-50">
-          <ULPCLayers value={buildDraft} onChange={onChangeBuild} />
+          <ULPCLayers value={buildDraft} onChange={onChangeBuild} sheetCatalog={sheetCatalog} warnings={warnings} />
         </div>
       </CardContent>
     </Card>

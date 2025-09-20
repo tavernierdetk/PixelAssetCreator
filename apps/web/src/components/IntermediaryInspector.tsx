@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { convertIntermediary } from "@/lib/api";
+import type { ComposeWarning } from "@/lib/api";
 import CollapsibleCard from "@/components/CollapsibleCard";
 
 type Props = {
@@ -10,6 +11,7 @@ type Props = {
   intermediary: any | null;               // comes from Assistant panel
   onUseBuild: (build: any) => void;       // send to ULPC editor when approved
   onComposed?: () => void | Promise<void>; // optional: refresh assets after compose
+  onWarnings?: (warnings: ComposeWarning[] | null) => void;
 };
 
 function pretty(x: unknown) {
@@ -18,11 +20,11 @@ function pretty(x: unknown) {
 
 const DEFAULT_ANIMS = ["idle"]; // user can add more later in the ULPC editor
 
-export default function IntermediaryInspector({ slug, intermediary, onUseBuild, onComposed }: Props) {
+export default function IntermediaryInspector({ slug, intermediary, onUseBuild, onComposed, onWarnings }: Props) {
   const [text, setText] = useState<string>(pretty(intermediary ?? {}));
   const [pending, setPending] = useState(false);
   const [build, setBuild] = useState<any | null>(null);
-  const [warnings, setWarnings] = useState<any[] | null>(null);
+  const [warnings, setWarnings] = useState<ComposeWarning[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   // Keep textarea in sync when a new intermediary arrives
@@ -31,6 +33,7 @@ export default function IntermediaryInspector({ slug, intermediary, onUseBuild, 
     setBuild(null);
     setWarnings(null);
     setError(null);
+    onWarnings?.(null);
   }, [intermediary]);
 
   const hasIntermediary = useMemo(() => {
@@ -60,14 +63,22 @@ export default function IntermediaryInspector({ slug, intermediary, onUseBuild, 
 
       if (res?.ok) {
         setBuild(res.build ?? null);
-        setWarnings(Array.isArray(res.warnings) ? res.warnings : null);
+        const warnList = Array.isArray(res.composeWarnings)
+          ? (res.composeWarnings as ComposeWarning[])
+          : Array.isArray(res.warnings)
+            ? (res.warnings as ComposeWarning[])
+            : null;
+        setWarnings(warnList);
+        onWarnings?.(warnList ?? []);
         if (onComposed) await onComposed();
       } else {
         setError(res?.detail || "Conversion failed.");
+        onWarnings?.([]);
       }
     } catch (e: any) {
       console.error("[IntermediaryInspector] convert error", e);
       setError(e?.message || "convert-intermediary failed");
+      onWarnings?.([]);
     } finally {
       setPending(false);
     }

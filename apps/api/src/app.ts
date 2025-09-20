@@ -18,6 +18,7 @@ import { assistantRouter } from "./routes/assistant.js";
 import { assistantIntermediaryRouter } from "./routes/assistant.intermediary.js";
 import { intermediaryRouter } from "./routes/intermediary.js";
 import { godotRouter } from "./routes/godot.js";
+import { ulpcRouter } from "./routes/ulpc.js";
 
 
 export function createApp(): Express {
@@ -63,6 +64,7 @@ export function createApp(): Express {
   app.use(assistantIntermediaryRouter);
   app.use(intermediaryRouter);
   app.use(godotRouter);
+  app.use(ulpcRouter);
 
 
 

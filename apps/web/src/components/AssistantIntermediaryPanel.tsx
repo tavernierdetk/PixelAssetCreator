@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import type { CharacterDefinitionLite } from "@/types";
 import { assistantGenerateIntermediary, convertIntermediary } from "@/lib/api";
+import type { ComposeWarning } from "@/lib/api";
 
 export default function AssistantIntermediaryPanel({
   slug,
@@ -11,12 +12,14 @@ export default function AssistantIntermediaryPanel({
   onIntermediary,
   onBuild,           // ← NEW
   onComposed,        // ← NEW (optional, to refresh assets)
+  onWarnings,
 }: {
   slug: string;
   draft?: CharacterDefinitionLite;
   onIntermediary: (obj: any) => void;
   onBuild?: (b: any) => void;
   onComposed?: () => void | Promise<void>;
+  onWarnings?: (warnings: ComposeWarning[] | null) => void;
 }) {
   const [pending, setPending] = useState(false);
   const [last, setLast] = useState<any | null>(null);
@@ -29,6 +32,7 @@ export default function AssistantIntermediaryPanel({
       if (!(res?.ok && res?.data)) {
         setLast(res);
         alert("Assistant did not return an intermediary.");
+        onWarnings?.(null);
         return;
       }
       setLast(res.data);
@@ -44,14 +48,22 @@ export default function AssistantIntermediaryPanel({
 
       if (conv?.ok && conv?.build) {
         onBuild?.(conv.build);     // ← feed the structured editor
+        const warnList = Array.isArray(conv.composeWarnings)
+          ? (conv.composeWarnings as ComposeWarning[])
+          : Array.isArray(conv.warnings)
+            ? (conv.warnings as ComposeWarning[])
+            : null;
+        onWarnings?.(warnList ?? []);
         await onComposed?.();      // ← refresh asset list so preview appears
       } else {
         console.warn("[assistant→convert] non-ok:", conv);
         alert(conv?.detail || "Intermediary conversion failed.");
+        onWarnings?.([]);
       }
     } catch (e) {
       console.error("[assistant → intermediary/convert] error", e);
       alert("Failed to generate/convert intermediary.");
+      onWarnings?.([]);
     } finally {
       setPending(false);
     }

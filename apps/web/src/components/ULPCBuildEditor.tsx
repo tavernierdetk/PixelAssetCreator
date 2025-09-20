@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { ulpc } from "@pixelart/schemas";
+import type { UlpcSheetCatalog, UlpcSheetItem, ComposeWarning } from "@/lib/api";
 
 // Types
 export type BuildJson = any;
@@ -12,6 +13,8 @@ export type BuildJson = any;
 type Props = {
   value: BuildJson;
   onChange: (next: BuildJson) => void;
+  sheetCatalog?: UlpcSheetCatalog | null;
+  warnings?: ComposeWarning[];
 };
 
 // ───── schema helpers ─────
@@ -40,12 +43,54 @@ function getAnimationEnum(): string[] {
 const BODY_TYPES = ["male", "muscular", "female", "teen", "child"] as const;
 const isBodyCat = (cat?: string) => typeof cat === "string" && /^body\//.test(cat);
 const isHeadCat = (cat?: string) => typeof cat === "string" && /^head\//.test(cat);
+const isBodyOrHead = (cat?: string) => isBodyCat(cat) || isHeadCat(cat);
 const bodyCategoryFor = (t: string) => `body/bodies/${t}`;
 const defaultHeadCategoryFor = (t: string) => `head/heads/human/${t}`;
 const lastSeg = (p: string) => {
   const parts = (p || "").split("/").filter(Boolean);
   return parts[parts.length - 1] || "";
 };
+
+const BODY_KEY_PRIORITY: Record<string, string[]> = {
+  male: ["male", "adult"],
+  muscular: ["muscular", "male", "adult"],
+  female: ["female", "adult"],
+  teen: ["teen", "adult"],
+  child: ["child"],
+};
+
+const normalizeSheetPath = (p: string): string => p.replace(/^\/+|\/+$/g, "");
+
+function resolvePathForBody(item: UlpcSheetItem, bodyType: string): string | null {
+  const keys = BODY_KEY_PRIORITY[bodyType] ?? [bodyType];
+  for (const key of keys) {
+    const raw = item.layerPaths?.[key];
+    if (typeof raw === "string" && raw.trim()) {
+      return normalizeSheetPath(raw.trim());
+    }
+  }
+  return null;
+}
+
+function findItemByCategoryPath(
+  catalog: UlpcSheetCatalog | null | undefined,
+  categoryPath: string
+): { category: string; item: UlpcSheetItem; path: string } | null {
+  if (!catalog) return null;
+  const normalized = normalizeSheetPath(categoryPath ?? "");
+  for (const entry of catalog.categories ?? []) {
+    for (const item of entry.items ?? []) {
+      const layerPaths = item.layerPaths ?? {};
+      for (const raw of Object.values(layerPaths)) {
+        if (typeof raw !== "string") continue;
+        if (normalizeSheetPath(raw) === normalized) {
+          return { category: entry.category, item, path: normalizeSheetPath(raw) };
+        }
+      }
+    }
+  }
+  return null;
+}
 
 // ───── base state normalization ─────
 function normalizeBuild(value: BuildJson): BuildJson {
@@ -286,28 +331,99 @@ export function ULPCControls({ value, onChange }: Props): JSX.Element {
 }
 
 // ────────────────────────────────────────────────────────────────────────────
-export function ULPCLayers({ value, onChange }: Props): JSX.Element {
+export function ULPCLayers({ value, onChange, sheetCatalog, warnings }: Props): JSX.Element {
   const build = useMemo(() => normalizeBuild(value), [value]);
-  const categories = useMemo(() => getAllCategories(), []);
+  const enumCategories = useMemo(() => getAllCategories(), []);
+  const catalogEntries = sheetCatalog?.categories ?? [];
+  const selectableEnumCategories = useMemo(
+    () => enumCategories.filter((c) => !isBodyOrHead(c)),
+    [enumCategories]
+  );
 
-  function addLayer() {
+  const warningMap = useMemo(() => {
+    const map = new Map<string, ComposeWarning[]>();
+    const entries = warnings ?? [];
+    for (const warn of entries) {
+      if (!warn?.category) continue;
+      const key = `${warn.category}::${warn.variant ?? ""}`;
+      const arr = map.get(key) ?? [];
+      arr.push(warn);
+      map.set(key, arr);
+    }
+    return map;
+  }, [warnings]);
+
+  const bodyLayer = (build.layers ?? []).find((l: any) => isBodyCat(l?.category));
+  const bodyType = bodyLayer ? lastSeg(bodyLayer.category) : "male";
+  const bodyVariant = bodyLayer?.variant ?? "light";
+
+  const catalogStructure = useMemo(() => {
+    if (!catalogEntries.length) return [] as Array<{ category: string; items: Array<{ item: UlpcSheetItem; path: string }> }>;
+
+    const out: Array<{ category: string; items: Array<{ item: UlpcSheetItem; path: string }> }> = [];
+    for (const entry of catalogEntries) {
+      if (isBodyOrHead(entry.category)) continue;
+      const items: Array<{ item: UlpcSheetItem; path: string }> = [];
+      for (const item of entry.items ?? []) {
+        const path = resolvePathForBody(item, bodyType);
+        if (path) items.push({ item, path });
+      }
+      if (items.length) {
+        out.push({ category: entry.category, items });
+      }
+    }
+    out.sort((a, b) => a.category.localeCompare(b.category));
+    return out;
+  }, [catalogEntries, bodyType]);
+
+  const categoryMap = useMemo(() => {
+    const map = new Map<string, Array<{ item: UlpcSheetItem; path: string }>>();
+    for (const entry of catalogStructure) {
+      map.set(entry.category, entry.items);
+    }
+    return map;
+  }, [catalogStructure]);
+
+  const categoryNames = useMemo(() => catalogStructure.map((entry) => entry.category), [catalogStructure]);
+  const hasCatalog = catalogStructure.length > 0;
+
+  function addLayerLegacy() {
     const ref: Array<{ category: string; items: string[] }> = Array.isArray(CATEGORY_REFERENCE)
       ? (CATEGORY_REFERENCE as any)
       : [];
-    const preferredOrder = ref.map((x) => x.category).filter((c) => !/^body\//.test(c) && !/^head\//.test(c));
+    const preferredOrder = ref.map((x) => x.category).filter((c) => !isBodyOrHead(c));
     const firstCat =
       preferredOrder.find((c) => !(build.layers ?? []).some((l: any) => l.category === c)) ||
-      categories[0] ||
+      selectableEnumCategories[0] ||
+      enumCategories[0] ||
       "clothes/shirts/adult";
     const firstVar = getVariantsForCategory(firstCat)[0] ?? "default";
     onChange({ ...build, layers: [...(build.layers ?? []), { category: firstCat, variant: firstVar }] });
   }
+
+  function addLayerCatalog() {
+    for (const entry of catalogStructure) {
+      const items = entry.items ?? [];
+      if (!items.length) continue;
+      const { item, path } = items[0];
+      const variants = Array.isArray(item.variants) ? item.variants : [];
+      const variant = variants[0] ?? bodyVariant ?? ((build.layers ?? [])[0]?.variant ?? "base");
+      onChange({
+        ...build,
+        layers: [...(build.layers ?? []), { category: path, variant }],
+      });
+      return;
+    }
+    addLayerLegacy();
+  }
+
   function removeLayer(i: number) {
     const L = (build.layers ?? [])[i];
     if (isBodyCat(L?.category) || isHeadCat(L?.category)) return;
     const next = (build.layers ?? []).filter((_: any, idx: number) => idx !== i);
     onChange({ ...build, layers: next });
   }
+
   function moveLayer(i: number, dir: -1 | 1) {
     const src = [...(build.layers ?? [])];
     const j = i + dir;
@@ -316,16 +432,47 @@ export function ULPCLayers({ value, onChange }: Props): JSX.Element {
     src.splice(j, 0, row);
     onChange({ ...build, layers: src });
   }
-  function changeLayerCategory(i: number, cat: string) {
+
+  function changeLayerCategoryLegacy(i: number, category: string) {
+    if (!category) return;
     const next = [...(build.layers ?? [])];
-    const v0 = getVariantsForCategory(cat)[0] ?? next[i]?.variant ?? "default";
-    next[i] = { ...next[i], category: cat, variant: v0 };
+    const v0 = getVariantsForCategory(category)[0] ?? next[i]?.variant ?? "default";
+    next[i] = { ...next[i], category, variant: v0 };
     onChange({ ...build, layers: next });
   }
-  function changeLayerVariant(i: number, v: string) {
+
+  function changeLayerVariant(index: number, variant: string) {
     const next = [...(build.layers ?? [])];
-    next[i] = { ...next[i], variant: v };
+    next[index] = { ...next[index], variant };
     onChange({ ...build, layers: next });
+  }
+
+  function setLayerFromItem(index: number, item: UlpcSheetItem) {
+    const path = resolvePathForBody(item, bodyType);
+    if (!path) return;
+    const next = [...(build.layers ?? [])];
+    const current = next[index] ?? {};
+    const variants = Array.isArray(item.variants) ? item.variants : [];
+    let variant = current.variant ?? bodyVariant ?? "base";
+    if (variants.length && !variants.includes(variant)) {
+      variant = variants[0];
+    }
+    next[index] = { ...current, category: path, variant };
+    onChange({ ...build, layers: next });
+  }
+
+  function handleCategoryChange(index: number, categoryName: string) {
+    if (!categoryName) return;
+    const items = categoryMap.get(categoryName) ?? [];
+    if (!items.length) return;
+    setLayerFromItem(index, items[0].item);
+  }
+
+  function handleItemChange(index: number, categoryName: string, itemId: string) {
+    const items = categoryMap.get(categoryName) ?? [];
+    const entry = items.find((it) => it.item.id === itemId);
+    if (!entry) return;
+    setLayerFromItem(index, entry.item);
   }
 
   return (
@@ -333,83 +480,199 @@ export function ULPCLayers({ value, onChange }: Props): JSX.Element {
       <CardContent className="p-3 space-y-3">
         <div className="flex items-center justify-between">
           <div className="font-medium">Layers</div>
-          <Button type="button" onClick={addLayer} className="bg-slate-900 text-white hover:bg-slate-800">
+          <Button
+            type="button"
+            onClick={hasCatalog ? addLayerCatalog : addLayerLegacy}
+            className="bg-slate-900 text-white hover:bg-slate-800"
+            disabled={hasCatalog ? !categoryNames.length : selectableEnumCategories.length === 0}
+          >
             + Add Layer
           </Button>
         </div>
 
         <div className="overflow-x-auto">
-          <div className="min-w-[640px] space-y-2">
-            {(build.layers ?? []).map((L: any, i: number) => {
-              const cat = L?.category ?? "";
-              const variants = getVariantsForCategory(cat);
-              const isBody = isBodyCat(cat);
-              const isHead = isHeadCat(cat);
-              const canRemove = !(isBody || isHead);
+          <div className="min-w-[760px] space-y-2">
+            {(build.layers ?? []).map((layer: any, index: number) => {
+              const categoryPath = layer?.category ?? "";
+              if (isBodyCat(categoryPath) || isHeadCat(categoryPath)) return null;
+
+              const warningKey = `${categoryPath}::${layer?.variant ?? ""}`;
+              const rowWarnings = warningMap.get(warningKey) ?? [];
+
+              if (!hasCatalog) {
+                const variants = getVariantsForCategory(categoryPath);
+                return (
+                  <div
+                    key={index}
+                    className={`rounded-xl border p-3 ${rowWarnings.length ? "border-amber-300 bg-amber-50" : "border-slate-200 bg-white"}`}
+                  >
+                    <div className="grid items-center gap-2 grid-cols-[minmax(0,1fr)_minmax(0,12rem)_auto_auto]">
+                      <select
+                        className="w-full min-w-0 rounded-xl border px-3 py-2 text-sm"
+                        value={categoryPath}
+                        onChange={(e) => changeLayerCategoryLegacy(index, e.target.value)}
+                      >
+                        <option value="">Select category…</option>
+                        {selectableEnumCategories.map((c) => (
+                          <option key={c} value={c}>
+                            {c}
+                          </option>
+                        ))}
+                      </select>
+
+                      <select
+                        className="w-full min-w-0 rounded-xl border px-3 py-2 text-sm"
+                        value={layer?.variant ?? ""}
+                        onChange={(e) => changeLayerVariant(index, e.target.value)}
+                      >
+                        {variants.map((v) => (
+                          <option key={v} value={v}>
+                            {v}
+                          </option>
+                        ))}
+                      </select>
+
+                      <div className="flex gap-1">
+                        <Button
+                          type="button"
+                          onClick={() => moveLayer(index, -1)}
+                          disabled={index === 0}
+                          className="w-8 h-8 bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                          title="Move up"
+                        >
+                          ↑
+                        </Button>
+                        <Button
+                          type="button"
+                          onClick={() => moveLayer(index, +1)}
+                          disabled={index === (build.layers?.length ?? 0) - 1}
+                          className="w-8 h-8 bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                          title="Move down"
+                        >
+                          ↓
+                        </Button>
+                      </div>
+
+                      <Button
+                        type="button"
+                        onClick={() => removeLayer(index)}
+                        className="bg-red-600 text-white hover:bg-red-700"
+                      >
+                        Remove
+                      </Button>
+                    </div>
+                    {rowWarnings.length ? (
+                      <ul className="mt-2 space-y-1 text-xs text-amber-800">
+                        {rowWarnings.map((warn, idx) => (
+                          <li key={idx}>
+                            ⚠️ {warn.reason.replace(/_/g, " ")}{warn.detail ? ` – ${warn.detail}` : ""}
+                            {warn.animation ? ` (animation: ${warn.animation})` : ""}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </div>
+                );
+              }
+
+              const match = findItemByCategoryPath(sheetCatalog ?? null, categoryPath);
+              const selectedCategory = match?.category ?? "";
+              const availableItems = selectedCategory ? categoryMap.get(selectedCategory) ?? [] : [];
+              const selectedItemId = match?.item?.id ?? "";
+              const selectedItem = availableItems.find((entry) => entry.item.id === selectedItemId)?.item ?? null;
+              const variantOptions = selectedItem && Array.isArray(selectedItem.variants)
+                ? selectedItem.variants
+                : [];
+              const variantChoices = variantOptions.length
+                ? variantOptions
+                : Array.from(new Set([layer?.variant].filter(Boolean)));
 
               return (
                 <div
-                  key={i}
-                  className="grid items-center gap-2 grid-cols-[minmax(0,1fr)_minmax(0,12rem)_auto_auto]"
+                  key={index}
+                  className={`rounded-xl border p-3 ${rowWarnings.length ? "border-amber-300 bg-amber-50" : "border-slate-200 bg-white"}`}
                 >
-                  <select
-                    className="w-full min-w-0 rounded-xl border px-3 py-2 text-sm"
-                    value={cat}
-                    onChange={(e) => changeLayerCategory(i, e.target.value)}
-                    disabled={isBody || isHead}
-                  >
-                    {categories.map((c) => (
-                      <option key={c} value={c}>
-                        {c}
-                      </option>
-                    ))}
-                  </select>
-
-                  <select
-                    className="w-full min-w-0 rounded-xl border px-3 py-2 text-sm"
-                    value={L?.variant ?? ""}
-                    onChange={(e) => changeLayerVariant(i, e.target.value)}
-                    disabled={isHead}
-                  >
-                    {variants.map((v) => (
-                      <option key={v} value={v}>
-                        {v}
-                      </option>
-                    ))}
-                  </select>
-
-                  <div className="flex gap-1">
-                    <Button
-                      type="button"
-                      onClick={() => moveLayer(i, -1)}
-                      disabled={i === 0}
-                      className="w-8 h-8 bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                      title="Move up"
+                  <div className="grid items-center gap-2 grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)_minmax(0,12rem)_auto_auto]">
+                    <select
+                      className="w-full min-w-0 rounded-xl border px-3 py-2 text-sm"
+                      value={selectedCategory}
+                      onChange={(e) => handleCategoryChange(index, e.target.value)}
                     >
-                      ↑
-                    </Button>
-                    <Button
-                      type="button"
-                      onClick={() => moveLayer(i, +1)}
-                      disabled={i === (build.layers?.length ?? 0) - 1}
-                      className="w-8 h-8 bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                      title="Move down"
-                    >
-                      ↓
-                    </Button>
-                  </div>
+                      <option value="">Select category…</option>
+                      {categoryNames.map((name) => (
+                        <option key={name} value={name}>
+                          {name}
+                        </option>
+                      ))}
+                    </select>
 
-                  {canRemove ? (
+                    <select
+                      className="w-full min-w-0 rounded-xl border px-3 py-2 text-sm"
+                      value={selectedItemId}
+                      onChange={(e) => handleItemChange(index, selectedCategory, e.target.value)}
+                      disabled={!selectedCategory}
+                    >
+                      <option value="">Select item…</option>
+                      {availableItems.map(({ item }) => (
+                        <option key={item.id} value={item.id}>
+                          {item.name}
+                        </option>
+                      ))}
+                    </select>
+
+                    <select
+                      className="w-full min-w-0 rounded-xl border px-3 py-2 text-sm"
+                      value={layer?.variant ?? ""}
+                      onChange={(e) => changeLayerVariant(index, e.target.value)}
+                      disabled={!selectedItem}
+                    >
+                      {variantChoices.length === 0 && <option value="">(no variants)</option>}
+                      {variantChoices.map((variant) => (
+                        <option key={variant} value={variant}>
+                          {variant}
+                        </option>
+                      ))}
+                    </select>
+
+                    <div className="flex gap-1">
+                      <Button
+                        type="button"
+                        onClick={() => moveLayer(index, -1)}
+                        disabled={index === 0}
+                        className="w-8 h-8 bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                        title="Move up"
+                      >
+                        ↑
+                      </Button>
+                      <Button
+                        type="button"
+                        onClick={() => moveLayer(index, +1)}
+                        disabled={index === (build.layers?.length ?? 0) - 1}
+                        className="w-8 h-8 bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                        title="Move down"
+                      >
+                        ↓
+                      </Button>
+                    </div>
+
                     <Button
                       type="button"
-                      onClick={() => removeLayer(i)}
+                      onClick={() => removeLayer(index)}
                       className="bg-red-600 text-white hover:bg-red-700"
                     >
                       Remove
                     </Button>
-                  ) : (
-                    <div />
-                  )}
+                  </div>
+                  {rowWarnings.length ? (
+                    <ul className="mt-2 space-y-1 text-xs text-amber-800">
+                      {rowWarnings.map((warn, idx) => (
+                        <li key={idx}>
+                          ⚠️ {warn.reason.replace(/_/g, " ")}{warn.detail ? ` – ${warn.detail}` : ""}
+                          {warn.animation ? ` (animation: ${warn.animation})` : ""}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
                 </div>
               );
             })}
@@ -423,11 +686,11 @@ export function ULPCLayers({ value, onChange }: Props): JSX.Element {
 // ────────────────────────────────────────────────────────────────────────────
 // Default export: keeps backwards compatibility (stacked controls + layers)
 // ────────────────────────────────────────────────────────────────────────────
-export default function ULPCBuildEditor({ value, onChange }: Props): JSX.Element {
+export default function ULPCBuildEditor({ value, onChange, sheetCatalog, warnings }: Props): JSX.Element {
   return (
     <div className="space-y-4">
-      <ULPCControls value={value} onChange={onChange} />
-      <ULPCLayers value={value} onChange={onChange} />
+      <ULPCControls value={value} onChange={onChange} sheetCatalog={sheetCatalog} />
+      <ULPCLayers value={value} onChange={onChange} sheetCatalog={sheetCatalog} warnings={warnings} />
     </div>
   );
 }

@@ -35,6 +35,14 @@ type BuildSpec = {
   layers: LayerSpec[];
 };
 
+type LayerWarning = {
+  category: string;
+  variant: string;
+  reason: string;
+  detail?: string;
+  animation?: string;
+};
+
 function exists(p: string): boolean {
   try { fs.accessSync(p); return true; } catch { return false; }
 }
@@ -188,7 +196,15 @@ async function applyTintIfAny(img: sharp.Sharp, layer: LayerSpec): Promise<sharp
 export async function composeULPC(
   build: BuildSpec,
   outPath: string
-): Promise<{ outPath: string; bytes: number; layers: number; width: number; height: number; }> {
+): Promise<{
+  outPath: string;
+  bytes: number;
+  layers: number;
+  width: number;
+  height: number;
+  warnings: LayerWarning[];
+  skipped: number;
+}> {
   if (build.schema !== "ulpc.build/1.0") {
     throw new Error(`Unsupported schema: ${build?.schema}`);
   }
@@ -198,18 +214,35 @@ export async function composeULPC(
   log.info({ msg: "compose.start", defsDir: resolveUlpcSheetDefs(), layers: visible.length });
 
   // Resolve all layer PNGs (without animation specialization)
-  const resolved: Array<{ layer: LayerSpec; png: string }> = [];
+  const warnings: LayerWarning[] = [];
+  let skippedCount = 0;
+  const resolved: Array<{ layer: LayerSpec; png: string; meta: sharp.Metadata }> = [];
   for (const l of visible) {
-    const png = await resolveLayerPng(l.category, l.variant);
-    resolved.push({ layer: l, png });
-    log.info({ msg: "layer.resolved", category: l.category, variant: l.variant, png });
+    try {
+      const png = await resolveLayerPng(l.category, l.variant);
+      const meta = await sharp(png).metadata();
+      if (!(meta.width && meta.height)) {
+        warnings.push({ category: l.category, variant: l.variant, reason: "invalid_dimensions", detail: "missing width/height" });
+        log.warn?.({ msg: "layer.invalid_dimensions", category: l.category, variant: l.variant, png });
+        skippedCount++;
+        continue;
+      }
+      resolved.push({ layer: l, png, meta });
+      log.info({ msg: "layer.resolved", category: l.category, variant: l.variant, png });
+    } catch (err: any) {
+      warnings.push({ category: l.category, variant: l.variant, reason: "resolve_failed", detail: err?.message });
+      log.warn?.({ msg: "layer.resolve_failed", category: l.category, variant: l.variant, error: err?.message });
+      skippedCount++;
+    }
   }
 
-  // Canvas size from first layer
-  const baseMeta = await sharp(resolved[0].png).metadata();
-  const W = baseMeta.width ?? 0;
-  const H = baseMeta.height ?? 0;
-  if (!W || !H) throw new Error("Cannot infer sheet size from first layer");
+  if (!resolved.length) {
+    throw new Error("No layers could be resolved for composition");
+  }
+
+  // Canvas size from first accepted layer
+  let W = 0;
+  let H = 0;
 
   const overlays: sharp.OverlayOptions[] = [];
   const sorted = resolved
@@ -219,9 +252,55 @@ export async function composeULPC(
   for (const r of sorted) {
     const left = r.layer.offset?.x ?? 0;
     const top  = r.layer.offset?.y ?? 0;
-    let img = sharp(r.png).ensureAlpha();
+    const width = r.meta.width ?? 0;
+    const height = r.meta.height ?? 0;
+    if (!W || !H) {
+      W = width;
+      H = height;
+    }
+    let targetWidth = width;
+    let targetHeight = height;
+    const crops: string[] = [];
+
+    if (W && width > W) {
+      if (width % W === 0) {
+        targetWidth = W;
+        crops.push(`width ${width}→${W}`);
+      } else {
+        warnings.push({ category: r.layer.category, variant: r.layer.variant, reason: "dimension_mismatch", detail: `layer ${width}x${height} exceeds base ${W}x${H}` });
+        log.warn?.({ msg: "layer.dimension_mismatch", category: r.layer.category, variant: r.layer.variant, layerWidth: width, layerHeight: height, baseWidth: W, baseHeight: H });
+        skippedCount++;
+        continue;
+      }
+    }
+
+    if (H && targetHeight > H) {
+      if (targetHeight % H === 0) {
+        targetHeight = H;
+        crops.push(`height ${height}→${H}`);
+      } else {
+        warnings.push({ category: r.layer.category, variant: r.layer.variant, reason: "dimension_mismatch", detail: `layer ${width}x${height} exceeds base ${W}x${H}` });
+        log.warn?.({ msg: "layer.dimension_mismatch", category: r.layer.category, variant: r.layer.variant, layerWidth: width, layerHeight: height, baseWidth: W, baseHeight: H });
+        skippedCount++;
+        continue;
+      }
+    }
+
+    let sharpImage = sharp(r.png);
+    if (targetWidth !== width || targetHeight !== height) {
+      sharpImage = sharpImage.extract({ left: 0, top: 0, width: targetWidth, height: targetHeight });
+      warnings.push({ category: r.layer.category, variant: r.layer.variant, reason: "cropped", detail: crops.join(", ") || undefined });
+      log.info({ msg: "layer.cropped", category: r.layer.category, variant: r.layer.variant, detail: crops.join(", ") });
+    }
+
+    let img = sharpImage.ensureAlpha();
     img = await applyTintIfAny(img, r.layer);
     overlays.push({ input: await img.toBuffer(), left, top });
+  }
+
+  if (!W || !H) throw new Error("Cannot infer sheet size from resolved layers");
+  if (!overlays.length) {
+    throw new Error("No layers remained after filtering invalid overlays");
   }
 
   await fsp.mkdir(path.dirname(outPath), { recursive: true });
@@ -230,7 +309,15 @@ export async function composeULPC(
   }).composite(overlays).png().toFile(outPath);
 
   const stat = await fsp.stat(outPath);
-  return { outPath, bytes: stat.size, layers: overlays.length, width: W, height: H };
+  return {
+    outPath,
+    bytes: stat.size,
+    layers: overlays.length,
+    width: W,
+    height: H,
+    warnings,
+    skipped: skippedCount,
+  };
 }
 
 // ────────────────────────────────────────────────────────────────────────────
@@ -244,6 +331,7 @@ export async function composeULPCExport(params: {
   sheets?: Record<string, { outPath: string; width: number; height: number; }>;
   frames?: Record<string, number>; // animation (or Animation_Orientation) → count
   manifestPath?: string;
+  warnings: LayerWarning[];
 }> {
   const { build, outBaseDir, slug } = params;
   if (build.schema !== "ulpc.build/1.0") throw new Error(`Unsupported schema: ${build?.schema}`);
@@ -282,28 +370,92 @@ export async function composeULPCExport(params: {
     }>
   };
 
+  const allWarnings: LayerWarning[] = [];
+
   // Resolve per-animation PNG for each layer, compose, optionally slice
   for (const animation of anims) {
-    // 1) Resolve overlays with per-animation preference
     const overlays: sharp.OverlayOptions[] = [];
-    let W = 0, H = 0;
+    let W = 0;
+    let H = 0;
     const resolvedPngs: string[] = [];
+    const animationWarnings: LayerWarning[] = [];
+
     for (let i = 0; i < visible.length; i++) {
       const L = visible[i];
-      const png = await resolveLayerPng(L.category, L.variant, animation);
-      resolvedPngs.push(png);
-      const meta = await sharp(png).metadata();
-      W = W || (meta.width ?? 0);
-      H = H || (meta.height ?? 0);
-      let img = sharp(png).ensureAlpha();
-      img = await applyTintIfAny(img, L);
-      overlays.push({
-        input: await img.toBuffer(),
-        left: L.offset?.x ?? 0,
-        top:  L.offset?.y ?? 0,
-      });
+      try {
+        const png = await resolveLayerPng(L.category, L.variant, animation);
+        const meta = await sharp(png).metadata();
+        if (!(meta.width && meta.height)) {
+          animationWarnings.push({ category: L.category, variant: L.variant, animation, reason: "invalid_dimensions", detail: "missing width/height" });
+          log.warn?.({ msg: "layer.invalid_dimensions", category: L.category, variant: L.variant, animation, png });
+          continue;
+        }
+
+        let width = meta.width ?? 0;
+        let height = meta.height ?? 0;
+        if (!W || !H) {
+          W = width;
+          H = height;
+        }
+
+        let targetWidth = width;
+        let targetHeight = height;
+        const crops: string[] = [];
+
+        if (W && width > W) {
+          if (width % W === 0) {
+            targetWidth = W;
+            targetHeight = Math.min(targetHeight, H);
+            crops.push(`width ${width}→${W}`);
+          } else {
+            animationWarnings.push({ category: L.category, variant: L.variant, animation, reason: "dimension_mismatch", detail: `layer ${width}x${height} exceeds base ${W}x${H}` });
+            log.warn?.({ msg: "layer.dimension_mismatch", category: L.category, variant: L.variant, animation, layerWidth: width, layerHeight: height, baseWidth: W, baseHeight: H });
+            continue;
+          }
+        }
+
+        if (H && targetHeight > H) {
+          if (targetHeight % H === 0) {
+            targetHeight = H;
+            crops.push(`height ${height}→${H}`);
+          } else {
+            animationWarnings.push({ category: L.category, variant: L.variant, animation, reason: "dimension_mismatch", detail: `layer ${width}x${height} exceeds base ${W}x${H}` });
+            log.warn?.({ msg: "layer.dimension_mismatch", category: L.category, variant: L.variant, animation, layerWidth: width, layerHeight: height, baseWidth: W, baseHeight: H });
+            continue;
+          }
+        }
+
+        let workingSharp = sharp(png);
+        if (targetWidth !== width || targetHeight !== height) {
+          workingSharp = workingSharp.extract({ left: 0, top: 0, width: targetWidth, height: targetHeight });
+          animationWarnings.push({ category: L.category, variant: L.variant, animation, reason: "cropped", detail: crops.join(", ") || undefined });
+          log.info({ msg: "layer.cropped", category: L.category, variant: L.variant, animation, detail: crops.join(", ") });
+        }
+
+        let img = workingSharp.ensureAlpha();
+        img = await applyTintIfAny(img, L);
+        overlays.push({
+          input: await img.toBuffer(),
+          left: L.offset?.x ?? 0,
+          top:  L.offset?.y ?? 0,
+        });
+        resolvedPngs.push(png);
+      } catch (err: any) {
+        animationWarnings.push({ category: L.category, variant: L.variant, animation, reason: "resolve_failed", detail: err?.message });
+        log.warn?.({ msg: "layer.resolve_failed", category: L.category, variant: L.variant, animation, error: err?.message });
+      }
     }
-    if (!W || !H) throw new Error(`compose: cannot infer size for animation=${animation}`);
+
+    allWarnings.push(...animationWarnings);
+
+    if (!W || !H) {
+      log.warn?.({ msg: "compose.animation_skipped", animation, reason: "unable_to_infer_dimensions" });
+      continue;
+    }
+    if (!overlays.length) {
+      log.warn?.({ msg: "compose.animation_skipped", animation, reason: "no_layers_after_filter" });
+      continue;
+    }
 
     // 2) Compose to a sheet if needed
     let composedPath = "";
@@ -316,7 +468,6 @@ export async function composeULPCExport(params: {
       composedPath = outPath;
       log.info({ msg: "compose.sheet.done", animation, outPath, width: W, height: H });
     } else {
-      // If not writing the sheet, do an in-memory composite to a tmp file for slicing
       const tmp = path.join(sheetsDir, animation, `__tmp_${Date.now()}.png`);
       await fsp.mkdir(path.dirname(tmp), { recursive: true });
       await sharp({ create: { width: W, height: H, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
@@ -326,7 +477,10 @@ export async function composeULPCExport(params: {
 
     // 3) Slice to frames (if requested)
     if (needFrames) {
-      // Resolve grid from metadata or heuristics
+      if (!resolvedPngs.length) {
+        log.warn?.({ msg: "compose.animation_skip_frames", animation, reason: "no_reference_pngs" });
+        continue;
+      }
       const grid = await resolveGridInfo({ animation, sheetsW: W, sheetsH: H, resolvedPngs, frameSizeOverride: build.output?.frame_size });
       const outDir = framesDir;
       const result = await sliceSheetByGrid({
@@ -336,11 +490,10 @@ export async function composeULPCExport(params: {
         animationName: animation,
         zeroPad,
         fps,
-        orientationDirs: true,   // as requested: Animation_Orientation subfolders
+        orientationDirs: true,
         grid
       });
 
-      // For reporting: we flatten counts per final folders
       Object.entries(result.manifest.frames).forEach(([folder, arr]) => {
         framesCount[folder] = arr.length;
       });
@@ -366,7 +519,8 @@ export async function composeULPCExport(params: {
   return {
     sheets: Object.keys(sheets).length ? sheets : undefined,
     frames: Object.keys(framesCount).length ? framesCount : undefined,
-    manifestPath
+    manifestPath,
+    warnings: allWarnings,
   };
 }
 

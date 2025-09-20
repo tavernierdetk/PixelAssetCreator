@@ -40,6 +40,13 @@ const initialDraft: CharacterDefinitionLite = {
     distinctive_features: [],
     aesthetic_vibe: "",
   },
+  stats: {
+    creature_affinity: 10,
+    chaos_mastery: 10,
+    kinesthetic: 10,
+    lucidity: 10,
+    terrain_control: 10,
+  },
 };
 
 function isLiteComplete(d: CharacterDefinitionLite): boolean {

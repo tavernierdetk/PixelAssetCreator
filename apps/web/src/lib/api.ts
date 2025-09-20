@@ -45,6 +45,35 @@ export async function deleteCharacter(slug: string): Promise<{ ok: boolean; slug
   return res.json();
 }
 
+export type ComposeWarning = {
+  category: string;
+  variant: string;
+  reason: string;
+  detail?: string;
+  animation?: string;
+};
+
+export type UlpcSheetItem = {
+  id: string;
+  name: string;
+  typeName: string | null;
+  category: string;
+  layerPaths: Record<string, string>;
+  variants: string[];
+};
+
+export type UlpcSheetCatalog = {
+  ok: boolean;
+  loadedAt: number;
+  categories: Array<{ category: string; items: UlpcSheetItem[] }>;
+};
+
+export async function getUlpcSheetDefs(): Promise<UlpcSheetCatalog> {
+  const res = await fetch(`${API}/ulpc/sheet-defs`, { cache: "no-store" });
+  if (!res.ok) throw new Error(`getUlpcSheetDefs ${res.status}`);
+  return res.json();
+}
+
 export async function enqueuePortrait(slug: string): Promise<{ jobId: string }> {
   const res = await fetch(`${API}/pipeline/${encodeURIComponent(slug)}/portrait`, {
     method: "POST",
