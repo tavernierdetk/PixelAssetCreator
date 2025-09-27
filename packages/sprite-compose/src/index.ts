@@ -1,1 +1,1 @@
-export { composeULPC, composeULPCExport } from "./ulpc.js";
+export { composeULPCExport } from "./ulpc.js";

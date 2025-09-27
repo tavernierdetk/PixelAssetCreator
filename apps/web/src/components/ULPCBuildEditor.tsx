@@ -1,5 +1,5 @@
 // apps/web/src/components/ULPCBuildEditor.tsx
-import React, { useMemo, useEffect } from "react";
+import React, { useMemo, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -15,6 +15,7 @@ type Props = {
   onChange: (next: BuildJson) => void;
   sheetCatalog?: UlpcSheetCatalog | null;
   warnings?: ComposeWarning[];
+  availability?: AnimationAvailability;
 };
 
 // ───── schema helpers ─────
@@ -42,7 +43,8 @@ function getAnimationEnum(): string[] {
 }
 const BODY_TYPES = ["male", "muscular", "female", "teen", "child"] as const;
 const isBodyCat = (cat?: string) => typeof cat === "string" && /^body\//.test(cat);
-const isHeadCat = (cat?: string) => typeof cat === "string" && /^head\//.test(cat);
+const isHeadCat = (cat?: string) =>
+  typeof cat === "string" && (/^head\/heads\//.test(cat) || cat === "head/heads" || cat === "head");
 const isBodyOrHead = (cat?: string) => isBodyCat(cat) || isHeadCat(cat);
 const bodyCategoryFor = (t: string) => `body/bodies/${t}`;
 const defaultHeadCategoryFor = (t: string) => `head/heads/human/${t}`;
@@ -92,6 +94,97 @@ function findItemByCategoryPath(
   return null;
 }
 
+const setFromArray = (arr?: string[] | null): Set<string> | null => {
+  if (!Array.isArray(arr) || arr.length === 0) return null;
+  return new Set(arr);
+};
+
+const arraysEqual = (a: string[], b: string[]): boolean => {
+  if (a.length !== b.length) return false;
+  for (let i = 0; i < a.length; i += 1) {
+    if (a[i] !== b[i]) return false;
+  }
+  return true;
+};
+
+type AnimationAvailability = {
+  allowedByLayer: Map<number, Set<string>>;
+  missingByLayer: Map<number, string[]>;
+  missingByAnimation: Map<string, number>;
+  intersection: Set<string> | null;
+};
+
+function computeAnimationAvailability(
+  value: BuildJson,
+  catalog: UlpcSheetCatalog | null | undefined,
+  animationUniverse?: string[]
+): AnimationAvailability {
+  const build = normalizeBuild(value);
+  const allowedByLayer = new Map<number, Set<string>>();
+  const missingByLayer = new Map<number, string[]>();
+  const missingByAnimation = new Map<string, number>();
+  const restricted: Array<{ index: number; set: Set<string> }> = [];
+
+  const animations = Array.isArray(build.animations)
+    ? (build.animations as string[]).filter((anim) => typeof anim === "string" && anim.trim().length > 0)
+    : [];
+
+  const candidateAnimations = new Set<string>();
+  if (Array.isArray(animationUniverse)) {
+    for (const anim of animationUniverse) {
+      if (typeof anim === "string" && anim.trim().length > 0) {
+        candidateAnimations.add(anim);
+      }
+    }
+  }
+  for (const anim of animations) {
+    candidateAnimations.add(anim);
+  }
+
+  (build.layers ?? []).forEach((layer: any, index: number) => {
+    const categoryPath = layer?.category ?? "";
+    if (!categoryPath || isBodyCat(categoryPath) || isHeadCat(categoryPath)) return;
+    const match = findItemByCategoryPath(catalog ?? null, categoryPath);
+    const allowed = setFromArray(match?.item?.animations ?? layer?.animations ?? null);
+    if (!allowed) return;
+
+    allowedByLayer.set(index, allowed);
+    restricted.push({ index, set: allowed });
+
+    if (animations.length) {
+      for (const anim of animations) {
+        if (allowed.has(anim)) continue;
+        const arr = missingByLayer.get(index) ?? [];
+        if (!arr.includes(anim)) arr.push(anim);
+        missingByLayer.set(index, arr);
+      }
+    }
+
+    if (candidateAnimations.size) {
+      for (const anim of candidateAnimations) {
+        if (allowed.has(anim)) continue;
+        missingByAnimation.set(anim, (missingByAnimation.get(anim) ?? 0) + 1);
+      }
+    }
+  });
+
+  for (const arr of missingByLayer.values()) {
+    arr.sort();
+  }
+
+  let intersection: Set<string> | null = null;
+  if (restricted.length) {
+    intersection = new Set<string>(restricted[0].set);
+    for (const entry of restricted.slice(1)) {
+      for (const anim of Array.from(intersection)) {
+        if (!entry.set.has(anim)) intersection.delete(anim);
+      }
+    }
+  }
+
+  return { allowedByLayer, missingByLayer, missingByAnimation, intersection };
+}
+
 // ───── base state normalization ─────
 function normalizeBuild(value: BuildJson): BuildJson {
   const b = value && typeof value === "object" ? value : {};
@@ -108,10 +201,15 @@ function normalizeBuild(value: BuildJson): BuildJson {
 // ────────────────────────────────────────────────────────────────────────────
 // ULPCControls: Animations + Output + Body&Head
 // ────────────────────────────────────────────────────────────────────────────
-export function ULPCControls({ value, onChange }: Props): JSX.Element {
+export function ULPCControls({ value, onChange, sheetCatalog, availability }: Props): JSX.Element {
   const build = useMemo(() => normalizeBuild(value), [value]);
   const categories = useMemo(() => getAllCategories(), []);
   const animEnum = useMemo(() => getAnimationEnum(), []);
+
+  const availabilitySummary = useMemo(
+    () => availability ?? computeAnimationAvailability(value, sheetCatalog, animEnum),
+    [availability, value, sheetCatalog, animEnum]
+  );
 
   const bodyIdx = (build.layers ?? []).findIndex((l: any) => isBodyCat(l?.category));
   const headIdx = (build.layers ?? []).findIndex((l: any) => isHeadCat(l?.category));
@@ -206,11 +304,28 @@ export function ULPCControls({ value, onChange }: Props): JSX.Element {
           <div className="flex flex-wrap gap-2">
             {animEnum.map((name) => {
               const on = (build.animations ?? []).includes(name);
+              const missingCount = availabilitySummary.missingByAnimation.get(name) ?? 0;
+              const hasMissing = missingCount > 0;
+              const baseClass = "relative px-2 py-1 rounded-xl border text-sm flex items-center gap-1 transition-colors";
+              const className = (() => {
+                if (on) {
+                  return hasMissing
+                    ? `${baseClass} bg-amber-600 border-amber-600 text-white hover:bg-amber-500`
+                    : `${baseClass} bg-slate-900 border-slate-900 text-white hover:bg-slate-800`;
+                }
+                return hasMissing
+                  ? `${baseClass} bg-amber-50 border-amber-500 text-amber-700 hover:bg-amber-100`
+                  : `${baseClass} bg-white border-slate-300 text-slate-700 hover:bg-slate-100`;
+              })();
+              const title = hasMissing
+                ? `${missingCount} layer${missingCount === 1 ? "" : "s"} missing ${name} frames`
+                : undefined;
               return (
                 <button
                   key={name}
                   type="button"
-                  className={`px-2 py-1 rounded-xl border text-sm ${on ? "bg-slate-900 text-white" : "bg-white"}`}
+                  className={className}
+                  title={title}
                   onClick={() => {
                     const set = new Set<string>((build.animations ?? []) as string[]);
                     if (on) set.delete(name);
@@ -218,11 +333,21 @@ export function ULPCControls({ value, onChange }: Props): JSX.Element {
                     changeAnimations(Array.from(set));
                   }}
                 >
-                  {name}
+                  <span>{name}</span>
+                  {hasMissing ? (
+                    <span className="ml-1 inline-flex items-center justify-center rounded-full bg-amber-500 text-white text-[10px] leading-none px-1.5">
+                      {missingCount}
+                    </span>
+                  ) : null}
                 </button>
               );
             })}
           </div>
+          {availabilitySummary.missingByAnimation.size ? (
+            <div className="text-xs text-amber-600">
+              Counts show how many selected layers are missing frames for that animation.
+            </div>
+          ) : null}
         </CardContent>
       </Card>
 
@@ -331,12 +456,13 @@ export function ULPCControls({ value, onChange }: Props): JSX.Element {
 }
 
 // ────────────────────────────────────────────────────────────────────────────
-export function ULPCLayers({ value, onChange, sheetCatalog, warnings }: Props): JSX.Element {
+export function ULPCLayers({ value, onChange, sheetCatalog, warnings, availability }: Props): JSX.Element {
   const build = useMemo(() => normalizeBuild(value), [value]);
   const enumCategories = useMemo(() => getAllCategories(), []);
   const catalogEntries = sheetCatalog?.categories ?? [];
+  const animationUniverse = useMemo(() => getAnimationEnum(), []);
   const selectableEnumCategories = useMemo(
-    () => enumCategories.filter((c) => !isBodyOrHead(c)),
+    () => enumCategories.filter((c) => !isBodyCat(c)),
     [enumCategories]
   );
 
@@ -357,12 +483,34 @@ export function ULPCLayers({ value, onChange, sheetCatalog, warnings }: Props): 
   const bodyType = bodyLayer ? lastSeg(bodyLayer.category) : "male";
   const bodyVariant = bodyLayer?.variant ?? "light";
 
+  const buildAnimations = useMemo(() => {
+    return Array.isArray(build.animations) ? [...build.animations] : [];
+  }, [build.animations]);
+
+  const availabilitySummary = useMemo(
+    () => availability ?? computeAnimationAvailability(value, sheetCatalog, animationUniverse),
+    [availability, value, sheetCatalog, animationUniverse]
+  );
+  const layerMissingAnimationMap = availabilitySummary.missingByLayer;
+
+  useEffect(() => {
+    const intersection = availabilitySummary.intersection;
+    if (!intersection || !intersection.size) return;
+
+    const filtered = buildAnimations.filter((anim) => intersection.has(anim));
+    const final = filtered.length ? filtered : Array.from(intersection);
+    if (!final.length) return;
+    if (arraysEqual(buildAnimations, final)) return;
+
+    onChange({ ...build, animations: final });
+  }, [availabilitySummary, build, buildAnimations, onChange]);
+
   const catalogStructure = useMemo(() => {
     if (!catalogEntries.length) return [] as Array<{ category: string; items: Array<{ item: UlpcSheetItem; path: string }> }>;
 
     const out: Array<{ category: string; items: Array<{ item: UlpcSheetItem; path: string }> }> = [];
     for (const entry of catalogEntries) {
-      if (isBodyOrHead(entry.category)) continue;
+      if (isBodyCat(entry.category)) continue;
       const items: Array<{ item: UlpcSheetItem; path: string }> = [];
       for (const item of entry.items ?? []) {
         const path = resolvePathForBody(item, bodyType);
@@ -419,7 +567,7 @@ export function ULPCLayers({ value, onChange, sheetCatalog, warnings }: Props): 
 
   function removeLayer(i: number) {
     const L = (build.layers ?? [])[i];
-    if (isBodyCat(L?.category) || isHeadCat(L?.category)) return;
+    if (isBodyCat(L?.category)) return;
     const next = (build.layers ?? []).filter((_: any, idx: number) => idx !== i);
     onChange({ ...build, layers: next });
   }
@@ -469,6 +617,7 @@ export function ULPCLayers({ value, onChange, sheetCatalog, warnings }: Props): 
   }
 
   function handleItemChange(index: number, categoryName: string, itemId: string) {
+    if (categoryName === "head/heads") return;
     const items = categoryMap.get(categoryName) ?? [];
     const entry = items.find((it) => it.item.id === itemId);
     if (!entry) return;
@@ -494,17 +643,19 @@ export function ULPCLayers({ value, onChange, sheetCatalog, warnings }: Props): 
           <div className="min-w-[760px] space-y-2">
             {(build.layers ?? []).map((layer: any, index: number) => {
               const categoryPath = layer?.category ?? "";
-              if (isBodyCat(categoryPath) || isHeadCat(categoryPath)) return null;
+              if (isBodyCat(categoryPath)) return null;
 
               const warningKey = `${categoryPath}::${layer?.variant ?? ""}`;
               const rowWarnings = warningMap.get(warningKey) ?? [];
+              const layerMissingAnimations = layerMissingAnimationMap.get(index) ?? [];
+              const hasRowAlerts = rowWarnings.length > 0 || layerMissingAnimations.length > 0;
 
               if (!hasCatalog) {
                 const variants = getVariantsForCategory(categoryPath);
                 return (
                   <div
                     key={index}
-                    className={`rounded-xl border p-3 ${rowWarnings.length ? "border-amber-300 bg-amber-50" : "border-slate-200 bg-white"}`}
+                    className={`rounded-xl border p-3 ${hasRowAlerts ? "border-amber-300 bg-amber-50" : "border-slate-200 bg-white"}`}
                   >
                     <div className="grid items-center gap-2 grid-cols-[minmax(0,1fr)_minmax(0,12rem)_auto_auto]">
                       <select
@@ -561,6 +712,11 @@ export function ULPCLayers({ value, onChange, sheetCatalog, warnings }: Props): 
                         Remove
                       </Button>
                     </div>
+                    {layerMissingAnimations.length ? (
+                      <div className="mt-2 text-xs text-amber-800">
+                        ⚠️ Missing animation frames: {layerMissingAnimations.join(", ")}
+                      </div>
+                    ) : null}
                     {rowWarnings.length ? (
                       <ul className="mt-2 space-y-1 text-xs text-amber-800">
                         {rowWarnings.map((warn, idx) => (
@@ -586,11 +742,12 @@ export function ULPCLayers({ value, onChange, sheetCatalog, warnings }: Props): 
               const variantChoices = variantOptions.length
                 ? variantOptions
                 : Array.from(new Set([layer?.variant].filter(Boolean)));
+              const isHeadBaseCategory = selectedCategory === "head/heads";
 
               return (
                 <div
                   key={index}
-                  className={`rounded-xl border p-3 ${rowWarnings.length ? "border-amber-300 bg-amber-50" : "border-slate-200 bg-white"}`}
+                  className={`rounded-xl border p-3 ${hasRowAlerts ? "border-amber-300 bg-amber-50" : "border-slate-200 bg-white"}`}
                 >
                   <div className="grid items-center gap-2 grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)_minmax(0,12rem)_auto_auto]">
                     <select
@@ -608,23 +765,26 @@ export function ULPCLayers({ value, onChange, sheetCatalog, warnings }: Props): 
 
                     <select
                       className="w-full min-w-0 rounded-xl border px-3 py-2 text-sm"
-                      value={selectedItemId}
+                      value={isHeadBaseCategory ? "" : selectedItemId}
                       onChange={(e) => handleItemChange(index, selectedCategory, e.target.value)}
-                      disabled={!selectedCategory}
+                      disabled={!selectedCategory || isHeadBaseCategory}
                     >
-                      <option value="">Select item…</option>
-                      {availableItems.map(({ item }) => (
-                        <option key={item.id} value={item.id}>
-                          {item.name}
-                        </option>
-                      ))}
+                      <option value="">
+                        {isHeadBaseCategory ? "Head layers are configured above" : "Select item…"}
+                      </option>
+                      {!isHeadBaseCategory &&
+                        availableItems.map(({ item }) => (
+                          <option key={item.id} value={item.id}>
+                            {item.name}
+                          </option>
+                        ))}
                     </select>
 
                     <select
                       className="w-full min-w-0 rounded-xl border px-3 py-2 text-sm"
                       value={layer?.variant ?? ""}
                       onChange={(e) => changeLayerVariant(index, e.target.value)}
-                      disabled={!selectedItem}
+                      disabled={!selectedItem || isHeadBaseCategory}
                     >
                       {variantChoices.length === 0 && <option value="">(no variants)</option>}
                       {variantChoices.map((variant) => (
@@ -663,6 +823,16 @@ export function ULPCLayers({ value, onChange, sheetCatalog, warnings }: Props): 
                       Remove
                     </Button>
                   </div>
+                  {isHeadBaseCategory ? (
+                    <div className="mt-2 text-xs text-slate-500">
+                      Head base layers follow the body colour and are managed in the Body & Head panel.
+                    </div>
+                  ) : null}
+                  {layerMissingAnimations.length ? (
+                    <div className="mt-2 text-xs text-amber-800">
+                      ⚠️ Missing animation frames: {layerMissingAnimations.join(", ")}
+                    </div>
+                  ) : null}
                   {rowWarnings.length ? (
                     <ul className="mt-2 space-y-1 text-xs text-amber-800">
                       {rowWarnings.map((warn, idx) => (
@@ -684,13 +854,287 @@ export function ULPCLayers({ value, onChange, sheetCatalog, warnings }: Props): 
 }
 
 // ────────────────────────────────────────────────────────────────────────────
+type DiagnosticRow = {
+  index: number;
+  categoryPath: string;
+  variant?: string;
+  label: string;
+  allowed: Set<string> | null;
+  warnings: ComposeWarning[];
+};
+
+type CellStatus = "supported" | "available" | "missing" | "unavailable" | "unknown";
+
+const CELL_SYMBOL: Record<CellStatus, string> = {
+  supported: "✔",
+  available: "•",
+  missing: "✖",
+  unavailable: "—",
+  unknown: "?",
+};
+
+const CELL_CLASS: Record<CellStatus, string> = {
+  supported: "bg-emerald-100 text-emerald-800 border-emerald-200",
+  available: "bg-slate-100 text-slate-700 border-slate-200",
+  missing: "bg-rose-100 text-rose-700 border-rose-200",
+  unavailable: "bg-slate-50 text-slate-400 border-slate-200",
+  unknown: "bg-slate-50 text-slate-400 border-dashed border-slate-300",
+};
+
+const CELL_TEXT: Record<CellStatus, string> = {
+  supported: "Layer provides this requested animation",
+  available: "Layer can provide this animation (not currently requested)",
+  missing: "Layer is missing frames for this requested animation",
+  unavailable: "Layer does not include this animation",
+  unknown: "Animation availability unknown for this layer",
+};
+
+const toCsv = (rows: string[][]): string =>
+  rows
+    .map((cols) =>
+      cols
+        .map((col) => {
+          const safe = col?.replace(/"/g, '""') ?? "";
+          return `"${safe}"`;
+        })
+        .join(",")
+    )
+    .join("\n");
+
+export function AnimationDiagnosticMatrix({
+  build,
+  sheetCatalog,
+  warnings,
+  className,
+}: {
+  build: BuildJson;
+  sheetCatalog?: UlpcSheetCatalog | null;
+  warnings?: ComposeWarning[];
+  className?: string;
+}): JSX.Element {
+  const animEnum = useMemo(() => getAnimationEnum(), []);
+  const normalized = useMemo(() => normalizeBuild(build), [build]);
+  const requestedAnimations = useMemo(
+    () => (Array.isArray(normalized.animations) ? Array.from(new Set(normalized.animations as string[])) : []),
+    [normalized.animations]
+  );
+  const requestedSet = useMemo(() => new Set<string>(requestedAnimations), [requestedAnimations]);
+
+  const availabilitySummary = useMemo(
+    () => computeAnimationAvailability(build, sheetCatalog, animEnum),
+    [build, sheetCatalog, animEnum]
+  );
+
+  const warningMap = useMemo(() => {
+    const map = new Map<string, ComposeWarning[]>();
+    for (const warn of warnings ?? []) {
+      if (!warn?.category) continue;
+      const key = `${warn.category}::${warn.variant ?? ""}`;
+      const arr = map.get(key) ?? [];
+      arr.push(warn);
+      map.set(key, arr);
+    }
+    return map;
+  }, [warnings]);
+
+  const rows = useMemo<DiagnosticRow[]>(() => {
+    const layers = Array.isArray(normalized.layers) ? normalized.layers : [];
+    const out: DiagnosticRow[] = [];
+    layers.forEach((layer: any, index: number) => {
+      const categoryPath = layer?.category ?? "";
+      if (!categoryPath) return;
+      if (isBodyCat(categoryPath)) return;
+      const allowed = availabilitySummary.allowedByLayer.get(index) ?? null;
+      const warningKey = `${categoryPath}::${layer?.variant ?? ""}`;
+      const rowWarnings = warningMap.get(warningKey) ?? [];
+      const match = findItemByCategoryPath(sheetCatalog ?? null, categoryPath);
+      const baseName = match?.item?.name || lastSeg(categoryPath) || "(unnamed)";
+      const variant = layer?.variant ? String(layer.variant) : undefined;
+      const label = variant ? `${baseName} • ${variant}` : baseName;
+      out.push({ index, categoryPath, variant, label, allowed, warnings: rowWarnings });
+    });
+    return out;
+  }, [normalized.layers, availabilitySummary.allowedByLayer, warningMap, sheetCatalog]);
+
+  const extraAnimations = useMemo(() => {
+    const extras = new Set<string>();
+    rows.forEach((row) => {
+      row.allowed?.forEach((anim) => {
+        if (!requestedSet.has(anim)) extras.add(anim);
+      });
+    });
+    return Array.from(extras).sort();
+  }, [rows, requestedSet]);
+
+  const columns = useMemo(() => {
+    const ordered = [...requestedAnimations];
+    extraAnimations.forEach((anim) => {
+      if (!ordered.includes(anim)) ordered.push(anim);
+    });
+    return ordered;
+  }, [requestedAnimations, extraAnimations]);
+
+  const cellStatus = useCallback(
+    (row: DiagnosticRow, anim: string): CellStatus => {
+      if (!row.allowed) return "unknown";
+      if (row.allowed.has(anim)) {
+        return requestedSet.has(anim) ? "supported" : "available";
+      }
+      return requestedSet.has(anim) ? "missing" : "unavailable";
+    },
+    [requestedSet]
+  );
+
+  const renderCellWarnings = useCallback((row: DiagnosticRow, anim: string): ComposeWarning[] => {
+    if (!row.warnings.length) return [];
+    return row.warnings.filter((warn) => !warn.animation || warn.animation === anim);
+  }, []);
+
+  const handleExportCsv = useCallback(() => {
+    if (!rows.length || !columns.length) return;
+    if (typeof window === "undefined") return;
+
+    const header = ["Layer", ...columns];
+    const dataRows = rows.map((row) => {
+      const cells = columns.map((anim) => {
+        const status = cellStatus(row, anim);
+        const warnings = renderCellWarnings(row, anim);
+        const warningText = warnings.map((w) => `${w.reason}${w.detail ? `: ${w.detail}` : ""}`).join("; ");
+        const base = CELL_TEXT[status];
+        return warningText ? `${base} | warnings: ${warningText}` : base;
+      });
+      return [row.label, ...cells];
+    });
+    const csv = toCsv([header, ...dataRows]);
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `animation_diagnostic_${Date.now()}.csv`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  }, [rows, columns, cellStatus, renderCellWarnings]);
+
+  const hasData = rows.length > 0 && columns.length > 0;
+
+  return (
+    <div className={className ? `space-y-3 ${className}` : "space-y-3"}>
+      <div className="flex items-center justify-between">
+        <div>
+          <div className="font-medium text-sm text-slate-700">Animation Coverage Diagnostic</div>
+          <div className="text-xs text-slate-500">Matrix of selected layers vs available animations.</div>
+        </div>
+        <Button
+          type="button"
+          onClick={handleExportCsv}
+          disabled={!hasData}
+          className="h-8 rounded-xl border border-slate-300 bg-white px-3 text-xs font-medium text-slate-700 hover:bg-slate-100 disabled:cursor-not-allowed"
+        >
+          Export CSV
+        </Button>
+      </div>
+
+      {!rows.length ? (
+        <div className="text-sm text-slate-500">
+          Add accessory layers to view animation coverage diagnostics.
+        </div>
+      ) : null}
+
+      {rows.length && !columns.length ? (
+        <div className="text-sm text-slate-500">
+          No animations detected for the current selection.
+        </div>
+      ) : null}
+
+      {hasData ? (
+        <div className="overflow-x-auto">
+          <table className="min-w-full border-collapse text-xs">
+            <thead>
+              <tr>
+                <th className="sticky left-0 z-10 bg-white border border-slate-200 px-2 py-1 text-left text-slate-600">
+                  Layer
+                </th>
+                {columns.map((anim) => (
+                  <th key={anim} className="border border-slate-200 px-2 py-1 text-slate-600">
+                    {anim}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((row) => {
+                const rowHasWarnings = row.warnings.length > 0;
+                return (
+                  <tr key={row.index}>
+                    <th
+                      className={`sticky left-0 z-10 bg-white border border-slate-200 px-2 py-1 text-left font-medium text-slate-700 ${rowHasWarnings ? "border-amber-300" : ""}`}
+                    >
+                      <div>{row.label}</div>
+                      {rowHasWarnings ? (
+                        <div className="text-[10px] text-amber-700">
+                          {row.warnings.length} warning{row.warnings.length === 1 ? "" : "s"}
+                        </div>
+                      ) : null}
+                    </th>
+                    {columns.map((anim) => {
+                      const status = cellStatus(row, anim);
+                      const warningsForCell = renderCellWarnings(row, anim);
+                      const warningText = warningsForCell
+                        .map((w) => `${w.reason.replace(/_/g, " ")}${w.detail ? ` – ${w.detail}` : ""}`)
+                        .join("; ");
+                      const title = warningText
+                        ? `${CELL_TEXT[status]} | warnings: ${warningText}`
+                        : CELL_TEXT[status];
+                      return (
+                        <td
+                          key={anim}
+                          className={`relative border px-2 py-1 text-center font-semibold ${CELL_CLASS[status]}`}
+                          title={title}
+                        >
+                          {CELL_SYMBOL[status]}
+                          {warningsForCell.length ? (
+                            <span className="absolute top-1 right-1 h-1.5 w-1.5 rounded-full bg-amber-500" />
+                          ) : null}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+// ────────────────────────────────────────────────────────────────────────────
 // Default export: keeps backwards compatibility (stacked controls + layers)
 // ────────────────────────────────────────────────────────────────────────────
 export default function ULPCBuildEditor({ value, onChange, sheetCatalog, warnings }: Props): JSX.Element {
+  const animationUniverse = useMemo(() => getAnimationEnum(), []);
+  const availability = useMemo(
+    () => computeAnimationAvailability(value, sheetCatalog, animationUniverse),
+    [value, sheetCatalog, animationUniverse]
+  );
   return (
     <div className="space-y-4">
-      <ULPCControls value={value} onChange={onChange} sheetCatalog={sheetCatalog} />
-      <ULPCLayers value={value} onChange={onChange} sheetCatalog={sheetCatalog} warnings={warnings} />
+      <ULPCControls
+        value={value}
+        onChange={onChange}
+        sheetCatalog={sheetCatalog}
+        availability={availability}
+      />
+      <ULPCLayers
+        value={value}
+        onChange={onChange}
+        sheetCatalog={sheetCatalog}
+        warnings={warnings}
+        availability={availability}
+      />
     </div>
   );
 }

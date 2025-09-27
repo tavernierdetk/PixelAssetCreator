@@ -43,12 +43,358 @@ type LayerWarning = {
   animation?: string;
 };
 
+type ResolvedLayerImage = {
+  primary: ResolvedLayerEntry;
+  extras?: ResolvedLayerEntry[];
+  availableAnimations: string[];
+};
+
+type ResolvedLayerEntry = {
+  png: string;
+  usedAnimation?: string | null;
+  role?: "primary" | "behind";
+  z?: number | null;
+};
+
+function buildAnimationPriority(requested?: string): string[] {
+  const priority: string[] = [];
+  const add = (anim?: string) => {
+    if (!anim) return;
+    const clean = anim.trim();
+    if (!clean) return;
+    if (!priority.includes(clean)) priority.push(clean);
+  };
+  add(requested);
+  add("idle");
+  add("walk");
+  for (const anim of animationsFallback()) add(anim);
+  return priority;
+}
+
+async function resolveLayerPngDetailed(
+  categoryIn: string,
+  variantIn: string,
+  animation: string
+): Promise<ResolvedLayerImage> {
+  const originalCategory = categoryIn.replace(/\/+$/, "");
+  let category = originalCategory;
+  const variant = variantIn;
+  const lowerCat = category.toLowerCase();
+  const lowerVar = variant.toLowerCase();
+  if (lowerCat.endsWith(`/${lowerVar}`)) {
+    category = category.slice(0, -(variant.length + 1));
+  }
+
+  const defsDir = resolveUlpcSheetDefs();
+  const catDir = path.join(defsDir, category);
+  const directJson = path.join(catDir, `${variant}.json`);
+  const indexJson = path.join(catDir, "index.json");
+  const preferAnimations = buildAnimationPriority(animation);
+
+  // 1) <category>/<variant>.json (non-animation specific)
+  if (exists(directJson)) {
+    const def = readJson(directJson);
+    const png = def && pngFromVariantJson(directJson, def);
+    if (png && exists(png)) {
+      const meta = getLayerMetaForPath(originalCategory);
+      return {
+        primary: { png, usedAnimation: null, role: "primary", z: zFromMeta(meta) ?? null },
+        availableAnimations: animationsFallback(),
+      };
+    }
+  }
+
+  // 2) <category>/index.json variants[]
+  if (exists(indexJson)) {
+    const idx = readJson<any>(indexJson);
+    const vs = Array.isArray(idx?.variants) ? idx.variants : [];
+    const hit = vs.find((v: any) =>
+      v?.id === variant ||
+      v?.name === variant ||
+      v?.file === `${variant}.png` ||
+      v?.file === variant
+    );
+    if (hit) {
+      // Prefer animations when available within the index
+      if (hit?.animations && typeof hit.animations === "object") {
+        const available = Object.keys(hit.animations).filter(Boolean);
+        for (const anim of preferAnimations) {
+          const byAnim = hit.animations[anim];
+          if (!byAnim) continue;
+          const png = pngFromVariantJson(indexJson, byAnim);
+          if (png && exists(png)) {
+            const meta = getLayerMetaForPath(originalCategory);
+            return {
+              primary: { png, usedAnimation: anim, role: "primary", z: zFromMeta(meta) ?? null },
+              availableAnimations: available,
+            };
+          }
+        }
+      }
+
+      const png = pngFromVariantJson(indexJson, hit);
+      if (png && exists(png)) {
+        const meta = getLayerMetaForPath(originalCategory);
+        return {
+          primary: { png, usedAnimation: null, role: "primary", z: zFromMeta(meta) ?? null },
+          availableAnimations: animationsFallback(),
+        };
+      }
+      const ref = hit.json ?? hit.def ?? hit.variant;
+      if (ref) {
+        const refAbs = toAbs(indexJson, ref);
+        if (exists(refAbs)) {
+          const sub = readJson(refAbs);
+          const p2 = pngFromVariantJson(refAbs, sub);
+          if (p2 && exists(p2)) {
+            const meta = getLayerMetaForPath(originalCategory);
+            return {
+              primary: { png: p2, usedAnimation: null, role: "primary", z: zFromMeta(meta) ?? null },
+              availableAnimations: animationsFallback(),
+            };
+          }
+        }
+      }
+    }
+  }
+
+  // 3a) Constructed per-animation path
+  {
+    const root = resolveUlpcRoot();
+    const available: string[] = [];
+    const categoriesToTry = [originalCategory];
+    if (!categoriesToTry.includes(category)) categoriesToTry.push(category);
+
+    for (const cat of categoriesToTry) {
+      for (const anim of preferAnimations) {
+        const primary = pickAnimationSheet(root, cat, anim, variant);
+        if (!primary) continue;
+
+        if (!available.includes(anim)) available.push(anim);
+
+        const extras: ResolvedLayerEntry[] = [];
+        const behind = pickBehindSheet(root, cat, anim, variant);
+        if (behind) {
+          const behindMeta = getLayerMetaForPath(`${cat}/universal_behind`) ??
+            (cat !== originalCategory ? getLayerMetaForPath(`${originalCategory}/universal_behind`) : null);
+          extras.push({ ...behind, role: "behind", z: zFromMeta(behindMeta) ?? null });
+        }
+
+        const primaryMeta = getLayerMetaForPath(cat) ??
+          (cat !== originalCategory ? getLayerMetaForPath(originalCategory) : null);
+        return {
+          primary: { ...primary, role: "primary", z: zFromMeta(primaryMeta) ?? null },
+          extras: extras.length ? extras : undefined,
+          availableAnimations: available.length ? available : animationsFallback(),
+        };
+      }
+    }
+  }
+
+  // 3b) Broad scan
+  const root = resolveUlpcRoot();
+  const categoriesToScan = [originalCategory];
+  if (!categoriesToScan.includes(category)) categoriesToScan.push(category);
+  const scanRoots = categoriesToScan
+    .map((cat) => {
+      const catRoot = path.join(root, cat);
+      return exists(catRoot) ? catRoot : null;
+    })
+    .filter((p): p is string => Boolean(p));
+
+  if (!scanRoots.length) scanRoots.push(root);
+
+  const seenRoots = new Set<string>();
+  const pngs = scanRoots
+    .filter((r) => {
+      if (seenRoots.has(r)) return false;
+      seenRoots.add(r);
+      return true;
+    })
+    .flatMap((r) => walkPng(r, 7));
+  const norm = (s: string) => s.replace(/\\/g, "/").toLowerCase();
+  const candidates = pngs
+    .map((p) => ({ abs: p, norm: norm(p) }))
+    .filter((p) =>
+      p.norm.includes(`/${category.toLowerCase()}/`) &&
+      p.norm.includes(`/${lowerVar}.`)
+    );
+
+  if (candidates.length) {
+    const best = candidates.sort((a, b) => a.norm.length - b.norm.length)[0];
+    const animMatch = best.norm.match(/\/(idle|walk|run|slash|thrust|shoot|hurt|jump|sit|emote|climb|combat)\//);
+    const matchAnim = animMatch ? animMatch[1] : null;
+
+    const extras: ResolvedLayerEntry[] = [];
+    if (matchAnim) {
+      const behindCandidate = deriveBehindFromPath(best.abs, matchAnim);
+      if (behindCandidate) extras.push({ ...behindCandidate, role: "behind" });
+    }
+
+    const derivedCategory = categoryFromSpritePath(best.abs) ?? originalCategory;
+    const primaryMeta = getLayerMetaForPath(derivedCategory);
+
+    return {
+      primary: { png: best.abs, usedAnimation: matchAnim ?? undefined, role: "primary", z: zFromMeta(primaryMeta) ?? null },
+      extras: extras.length ? extras : undefined,
+      availableAnimations: matchAnim ? [matchAnim] : animationsFallback(),
+    };
+  }
+
+  throw new Error(`Unable to resolve PNG for ${category}/${variant}${animation ? ` (animation=${animation})` : ""}`);
+}
+
 function exists(p: string): boolean {
   try { fs.accessSync(p); return true; } catch { return false; }
 }
+
+type LayerMeta = {
+  zPos?: number;
+  customAnimation?: string | null;
+};
+
+let layerMetaCache: Map<string, LayerMeta> | null = null;
+
+function normalizeCategoryKey(input: string): string {
+  return input.replace(/\\/g, "/").replace(/\/+$/, "").toLowerCase();
+}
+
+function loadLayerMetaCache(): Map<string, LayerMeta> {
+  if (layerMetaCache) return layerMetaCache;
+  const cache = new Map<string, LayerMeta>();
+  const defsDir = resolveUlpcSheetDefs();
+
+  const capture = (rawPath: unknown, layer: any) => {
+    if (typeof rawPath !== "string") return;
+    const key = normalizeCategoryKey(rawPath);
+    if (!key) return;
+
+    const candidate: LayerMeta = {
+      zPos: typeof layer?.zPos === "number" ? layer.zPos : undefined,
+      customAnimation: typeof layer?.custom_animation === "string" ? layer.custom_animation : null,
+    };
+
+    const existing = cache.get(key);
+    if (!existing) {
+      cache.set(key, candidate);
+      return;
+    }
+
+    const existingHasCustom = !!existing.customAnimation;
+    const candidateHasCustom = !!candidate.customAnimation;
+
+    if (existingHasCustom && !candidateHasCustom) {
+      cache.set(key, candidate);
+      return;
+    }
+
+    if (existingHasCustom === candidateHasCustom) {
+      if ((existing.zPos ?? null) == null && (candidate.zPos ?? null) != null) {
+        cache.set(key, { ...existing, zPos: candidate.zPos });
+      }
+    }
+  };
+
+  const scan = (dir: string) => {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        scan(full);
+        continue;
+      }
+      if (!entry.isFile() || !entry.name.endsWith(".json")) continue;
+      const def = readJson<any>(full);
+      if (!def || typeof def !== "object") continue;
+
+      for (const [layerKey, layerValue] of Object.entries(def)) {
+        if (!layerKey.startsWith("layer_")) continue;
+        if (!layerValue || typeof layerValue !== "object") continue;
+        const layer = layerValue as any;
+        for (const layerPath of Object.values(layer)) {
+          capture(layerPath, layer);
+        }
+      }
+    }
+  };
+
+  scan(defsDir);
+  layerMetaCache = cache;
+  return cache;
+}
+
+function getLayerMetaForPath(categoryPath: string): LayerMeta | null {
+  if (!categoryPath) return null;
+  const key = normalizeCategoryKey(categoryPath);
+  if (!key) return null;
+  const cache = loadLayerMetaCache();
+  return cache.get(key) ?? null;
+}
+
+function zFromMeta(meta: LayerMeta | null): number | undefined {
+  if (!meta) return undefined;
+  if (meta.customAnimation) return undefined;
+  return typeof meta.zPos === "number" ? meta.zPos : undefined;
+}
+
+function pickAnimationSheet(root: string, category: string, animation: string, variant: string): ResolvedLayerEntry | null {
+  const pngPath = path.join(root, category, animation, `${variant}.png`);
+  if (exists(pngPath)) return { png: pngPath, usedAnimation: animation };
+  const webpPath = path.join(root, category, animation, `${variant}.webp`);
+  if (exists(webpPath)) return { png: webpPath, usedAnimation: animation };
+  return null;
+}
+
+function pickBehindSheet(root: string, category: string, animation: string, variant: string): ResolvedLayerEntry | null {
+  const segments = category.split(/[/\\]/).map((s) => s.toLowerCase());
+  if (segments.includes("universal_behind")) return null;
+  const base = path.join(root, category, "universal_behind", animation);
+  const pngPath = path.join(base, `${variant}.png`);
+  if (exists(pngPath)) return { png: pngPath, usedAnimation: animation };
+  const webpPath = path.join(base, `${variant}.webp`);
+  if (exists(webpPath)) return { png: webpPath, usedAnimation: animation };
+  return null;
+}
+
+function categoryFromSpritePath(absPath: string): string | null {
+  const root = resolveUlpcRoot();
+  const rel = path.relative(root, absPath);
+  if (rel.startsWith("..")) return null;
+  const parts = rel.replace(/\\/g, "/").split("/");
+  if (parts.length < 3) return null;
+  parts.pop(); // variant file
+  parts.pop(); // animation
+  const category = parts.join("/");
+  return category ? category : null;
+}
+
+function deriveBehindFromPath(primaryPath: string, animation: string): ResolvedLayerEntry | null {
+  const dir = path.dirname(primaryPath);
+  const variantFile = path.basename(primaryPath);
+  const animSegment = path.basename(dir);
+  if (animSegment.toLowerCase() !== animation.toLowerCase()) return null;
+  const categoryDir = path.dirname(dir);
+  if (!categoryDir || !categoryDir.length) return null;
+  if (categoryDir.split(path.sep).map((s) => s.toLowerCase()).includes("universal_behind")) return null;
+
+  const primaryCategory = categoryFromSpritePath(primaryPath);
+  const candidate = path.join(categoryDir, "universal_behind", animation, variantFile);
+  const categoryRel = categoryFromSpritePath(candidate) ?? (primaryCategory ? `${primaryCategory}/universal_behind` : null);
+  if (exists(candidate)) {
+    const meta = categoryRel ? getLayerMetaForPath(categoryRel) : null;
+    return { png: candidate, usedAnimation: animation, z: zFromMeta(meta) ?? null };
+  }
+  const webpCandidate = candidate.replace(/\.png$/i, ".webp");
+  if (webpCandidate !== candidate && exists(webpCandidate)) {
+    const meta = categoryRel ? getLayerMetaForPath(categoryRel) : null;
+    return { png: webpCandidate, usedAnimation: animation, z: zFromMeta(meta) ?? null };
+  }
+  return null;
+}
+
 function readJson<T = any>(file: string): T | null {
   try { return JSON.parse(fs.readFileSync(file, "utf-8")) as T; } catch { return null; }
 }
+ 
 function walkPng(root: string, maxDepth = 7): string[] {
   const out: string[] = [];
   function go(dir: string, depth: number) {
@@ -87,101 +433,30 @@ function pngFromVariantJson(jsonPath: string, obj: any): string | null {
   return null;
 }
 
+const DEFAULT_ANIMS = [
+  "walk",
+  "idle",
+  "run",
+  "slash",
+  "thrust",
+  "shoot",
+  "hurt",
+  "jump",
+  "sit",
+  "emote",
+  "climb",
+  "combat",
+];
+
 function animationsFallback(): string[] {
   const env = process.env.ULPC_ANIMS_FALLBACK;
   if (env && env.trim()) {
-    return env.split(",").map(s => s.trim()).filter(Boolean);
+    const overrides = env.split(",").map((s) => s.trim()).filter(Boolean);
+    return overrides.length ? overrides : [...DEFAULT_ANIMS];
   }
-  return ["idle","walk","run","slash","thrust","shoot","hurt","jump","sit","emote","climb","combat"];
+  return [...DEFAULT_ANIMS];
 }
 
-async function resolveLayerPng(categoryIn: string, variantIn: string, animation?: string): Promise<string> {
-  // normalization + defensive handling
-  let category = categoryIn.replace(/\/+$/,"");
-  const variant = variantIn;
-  const lowerCat = category.toLowerCase();
-  const lowerVar = variant.toLowerCase();
-  if (lowerCat.endsWith(`/${lowerVar}`)) {
-    category = category.slice(0, -(variant.length + 1));
-  }
-
-  const defsDir = resolveUlpcSheetDefs();
-  const catDir = path.join(defsDir, category);
-  const directJson = path.join(catDir, `${variant}.json`);
-  const indexJson = path.join(catDir, "index.json");
-
-  // 1) <category>/<variant>.json
-  if (exists(directJson)) {
-    const def = readJson(directJson);
-    const png = def && pngFromVariantJson(directJson, def);
-    if (png && exists(png)) return png;
-  }
-
-  // 2) <category>/index.json variants[]
-  if (exists(indexJson)) {
-    const idx = readJson<any>(indexJson);
-    const vs = Array.isArray(idx?.variants) ? idx.variants : [];
-    const hit = vs.find((v: any) =>
-      v?.id === variant ||
-      v?.name === variant ||
-      v?.file === `${variant}.png` ||
-      v?.file === variant
-    );
-    if (hit) {
-      // If the index provides per-animation PNGs, prefer those
-      if (animation && hit?.animations && hit.animations[animation]) {
-        const byAnim = hit.animations[animation];
-        const png = pngFromVariantJson(indexJson, byAnim);
-        if (png && exists(png)) return png;
-      }
-      // Otherwise general
-      const png = pngFromVariantJson(indexJson, hit);
-      if (png && exists(png)) return png;
-      const ref = hit.json ?? hit.def ?? hit.variant;
-      if (ref) {
-        const refAbs = toAbs(indexJson, ref);
-        if (exists(refAbs)) {
-          const sub = readJson(refAbs);
-          const p2 = pngFromVariantJson(refAbs, sub);
-          if (p2 && exists(p2)) return p2;
-        }
-      }
-    }
-  }
-
-  // 3a) Constructed per-animation path
-  {
-    const root = resolveUlpcRoot();
-    const prefer = animation ? [animation] : animationsFallback();
-    for (const a of prefer) {
-      const p1 = path.join(root, category, a, `${variant}.png`);
-      if (exists(p1)) return p1;
-      const p2 = path.join(root, category, a, `${variant}.webp`);
-      if (exists(p2)) return p2;
-    }
-  }
-
-  // 3b) Broad scan
-  const root = resolveUlpcRoot();
-  const catRoot = path.join(root, category);
-  const scanRoot = exists(catRoot) ? catRoot : root;
-  const pngs = walkPng(scanRoot, 7);
-  const norm = (s: string) => s.replace(/\\/g, "/").toLowerCase();
-  const candidates = pngs
-    .map(norm)
-    .filter(p =>
-      p.includes(`/${category.toLowerCase()}/`) &&
-      p.includes(`/${lowerVar}.`) &&
-      (animation ? p.includes(`/${animation.toLowerCase()}/`) : true)
-    );
-
-  if (candidates.length) {
-    const best = candidates.sort((a, b) => a.length - b.length)[0];
-    return best;
-  }
-
-  throw new Error(`Unable to resolve PNG for ${category}/${variant}${animation ? ` (animation=${animation})` : ""}`);
-}
 
 async function applyTintIfAny(img: sharp.Sharp, layer: LayerSpec): Promise<sharp.Sharp> {
   const hex = layer.color?.tint?.rgb;
@@ -190,139 +465,6 @@ async function applyTintIfAny(img: sharp.Sharp, layer: LayerSpec): Promise<sharp
   return img.tint(hex as any);
 }
 
-// ────────────────────────────────────────────────────────────────────────────
-// Baseline single-sheet compose (kept for compatibility)
-// ────────────────────────────────────────────────────────────────────────────
-export async function composeULPC(
-  build: BuildSpec,
-  outPath: string
-): Promise<{
-  outPath: string;
-  bytes: number;
-  layers: number;
-  width: number;
-  height: number;
-  warnings: LayerWarning[];
-  skipped: number;
-}> {
-  if (build.schema !== "ulpc.build/1.0") {
-    throw new Error(`Unsupported schema: ${build?.schema}`);
-  }
-  const visible = (build.layers ?? []).filter(l => l.visible !== false);
-  if (!visible.length) throw new Error("No visible layers to compose");
-
-  log.info({ msg: "compose.start", defsDir: resolveUlpcSheetDefs(), layers: visible.length });
-
-  // Resolve all layer PNGs (without animation specialization)
-  const warnings: LayerWarning[] = [];
-  let skippedCount = 0;
-  const resolved: Array<{ layer: LayerSpec; png: string; meta: sharp.Metadata }> = [];
-  for (const l of visible) {
-    try {
-      const png = await resolveLayerPng(l.category, l.variant);
-      const meta = await sharp(png).metadata();
-      if (!(meta.width && meta.height)) {
-        warnings.push({ category: l.category, variant: l.variant, reason: "invalid_dimensions", detail: "missing width/height" });
-        log.warn?.({ msg: "layer.invalid_dimensions", category: l.category, variant: l.variant, png });
-        skippedCount++;
-        continue;
-      }
-      resolved.push({ layer: l, png, meta });
-      log.info({ msg: "layer.resolved", category: l.category, variant: l.variant, png });
-    } catch (err: any) {
-      warnings.push({ category: l.category, variant: l.variant, reason: "resolve_failed", detail: err?.message });
-      log.warn?.({ msg: "layer.resolve_failed", category: l.category, variant: l.variant, error: err?.message });
-      skippedCount++;
-    }
-  }
-
-  if (!resolved.length) {
-    throw new Error("No layers could be resolved for composition");
-  }
-
-  // Canvas size from first accepted layer
-  let W = 0;
-  let H = 0;
-
-  const overlays: sharp.OverlayOptions[] = [];
-  const sorted = resolved
-    .map((r, i) => ({ ...r, z: r.layer.z_override ?? i, idx: i }))
-    .sort((a, b) => (a.z - b.z) || (a.idx - b.idx));
-
-  for (const r of sorted) {
-    const left = r.layer.offset?.x ?? 0;
-    const top  = r.layer.offset?.y ?? 0;
-    const width = r.meta.width ?? 0;
-    const height = r.meta.height ?? 0;
-    if (!W || !H) {
-      W = width;
-      H = height;
-    }
-    let targetWidth = width;
-    let targetHeight = height;
-    const crops: string[] = [];
-
-    if (W && width > W) {
-      if (width % W === 0) {
-        targetWidth = W;
-        crops.push(`width ${width}→${W}`);
-      } else {
-        warnings.push({ category: r.layer.category, variant: r.layer.variant, reason: "dimension_mismatch", detail: `layer ${width}x${height} exceeds base ${W}x${H}` });
-        log.warn?.({ msg: "layer.dimension_mismatch", category: r.layer.category, variant: r.layer.variant, layerWidth: width, layerHeight: height, baseWidth: W, baseHeight: H });
-        skippedCount++;
-        continue;
-      }
-    }
-
-    if (H && targetHeight > H) {
-      if (targetHeight % H === 0) {
-        targetHeight = H;
-        crops.push(`height ${height}→${H}`);
-      } else {
-        warnings.push({ category: r.layer.category, variant: r.layer.variant, reason: "dimension_mismatch", detail: `layer ${width}x${height} exceeds base ${W}x${H}` });
-        log.warn?.({ msg: "layer.dimension_mismatch", category: r.layer.category, variant: r.layer.variant, layerWidth: width, layerHeight: height, baseWidth: W, baseHeight: H });
-        skippedCount++;
-        continue;
-      }
-    }
-
-    let sharpImage = sharp(r.png);
-    if (targetWidth !== width || targetHeight !== height) {
-      sharpImage = sharpImage.extract({ left: 0, top: 0, width: targetWidth, height: targetHeight });
-      warnings.push({ category: r.layer.category, variant: r.layer.variant, reason: "cropped", detail: crops.join(", ") || undefined });
-      log.info({ msg: "layer.cropped", category: r.layer.category, variant: r.layer.variant, detail: crops.join(", ") });
-    }
-
-    let img = sharpImage.ensureAlpha();
-    img = await applyTintIfAny(img, r.layer);
-    overlays.push({ input: await img.toBuffer(), left, top });
-  }
-
-  if (!W || !H) throw new Error("Cannot infer sheet size from resolved layers");
-  if (!overlays.length) {
-    throw new Error("No layers remained after filtering invalid overlays");
-  }
-
-  await fsp.mkdir(path.dirname(outPath), { recursive: true });
-  await sharp({
-    create: { width: W, height: H, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } }
-  }).composite(overlays).png().toFile(outPath);
-
-  const stat = await fsp.stat(outPath);
-  return {
-    outPath,
-    bytes: stat.size,
-    layers: overlays.length,
-    width: W,
-    height: H,
-    warnings,
-    skipped: skippedCount,
-  };
-}
-
-// ────────────────────────────────────────────────────────────────────────────
-// Multi-animation export with optional splitting by animation / frame
-// ────────────────────────────────────────────────────────────────────────────
 export async function composeULPCExport(params: {
   build: BuildSpec;
   outBaseDir: string;        // character root, e.g. /assets/characters/{slug}
@@ -374,7 +516,8 @@ export async function composeULPCExport(params: {
 
   // Resolve per-animation PNG for each layer, compose, optionally slice
   for (const animation of anims) {
-    const overlays: sharp.OverlayOptions[] = [];
+    const overlayQueue: Array<{ overlay: sharp.OverlayOptions; z: number; order: number; role?: string }> = [];
+    let overlayOrder = 0;
     let W = 0;
     let H = 0;
     const resolvedPngs: string[] = [];
@@ -383,65 +526,105 @@ export async function composeULPCExport(params: {
     for (let i = 0; i < visible.length; i++) {
       const L = visible[i];
       try {
-        const png = await resolveLayerPng(L.category, L.variant, animation);
-        const meta = await sharp(png).metadata();
-        if (!(meta.width && meta.height)) {
-          animationWarnings.push({ category: L.category, variant: L.variant, animation, reason: "invalid_dimensions", detail: "missing width/height" });
-          log.warn?.({ msg: "layer.invalid_dimensions", category: L.category, variant: L.variant, animation, png });
-          continue;
-        }
+        const resolvedImage = await resolveLayerPngDetailed(L.category, L.variant, animation);
+        const entries: ResolvedLayerEntry[] = [
+          ...(resolvedImage.extras?.filter((e) => e.role === "behind") ?? []),
+          resolvedImage.primary,
+          ...(resolvedImage.extras?.filter((e) => e.role !== "behind") ?? []),
+        ];
 
-        let width = meta.width ?? 0;
-        let height = meta.height ?? 0;
-        if (!W || !H) {
-          W = width;
-          H = height;
-        }
-
-        let targetWidth = width;
-        let targetHeight = height;
-        const crops: string[] = [];
-
-        if (W && width > W) {
-          if (width % W === 0) {
-            targetWidth = W;
-            targetHeight = Math.min(targetHeight, H);
-            crops.push(`width ${width}→${W}`);
-          } else {
-            animationWarnings.push({ category: L.category, variant: L.variant, animation, reason: "dimension_mismatch", detail: `layer ${width}x${height} exceeds base ${W}x${H}` });
-            log.warn?.({ msg: "layer.dimension_mismatch", category: L.category, variant: L.variant, animation, layerWidth: width, layerHeight: height, baseWidth: W, baseHeight: H });
+        for (const entry of entries) {
+          const png = entry.png;
+          const meta = await sharp(png).metadata();
+          if (!(meta.width && meta.height)) {
+            const detail = `missing width/height${entry.role ? ` (${entry.role})` : ""}`;
+            animationWarnings.push({ category: L.category, variant: L.variant, animation, reason: "invalid_dimensions", detail });
+            log.warn?.({ msg: "layer.invalid_dimensions", category: L.category, variant: L.variant, animation, png, role: entry.role });
             continue;
           }
-        }
 
-        if (H && targetHeight > H) {
-          if (targetHeight % H === 0) {
-            targetHeight = H;
-            crops.push(`height ${height}→${H}`);
-          } else {
-            animationWarnings.push({ category: L.category, variant: L.variant, animation, reason: "dimension_mismatch", detail: `layer ${width}x${height} exceeds base ${W}x${H}` });
-            log.warn?.({ msg: "layer.dimension_mismatch", category: L.category, variant: L.variant, animation, layerWidth: width, layerHeight: height, baseWidth: W, baseHeight: H });
-            continue;
+          let width = meta.width ?? 0;
+          let height = meta.height ?? 0;
+          if (!W || !H) {
+            W = width;
+            H = height;
+          }
+
+          if (animation && entry.usedAnimation && entry.usedAnimation !== animation) {
+            animationWarnings.push({
+              category: L.category,
+              variant: L.variant,
+              animation,
+              reason: "animation_fallback",
+              detail: `used ${entry.usedAnimation}${entry.role ? ` (${entry.role})` : ""}`,
+            });
+          }
+
+          let targetWidth = width;
+          let targetHeight = height;
+          const crops: string[] = [];
+
+          if (W && width > W) {
+            if (width % W === 0) {
+              targetWidth = W;
+              targetHeight = Math.min(targetHeight, H);
+              crops.push(`width ${width}→${W}`);
+            } else {
+            animationWarnings.push({ category: L.category, variant: L.variant, animation, reason: "dimension_mismatch", detail: `layer ${width}x${height} exceeds base ${W}x${H}${entry.role ? ` (${entry.role})` : ""}` });
+              log.warn?.({ msg: "layer.dimension_mismatch", category: L.category, variant: L.variant, animation, layerWidth: width, layerHeight: height, baseWidth: W, baseHeight: H, role: entry.role });
+              continue;
+            }
+          }
+
+          if (H && targetHeight > H) {
+            if (targetHeight % H === 0) {
+              targetHeight = H;
+              crops.push(`height ${height}→${H}`);
+            } else {
+              animationWarnings.push({ category: L.category, variant: L.variant, animation, reason: "dimension_mismatch", detail: `layer ${width}x${height} exceeds base ${W}x${H}${entry.role ? ` (${entry.role})` : ""}` });
+              log.warn?.({ msg: "layer.dimension_mismatch", category: L.category, variant: L.variant, animation, layerWidth: width, layerHeight: height, baseWidth: W, baseHeight: H, role: entry.role });
+              continue;
+            }
+          }
+
+          let workingSharp = sharp(png);
+          if (targetWidth !== width || targetHeight !== height) {
+            workingSharp = workingSharp.extract({ left: 0, top: 0, width: targetWidth, height: targetHeight });
+            const cropDetailRaw = crops.join(", ");
+            const cropDetail = cropDetailRaw ? cropDetailRaw : undefined;
+            animationWarnings.push({
+              category: L.category,
+              variant: L.variant,
+              animation,
+              reason: "cropped",
+              detail: cropDetail ? `${cropDetail}${entry.role ? ` (${entry.role})` : ""}` : (entry.role ? `applied for ${entry.role}` : undefined),
+            });
+            log.info({ msg: "layer.cropped", category: L.category, variant: L.variant, animation, detail: cropDetailRaw, role: entry.role });
+          }
+
+          let img = workingSharp.ensureAlpha();
+          img = await applyTintIfAny(img, L);
+          const zBaseRaw = L.z_override ?? entry.z ?? i;
+          const zValue = typeof zBaseRaw === "number" ? zBaseRaw : Number(zBaseRaw ?? i);
+          overlayQueue.push({
+            overlay: {
+              input: await img.toBuffer(),
+              left: L.offset?.x ?? 0,
+              top:  L.offset?.y ?? 0,
+            },
+            z: Number.isFinite(zValue) ? zValue : i,
+            order: overlayOrder++,
+            role: entry.role,
+          });
+
+          if (entry === resolvedImage.primary) {
+            resolvedPngs.push(png);
           }
         }
-
-        let workingSharp = sharp(png);
-        if (targetWidth !== width || targetHeight !== height) {
-          workingSharp = workingSharp.extract({ left: 0, top: 0, width: targetWidth, height: targetHeight });
-          animationWarnings.push({ category: L.category, variant: L.variant, animation, reason: "cropped", detail: crops.join(", ") || undefined });
-          log.info({ msg: "layer.cropped", category: L.category, variant: L.variant, animation, detail: crops.join(", ") });
-        }
-
-        let img = workingSharp.ensureAlpha();
-        img = await applyTintIfAny(img, L);
-        overlays.push({
-          input: await img.toBuffer(),
-          left: L.offset?.x ?? 0,
-          top:  L.offset?.y ?? 0,
-        });
-        resolvedPngs.push(png);
       } catch (err: any) {
-        animationWarnings.push({ category: L.category, variant: L.variant, animation, reason: "resolve_failed", detail: err?.message });
+        const message = err?.message ?? "";
+        const reason = message.includes("Unable to resolve PNG") ? "missing_animation" : "resolve_failed";
+        animationWarnings.push({ category: L.category, variant: L.variant, animation, reason, detail: message });
         log.warn?.({ msg: "layer.resolve_failed", category: L.category, variant: L.variant, animation, error: err?.message });
       }
     }
@@ -452,6 +635,13 @@ export async function composeULPCExport(params: {
       log.warn?.({ msg: "compose.animation_skipped", animation, reason: "unable_to_infer_dimensions" });
       continue;
     }
+    const overlays = overlayQueue
+      .sort((a, b) => {
+        if (a.z !== b.z) return a.z - b.z;
+        return a.order - b.order;
+      })
+      .map((item) => item.overlay);
+
     if (!overlays.length) {
       log.warn?.({ msg: "compose.animation_skipped", animation, reason: "no_layers_after_filter" });
       continue;
@@ -596,7 +786,13 @@ async function resolveGridInfo(params: {
   // 2) safe fallbacks:
   // Try 64x64 tiles (classical LPC). If divisible, use that.
   if (W % 64 === 0 && H % 64 === 0) {
-    return { frame_w: 64, frame_h: 64, cols: W / 64, rows: H / 64, directions: (H/64) >= 4 ? ["front","left","right","back"] : undefined };
+    return {
+      frame_w: 64,
+      frame_h: 64,
+      cols: W / 64,
+      rows: H / 64,
+      directions: (H / 64) >= 4 ? ["front", "left", "back", "right"] : undefined,
+    };
   }
 
   // Try "square tiles" by assuming rows=4 if tall enough
@@ -604,7 +800,13 @@ async function resolveGridInfo(params: {
   const frame_h = Math.floor(H / rowsGuess);
   const frame_w = frame_h; // square fallback
   if (frame_w > 0 && frame_h > 0 && W % frame_w === 0 && H % frame_h === 0) {
-    return { frame_w, frame_h, cols: W / frame_w, rows: H / frame_h, directions: rowsGuess >= 4 ? ["front","left","right","back"] : undefined };
+    return {
+      frame_w,
+      frame_h,
+      cols: W / frame_w,
+      rows: H / frame_h,
+      directions: rowsGuess >= 4 ? ["front", "left", "back", "right"] : undefined,
+    };
   }
 
   // Last resort: single row (whole sheet in one row)

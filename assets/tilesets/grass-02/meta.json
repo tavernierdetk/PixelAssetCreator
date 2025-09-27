@@ -1,0 +1,8 @@
+{
+  "schema": "tileset.meta/1.0",
+  "slug": "grass-02",
+  "pattern": "blob47",
+  "tile_size": 32,
+  "palette": "roman_steampunk",
+  "created_at": "2025-09-26T23:14:10.534Z"
+}

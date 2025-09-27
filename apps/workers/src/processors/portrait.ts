@@ -1,3 +1,4 @@
+// /Users/alexandredube-cote/entropy/pixelart-backbone/apps/workers/src/processors/portrait.ts
 import path from "node:path";
 import fs from "node:fs/promises";
 import { createLogger } from "@pixelart/log";
@@ -19,7 +20,7 @@ export async function portraitProcessor(data: { slug: string }) {
 
   const png = await generatePortraitOpenAI({
     prompt,
-    size: (process.env.IMAGE_SIZE as any) || "1024x1024",
+    size: (process.env.IMAGE_SIZE as any) || "1024x1536",
     background: process.env.IMAGE_TRANSPARENT_BG ? "transparent" : undefined
   });
 

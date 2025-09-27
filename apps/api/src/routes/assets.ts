@@ -1,3 +1,4 @@
+//Users/alexandredube-cote/entropy/pixelart-backbone/apps/api/src/routes/assets.ts
 import { Router, type Request, type Response, type Express } from "express";
 import { promises as fs } from "node:fs";
 import { resolve, join, extname } from "node:path";
@@ -19,10 +20,30 @@ function expectedFileForSlot(slug: string, slot: "portrait" | "idle", ext = ".pn
   if (slot === "idle") return `idle_static_${slug}${ext}`;
   throw new Error("invalid slot");
 }
+async function listFilesRecursive(root: string, base = ""): Promise<string[]> {
+  let entries: import("fs").Dirent[] = [];
+  try {
+    entries = await fs.readdir(root, { withFileTypes: true });
+  } catch {
+    return [];
+  }
+  const out: string[] = [];
+  for (const entry of entries) {
+    const rel = base ? `${base}/${entry.name}` : entry.name;
+    const abs = join(root, entry.name);
+    if (entry.isDirectory()) {
+      const children = await listFilesRecursive(abs, rel);
+      out.push(...children);
+    } else if (entry.isFile()) {
+      out.push(rel);
+    }
+  }
+  return out;
+}
+
 async function listFiles(slug: string) {
   const dir = charDir(slug);
-  const names = await fs.readdir(dir).catch(() => []);
-  return names;
+  return listFilesRecursive(dir);
 }
 
 // GET (keep if you already have it)

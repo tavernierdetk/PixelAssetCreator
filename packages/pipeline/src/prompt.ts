@@ -1,3 +1,4 @@
+//Users/alexandredube-cote/entropy/pixelart-backbone/packages/pipeline/src/prompt.ts
 import type { CharacterLite} from "@pixelart/schemas";
 
 type ProjectSettingsLike = { aesthetics?: string };
@@ -17,7 +18,7 @@ export function buildPortraitPrompt(def: CharacterLite, settings: ProjectSetting
     `Character: ${i?.char_name ?? "Unnamed"}; age:${p?.age_range}; height:${p?.height_category}; build:${p?.build}.`,
     `Colors: skin ${p?.skin_tone}, hair ${p?.hair_color}, eyes ${p?.eye_color}.`,
     traits ? `Personality hints: ${traits}.` : null,
-    `Full body-portrait of this character, clear silhouette, clean edges.`,
+    `Ensure the entire character fits within frame from head to feet, clear silhouette, clean edges.`,
     `Do NOT add text, watermarks, or borders.`
   ].filter(Boolean).join(" ");
 }

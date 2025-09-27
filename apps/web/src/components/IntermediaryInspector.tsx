@@ -18,7 +18,7 @@ function pretty(x: unknown) {
   try { return JSON.stringify(x, null, 2); } catch { return ""; }
 }
 
-const DEFAULT_ANIMS = ["idle"]; // user can add more later in the ULPC editor
+const DEFAULT_ANIMS = ["walk"]; // default to walk when composing
 
 export default function IntermediaryInspector({ slug, intermediary, onUseBuild, onComposed, onWarnings }: Props) {
   const [text, setText] = useState<string>(pretty(intermediary ?? {}));

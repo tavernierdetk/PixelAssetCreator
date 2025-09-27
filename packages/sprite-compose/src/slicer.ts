@@ -77,14 +77,35 @@ export async function sliceSheetByGrid(opts: SliceOptions): Promise<{
   const orientNames: OrientationName[] =
     directions && directions.length === rows
       ? directions
-      : (rows > 1 ? (["front", "left", "right", "back"].slice(0, rows) as OrientationName[]) : []);
+      : (rows > 1 ? (["back", "left", "front", "right"].slice(0, rows) as OrientationName[]) : []);
+
+  const desiredCycle: OrientationName[] = ["back", "left", "front", "right"];
+  let rowsWithOrientation: Array<{ orientation: OrientationName; rowIndex: number }> =
+    Array.from({ length: rows }, (_, idx) => ({ orientation: orientNames[idx] ?? "back", rowIndex: idx }));
+
+  if (orientNames.length === rows && orientNames.length >= desiredCycle.length) {
+    const used = new Set<number>();
+    const reordered: Array<{ orientation: OrientationName; rowIndex: number }> = [];
+
+    for (const face of desiredCycle) {
+      const entry = rowsWithOrientation.find((candidate) => candidate.orientation === face && !used.has(candidate.rowIndex));
+      if (entry) {
+        reordered.push(entry);
+        used.add(entry.rowIndex);
+      }
+    }
+
+    if (reordered.length === desiredCycle.length) {
+      const remainder = rowsWithOrientation.filter((entry) => !used.has(entry.rowIndex));
+      rowsWithOrientation = [...reordered, ...remainder];
+    }
+  }
 
   const written: Array<{ path: string; w: number; h: number }> = [];
   const framesByFolder: Record<string, string[]> = {};
   let totalFrames = 0;
 
-  for (let r = 0; r < rows; r++) {
-    const orientation = orientNames[r] ?? "front";
+  for (const { orientation, rowIndex } of rowsWithOrientation) {
     const folderBase = orientationDirs
       ? `${titleCaseFirst(animationName)}_${orientation}`
       : animationName;
@@ -94,8 +115,8 @@ export async function sliceSheetByGrid(opts: SliceOptions): Promise<{
 
     for (let c = 0; c < cols; c++) {
       const left = c * frame_w;
-      const top = r * frame_h;
-      const idx = r * cols + c;
+      const top = rowIndex * frame_h;
+      const idx = rowIndex * cols + c;
       const name = `${slug}_${animationName}_${zpad(idx, zeroPad)}.png`;
       const outPath = path.join(baseDir, name);
 
@@ -116,7 +137,7 @@ export async function sliceSheetByGrid(opts: SliceOptions): Promise<{
       animation: animationName,
       fps,
       frame_size: { w: grid.frame_w, h: grid.frame_h },
-      orientations: orientNames.length ? orientNames : undefined,
+      orientations: rowsWithOrientation.length ? rowsWithOrientation.map((entry) => entry.orientation) : undefined,
       frames: framesByFolder,
     }
   };

@@ -13,6 +13,7 @@ type SheetItem = {
   category: string;
   layerPaths: Record<string, string>;
   variants: string[];
+  animations?: string[];
 };
 
 type Catalog = {
@@ -27,13 +28,12 @@ async function loadCatalog(): Promise<Catalog> {
   if (cachedCatalog) return cachedCatalog;
 
   const defsDir = resolveUlpcSheetDefs();
-  const entries = await fs.readdir(defsDir, { withFileTypes: true });
+  const files = await walkJson(defsDir);
 
   const byCategory = new Map<string, SheetItem[]>();
 
-  for (const entry of entries) {
-    if (!entry.isFile() || !entry.name.endsWith(".json")) continue;
-    const filePath = path.join(defsDir, entry.name);
+  for (const filePath of files) {
+    const slug = path.relative(defsDir, filePath).replace(/\\/g, "/").replace(/\.json$/i, "");
     let json: any;
     try {
       const raw = await fs.readFile(filePath, "utf8");
@@ -46,26 +46,28 @@ async function loadCatalog(): Promise<Catalog> {
     if (!layer1 || typeof layer1 !== "object") continue;
 
     const layerPaths: Record<string, string> = {};
-    let topCategory: string | null = null;
+    const typeName = typeof json?.type_name === "string" && json.type_name.trim()
+      ? json.type_name.trim()
+      : null;
+    let topCategory: string | null = typeName;
 
     for (const [key, value] of Object.entries(layer1)) {
       if (typeof key === "string" && key.toLowerCase() === "zpos") continue;
       if (!value || typeof value !== "string") continue;
       const trimmed = value.trim();
       if (!trimmed) continue;
-      const normalized = trimmed.replace(/^\/+|\/+$/g, ""); // remove leading/trailing slashes
+      const normalized = trimmed.replace(/^\/+|\/+$/g, "");
       if (!normalized) continue;
-      const segments = normalized.split("/").filter(Boolean);
+      const materialized = materializeLayerPath(normalized, key, json);
+      const segments = materialized.split("/").filter(Boolean);
       if (!segments.length) continue;
 
-      layerPaths[key] = normalized;
+      layerPaths[key] = materialized;
 
-      if (!topCategory) topCategory = segments[0];
+      if (!topCategory) topCategory = typeName ?? segments[0];
     }
 
     if (!topCategory || Object.keys(layerPaths).length === 0) continue;
-
-    const slug = entry.name.replace(/\.json$/i, "");
     const item: SheetItem = {
       id: slug,
       name: typeof json?.name === "string" && json.name.trim() ? json.name.trim() : slug,
@@ -73,6 +75,9 @@ async function loadCatalog(): Promise<Catalog> {
       category: topCategory,
       layerPaths,
       variants: Array.isArray(json?.variants) ? json.variants.filter((v: unknown) => typeof v === "string") : [],
+      animations: Array.isArray(json?.animations)
+        ? json.animations.filter((anim: unknown) => typeof anim === "string" && anim.trim().length > 0)
+        : undefined,
     };
 
     if (!byCategory.has(topCategory)) {
@@ -106,5 +111,42 @@ ulpcRouter.get("/ulpc/sheet-defs", async (_req: Request, res: Response) => {
     res.status(500).json({ ok: false, code: "ULPC_DEFS_ERROR", message: err?.message ?? "sheet_def_load_failed" });
   }
 });
+
+async function walkJson(root: string): Promise<string[]> {
+  const out: string[] = [];
+  const entries = await fs.readdir(root, { withFileTypes: true });
+  for (const entry of entries) {
+    const filePath = path.join(root, entry.name);
+    if (entry.isDirectory()) {
+      out.push(...await walkJson(filePath));
+    } else if (entry.isFile() && entry.name.endsWith(".json")) {
+      out.push(filePath);
+    }
+  }
+  return out;
+}
+
+const HEAD_LEXEME_BY_BODY: Record<string, string> = {
+  male: "male",
+  muscular: "male",
+  female: "female",
+  pregnant: "female",
+  teen: "male",
+  child: "child",
+};
+
+function materializeLayerPath(raw: string, bodyKey: string, _json: any): string {
+  let out = raw;
+  if (out.includes("${head}")) {
+    const lexeme = HEAD_LEXEME_BY_BODY[bodyKey] ?? HEAD_LEXEME_BY_BODY.male;
+    out = out.replace(/\$\{head\}/g, lexeme);
+  }
+  if (out.includes("${expression}")) {
+    out = out.replace(/\/?\$\{expression\}/g, "");
+  }
+  out = out.replace(/\/{2,}/g, "/");
+  if (out.endsWith("/")) out = out.slice(0, -1);
+  return out;
+}
 
 export { ulpcRouter };

@@ -1,0 +1,29 @@
+{
+  "name": "@pixelart/tileset-compose",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "clean": "rimraf dist tsconfig.tsbuildinfo",
+    "build": "tsc -b"
+  },
+  "dependencies": {
+    "@pixelart/log": "workspace:*",
+    "@pixelart/adapters": "workspace:*",
+    "sharp": "^0.33.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2",
+    "rimraf": "^5.0.10"
+  }
+}

@@ -3,7 +3,7 @@ import { Job } from "bullmq";
 import path from "node:path";
 import { promises as fs } from "node:fs";
 import { createLogger } from "@pixelart/log";
-import { composeULPC, composeULPCExport } from "@pixelart/sprite-compose";
+import { composeULPCExport } from "@pixelart/sprite-compose";
 import { makeUlpcBuildValidator } from "@pixelart/validators";
 import { writeUlpcBuild } from "@pixelart/config";
 
@@ -78,15 +78,5 @@ export default async function ulpcProcessor(job: Job) {
     };
   }
 
-  // Legacy/single output path
-  const outPath = path.join(outBaseDir, `ulpc_spritesheet_${slug}.png`);
-  log.info({ msg: "compose.start", slug, outPath });
-  const result = await composeULPC(build, outPath);
-  if (result.warnings?.length) {
-    for (const warn of result.warnings) {
-      log.warn({ msg: "compose.layer_warning", slug, warning: warn });
-    }
-  }
-  log.info({ msg: "sprite.written", slug, outPath: result.outPath, bytes: result.bytes });
-  return { file: path.basename(outPath), bytes: result.bytes, warnings: result.warnings ?? [], skipped: result.skipped };
+
 }

@@ -375,6 +375,7 @@
         "eyes/eyebrows/thick/child",
         "eyes/eyebrows/thin/adult",
         "eyes/eyebrows/thin/child",
+        "eyes/human/${head}",
         "eyes/human/${head}/${expression}",
         "eyes/human/child",
         "eyes/human/child/${expression}",
@@ -387,6 +388,8 @@
         "eyes/human/elderly/sad",
         "eyes/human/elderly/shame",
         "eyes/human/elderly/shock",
+        "eyes/human/female",
+        "eyes/human/male",
         "facial/earrings/emerald/female",
         "facial/earrings/emerald/male",
         "facial/earrings/moon/female",
@@ -794,10 +797,46 @@
         "head/faces/${head}/sad",
         "head/faces/${head}/shame",
         "head/faces/${head}/shock",
+        "head/faces/child/anger",
+        "head/faces/child/blush",
+        "head/faces/child/closed",
+        "head/faces/child/closing",
+        "head/faces/child/eyeroll",
+        "head/faces/child/happy",
+        "head/faces/child/look_l",
+        "head/faces/child/look_r",
+        "head/faces/child/neutral",
+        "head/faces/child/sad",
+        "head/faces/child/shame",
+        "head/faces/child/shock",
+        "head/faces/female/anger",
+        "head/faces/female/blush",
+        "head/faces/female/closed",
+        "head/faces/female/closing",
+        "head/faces/female/eyeroll",
+        "head/faces/female/happy",
+        "head/faces/female/look_l",
+        "head/faces/female/look_r",
+        "head/faces/female/neutral",
+        "head/faces/female/sad",
+        "head/faces/female/shame",
+        "head/faces/female/shock",
         "head/faces/global/angry2",
         "head/faces/global/happy2",
         "head/faces/global/sad2",
         "head/faces/global/tears",
+        "head/faces/male/anger",
+        "head/faces/male/blush",
+        "head/faces/male/closed",
+        "head/faces/male/closing",
+        "head/faces/male/eyeroll",
+        "head/faces/male/happy",
+        "head/faces/male/look_l",
+        "head/faces/male/look_r",
+        "head/faces/male/neutral",
+        "head/faces/male/sad",
+        "head/faces/male/shame",
+        "head/faces/male/shock",
         "head/fins/fin/adult",
         "head/fins/fin/child",
         "head/fins/fin_short/adult",
@@ -1298,7 +1337,6 @@
         "weapon/magic/s/universal/foreground",
         "weapon/magic/simple/background",
         "weapon/magic/simple/foreground",
-        "weapon/magic/wand//female",
         "weapon/magic/wand/female",
         "weapon/magic/wand/male",
         "weapon/polearm/cane/female",
@@ -7535,6 +7573,36 @@
           "if": {
             "properties": {
               "category": {
+                "const": "eyes/human/${head}"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "blue",
+                  "brown",
+                  "gray",
+                  "green",
+                  "orange",
+                  "purple",
+                  "red",
+                  "yellow"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
                 "const": "eyes/human/${head}/${expression}"
               }
             },
@@ -7866,6 +7934,66 @@
             "properties": {
               "category": {
                 "const": "eyes/human/elderly/shock"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "blue",
+                  "brown",
+                  "gray",
+                  "green",
+                  "orange",
+                  "purple",
+                  "red",
+                  "yellow"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "eyes/human/female"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "blue",
+                  "brown",
+                  "gray",
+                  "green",
+                  "orange",
+                  "purple",
+                  "red",
+                  "yellow"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "eyes/human/male"
               }
             },
             "required": [
@@ -26415,6 +26543,1062 @@
           "if": {
             "properties": {
               "category": {
+                "const": "head/faces/child/anger"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/child/blush"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/child/closed"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/child/closing"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/child/eyeroll"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/child/happy"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/child/look_l"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/child/look_r"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/child/neutral"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/child/sad"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/child/shame"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/child/shock"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/female/anger"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/female/blush"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/female/closed"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/female/closing"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/female/eyeroll"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/female/happy"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/female/look_l"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/female/look_r"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/female/neutral"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/female/sad"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/female/shame"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/female/shock"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
                 "const": "head/faces/global/angry2"
               }
             },
@@ -26560,6 +27744,534 @@
                 "type": "string",
                 "enum": [
                   "blue"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/male/anger"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/male/blush"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/male/closed"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/male/closing"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/male/eyeroll"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/male/happy"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/male/look_l"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/male/look_r"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/male/neutral"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/male/sad"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/male/shame"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
+                ]
+              }
+            }
+          },
+          "else": false
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "const": "head/faces/male/shock"
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "variant": {
+                "type": "string",
+                "enum": [
+                  "amber",
+                  "black",
+                  "blue",
+                  "bright_green",
+                  "bronze",
+                  "brown",
+                  "dark_green",
+                  "fur_black",
+                  "fur_brown",
+                  "fur_copper",
+                  "fur_gold",
+                  "fur_grey",
+                  "fur_tan",
+                  "fur_white",
+                  "green",
+                  "lavender",
+                  "light",
+                  "olive",
+                  "pale_green",
+                  "taupe",
+                  "zombie",
+                  "zombie_green"
                 ]
               }
             }
@@ -47059,29 +48771,6 @@
                 "type": "string",
                 "enum": [
                   "simple"
-                ]
-              }
-            }
-          },
-          "else": false
-        },
-        {
-          "if": {
-            "properties": {
-              "category": {
-                "const": "weapon/magic/wand//female"
-              }
-            },
-            "required": [
-              "category"
-            ]
-          },
-          "then": {
-            "properties": {
-              "variant": {
-                "type": "string",
-                "enum": [
-                  "wand"
                 ]
               }
             }

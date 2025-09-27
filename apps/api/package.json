@@ -17,8 +17,10 @@
     "@pixelart/intermediary-converter": "workspace:*",
     "@pixelart/log": "workspace:*",
     "@pixelart/pipeline": "workspace:*",
+    "@pixelart/adapters": "workspace:*",
     "@pixelart/schemas": "workspace:*",
     "@pixelart/sprite-compose": "workspace:*",
+    "@pixelart/tileset-compose": "workspace:*",
     "@pixelart/godot-res": "workspace:*",
     "bullmq": "^5.58.5",
     "cors": "^2.8.5",
@@ -32,7 +34,9 @@
     "multer": "^2.0.2",
     "pino": "^9.4.0",
     "pino-http": "^10.5.0",
-    "pino-pretty": "^11.2.2"
+    "pino-pretty": "^11.2.2",
+    "sharp": "^0.33.3"
+
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",

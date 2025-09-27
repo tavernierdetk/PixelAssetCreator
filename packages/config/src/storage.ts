@@ -73,3 +73,38 @@ export async function writeProjectSettings(obj: Record<string, unknown>): Promis
   await fs.writeFile(SETTINGS_FILE, JSON.stringify(obj, null, 2), "utf8");
   return SETTINGS_FILE;
 }
+
+// ───────────────────────── Tileset storage (mirrors character strategy) ─────────────────────────
+import { sep } from "node:path";
+
+export const TILESET_ROOT: string =
+  process.env.TILESET_ROOT ??
+  resolve(process.cwd(), "..", "..", "assets", "tilesets");
+
+export const tilesetDir = (slug: string) => join(TILESET_ROOT, slug);
+
+export async function writeTilesetManifest(slug: string, data: unknown): Promise<string> {
+  const dir = tilesetDir(slug);
+  await ensureDir(dir);
+  const file = join(dir, `tileset_manifest_${slug}.json`);
+  await fs.writeFile(file, JSON.stringify(data, null, 2), "utf8");
+  return file;
+}
+
+export async function listTilesetFiles(slug: string): Promise<string[]> {
+  const root = tilesetDir(slug);
+  const out: string[] = [];
+  async function walk(dir: string, base = ""): Promise<void> {
+    let entries: import("fs").Dirent[] = [];
+    try { entries = await fs.readdir(dir, { withFileTypes: true }); } catch { return; }
+    for (const e of entries) {
+      const rel = base ? `${base}/${e.name}` : e.name;
+      const abs = join(dir, e.name);
+      if (e.isDirectory()) await walk(abs, rel);
+      else if (e.isFile()) out.push(rel);
+    }
+  }
+  await walk(root, "");
+  return out;
+}
+

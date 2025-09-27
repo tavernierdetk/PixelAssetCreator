@@ -49,6 +49,97 @@ export class InvalidIntermediaryPayloadError extends Error {
 
 const DEBUG = (process.env.ASSISTANT_DEBUG ?? "").toLowerCase() === "true";
 
+type CategoryReferenceEntry = {
+  category: string;
+  items: string[];
+  required?: boolean;
+};
+
+const BODY_CATEGORY_FALLBACK: CategoryReferenceEntry = {
+  category: "body",
+  required: true,
+  items: ["body.json", "body_skeleton.json", "body_zombie.json"],
+};
+
+const categoryReferenceRaw: unknown = (schemas as any)?.ulpc?.category_reference ?? null;
+const categoryReference: CategoryReferenceEntry[] = Array.isArray(categoryReferenceRaw)
+  ? (categoryReferenceRaw as CategoryReferenceEntry[])
+      .filter((entry) => entry && typeof entry.category === "string")
+      .map((entry) => ({
+        category: entry.category,
+        items: Array.isArray(entry.items) ? [...entry.items] : [],
+        required: entry.required,
+      }))
+  : [];
+
+if (!categoryReference.some((entry) => entry?.category === "body")) {
+  categoryReference.unshift(BODY_CATEGORY_FALLBACK);
+}
+
+const CATEGORY_ITEMS = new Map<string, Set<string>>();
+for (const entry of categoryReference) {
+  if (!entry?.category || !Array.isArray(entry.items)) continue;
+  CATEGORY_ITEMS.set(entry.category, new Set(entry.items));
+}
+
+const CATEGORY_REFERENCE_PROMPT_BLOCK = JSON.stringify(
+  categoryReference.map((entry) => ({
+    category: entry.category,
+    items: Array.isArray(entry.items) ? entry.items : [],
+  })),
+  null,
+  2
+);
+
+function enforceCategoryReference(ci: CharIntermediary): CharIntermediary {
+  if (!Array.isArray(ci?.categories) || !CATEGORY_ITEMS.size) return ci;
+
+  const sanitizedCategories: CharIntermediary["categories"] = [];
+  const warnings: string[] = [];
+
+  for (const entry of ci.categories) {
+    if (!entry || typeof entry.category !== "string") continue;
+
+    const allowedItems = CATEGORY_ITEMS.get(entry.category);
+    if (!allowedItems) {
+      warnings.push(`unknown_category:${entry.category}`);
+      continue;
+    }
+
+    const filteredItems = Array.isArray(entry.items)
+      ? entry.items.filter((item) => allowedItems.has(item))
+      : [];
+
+    if (!filteredItems.length) {
+      warnings.push(`no_allowed_items:${entry.category}`);
+      if (entry.category === "body") {
+        warnings.push("body_category_has_no_valid_items");
+      }
+      continue;
+    }
+
+    const sanitized = filteredItems.length === entry.items.length
+      ? entry
+      : { ...entry, items: filteredItems };
+
+    sanitizedCategories.push(sanitized);
+  }
+
+  const hasBody = sanitizedCategories.some((entry) => entry.category === "body");
+  if (!hasBody) {
+    const errors: AjvSummary = [
+      { message: "missing_required_category:body", instancePath: "/categories" } as any,
+    ];
+    throw new InvalidIntermediaryPayloadError(errors);
+  }
+
+  if (warnings.length) {
+    console.warn?.("[char_intermediary] category_reference_warnings", { warnings });
+  }
+
+  return { ...ci, categories: sanitizedCategories };
+}
+
 // Small helpers
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -64,8 +155,13 @@ function stripJsonFence(s: string): string {
 function buildPrompt(baseDraft: unknown, userMessage: string, thread?: AssistantThreadMsg[]) {
   const header =
     "Return ONLY a single JSON object that conforms to the enforced Char_Intermediary schema. " +
-    "Use only categories and item filenames from the attached Category Reference. " +
+    "Before replying, re-check that every category exists in the Category Reference and that each listed item belongs to that category. " +
+    "If no valid items are available for a desired category, omit that category entirely. " +
     "No prose or markdown — just the JSON object.\n\n";
+
+  const referenceBlock = CATEGORY_REFERENCE_PROMPT_BLOCK
+    ? `Category Reference (use ONLY these categories and item filenames):\n\`\`\`json\n${CATEGORY_REFERENCE_PROMPT_BLOCK}\n\`\`\`\n\n`
+    : "";
 
   const draftBlock = baseDraft
     ? `Current character-lite JSON (context):\n\`\`\`json\n${JSON.stringify(baseDraft, null, 2)}\n\`\`\`\n\n`
@@ -79,7 +175,7 @@ function buildPrompt(baseDraft: unknown, userMessage: string, thread?: Assistant
   }
 
   const user = `User message:\n${userMessage}\n`;
-  return header + draftBlock + convo + user;
+  return header + referenceBlock + draftBlock + convo + user;
 }
 
 // ────────────────────────────────────────────────────────────────────────────
@@ -156,5 +252,7 @@ export async function runCharIntermediaryTurn(input: IntermediaryTurnInput): Pro
     throw new InvalidIntermediaryPayloadError((v as any).errors ?? []);
   }
 
-  return { data: (v as any).data as CharIntermediary, rawText };
+  const sanitized = enforceCategoryReference((v as any).data as CharIntermediary);
+
+  return { data: sanitized, rawText };
 }

@@ -19,6 +19,10 @@ import { assistantIntermediaryRouter } from "./routes/assistant.intermediary.js"
 import { intermediaryRouter } from "./routes/intermediary.js";
 import { godotRouter } from "./routes/godot.js";
 import { ulpcRouter } from "./routes/ulpc.js";
+import { tilesets } from "./routes/tilesets.js";   // ← add this
+import { tilesetDebug } from "./routes/tilesets.js"; // same file; different export
+
+
 
 
 export function createApp(): Express {
@@ -55,6 +59,7 @@ export function createApp(): Express {
   }
 
 
+app.use(tilesetDebug);
   // App routes
   app.use(intake);
   app.use(jobs);
@@ -65,7 +70,7 @@ export function createApp(): Express {
   app.use(intermediaryRouter);
   app.use(godotRouter);
   app.use(ulpcRouter);
-
+  app.use(tilesets); 
 
 
   // Unified error handler

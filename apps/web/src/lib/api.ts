@@ -1,3 +1,4 @@
+//Users/alexandredube-cote/entropy/pixelart-backbone/apps/web/src/lib/api.ts
 import type { CharacterDefinitionLite, JobInfo } from "@/types";
 
 
@@ -60,6 +61,7 @@ export type UlpcSheetItem = {
   category: string;
   layerPaths: Record<string, string>;
   variants: string[];
+  animations?: string[];
 };
 
 export type UlpcSheetCatalog = {
@@ -92,7 +94,14 @@ export async function getJob(id: string) {
 }
 
 export function fileUrl(slug: string, name: string, bust?: number | string) {
-  const url = `${API}/characters/${encodeURIComponent(slug)}/files/${encodeURIComponent(name)}${
+  const encodePath = (value: string) =>
+    value
+      .split("/")
+      .filter(Boolean)
+      .map((segment) => encodeURIComponent(segment))
+      .join("/");
+  const rel = encodePath(name);
+  const url = `${API}/characters/${encodeURIComponent(slug)}/files/${rel}${
     bust ? `?v=${bust}` : ""
   }`;
   // DEBUG (log only the first time per call site to avoid spam if needed)
@@ -260,11 +269,114 @@ export async function exportGodot(
     writeBattleVisual?: boolean;
   }
 ): Promise<{ ok: true }> {
-  const res = await fetch(`/api/characters/${encodeURIComponent(slug)}/export-godot`, {
+  const res = await fetch(`${API}/characters/${encodeURIComponent(slug)}/export-godot`, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(payload)
   });
   if (!res.ok) throw new Error(await res.text());
   return res.json();
+}
+
+// ───────────── Tileset API (mirrors character assets) ─────────────
+export async function listTilesets(): Promise<{ ok: boolean; slugs: string[] }> {
+  const r = await fetch(`${API}/tilesets`, { cache: "no-store" });
+  if (!r.ok) throw new Error(`listTilesets ${r.status}`);
+  return r.json();
+}
+
+export async function listTilesetAssets(slug: string): Promise<{ ok: boolean; files: string[] }> {
+  const url = `${API}/tilesets/${encodeURIComponent(slug)}/assets?t=${Date.now()}`;
+  const r = await fetch(url, { cache: "no-store" });
+  if (!r.ok) {
+    console.error("[tileset] assets_list_failed", { slug, status: r.status, url });
+    throw new Error(`listTilesetAssets ${slug}: ${r.status}`);
+  }
+  const json = await r.json();
+  console.debug("[tileset] assets_list", { slug, count: Array.isArray(json?.files) ? json.files.length : 0, url });
+  return json;
+}
+
+export function tilesetFileUrl(slug: string, rel: string, bust?: number | string) {
+  const enc = rel.split("/").filter(Boolean).map(encodeURIComponent).join("/");
+  return `${API}/tilesets/${encodeURIComponent(slug)}/files/${enc}${bust ? `?v=${bust}` : ""}`;
+}
+
+
+
+export async function getPatterns() {
+const r = await fetch(`${API}/tileset-patterns`);
+if (!r.ok) throw new Error("patterns_fetch_failed");
+const j = await r.json();
+return j.patterns as Array<{ id: string; displayName: string; tileSize: number; grid: { cols: number; rows: number }; slots: number; docs?: string }>
+}
+
+
+export async function getTilesetMeta(slug: string) {
+const r = await fetch(`${API}/tilesets/${encodeURIComponent(slug)}/meta`);
+if (!r.ok) return null;
+const j = await r.json();
+return j.meta as { schema: string; slug: string; pattern: string; tile_size: number; palette?: string; created_at: string } | null;
+}
+
+
+export async function enqueueTileset(args: { slug: string; pattern: string; material?: string; mode?: "direct"|"mask"; paletteName?: string }) {
+const { slug, ...body } = args;
+const r = await fetch(`${API}/tilesets/${encodeURIComponent(slug)}/enqueue`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) });
+if (!r.ok) throw new Error(`enqueue_failed_${r.status}`);
+return r.json();
+}
+
+export async function generateTile(args: { slug: string; pattern: string; key: string; prompt: string; size?: string; tileName?: string }) {
+  const { slug } = args;
+  const url = `${API}/tilesets/${encodeURIComponent(slug)}/tile/${encodeURIComponent(args.key)}`;
+  const body = {
+    pattern: args.pattern,
+    prompt: args.prompt,
+    size: args.size ?? "1024x1024",
+    // Ensure server gets tileName for slot-specific instructions
+    tileName: args.tileName ?? undefined,
+  } as const;
+  console.debug("[tileset] generateTile →", { url, key: args.key, pattern: args.pattern, hasPrompt: !!args.prompt, tileName: args.tileName });
+  const r = await fetch(url, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  if (!r.ok) {
+    let text = await r.text().catch(() => "");
+    try {
+      const errJson = JSON.parse(text);
+      if (errJson && typeof errJson.error === "string") text = errJson.error;
+    } catch {}
+    console.error("[tileset] generateTile failed", { status: r.status, text, url });
+    throw new Error(`[${r.status}] ${text || 'tile_generate_failed'}`);
+  }
+  const json = await r.json();
+  console.debug("[tileset] generateTile ←", { ok: json?.ok, url: json?.url, sheetUrl: json?.sheetUrl });
+  return json;
+}
+
+
+export async function stitchTileset(args: { slug: string; pattern: string }) {
+const { slug, ...body } = args;
+const r = await fetch(`${API}/tilesets/${encodeURIComponent(slug)}/stitch`, {
+method: "POST",
+headers: { "content-type": "application/json" },
+body: JSON.stringify(body)
+});
+if (!r.ok) throw new Error(`stitch_failed_${r.status}`);
+return r.json();
+}
+
+
+export async function cropTile(args: { slug: string; pattern: string; key: string; x: number; y: number; w: number; h: number }) {
+const { slug, ...body } = args;
+const r = await fetch(`${API}/tilesets/${encodeURIComponent(slug)}/crop`, {
+method: "POST",
+headers: { "content-type": "application/json" },
+body: JSON.stringify(body)
+});
+if (!r.ok) throw new Error(`crop_failed_${r.status}`);
+return r.json();
 }

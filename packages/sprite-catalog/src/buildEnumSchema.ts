@@ -187,6 +187,41 @@ function variantId(v: any): string | null {
   return null;
 }
 
+const HEAD_LEXEMES = ["male", "female", "child"] as const;
+
+function expandCategoryPlaceholders(raw: string): string[] {
+  const results = new Set<string>();
+  const queue: string[] = [raw];
+
+  while (queue.length) {
+    const current = queue.pop() ?? "";
+
+    if (!current) continue;
+
+    if (current.includes("${expression}")) {
+      const removed = current.replace(/\/?\$\{expression\}/g, "");
+      queue.push(removed);
+      // also preserve the original placeholder form for completeness
+      results.add(current.replace(/\/{2,}/g, "/").replace(/\/$/, ""));
+      continue;
+    }
+
+    if (current.includes("${head}")) {
+      for (const head of HEAD_LEXEMES) {
+        queue.push(current.replace(/\$\{head\}/g, head));
+      }
+      // retain placeholder form as well
+      results.add(current.replace(/\/{2,}/g, "/").replace(/\/$/, ""));
+      continue;
+    }
+
+    const cleaned = current.replace(/\/{2,}/g, "/").replace(/\/$/, "");
+    if (cleaned) results.add(cleaned);
+  }
+
+  return Array.from(results);
+}
+
 function extractLayerPaths(def: any): string[] {
   const out = new Set<string>();
   const visit = (node: any) => {
@@ -194,7 +229,11 @@ function extractLayerPaths(def: any): string[] {
     for (const [, v] of Object.entries(node)) {
       if (typeof v === "string") {
         const rel = v.replace(/^\/*/, "").replace(/\/*$/, "");
-        if (rel.includes("/")) out.add(rel);
+        if (rel.includes("/")) {
+          for (const expanded of expandCategoryPlaceholders(rel)) {
+            out.add(expanded);
+          }
+        }
       } else if (v && typeof v === "object") {
         visit(v);
       }
@@ -230,10 +269,15 @@ for (const f of files) {
 
   for (const cat of candidates) {
     let set = byCategory.get(cat);
-    if (!set) byCategory.set(cat, (set = new Set<string>()));
-    for (const v of arr) {
-      const id = variantId(v);
-      if (id) set.add(String(id));
+    const expandedCats = expandCategoryPlaceholders(cat);
+    const targets = expandedCats.length ? expandedCats : [cat];
+    for (const target of targets) {
+      let set = byCategory.get(target);
+      if (!set) byCategory.set(target, (set = new Set<string>()));
+      for (const v of arr) {
+        const id = variantId(v);
+        if (id) set.add(String(id));
+      }
     }
   }
 }

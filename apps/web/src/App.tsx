@@ -1,3 +1,4 @@
+//Users/alexandredube-cote/entropy/pixelart-backbone/apps/web/src/App.tsx
 import { Outlet, Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { API } from "./lib/api";

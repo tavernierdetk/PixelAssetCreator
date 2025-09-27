@@ -11,6 +11,7 @@
   "dependencies": {
     "@pixelart/pipeline": "workspace:*",
     "@pixelart/sprite-compose": "workspace:*",
+    "@pixelart/tileset-compose": "workspace:*",
     "@pixelart/validators": "workspace:*",
     "@pixelart/adapters": "workspace:*",
     "@pixelart/config": "workspace:*",

@@ -1,3 +1,4 @@
+//Users/alexandredube-cote/entropy/pixelart-backbone/apps/workers/src/index.ts
 import "dotenv/config";
 
 // start real workers (each worker registers itself on import)

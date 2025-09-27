@@ -1,0 +1,63 @@
+{
+  "schema": "ulpc.manifest/1.0",
+  "slug": "zephyr",
+  "animations": {
+    "walk": {
+      "frames": 36,
+      "fps": 8,
+      "sheet": "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc/walk/sheet.png",
+      "orientations": [
+        "front",
+        "left",
+        "back",
+        "right"
+      ],
+      "folders": {
+        "Walk_front": [
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_front/zephyr_walk_000.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_front/zephyr_walk_001.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_front/zephyr_walk_002.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_front/zephyr_walk_003.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_front/zephyr_walk_004.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_front/zephyr_walk_005.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_front/zephyr_walk_006.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_front/zephyr_walk_007.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_front/zephyr_walk_008.png"
+        ],
+        "Walk_left": [
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_left/zephyr_walk_009.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_left/zephyr_walk_010.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_left/zephyr_walk_011.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_left/zephyr_walk_012.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_left/zephyr_walk_013.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_left/zephyr_walk_014.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_left/zephyr_walk_015.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_left/zephyr_walk_016.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_left/zephyr_walk_017.png"
+        ],
+        "Walk_back": [
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_back/zephyr_walk_018.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_back/zephyr_walk_019.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_back/zephyr_walk_020.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_back/zephyr_walk_021.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_back/zephyr_walk_022.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_back/zephyr_walk_023.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_back/zephyr_walk_024.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_back/zephyr_walk_025.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_back/zephyr_walk_026.png"
+        ],
+        "Walk_right": [
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_right/zephyr_walk_027.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_right/zephyr_walk_028.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_right/zephyr_walk_029.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_right/zephyr_walk_030.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_right/zephyr_walk_031.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_right/zephyr_walk_032.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_right/zephyr_walk_033.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_right/zephyr_walk_034.png",
+          "/Users/alexandredube-cote/entropy/pixelart-backbone/tmp_test_export/ulpc_frames/Walk_right/zephyr_walk_035.png"
+        ]
+      }
+    }
+  }
+}

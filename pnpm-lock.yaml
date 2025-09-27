@@ -48,6 +48,9 @@ importers:
       '@bull-board/express':
         specifier: ^6.12.7
         version: 6.12.7
+      '@pixelart/adapters':
+        specifier: workspace:*
+        version: link:../../packages/adapters
       '@pixelart/assistants':
         specifier: workspace:*
         version: link:../../packages/assistants
@@ -72,6 +75,9 @@ importers:
       '@pixelart/sprite-compose':
         specifier: workspace:*
         version: link:../../packages/sprite-compose
+      '@pixelart/tileset-compose':
+        specifier: workspace:*
+        version: link:../../packages/tileset-compose
       bullmq:
         specifier: ^5.58.5
         version: 5.58.5
@@ -111,6 +117,9 @@ importers:
       pino-pretty:
         specifier: ^11.2.2
         version: 11.3.0
+      sharp:
+        specifier: ^0.33.3
+        version: 0.33.5
     devDependencies:
       '@types/cors':
         specifier: ^2.8.17
@@ -224,6 +233,9 @@ importers:
       '@pixelart/sprite-compose':
         specifier: workspace:*
         version: link:../../packages/sprite-compose
+      '@pixelart/tileset-compose':
+        specifier: workspace:*
+        version: link:../../packages/tileset-compose
       '@pixelart/validators':
         specifier: workspace:*
         version: link:../../packages/validators
@@ -382,6 +394,25 @@ importers:
         version: 5.0.10
       typescript:
         specifier: ^5.4.0
+        version: 5.9.2
+
+  packages/tileset-compose:
+    dependencies:
+      '@pixelart/adapters':
+        specifier: workspace:*
+        version: link:../adapters
+      '@pixelart/log':
+        specifier: workspace:*
+        version: link:../log
+      sharp:
+        specifier: ^0.33.3
+        version: 0.33.5
+    devDependencies:
+      rimraf:
+        specifier: ^5.0.10
+        version: 5.0.10
+      typescript:
+        specifier: ^5.9.2
         version: 5.9.2
 
   packages/validators:

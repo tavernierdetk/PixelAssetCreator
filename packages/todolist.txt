@@ -1,1 +1,11 @@
 optimize intermediary generator, or remove completely to switch directly to ulpc build
+create color mapping engine
+create animated preview pane
+godot export finalising
+tweak char builder to give more explicit outfit instructions and link to next point
+craft prompts for portrait + intermediary builders, probably by unifying them
+switch front and left breakdown of animation
+make the preview generator zoom in
+finally stop the protrait generator from cropping
+remove the guard preventing from selecting an animation with missing assets
+remove intermediary generation component

@@ -1,3 +1,4 @@
+//Users/alexandredube-cote/entropy/pixelart-backbone/apps/web/src/components/Gallery.tsx
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";

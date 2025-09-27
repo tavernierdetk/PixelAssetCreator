@@ -130,7 +130,7 @@ export default function CharacterDetailPage() {
   const [ulpcBuildDraft, setUlpcBuildDraft] = useState<any>({
     schema: "ulpc.build/1.0",
     generator: { project: "Universal-LPC-Spritesheet-Character-Generator", version: "local" },
-    animations: ["idle"],
+    animations: ["walk"],
     output: { mode: "full" },
     layers: [],
   });

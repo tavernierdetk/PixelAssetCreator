@@ -213,9 +213,20 @@ export async function convertCharIntermediaryToUlpc(
   // Helper: resolve category path for this bodyType (fallback child→teen only)
   function resolveCategoryPath(def: SheetDef): string | null {
     const l1 = def.layer_1 || {};
-    const raw = l1[bodyType] ?? (bodyType === "child" ? l1["teen"] : undefined);
-    if (!raw || typeof raw !== "string") return null;
-    return raw.replace(/\/$/, ""); // strip trailing slash
+    const candidates: string[] = [];
+    if (bodyType) candidates.push(bodyType);
+    if (bodyType === "teen") candidates.push("child");
+    if (bodyType === "child") candidates.push("teen");
+    candidates.push("male");
+    candidates.push("female");
+
+    for (const key of candidates) {
+      const raw = l1[key];
+      if (typeof raw === "string" && raw.trim()) {
+        return raw.replace(/\/$/, "");
+      }
+    }
+    return null;
   }
 
   // Helper: choose variant from preferred colour and def.variants

@@ -7,7 +7,6 @@ import os from "node:os";
 import {
   convertCharIntermediaryToUlpc,
 } from "@pixelart/intermediary-converter";
-import { composeULPC } from "@pixelart/sprite-compose";
 import { ensureDir, charDir, writeIntermediary, writeUlpcBuild } from "@pixelart/config";
 
 // ✅ import the category reference from the package (no brittle paths)
@@ -118,28 +117,6 @@ intermediaryRouter.post(
       let composed: any = null;
       let composeWarnings: any[] = [];
       let composeError: string | null = null;
-      try {
-        console.log("[convert-intermediary] compose_start", { slug, finalOutPath });
-        composed = await composeULPC(okResult.build as any, finalOutPath);
-        if (Array.isArray(composed?.warnings) && composed.warnings.length) {
-          composeWarnings = composed.warnings;
-          for (const warn of composed.warnings) {
-            console.warn("[convert-intermediary] compose_warning", { slug, warning: warn });
-          }
-        }
-        console.log("[convert-intermediary] compose_done", {
-          slug,
-          outPath: composed?.outPath ?? finalOutPath,
-          bytes: composed?.bytes ?? null,
-        });
-      } catch (err: any) {
-        composeError = err?.message ?? "compose_failed";
-        console.error("[convert-intermediary] compose_error", {
-          slug,
-          finalOutPath,
-          error: composeError,
-        });
-      }
 
       return res.json({ ...okResult, composed, composeError, composeWarnings });
     } catch (err: any) {

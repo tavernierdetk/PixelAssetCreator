@@ -1,3 +1,4 @@
+//Users/alexandredube-cote/entropy/pixelart-backbone/apps/api/src/routes/intake.ts
 import { Router, type Request, type Response } from "express";
 import * as schemas from "@pixelart/schemas";
 import { writeLiteDef, readLiteDef } from "@pixelart/config";
@@ -213,11 +214,14 @@ intake.put("/characters/:slug/defs/lite", async (req: Request, res: Response) =>
  * Scan ASSET_ROOT for directories containing char_def_lite_<slug>.json
  * Returns { slugs: string[] }
  */
+const SAFE_SEGMENT = /^[a-z0-9._-]+$/i;
+
 intake.get("/characters/:slug/files/:name", async (req: Request, res: Response) => {
+  // legacy single-level files
   try {
     const { slug, name } = req.params;
     // very small whitelist to avoid path traversal
-    if (!/^[a-z0-9._-]+$/i.test(name)) return res.status(400).end("Bad filename");
+    if (!SAFE_SEGMENT.test(name)) return res.status(400).end("Bad filename");
     const root = assetRoot();
     const filePath = join(root, slug, name);
 
@@ -230,6 +234,33 @@ intake.get("/characters/:slug/files/:name", async (req: Request, res: Response) 
     });
 
     // stream
+    res.sendFile(filePath);
+  } catch (err: any) {
+    const status = err?.status ?? 500;
+    res.status(status).json({ ok: false, error: String(err?.message ?? err) });
+  }
+});
+
+intake.get("/characters/:slug/files/*", async (req: Request, res: Response) => {
+  try {
+    const { slug } = req.params;
+    const relRaw = (req.params[0] ?? "").trim();
+    if (!relRaw) return res.status(400).end("Missing file path");
+
+    const segments = relRaw.split("/").filter(Boolean);
+    if (segments.length === 0) return res.status(400).end("Missing file path");
+    if (!segments.every((seg) => SAFE_SEGMENT.test(seg))) return res.status(400).end("Bad filename");
+
+    const root = assetRoot();
+    const filePath = join(root, slug, ...segments);
+
+    const leaf = segments[segments.length - 1];
+    if (!/\.(png|webp|json)$/i.test(leaf)) return res.status(403).end("Forbidden");
+
+    await fs.access(filePath).catch(() => {
+      throw Object.assign(new Error("Not found"), { status: 404 });
+    });
+
     res.sendFile(filePath);
   } catch (err: any) {
     const status = err?.status ?? 500;
