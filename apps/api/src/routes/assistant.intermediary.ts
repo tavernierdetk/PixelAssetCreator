@@ -1,7 +1,7 @@
 // apps/api/src/routes/assistant.intermediary.ts
 import { Router, type Request, type Response } from "express";
 import { runCharIntermediaryTurn, InvalidIntermediaryPayloadError } from "@pixelart/assistants";
-import { writeIntermediary } from "@pixelart/config";
+import { writeIntermediary, readProjectSettings } from "@pixelart/config";
 
 export const assistantIntermediaryRouter: import("express").Router = Router();
 
@@ -28,13 +28,14 @@ assistantIntermediaryRouter.post("/assistant/char-intermediary", async (req: Req
       return res.status(400).json({ ok: false, code: "SLUG_REQUIRED", message: "slug is required for intermediary generation" });
     }
 
-    const apiKey = process.env.OPENAI_API_KEY;
-    const assistantId = process.env.OPENAI_CHAR_INTERMEDIARY_ASSISTANT_ID;
+    const proj = (await readProjectSettings()) as any;
+    const apiKey = (proj?.llm?.apiKey as string) || process.env.OPENAI_API_KEY;
+    const assistantId = (proj?.llm?.intermediaryAssistantId as string) || process.env.OPENAI_CHAR_INTERMEDIARY_ASSISTANT_ID;
     if (!apiKey || !assistantId) {
       return res.status(400).json({
         ok: false,
         error: "missing_openai_config",
-        detail: "OPENAI_API_KEY and OPENAI_CHAR_INTERMEDIARY_ASSISTANT_ID are required",
+        detail: "Missing OPENAI_API_KEY or intermediary assistant id (settings.llm.intermediaryAssistantId or OPENAI_CHAR_INTERMEDIARY_ASSISTANT_ID)",
       });
     }
 

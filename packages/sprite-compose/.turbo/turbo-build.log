@@ -1,2 +1,8 @@
 
-
+> @pixelart/sprite-compose@0.1.0 prebuild /Users/alexandredube-cote/entropy/pixelart-backbone/packages/sprite-compose
+> rimraf dist tsconfig.tsbuildinfo
+
+
+> @pixelart/sprite-compose@0.1.0 build /Users/alexandredube-cote/entropy/pixelart-backbone/packages/sprite-compose
+> tsc -b
+

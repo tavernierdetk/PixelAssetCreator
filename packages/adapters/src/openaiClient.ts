@@ -3,8 +3,8 @@ import { createLogger } from "@pixelart/log";
 
 const log = createLogger("@adapters/openai");
 
-export function makeOpenAI() {
-  const apiKey = process.env.OPENAI_API_KEY;
+export function makeOpenAI(apiKeyOverride?: string) {
+  const apiKey = apiKeyOverride || process.env.OPENAI_API_KEY;
   if (!apiKey) {
     log.error("OPENAI_API_KEY is missing");
     throw new Error("OPENAI_API_KEY is not set");

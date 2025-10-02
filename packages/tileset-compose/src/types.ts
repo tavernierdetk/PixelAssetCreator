@@ -9,6 +9,21 @@ export type OpenAIImageSize =
 export type TilesetMaterial =
   | "grass" | "dirt" | "stone" | "sand" | "water";
 
+// Vehicle traversal tagging — permissive string tags to avoid over-constraining
+export type VehicleType =
+  | "foot" | "wheels" | "tracked" | "boat" | "amphibious" | "air"
+  | (string & {});
+
+export type MaterialSpec = {
+  name: string;
+  vehicles?: VehicleType[];  // vehicle types that can traverse this material
+};
+
+export type MaterialsAB = {
+  A: MaterialSpec;  // typically Land
+  B: MaterialSpec;  // typically Water
+};
+
 export type Blob47TileSpec = {
   id: number;                  // 1..47 (48 is empty)
   name: string;                // "edge_north", etc.
@@ -27,6 +42,21 @@ export type MaskDictionary = {
   tiles: Blob47TileSpec[];     // same ids, mask-specific prompts
 };
 
+// Coast16 prompt dictionary (AB-stepped variant)
+export type Coast16TileSpec = {
+  id: number;                  // 0..15
+  name: string;                // mask_0000 .. mask_1111
+  prompt: string;              // tile-specific rules
+};
+
+export type Coast16PromptDictionary = {
+  schema: "coast16.prompt/1.0-ab-stepped";
+  pattern: "coast16";
+  global_preamble: string;
+  mask_bits: { order: string[]; meaning: string };
+  tiles: Coast16TileSpec[];    // 16 entries
+};
+
 export type TilesetComposeOptions = {
   outDir: string;                        // output directory for generated tileset
   paletteName?: string;                  // e.g. "roman_steampunk"
@@ -37,6 +67,7 @@ export type TilesetComposeOptions = {
   sheetRows?: number;                    // default 6
   transparentBG?: boolean;               // default true
   quantize?: boolean;                    // default true
+  materialsAB?: MaterialsAB;             // optional A/B materials + vehicles
 };
 
 export type TilesetComposeResult = {
@@ -53,7 +84,7 @@ export type MaskFirstOptions = TilesetComposeOptions & {
 export type TilesetManifest = {
   schema: "tileset.manifest/1.0";
   material: string;
-  engine_order: "blob47";
+  engine_order: "blob47" | "coast16";
   grid: { cols: number; rows: number; tile: number };
   palette: {
     name?: string;
@@ -74,4 +105,5 @@ export type TilesetManifest = {
     file: string;            // relative path to 8×6 sheet
     layout: "row-major";
   };
+  materialsAB?: MaterialsAB;             // if applicable to the pattern (e.g., coast16)
 };

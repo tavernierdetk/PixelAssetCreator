@@ -21,6 +21,10 @@ export default function App() {
           <Link to="/" className="font-semibold tracking-tight">PixelArt Assets</Link>
           <nav className="text-sm text-slate-600 flex gap-3">
             <Link to="/">Home</Link>
+            <Link to="/tilesets">Tilesets</Link>
+            <Link to="/scenes">Scenes</Link>
+            <Link to="/characters/new">New Character</Link>
+            <Link to="/tilesets#create-tileset">New Tileset</Link>
             <Link to="/settings">Settings</Link>
           </nav>
         </div>

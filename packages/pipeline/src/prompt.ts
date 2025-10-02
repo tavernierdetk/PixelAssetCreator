@@ -25,7 +25,7 @@ export function buildPortraitPrompt(def: CharacterLite, settings: ProjectSetting
 
 
 export function buildIdlePrompt(def: CharacterLite, settings: any) {
-  const aesthetic = settings?.image?.aesthetic ?? settings?.aesthetic ?? "16-bit SNES pixel art";
+  const aesthetic = settings?.image?.aesthetic ?? settings?.aesthetic ?? settings?.aesthetics ?? "16-bit SNES pixel art";
   const style = settings?.image?.idleStyle ?? "idle animation frame, full body or 3/4 view, neutral background";
   return [
     "Pixel art idle frame for a game sprite.",

@@ -11,6 +11,8 @@ import CharacterDetailPage from "./pages/CharacterDetailPage";
 import ProjectSettingsPage from "./pages/ProjectSettingsPage";
 import TilesetsPage from "./pages/TilesetsPage";
 import TilesetEditPage from "./pages/TilesetEditPage";
+import ScenesPage from "./pages/ScenesPage";
+import CharacterCreatePage from "./pages/CharacterCreatePage";
 
 const router = createBrowserRouter([
   {
@@ -18,10 +20,12 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { index: true, element: <RootPage /> },
+      { path: "characters/new", element: <CharacterCreatePage /> },
       { path: "characters/:slug", element: <CharacterDetailPage /> },
       { path: "settings", element: <ProjectSettingsPage /> },
       { path: "tilesets", element: <TilesetsPage /> },
       { path: "tilesets/:slug", element: <TilesetEditPage /> }, // ← new edit route
+      { path: "scenes", element: <ScenesPage /> },
     ],
   },
 ]);

@@ -10,7 +10,10 @@
     "test": "turbo run test",
     "format": "turbo run format",
     "dev:infra": "docker compose up -d redis",
-    "smoke": "bash ./scripts/smoke-local.sh"
+    "smoke": "bash ./scripts/smoke-local.sh",
+    "dev:workers": "pnpm -w --filter @app/workers dev",
+    "workers": "pnpm -w --filter @app/workers run dev",
+    "dev:stack": "pnpm -w run dev:infra && turbo run build --filter=@app/api^... --filter=@app/web^... --filter=@app/workers^... && turbo run dev --parallel --filter=@app/api --filter=@app/web --filter=@app/workers"
   },
   "devDependencies": {
     "@types/node": "^20.19.13",

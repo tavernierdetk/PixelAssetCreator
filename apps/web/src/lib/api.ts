@@ -87,10 +87,14 @@ export async function enqueuePortrait(slug: string): Promise<{ jobId: string }> 
 export async function getJob(id: string) {
   const url = `${API}/jobs/${encodeURIComponent(id)}?t=${Date.now()}`;
   const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) {
+    // Treat not found as transient/removed job
+    console.debug("[jobs] get not_found", { id, url });
+    return { id, state: "not_found" } as any;
+  }
   const json = await res.json();
-  // DEBUG
   console.debug("[jobs] get", { id, state: json?.state, url });
-  return json as { id: string; state: string; progress?: number; returnvalue?: unknown };
+  return json as { id: string; state: string; progress?: number; returnvalue?: unknown; failedReason?: string };
 }
 
 export function fileUrl(slug: string, name: string, bust?: number | string) {
@@ -285,6 +289,12 @@ export async function listTilesets(): Promise<{ ok: boolean; slugs: string[] }> 
   return r.json();
 }
 
+export async function deleteTileset(slug: string): Promise<{ ok: boolean; deleted: string }> {
+  const r = await fetch(`${API}/tilesets/${encodeURIComponent(slug)}`, { method: "DELETE" });
+  if (!r.ok) throw new Error(`deleteTileset ${slug}: ${r.status}`);
+  return r.json();
+}
+
 export async function listTilesetAssets(slug: string): Promise<{ ok: boolean; files: string[] }> {
   const url = `${API}/tilesets/${encodeURIComponent(slug)}/assets?t=${Date.now()}`;
   const r = await fetch(url, { cache: "no-store" });
@@ -313,10 +323,22 @@ return j.patterns as Array<{ id: string; displayName: string; tileSize: number; 
 
 
 export async function getTilesetMeta(slug: string) {
-const r = await fetch(`${API}/tilesets/${encodeURIComponent(slug)}/meta`);
-if (!r.ok) return null;
-const j = await r.json();
-return j.meta as { schema: string; slug: string; pattern: string; tile_size: number; palette?: string; created_at: string } | null;
+  const r = await fetch(`${API}/tilesets/${encodeURIComponent(slug)}/meta`);
+  if (!r.ok) return null;
+  const j = await r.json();
+  return j.meta as {
+    schema: string;
+    slug: string;
+    pattern: string;
+    tile_size: number;
+    palette?: string;
+    created_at: string;
+    // v2 fields
+    materials_text?: string;
+    palette_text?: string;
+    interface_text?: string;
+    materials_ab?: { A: { name: string; vehicles?: string[] }; B: { name: string; vehicles?: string[] } };
+  } | null;
 }
 
 
@@ -327,17 +349,20 @@ if (!r.ok) throw new Error(`enqueue_failed_${r.status}`);
 return r.json();
 }
 
-export async function generateTile(args: { slug: string; pattern: string; key: string; prompt: string; size?: string; tileName?: string }) {
+export async function generateTile(args: { slug: string; pattern: string; key: string; prompt: string; size?: string; tileName?: string; fullPrompt?: string }) {
   const { slug } = args;
   const url = `${API}/tilesets/${encodeURIComponent(slug)}/tile/${encodeURIComponent(args.key)}`;
-  const body = {
+  const body: any = {
     pattern: args.pattern,
     prompt: args.prompt,
-    size: args.size ?? "1024x1024",
+    // Only include `size` if caller specifies; else the server uses project defaults
+    ...(args.size ? { size: args.size } : {}),
     // Ensure server gets tileName for slot-specific instructions
-    tileName: args.tileName ?? undefined,
-  } as const;
-  console.debug("[tileset] generateTile →", { url, key: args.key, pattern: args.pattern, hasPrompt: !!args.prompt, tileName: args.tileName });
+    ...(args.tileName ? { tileName: args.tileName } : {}),
+    // If provided, server should use this exact prompt as-is
+    ...(args.fullPrompt ? { fullPrompt: args.fullPrompt } : {}),
+  };
+  console.debug("[tileset] generateTile →", { url, key: args.key, pattern: args.pattern, hasPrompt: !!args.prompt, hasFullPrompt: !!args.fullPrompt, tileName: args.tileName });
   const r = await fetch(url, {
     method: "POST",
     headers: { "content-type": "application/json" },
@@ -379,4 +404,86 @@ body: JSON.stringify(body)
 });
 if (!r.ok) throw new Error(`crop_failed_${r.status}`);
 return r.json();
+}
+
+export async function updateTilesetMeta(slug: string, meta: { pattern?: string; materials_text?: string; palette_text?: string; interface_text?: string; materials_ab?: { A: { name: string; vehicles?: string[] }; B: { name: string; vehicles?: string[] } } }) {
+  const url = `${API}/tilesets/${encodeURIComponent(slug)}/meta`;
+  const r = await fetch(url, {
+    method: "PUT",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(meta),
+  });
+  if (!r.ok) {
+    const text = await r.text().catch(() => "");
+    throw new Error(`updateTilesetMeta ${r.status}: ${text}`);
+  }
+  return r.json() as Promise<{ ok: true; meta: any }>;
+}
+
+export async function exportTilesetGodot(slug: string, opts?: { debug?: boolean }) {
+  const params = opts?.debug ? `?debug=1` : "";
+  const url = `${API}/tilesets/${encodeURIComponent(slug)}/export-godot${params}`;
+  const r = await fetch(url, { method: "POST" });
+  if (!r.ok) {
+    const text = await r.text().catch(() => "");
+    throw new Error(`exportTilesetGodot ${r.status}: ${text}`);
+  }
+  return r.json() as Promise<{ ok: boolean; localDir: string; projectDir?: string | null; atlas: string; tres: string; rulesSource: string }>;
+}
+
+// ───────────── Tileset Textures API ─────────────
+export async function uploadTilesetTexture(slug: string, slot: "A"|"B"|"transition", file: File) {
+  const fd = new FormData();
+  fd.append("file", file);
+  const r = await fetch(`${API}/tilesets/${encodeURIComponent(slug)}/textures/upload?slot=${encodeURIComponent(slot)}`, {
+    method: "POST",
+    body: fd,
+  });
+  if (!r.ok) throw new Error(`uploadTilesetTexture ${r.status}`);
+  return r.json() as Promise<{ ok: boolean; file: string }>;
+}
+
+export async function deleteTilesetTexture(slug: string, slot: "A"|"B"|"transition") {
+  const r = await fetch(`${API}/tilesets/${encodeURIComponent(slug)}/textures?slot=${encodeURIComponent(slot)}`, { method: "DELETE" });
+  if (!r.ok) throw new Error(`deleteTilesetTexture ${r.status}`);
+  return r.json() as Promise<{ ok: boolean; deleted: string }>;
+}
+
+export async function generateTilesetTexture(slug: string, slot: "A"|"B"|"transition") {
+  const r = await fetch(`${API}/tilesets/${encodeURIComponent(slug)}/textures/generate?slot=${encodeURIComponent(slot)}`, { method: "POST" });
+  if (!r.ok) throw new Error(`generateTilesetTexture ${r.status}`);
+  return r.json() as Promise<{ ok: boolean; file: string }>;
+}
+
+export async function generateProceduralTileset(slug: string, settings: { tileSize?: number; bandWidth?: number; cornerStyle?: "stepped"|"quarter"|"square"; transitionMode?: "texture"; textureScale?: number; lineStyle?: "straight_line"|"wavy_smooth"|"craggy"|"zigzag" }) {
+  const r = await fetch(`${API}/tilesets/${encodeURIComponent(slug)}/procedural/generate`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(settings || {}),
+  });
+  if (!r.ok) throw new Error(`procedural_generate ${r.status}`);
+  return r.json() as Promise<{ ok: boolean; jobId: string }>;
+}
+
+// ───────────── Scene Assets API ─────────────
+export async function generateSceneAsset(args: { name?: string; category?: string; description: string; size?: string }) {
+  const r = await fetch(`${API}/scene-assets/generate`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(args),
+  });
+  if (!r.ok) throw new Error(`scene_generate_failed_${r.status}`);
+  return r.json() as Promise<{ ok: boolean; file: string; url: string }>;
+}
+
+export async function listSceneAssets(category?: string) {
+  const url = `${API}/scene-assets/list${category ? `?category=${encodeURIComponent(category)}` : ""}`;
+  const r = await fetch(url, { cache: "no-store" });
+  if (!r.ok) throw new Error(`scene_list_failed_${r.status}`);
+  return r.json() as Promise<{ ok: boolean; files: string[] }>;
+}
+
+export function sceneAssetUrl(rel: string, bust?: number | string) {
+  const enc = rel.split("/").filter(Boolean).map(encodeURIComponent).join("/");
+  return `${API}/scene-assets/files/${enc}${bust ? `?v=${bust}` : ""}`;
 }

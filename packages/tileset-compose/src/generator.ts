@@ -3,7 +3,7 @@ import fs from "node:fs/promises";
 import sharp from "sharp";
 import { createLogger } from "@pixelart/log";
 import { generatePortraitOpenAI } from "@pixelart/adapters"; // generic image generate
-import { loadPromptDictionary, loadMaskDictionary } from "./promptLoader.js";
+import { loadPromptDictionary, loadMaskDictionary, loadCoast16PromptDictionary } from "./promptLoader.js";
 import { quantizeToPalette } from "./quantize.js";
 import { writeManifest, promptHash } from "./manifest.js";
 import type {
@@ -206,5 +206,92 @@ export async function generateBlob47MaskFirst(params: {
     sheet: { file: path.basename(sheetPath), layout: "row-major" }
   });
 
+  return { sheetPath, tilePaths: tileOut, manifestPath };
+}
+
+// ──────────────────────────────────────────────────────────────────────────────
+// Coast16 (Wang corner mask, 16 tiles) — AB stepped coastline
+// ──────────────────────────────────────────────────────────────────────────────
+export async function generateCoast16Tileset(params: {
+  dictPath: string;
+  options: TilesetComposeOptions;
+}): Promise<TilesetComposeResult> {
+  const { dictPath, options } = params;
+  const dict = await loadCoast16PromptDictionary(dictPath);
+  const palette = resolvePalette(options);
+
+  const outDir = options.outDir;
+  const size = options.size ?? "1024x1024";
+  const tile = options.tileSize ?? 32;
+  const COLS = options.sheetCols ?? 4;
+  const ROWS = options.sheetRows ?? 4;
+  const transparentBG = options.transparentBG !== false;
+  const quant = options.quantize !== false;
+
+  await ensureDir(outDir);
+  const rawDir = path.join(outDir, "raw");
+  const tilesDir = path.join(outDir, "tiles_32");
+  await ensureDir(rawDir);
+  await ensureDir(tilesDir);
+
+  const global = dict.global_preamble.trim();
+  const ab = options.materialsAB;
+  const abLine = ab ? `[MATERIALS] A=${ab.A.name}; B=${ab.B.name}.` : "";
+  const travLine = ab ? `[TRAVERSAL] ${ab.A.name}: ${(ab.A.vehicles ?? []).join(", ") || "none"}; ${ab.B.name}: ${(ab.B.vehicles ?? []).join(", ") || "none"}.` : "";
+
+  // 1) generate 16 images (per-tile)
+  const tileOut: string[] = [];
+  for (const spec of dict.tiles.slice(0, 16)) {
+    const prompt = [global, abLine, travLine, spec.prompt, `Canvas must be exactly ${size}.`]
+      .filter(Boolean)
+      .join("\n");
+    const buf = await generatePortraitOpenAI({ prompt, size, background: transparentBG ? "transparent" : undefined });
+    const rawPath = path.join(rawDir, `${spec.id}_${spec.name}.png`);
+    await fs.writeFile(rawPath, buf);
+
+    let processed = buf;
+    if (quant) processed = await quantizeToPalette(processed, palette);
+    processed = await downscaleNearest(processed, tile, tile);
+    const tilePath = path.join(tilesDir, `${spec.id}_${spec.name}_32.png`);
+    await fs.writeFile(tilePath, processed);
+    tileOut.push(tilePath);
+    log.info({ id: spec.id, name: spec.name, bytes: processed.length }, "coast16.tile.done");
+  }
+
+  // 2) stitch 4×4 sheet
+  const sheetW = COLS * tile, sheetH = ROWS * tile;
+  const composites: sharp.OverlayOptions[] = [];
+  for (let i = 0; i < 16; i++) {
+    const row = Math.floor(i / COLS), col = i % COLS;
+    composites.push({ input: tileOut[i], left: col * tile, top: row * tile });
+  }
+  const sheetPath = path.join(outDir, `coast16_${tile}.png`);
+  await sharp({ create: { width: sheetW, height: sheetH, channels: 4, background: { r:0,g:0,b:0,alpha:0 } } })
+    .composite(composites)
+    .png()
+    .toFile(sheetPath);
+
+  // 3) manifest
+  const tilesForManifest = dict.tiles.slice(0, 16).map((t, idx) => ({
+    id: t.id,
+    name: t.name,
+    file: path.relative(outDir, tileOut[idx]).replaceAll("\\", "/"),
+    promptHash: promptHash(`${global}\n${abLine}\n${travLine}\n${t.prompt}`)
+  }));
+
+  const manifest: TilesetManifest = {
+    schema: "tileset.manifest/1.0",
+    material: ab ? `${ab.A.name}+${ab.B.name}` : "coast16",
+    engine_order: "coast16",
+    grid: { cols: COLS, rows: ROWS, tile },
+    palette: { name: options.paletteName, rgb: palette },
+    openai: { model: "gpt-image-1", size, transparent: transparentBG },
+    tiles: tilesForManifest,
+    sheet: { file: path.basename(sheetPath), layout: "row-major" },
+    materialsAB: ab,
+  };
+
+  const manifestPath = path.join(outDir, `coast16_manifest.json`);
+  await writeManifest(manifestPath, manifest);
   return { sheetPath, tilePaths: tileOut, manifestPath };
 }

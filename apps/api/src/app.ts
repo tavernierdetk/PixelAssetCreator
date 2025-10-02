@@ -21,6 +21,7 @@ import { godotRouter } from "./routes/godot.js";
 import { ulpcRouter } from "./routes/ulpc.js";
 import { tilesets } from "./routes/tilesets.js";   // ← add this
 import { tilesetDebug } from "./routes/tilesets.js"; // same file; different export
+import { scenes } from "./routes/scenes.js";
 
 
 
@@ -71,6 +72,7 @@ app.use(tilesetDebug);
   app.use(godotRouter);
   app.use(ulpcRouter);
   app.use(tilesets); 
+  app.use(scenes);
 
 
   // Unified error handler

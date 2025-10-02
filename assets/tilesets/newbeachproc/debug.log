@@ -1,0 +1,1535 @@
+2025-10-01T19:45:03.287Z enqueue pattern=coast16 mode=direct palette=roman_steampunk job=29
+2025-10-01T19:45:03.291Z worker_start pattern=coast16 mode=direct
+2025-10-01T19:45:03.867Z worker_failed job=29 error=401 Incorrect API key provided: sk-proj-********************************************************************************************************************************************************Ax8A. You can find your API key at https://platform.openai.com/account/api-keys.
+2025-10-01T19:45:27.368Z worker_start pattern=coast16 mode=procedural
+2025-10-01T19:45:27.371Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1}
+2025-10-01T19:45:27.464Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T19:45:27.465Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T19:45:27.466Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T19:45:27.466Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T19:45:27.467Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T19:45:27.468Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T19:45:27.468Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T19:45:27.469Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T19:45:27.470Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T19:45:27.470Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T19:45:27.471Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T19:45:27.471Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T19:45:27.472Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T19:45:27.473Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T19:45:27.474Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T19:45:27.474Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T19:45:27.475Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T19:45:27.486Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T20:39:04.286Z worker_start pattern=coast16 mode=procedural
+2025-10-01T20:39:04.290Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1}
+2025-10-01T20:39:04.390Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T20:39:04.392Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T20:39:04.393Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T20:39:04.393Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T20:39:04.394Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T20:39:04.394Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T20:39:04.395Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T20:39:04.395Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T20:39:04.396Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T20:39:04.396Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T20:39:04.397Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T20:39:04.398Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T20:39:04.398Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T20:39:04.398Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T20:39:04.399Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T20:39:04.399Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T20:39:04.400Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T20:39:04.412Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T20:43:09.563Z worker_start pattern=coast16 mode=procedural
+2025-10-01T20:43:09.566Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"square","transitionMode":"texture","textureScale":1}
+2025-10-01T20:43:09.671Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T20:43:09.673Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T20:43:09.674Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T20:43:09.675Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T20:43:09.675Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T20:43:09.676Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T20:43:09.677Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T20:43:09.680Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T20:43:09.682Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T20:43:09.687Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T20:43:09.688Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T20:43:09.688Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T20:43:09.689Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T20:43:09.690Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T20:43:09.690Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T20:43:09.691Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T20:43:09.692Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T20:43:09.704Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T20:43:13.063Z worker_start pattern=coast16 mode=procedural
+2025-10-01T20:43:13.064Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"quarter","transitionMode":"texture","textureScale":1}
+2025-10-01T20:43:13.155Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T20:43:13.156Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T20:43:13.157Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T20:43:13.158Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T20:43:13.158Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T20:43:13.160Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T20:43:13.163Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T20:43:13.165Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T20:43:13.166Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T20:43:13.166Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T20:43:13.167Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T20:43:13.167Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T20:43:13.168Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T20:43:13.169Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T20:43:13.170Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T20:43:13.171Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T20:43:13.172Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T20:43:13.183Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T20:44:07.852Z worker_start pattern=coast16 mode=procedural
+2025-10-01T20:44:07.855Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T20:44:07.945Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T20:44:07.949Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T20:44:07.950Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T20:44:07.950Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T20:44:07.953Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T20:44:07.954Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T20:44:07.955Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T20:44:07.960Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T20:44:07.967Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T20:44:07.970Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T20:44:07.972Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T20:44:07.977Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T20:44:07.979Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T20:44:07.979Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T20:44:07.980Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T20:44:07.981Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T20:44:07.982Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T20:44:07.996Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T20:48:02.026Z worker_start pattern=coast16 mode=procedural
+2025-10-01T20:48:02.028Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T20:48:02.120Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T20:48:02.123Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T20:48:02.125Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T20:48:02.128Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T20:48:02.136Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T20:48:02.139Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T20:48:02.144Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T20:48:02.145Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T20:48:02.146Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T20:48:02.147Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T20:48:02.147Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T20:48:02.148Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T20:48:02.149Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T20:48:02.149Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T20:48:02.150Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T20:48:02.151Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T20:48:02.152Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T20:48:02.165Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T20:49:35.312Z worker_start pattern=coast16 mode=procedural
+2025-10-01T20:49:35.317Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T20:49:35.440Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T20:49:35.443Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T20:49:35.444Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T20:49:35.445Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T20:49:35.446Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T20:49:35.447Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T20:49:35.448Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T20:49:35.450Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T20:49:35.451Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T20:49:35.452Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T20:49:35.453Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T20:49:35.454Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T20:49:35.455Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T20:49:35.456Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T20:49:35.457Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T20:49:35.458Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T20:49:35.459Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T20:49:35.469Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T20:49:59.510Z worker_start pattern=coast16 mode=procedural
+2025-10-01T20:49:59.511Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"wavy_smooth"}
+2025-10-01T20:49:59.604Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T20:49:59.606Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T20:49:59.607Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T20:49:59.609Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T20:49:59.612Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T20:49:59.614Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T20:49:59.615Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T20:49:59.616Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T20:49:59.617Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T20:49:59.618Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T20:49:59.619Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T20:49:59.620Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T20:49:59.621Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T20:49:59.622Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T20:49:59.622Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T20:49:59.623Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T20:49:59.624Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T20:49:59.629Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T20:50:08.183Z worker_start pattern=coast16 mode=procedural
+2025-10-01T20:50:08.184Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"craggy"}
+2025-10-01T20:50:08.275Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T20:50:08.276Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T20:50:08.277Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T20:50:08.280Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T20:50:08.282Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T20:50:08.284Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T20:50:08.285Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T20:50:08.286Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T20:50:08.287Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T20:50:08.288Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T20:50:08.289Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T20:50:08.290Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T20:50:08.291Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T20:50:08.292Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T20:50:08.293Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T20:50:08.294Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T20:50:08.295Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T20:50:08.299Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T20:50:11.773Z worker_start pattern=coast16 mode=procedural
+2025-10-01T20:50:11.774Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T20:50:11.866Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T20:50:11.866Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T20:50:11.867Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T20:50:11.868Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T20:50:11.868Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T20:50:11.869Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T20:50:11.870Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T20:50:11.871Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T20:50:11.874Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T20:50:11.875Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T20:50:11.875Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T20:50:11.876Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T20:50:11.876Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T20:50:11.877Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T20:50:11.877Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T20:50:11.878Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T20:50:11.878Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T20:50:11.882Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T20:50:17.324Z worker_start pattern=coast16 mode=procedural
+2025-10-01T20:50:17.325Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T20:50:17.417Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T20:50:17.418Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T20:50:17.419Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T20:50:17.420Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T20:50:17.421Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T20:50:17.421Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T20:50:17.423Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T20:50:17.425Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T20:50:17.427Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T20:50:17.427Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T20:50:17.428Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T20:50:17.428Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T20:50:17.429Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T20:50:17.430Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T20:50:17.430Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T20:50:17.431Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T20:50:17.431Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T20:50:17.436Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T21:05:08.134Z worker_start pattern=coast16 mode=procedural
+2025-10-01T21:05:08.136Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"quarter","transitionMode":"texture","textureScale":1,"lineStyle":"craggy"}
+2025-10-01T21:05:08.238Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T21:05:08.240Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:05:08.241Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:05:08.243Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T21:05:08.245Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:05:08.248Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T21:05:08.252Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T21:05:08.253Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T21:05:08.255Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T21:05:08.256Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T21:05:08.257Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T21:05:08.258Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T21:05:08.259Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T21:05:08.260Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T21:05:08.261Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T21:05:08.262Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T21:05:08.264Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T21:05:08.268Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T21:05:11.547Z worker_start pattern=coast16 mode=procedural
+2025-10-01T21:05:11.548Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"quarter","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T21:05:11.646Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T21:05:11.647Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:05:11.649Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:05:11.654Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T21:05:11.655Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:05:11.655Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T21:05:11.656Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T21:05:11.656Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T21:05:11.657Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T21:05:11.658Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T21:05:11.658Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T21:05:11.659Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T21:05:11.660Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T21:05:11.660Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T21:05:11.661Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T21:05:11.662Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T21:05:11.662Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T21:05:11.666Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T21:06:49.619Z worker_start pattern=coast16 mode=procedural
+2025-10-01T21:06:49.621Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"square","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T21:06:49.715Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T21:06:49.717Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:06:49.717Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:06:49.718Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T21:06:49.721Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:06:49.722Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T21:06:49.726Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T21:06:49.727Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T21:06:49.727Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T21:06:49.728Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T21:06:49.729Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T21:06:49.730Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T21:06:49.731Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T21:06:49.732Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T21:06:49.732Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T21:06:49.733Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T21:06:49.733Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T21:06:49.737Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T21:06:53.431Z worker_start pattern=coast16 mode=procedural
+2025-10-01T21:06:53.432Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T21:06:53.524Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T21:06:53.525Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:06:53.526Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:06:53.528Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T21:06:53.531Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:06:53.532Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T21:06:53.533Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T21:06:53.534Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T21:06:53.535Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T21:06:53.535Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T21:06:53.536Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T21:06:53.536Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T21:06:53.537Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T21:06:53.538Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T21:06:53.538Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T21:06:53.539Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T21:06:53.539Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T21:06:53.543Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T21:07:05.463Z worker_start pattern=coast16 mode=procedural
+2025-10-01T21:07:05.464Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":2,"cornerStyle":"square","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T21:07:05.556Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T21:07:05.558Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:07:05.561Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:07:05.563Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T21:07:05.565Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:07:05.572Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T21:07:05.573Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T21:07:05.574Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T21:07:05.576Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T21:07:05.577Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T21:07:05.578Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T21:07:05.580Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T21:07:05.581Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T21:07:05.582Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T21:07:05.583Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T21:07:05.584Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T21:07:05.584Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T21:07:05.590Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T21:07:15.674Z worker_start pattern=coast16 mode=procedural
+2025-10-01T21:07:15.677Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":2,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T21:07:15.756Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T21:07:15.758Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:07:15.759Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:07:15.761Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T21:07:15.763Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:07:15.765Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T21:07:15.776Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T21:07:15.777Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T21:07:15.779Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T21:07:15.779Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T21:07:15.780Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T21:07:15.781Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T21:07:15.781Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T21:07:15.782Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T21:07:15.783Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T21:07:15.783Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T21:07:15.784Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T21:07:15.788Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T21:07:38.597Z worker_start pattern=coast16 mode=procedural
+2025-10-01T21:07:38.598Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T21:07:38.689Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T21:07:38.690Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:07:38.690Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:07:38.691Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T21:07:38.693Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:07:38.694Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T21:07:38.698Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T21:07:38.698Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T21:07:38.699Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T21:07:38.700Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T21:07:38.701Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T21:07:38.701Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T21:07:38.702Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T21:07:38.703Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T21:07:38.704Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T21:07:38.704Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T21:07:38.705Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T21:07:38.709Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T21:08:24.824Z worker_start pattern=coast16 mode=procedural
+2025-10-01T21:08:24.826Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"wavy_smooth"}
+2025-10-01T21:08:24.912Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T21:08:24.916Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:08:24.918Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:08:24.919Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T21:08:24.921Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:08:24.923Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T21:08:24.924Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T21:08:24.925Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T21:08:24.927Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T21:08:24.928Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T21:08:24.929Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T21:08:24.931Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T21:08:24.932Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T21:08:24.933Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T21:08:24.935Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T21:08:24.936Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T21:08:24.937Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T21:08:24.942Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T21:13:39.452Z worker_start pattern=coast16 mode=procedural
+2025-10-01T21:13:39.454Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"square","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T21:13:39.546Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T21:13:39.548Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:13:39.551Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:13:39.553Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T21:13:39.555Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:13:39.556Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T21:13:39.556Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T21:13:39.557Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T21:13:39.557Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T21:13:39.558Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T21:13:39.559Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T21:13:39.559Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T21:13:39.560Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T21:13:39.561Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T21:13:39.561Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T21:13:39.562Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T21:13:39.563Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T21:13:39.570Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T21:15:59.187Z worker_start pattern=coast16 mode=procedural
+2025-10-01T21:15:59.189Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"quarter","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T21:15:59.280Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T21:15:59.281Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:15:59.281Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:15:59.282Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T21:15:59.285Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:15:59.289Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T21:15:59.290Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T21:15:59.290Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T21:15:59.291Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T21:15:59.292Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T21:15:59.292Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T21:15:59.293Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T21:15:59.294Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T21:15:59.295Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T21:15:59.295Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T21:15:59.296Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T21:15:59.297Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T21:15:59.302Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T21:16:02.277Z worker_start pattern=coast16 mode=procedural
+2025-10-01T21:16:02.278Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T21:16:02.371Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T21:16:02.372Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:16:02.374Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:16:02.377Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T21:16:02.378Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:16:02.379Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T21:16:02.379Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T21:16:02.380Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T21:16:02.380Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T21:16:02.381Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T21:16:02.381Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T21:16:02.382Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T21:16:02.382Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T21:16:02.383Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T21:16:02.383Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T21:16:02.384Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T21:16:02.384Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T21:16:02.388Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T21:16:02.946Z worker_start pattern=coast16 mode=procedural
+2025-10-01T21:16:02.947Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T21:16:03.038Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T21:16:03.038Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:16:03.039Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:16:03.040Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T21:16:03.042Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:16:03.045Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T21:16:03.045Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T21:16:03.046Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T21:16:03.047Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T21:16:03.047Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T21:16:03.048Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T21:16:03.049Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T21:16:03.050Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T21:16:03.051Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T21:16:03.051Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T21:16:03.052Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T21:16:03.052Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T21:16:03.057Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T21:16:10.761Z worker_start pattern=coast16 mode=procedural
+2025-10-01T21:16:10.762Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"quarter","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T21:16:10.853Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T21:16:10.854Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:16:10.856Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:16:10.859Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T21:16:10.860Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:16:10.861Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T21:16:10.861Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T21:16:10.862Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T21:16:10.863Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T21:16:10.863Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T21:16:10.864Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T21:16:10.865Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T21:16:10.865Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T21:16:10.866Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T21:16:10.867Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T21:16:10.867Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T21:16:10.868Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T21:16:10.872Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T21:21:56.743Z worker_start pattern=coast16 mode=procedural
+2025-10-01T21:21:56.744Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T21:21:56.857Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T21:21:56.858Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:21:56.859Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:21:56.861Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T21:21:56.864Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:21:56.868Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T21:21:56.869Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T21:21:56.870Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T21:21:56.870Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T21:21:56.871Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T21:21:56.872Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T21:21:56.873Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T21:21:56.873Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T21:21:56.875Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T21:21:56.875Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T21:21:56.876Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T21:21:56.877Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T21:21:56.883Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T21:22:05.161Z worker_start pattern=coast16 mode=procedural
+2025-10-01T21:22:05.162Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"quarter","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T21:22:05.225Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T21:22:05.226Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:22:05.228Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:22:05.230Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T21:22:05.233Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:22:05.235Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T21:22:05.235Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T21:22:05.236Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T21:22:05.237Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T21:22:05.237Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T21:22:05.238Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T21:22:05.238Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T21:22:05.239Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T21:22:05.240Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T21:22:05.240Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T21:22:05.241Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T21:22:05.241Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T21:22:05.246Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T21:25:00.246Z worker_start pattern=coast16 mode=procedural
+2025-10-01T21:25:00.248Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T21:25:00.335Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T21:25:00.339Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:25:00.342Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:25:00.344Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T21:25:00.347Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:25:00.349Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T21:25:00.353Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T21:25:00.354Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T21:25:00.354Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T21:25:00.355Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T21:25:00.356Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T21:25:00.356Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T21:25:00.357Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T21:25:00.358Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T21:25:00.358Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T21:25:00.359Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T21:25:00.360Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T21:25:00.364Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T21:25:11.359Z worker_start pattern=coast16 mode=procedural
+2025-10-01T21:25:11.360Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T21:25:11.452Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T21:25:11.453Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:25:11.456Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:25:11.460Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T21:25:11.461Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:25:11.461Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T21:25:11.462Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T21:25:11.463Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T21:25:11.463Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T21:25:11.464Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T21:25:11.465Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T21:25:11.466Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T21:25:11.466Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T21:25:11.467Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T21:25:11.467Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T21:25:11.468Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T21:25:11.468Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T21:25:11.474Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T21:25:15.286Z worker_start pattern=coast16 mode=procedural
+2025-10-01T21:25:15.288Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"quarter","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T21:25:15.380Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T21:25:15.381Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:25:15.382Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:25:15.384Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T21:25:15.387Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:25:15.388Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T21:25:15.389Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T21:25:15.390Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T21:25:15.390Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T21:25:15.391Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T21:25:15.392Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T21:25:15.392Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T21:25:15.393Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T21:25:15.394Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T21:25:15.395Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T21:25:15.395Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T21:25:15.396Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T21:25:15.400Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T21:25:19.152Z worker_start pattern=coast16 mode=procedural
+2025-10-01T21:25:19.154Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"square","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T21:25:19.246Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T21:25:19.247Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:25:19.247Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:25:19.248Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T21:25:19.248Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:25:19.249Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T21:25:19.249Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T21:25:19.251Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T21:25:19.254Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T21:25:19.255Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T21:25:19.256Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T21:25:19.257Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T21:25:19.257Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T21:25:19.258Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T21:25:19.258Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T21:25:19.259Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T21:25:19.259Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T21:25:19.263Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T21:25:19.887Z worker_start pattern=coast16 mode=procedural
+2025-10-01T21:25:19.889Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"square","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T21:25:19.981Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T21:25:19.982Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:25:19.983Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:25:19.985Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T21:25:19.987Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T21:25:19.988Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T21:25:19.989Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T21:25:19.990Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T21:25:19.990Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T21:25:19.991Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T21:25:19.991Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T21:25:19.992Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T21:25:19.993Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T21:25:19.993Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T21:25:19.994Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T21:25:19.995Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T21:25:19.995Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T21:25:19.999Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T22:34:01.759Z worker_start pattern=coast16 mode=procedural
+2025-10-01T22:34:01.762Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T22:34:01.858Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T22:34:01.860Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:34:01.861Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:34:01.862Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T22:34:01.864Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:34:01.866Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T22:34:01.870Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T22:34:01.870Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T22:34:01.871Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T22:34:01.872Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T22:34:01.873Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T22:34:01.874Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T22:34:01.874Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T22:34:01.875Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T22:34:01.876Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T22:34:01.876Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T22:34:01.877Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T22:34:01.882Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T22:34:25.735Z worker_start pattern=coast16 mode=procedural
+2025-10-01T22:34:25.736Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"quarter","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T22:34:25.834Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T22:34:25.835Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:34:25.836Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:34:25.837Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T22:34:25.837Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:34:25.840Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T22:34:25.842Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T22:34:25.843Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T22:34:25.844Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T22:34:25.844Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T22:34:25.845Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T22:34:25.846Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T22:34:25.846Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T22:34:25.847Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T22:34:25.848Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T22:34:25.848Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T22:34:25.849Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T22:34:25.853Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T22:34:27.117Z worker_start pattern=coast16 mode=procedural
+2025-10-01T22:34:27.119Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"quarter","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T22:34:27.210Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T22:34:27.212Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:34:27.215Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:34:27.216Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T22:34:27.217Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:34:27.217Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T22:34:27.218Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T22:34:27.218Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T22:34:27.219Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T22:34:27.219Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T22:34:27.220Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T22:34:27.220Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T22:34:27.221Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T22:34:27.221Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T22:34:27.222Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T22:34:27.222Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T22:34:27.223Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T22:34:27.229Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T22:34:27.678Z worker_start pattern=coast16 mode=procedural
+2025-10-01T22:34:27.679Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"quarter","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T22:34:27.742Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T22:34:27.743Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:34:27.744Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:34:27.747Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T22:34:27.750Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:34:27.751Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T22:34:27.752Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T22:34:27.753Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T22:34:27.753Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T22:34:27.754Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T22:34:27.754Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T22:34:27.755Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T22:34:27.756Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T22:34:27.757Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T22:34:27.757Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T22:34:27.758Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T22:34:27.758Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T22:34:27.763Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T22:34:28.096Z worker_start pattern=coast16 mode=procedural
+2025-10-01T22:34:28.097Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"quarter","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T22:34:28.188Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T22:34:28.189Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:34:28.190Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:34:28.191Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T22:34:28.192Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:34:28.195Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T22:34:28.197Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T22:34:28.197Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T22:34:28.198Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T22:34:28.198Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T22:34:28.199Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T22:34:28.200Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T22:34:28.200Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T22:34:28.201Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T22:34:28.202Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T22:34:28.202Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T22:34:28.203Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T22:34:28.207Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T22:34:28.530Z worker_start pattern=coast16 mode=procedural
+2025-10-01T22:34:28.531Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"quarter","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T22:34:28.612Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T22:34:28.613Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:34:28.615Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:34:28.617Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T22:34:28.618Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:34:28.619Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T22:34:28.619Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T22:34:28.620Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T22:34:28.621Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T22:34:28.621Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T22:34:28.622Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T22:34:28.622Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T22:34:28.623Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T22:34:28.624Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T22:34:28.625Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T22:34:28.626Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T22:34:28.626Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T22:34:28.630Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T22:34:53.815Z worker_start pattern=coast16 mode=procedural
+2025-10-01T22:34:53.816Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"square","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T22:34:53.908Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T22:34:53.909Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:34:53.910Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:34:53.912Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T22:34:53.915Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:34:53.916Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T22:34:53.916Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T22:34:53.917Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T22:34:53.917Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T22:34:53.917Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T22:34:53.918Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T22:34:53.919Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T22:34:53.920Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T22:34:53.920Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T22:34:53.921Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T22:34:53.921Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T22:34:53.922Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T22:34:53.925Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T22:39:40.741Z worker_start pattern=coast16 mode=procedural
+2025-10-01T22:39:40.743Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"square","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T22:39:40.825Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T22:39:40.829Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:39:40.832Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:39:40.833Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T22:39:40.834Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:39:40.834Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:39:40.835Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T22:39:40.835Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:39:40.836Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T22:39:40.836Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:39:40.837Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T22:39:40.837Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:39:40.838Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T22:39:40.839Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T22:39:40.839Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T22:39:40.840Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T22:39:40.841Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T22:39:40.841Z base_pts id=12 name=mask_1100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:39:40.841Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T22:39:40.841Z base_pts id=13 name=mask_1101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:39:40.842Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T22:39:40.842Z base_pts id=14 name=mask_1110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:39:40.843Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T22:39:40.843Z base_pts id=15 name=mask_1111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:39:40.843Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T22:39:40.848Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T22:39:41.496Z worker_start pattern=coast16 mode=procedural
+2025-10-01T22:39:41.498Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"square","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T22:39:41.598Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T22:39:41.599Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:39:41.605Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:39:41.607Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T22:39:41.609Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:39:41.610Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:39:41.612Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T22:39:41.612Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:39:41.613Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T22:39:41.614Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:39:41.614Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T22:39:41.614Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:39:41.615Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T22:39:41.616Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T22:39:41.616Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T22:39:41.617Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T22:39:41.617Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T22:39:41.617Z base_pts id=12 name=mask_1100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:39:41.618Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T22:39:41.618Z base_pts id=13 name=mask_1101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:39:41.619Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T22:39:41.619Z base_pts id=14 name=mask_1110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:39:41.619Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T22:39:41.619Z base_pts id=15 name=mask_1111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:39:41.620Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T22:39:41.624Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T22:39:42.009Z worker_start pattern=coast16 mode=procedural
+2025-10-01T22:39:42.010Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"square","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T22:39:42.100Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T22:39:42.101Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:39:42.102Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:39:42.103Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T22:39:42.106Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:39:42.106Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:39:42.107Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T22:39:42.107Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:39:42.107Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T22:39:42.107Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:39:42.108Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T22:39:42.108Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:39:42.109Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T22:39:42.110Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T22:39:42.110Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T22:39:42.111Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T22:39:42.112Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T22:39:42.112Z base_pts id=12 name=mask_1100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:39:42.113Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T22:39:42.113Z base_pts id=13 name=mask_1101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:39:42.113Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T22:39:42.113Z base_pts id=14 name=mask_1110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:39:42.114Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T22:39:42.114Z base_pts id=15 name=mask_1111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:39:42.115Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T22:39:42.120Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T22:39:42.494Z worker_start pattern=coast16 mode=procedural
+2025-10-01T22:39:42.495Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"square","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T22:39:42.587Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T22:39:42.588Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:39:42.588Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:39:42.589Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T22:39:42.589Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:39:42.589Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:39:42.590Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T22:39:42.590Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:39:42.592Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T22:39:42.593Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:39:42.595Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T22:39:42.595Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:39:42.596Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T22:39:42.596Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T22:39:42.597Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T22:39:42.598Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T22:39:42.598Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T22:39:42.598Z base_pts id=12 name=mask_1100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:39:42.599Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T22:39:42.599Z base_pts id=13 name=mask_1101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:39:42.599Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T22:39:42.599Z base_pts id=14 name=mask_1110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:39:42.600Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T22:39:42.600Z base_pts id=15 name=mask_1111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:39:42.600Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T22:39:42.604Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T22:41:02.432Z worker_start pattern=coast16 mode=procedural
+2025-10-01T22:41:02.433Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"square","transitionMode":"texture","textureScale":0.2,"lineStyle":"straight_line"}
+2025-10-01T22:41:02.534Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T22:41:02.537Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=24,68,125,255 BCC=221,172,84,255 TCC=231,221,197,255
+2025-10-01T22:41:02.540Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=24,68,125,255 BCC=221,172,84,255 TCC=231,221,197,255
+2025-10-01T22:41:02.544Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T22:41:02.546Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=24,68,125,255 BCC=221,172,84,255 TCC=231,221,197,255
+2025-10-01T22:41:02.546Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:41:02.547Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T22:41:02.547Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:41:02.548Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T22:41:02.548Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:41:02.548Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T22:41:02.548Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:41:02.549Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T22:41:02.550Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T22:41:02.550Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T22:41:02.551Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T22:41:02.552Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T22:41:02.552Z base_pts id=12 name=mask_1100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:41:02.553Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T22:41:02.553Z base_pts id=13 name=mask_1101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:41:02.554Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T22:41:02.554Z base_pts id=14 name=mask_1110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:41:02.554Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T22:41:02.554Z base_pts id=15 name=mask_1111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:41:02.555Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T22:41:02.560Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T22:41:13.147Z worker_start pattern=coast16 mode=procedural
+2025-10-01T22:41:13.148Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"square","transitionMode":"texture","textureScale":1.9,"lineStyle":"straight_line"}
+2025-10-01T22:41:13.237Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T22:41:13.238Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=37,102,164,255 BCC=234,196,103,255 TCC=221,212,188,255
+2025-10-01T22:41:13.240Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=37,102,164,255 BCC=234,196,103,255 TCC=221,212,188,255
+2025-10-01T22:41:13.242Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T22:41:13.244Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=37,102,164,255 BCC=234,196,103,255 TCC=221,212,188,255
+2025-10-01T22:41:13.244Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:41:13.244Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T22:41:13.244Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:41:13.245Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T22:41:13.245Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:41:13.246Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T22:41:13.246Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:41:13.246Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T22:41:13.247Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T22:41:13.248Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T22:41:13.248Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T22:41:13.249Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T22:41:13.249Z base_pts id=12 name=mask_1100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:41:13.250Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T22:41:13.250Z base_pts id=13 name=mask_1101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:41:13.250Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T22:41:13.251Z base_pts id=14 name=mask_1110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:41:13.251Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T22:41:13.251Z base_pts id=15 name=mask_1111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:41:13.252Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T22:41:13.256Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T22:41:22.480Z worker_start pattern=coast16 mode=procedural
+2025-10-01T22:41:22.482Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"square","transitionMode":"texture","textureScale":10,"lineStyle":"straight_line"}
+2025-10-01T22:41:22.551Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T22:41:22.552Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=62,150,211,255 BCC=236,199,104,255 TCC=243,237,219,255
+2025-10-01T22:41:22.553Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=62,150,211,255 BCC=236,199,104,255 TCC=243,237,219,255
+2025-10-01T22:41:22.555Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T22:41:22.557Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=62,150,211,255 BCC=236,199,104,255 TCC=243,237,219,255
+2025-10-01T22:41:22.557Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:41:22.560Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T22:41:22.560Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:41:22.561Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T22:41:22.561Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:41:22.561Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T22:41:22.561Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:41:22.562Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T22:41:22.563Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T22:41:22.563Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T22:41:22.564Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T22:41:22.565Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T22:41:22.565Z base_pts id=12 name=mask_1100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:41:22.566Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T22:41:22.566Z base_pts id=13 name=mask_1101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:41:22.567Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T22:41:22.567Z base_pts id=14 name=mask_1110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:41:22.568Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T22:41:22.568Z base_pts id=15 name=mask_1111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:41:22.568Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T22:41:22.573Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T22:41:36.094Z worker_start pattern=coast16 mode=procedural
+2025-10-01T22:41:36.095Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"square","transitionMode":"texture","textureScale":10,"lineStyle":"wavy_smooth"}
+2025-10-01T22:41:36.188Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T22:41:36.190Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=62,150,211,255 BCC=236,199,104,255 TCC=243,237,219,255
+2025-10-01T22:41:36.191Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=62,150,211,255 BCC=236,199,104,255 TCC=243,237,219,255
+2025-10-01T22:41:36.193Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T22:41:36.196Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=62,150,211,255 BCC=236,199,104,255 TCC=243,237,219,255
+2025-10-01T22:41:36.197Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:41:36.198Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T22:41:36.198Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:41:36.199Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T22:41:36.199Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:41:36.200Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T22:41:36.200Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:41:36.201Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T22:41:36.202Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T22:41:36.203Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T22:41:36.204Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T22:41:36.205Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T22:41:36.205Z base_pts id=12 name=mask_1100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:41:36.207Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T22:41:36.207Z base_pts id=13 name=mask_1101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:41:36.208Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T22:41:36.208Z base_pts id=14 name=mask_1110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:41:36.209Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T22:41:36.209Z base_pts id=15 name=mask_1111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:41:36.209Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T22:41:36.214Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T22:49:22.747Z worker_start pattern=coast16 mode=procedural
+2025-10-01T22:49:22.749Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T22:49:22.851Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T22:49:22.852Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:49:22.853Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:49:22.855Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T22:49:22.857Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:49:22.857Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:49:22.860Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T22:49:22.861Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:49:22.861Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T22:49:22.862Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:49:22.862Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T22:49:22.862Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:49:22.863Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T22:49:22.864Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T22:49:22.864Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T22:49:22.865Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T22:49:22.866Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T22:49:22.866Z base_pts id=12 name=mask_1100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:49:22.867Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T22:49:22.867Z base_pts id=13 name=mask_1101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:49:22.868Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T22:49:22.868Z base_pts id=14 name=mask_1110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:49:22.869Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T22:49:22.869Z base_pts id=15 name=mask_1111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:49:22.869Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T22:49:22.874Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T22:49:41.962Z worker_start pattern=coast16 mode=procedural
+2025-10-01T22:49:41.976Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T22:49:42.057Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T22:49:42.058Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:49:42.059Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:49:42.061Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T22:49:42.062Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:49:42.079Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:49:42.081Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T22:49:42.081Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:49:42.082Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T22:49:42.082Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:49:42.083Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T22:49:42.083Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:49:42.084Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T22:49:42.084Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T22:49:42.085Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T22:49:42.087Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T22:49:42.088Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T22:49:42.088Z base_pts id=12 name=mask_1100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:49:42.089Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T22:49:42.089Z base_pts id=13 name=mask_1101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:49:42.089Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T22:49:42.089Z base_pts id=14 name=mask_1110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:49:42.090Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T22:49:42.090Z base_pts id=15 name=mask_1111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:49:42.091Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T22:49:42.096Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T22:50:11.834Z worker_start pattern=coast16 mode=procedural
+2025-10-01T22:50:11.836Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":20,"lineStyle":"straight_line"}
+2025-10-01T22:50:11.924Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T22:50:11.925Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=24,70,124,255 BCC=222,180,86,255 TCC=226,217,192,255
+2025-10-01T22:50:11.926Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=24,70,124,255 BCC=222,180,86,255 TCC=226,217,192,255
+2025-10-01T22:50:11.928Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T22:50:11.930Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=24,70,124,255 BCC=222,180,86,255 TCC=226,217,192,255
+2025-10-01T22:50:11.932Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:50:11.934Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T22:50:11.934Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:50:11.935Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T22:50:11.935Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:50:11.935Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T22:50:11.935Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:50:11.936Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T22:50:11.937Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T22:50:11.937Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T22:50:11.938Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T22:50:11.939Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T22:50:11.939Z base_pts id=12 name=mask_1100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:50:11.940Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T22:50:11.940Z base_pts id=13 name=mask_1101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:50:11.940Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T22:50:11.941Z base_pts id=14 name=mask_1110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:50:11.941Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T22:50:11.941Z base_pts id=15 name=mask_1111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:50:11.942Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T22:50:11.946Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T22:51:39.734Z worker_start pattern=coast16 mode=procedural
+2025-10-01T22:51:39.737Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T22:51:39.819Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T22:51:39.822Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:51:39.824Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:51:39.826Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T22:51:39.828Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:51:39.828Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:51:39.829Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T22:51:39.829Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:51:39.830Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T22:51:39.831Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:51:39.831Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T22:51:39.832Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:51:39.832Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T22:51:39.833Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T22:51:39.834Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T22:51:39.835Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T22:51:39.836Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T22:51:39.836Z base_pts id=12 name=mask_1100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:51:39.837Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T22:51:39.837Z base_pts id=13 name=mask_1101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:51:39.838Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T22:51:39.838Z base_pts id=14 name=mask_1110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:51:39.839Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T22:51:39.840Z base_pts id=15 name=mask_1111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:51:39.840Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T22:51:39.847Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T22:51:58.414Z worker_start pattern=coast16 mode=procedural
+2025-10-01T22:51:58.416Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T22:51:58.510Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T22:51:58.511Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:51:58.512Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:51:58.513Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T22:51:58.515Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:51:58.516Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:51:58.518Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T22:51:58.518Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:51:58.519Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T22:51:58.519Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:51:58.520Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T22:51:58.520Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:51:58.520Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T22:51:58.521Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T22:51:58.522Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T22:51:58.522Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T22:51:58.523Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T22:51:58.523Z base_pts id=12 name=mask_1100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:51:58.523Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T22:51:58.523Z base_pts id=13 name=mask_1101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:51:58.524Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T22:51:58.524Z base_pts id=14 name=mask_1110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:51:58.525Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T22:51:58.525Z base_pts id=15 name=mask_1111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:51:58.525Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T22:51:58.530Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T22:57:28.213Z worker_start pattern=coast16 mode=procedural
+2025-10-01T22:57:28.216Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T22:57:28.303Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T22:57:28.304Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:57:28.305Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:57:28.305Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T22:57:28.306Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:57:28.306Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:57:28.306Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T22:57:28.306Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:57:28.307Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T22:57:28.307Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:57:28.308Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T22:57:28.308Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:57:28.308Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T22:57:28.309Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T22:57:28.309Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T22:57:28.310Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T22:57:28.311Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T22:57:28.311Z base_pts id=12 name=mask_1100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:57:28.312Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T22:57:28.312Z base_pts id=13 name=mask_1101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:57:28.313Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T22:57:28.313Z base_pts id=14 name=mask_1110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:57:28.313Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T22:57:28.313Z base_pts id=15 name=mask_1111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:57:28.314Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T22:57:28.318Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T22:57:49.173Z worker_start pattern=coast16 mode=procedural
+2025-10-01T22:57:49.174Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":20,"lineStyle":"straight_line"}
+2025-10-01T22:57:49.273Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T22:57:49.274Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=24,70,124,255 BCC=222,180,86,255 TCC=226,217,192,255
+2025-10-01T22:57:49.275Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=24,70,124,255 BCC=222,180,86,255 TCC=226,217,192,255
+2025-10-01T22:57:49.275Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T22:57:49.276Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=24,70,124,255 BCC=222,180,86,255 TCC=226,217,192,255
+2025-10-01T22:57:49.276Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:57:49.276Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T22:57:49.276Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:57:49.277Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T22:57:49.277Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:57:49.279Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T22:57:49.279Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:57:49.281Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T22:57:49.282Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T22:57:49.282Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T22:57:49.283Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T22:57:49.283Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T22:57:49.284Z base_pts id=12 name=mask_1100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:57:49.284Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T22:57:49.284Z base_pts id=13 name=mask_1101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:57:49.285Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T22:57:49.285Z base_pts id=14 name=mask_1110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:57:49.285Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T22:57:49.285Z base_pts id=15 name=mask_1111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:57:49.286Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T22:57:49.290Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T22:57:57.686Z worker_start pattern=coast16 mode=procedural
+2025-10-01T22:57:57.687Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":2,"cornerStyle":"stepped","transitionMode":"texture","textureScale":20,"lineStyle":"straight_line"}
+2025-10-01T22:57:57.774Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T22:57:57.776Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=24,70,124,255 BCC=222,180,86,255 TCC=226,217,192,255
+2025-10-01T22:57:57.776Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=24,70,124,255 BCC=222,180,86,255 TCC=226,217,192,255
+2025-10-01T22:57:57.778Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T22:57:57.779Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=24,70,124,255 BCC=222,180,86,255 TCC=226,217,192,255
+2025-10-01T22:57:57.782Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:57:57.784Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T22:57:57.785Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:57:57.786Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T22:57:57.786Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:57:57.786Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T22:57:57.787Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:57:57.787Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T22:57:57.788Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T22:57:57.788Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T22:57:57.789Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T22:57:57.790Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T22:57:57.790Z base_pts id=12 name=mask_1100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:57:57.791Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T22:57:57.791Z base_pts id=13 name=mask_1101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:57:57.791Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T22:57:57.791Z base_pts id=14 name=mask_1110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:57:57.792Z tile_14_mask_1110 alphaSum=261120
+2025-10-01T22:57:57.792Z base_pts id=15 name=mask_1111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:57:57.793Z tile_15_mask_1111 alphaSum=261120
+2025-10-01T22:57:57.797Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T22:59:19.590Z worker_start pattern=coast16 mode=procedural
+2025-10-01T22:59:19.593Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T22:59:19.679Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T22:59:19.682Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:59:19.684Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:59:19.685Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T22:59:19.686Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T22:59:19.687Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:59:19.687Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T22:59:19.688Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:59:19.689Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T22:59:19.689Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:59:19.690Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T22:59:19.690Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:59:19.690Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T22:59:19.691Z base_pts id=8 name=mask_1000 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T22:59:19.691Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T22:59:19.691Z base_pts id=9 name=mask_1001 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T22:59:19.692Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T22:59:19.692Z base_pts id=10 name=mask_1010 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T22:59:19.693Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T22:59:19.693Z base_pts id=11 name=mask_1011 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T22:59:19.694Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T22:59:19.694Z base_pts id=12 name=mask_1100 a=(31.00,0.00) c=(15.50,15.50) b=(0.00,31.00)
+2025-10-01T22:59:19.695Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T22:59:19.695Z base_pts id=13 name=mask_1101 a=(0.00,0.00) c=(15.50,15.50) b=(31.00,31.00)
+2025-10-01T22:59:19.695Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T22:59:19.696Z tile_14_mask_1110_fill=A alphaSum=261120
+2025-10-01T22:59:19.697Z tile_15_mask_1111_fill=B alphaSum=261120
+2025-10-01T22:59:19.702Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T23:02:54.906Z worker_start pattern=coast16 mode=procedural
+2025-10-01T23:02:54.908Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"quarter","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T23:02:54.999Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T23:02:55.007Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T23:02:55.011Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T23:02:55.014Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T23:02:55.015Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T23:02:55.016Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:02:55.016Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T23:02:55.016Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:02:55.017Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T23:02:55.018Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:02:55.018Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T23:02:55.018Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:02:55.019Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T23:02:55.019Z base_pts id=8 name=mask_1000 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:02:55.020Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T23:02:55.020Z base_pts id=9 name=mask_1001 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:02:55.021Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T23:02:55.021Z base_pts id=10 name=mask_1010 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:02:55.021Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T23:02:55.022Z base_pts id=11 name=mask_1011 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:02:55.022Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T23:02:55.022Z base_pts id=12 name=mask_1100 a=(31.00,0.00) c=(15.50,15.50) b=(0.00,31.00)
+2025-10-01T23:02:55.023Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T23:02:55.023Z base_pts id=13 name=mask_1101 a=(0.00,0.00) c=(15.50,15.50) b=(31.00,31.00)
+2025-10-01T23:02:55.024Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T23:02:55.024Z tile_14_mask_1110_fill=A alphaSum=261120
+2025-10-01T23:02:55.025Z tile_15_mask_1111_fill=B alphaSum=261120
+2025-10-01T23:02:55.030Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T23:03:02.675Z worker_start pattern=coast16 mode=procedural
+2025-10-01T23:03:02.676Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T23:03:02.732Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T23:03:02.733Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T23:03:02.734Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T23:03:02.736Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T23:03:02.737Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T23:03:02.739Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:03:02.740Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T23:03:02.740Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:03:02.741Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T23:03:02.741Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:03:02.742Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T23:03:02.742Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:03:02.743Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T23:03:02.743Z base_pts id=8 name=mask_1000 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:03:02.743Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T23:03:02.743Z base_pts id=9 name=mask_1001 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:03:02.744Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T23:03:02.744Z base_pts id=10 name=mask_1010 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:03:02.745Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T23:03:02.745Z base_pts id=11 name=mask_1011 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:03:02.746Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T23:03:02.746Z base_pts id=12 name=mask_1100 a=(31.00,0.00) c=(15.50,15.50) b=(0.00,31.00)
+2025-10-01T23:03:02.747Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T23:03:02.747Z base_pts id=13 name=mask_1101 a=(0.00,0.00) c=(15.50,15.50) b=(31.00,31.00)
+2025-10-01T23:03:02.747Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T23:03:02.748Z tile_14_mask_1110_fill=A alphaSum=261120
+2025-10-01T23:03:02.748Z tile_15_mask_1111_fill=B alphaSum=261120
+2025-10-01T23:03:02.752Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T23:03:10.138Z worker_start pattern=coast16 mode=procedural
+2025-10-01T23:03:10.139Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"wavy_smooth"}
+2025-10-01T23:03:10.196Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T23:03:10.202Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T23:03:10.204Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T23:03:10.205Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T23:03:10.206Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T23:03:10.206Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:03:10.207Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T23:03:10.207Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:03:10.208Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T23:03:10.208Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:03:10.209Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T23:03:10.209Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:03:10.210Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T23:03:10.210Z base_pts id=8 name=mask_1000 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:03:10.211Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T23:03:10.211Z base_pts id=9 name=mask_1001 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:03:10.212Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T23:03:10.212Z base_pts id=10 name=mask_1010 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:03:10.214Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T23:03:10.214Z base_pts id=11 name=mask_1011 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:03:10.215Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T23:03:10.215Z base_pts id=12 name=mask_1100 a=(31.00,0.00) c=(15.50,15.50) b=(0.00,31.00)
+2025-10-01T23:03:10.216Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T23:03:10.216Z base_pts id=13 name=mask_1101 a=(0.00,0.00) c=(15.50,15.50) b=(31.00,31.00)
+2025-10-01T23:03:10.217Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T23:03:10.218Z tile_14_mask_1110_fill=A alphaSum=261120
+2025-10-01T23:03:10.218Z tile_15_mask_1111_fill=B alphaSum=261120
+2025-10-01T23:03:10.223Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T23:03:18.976Z worker_start pattern=coast16 mode=procedural
+2025-10-01T23:03:18.978Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"craggy"}
+2025-10-01T23:03:19.043Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T23:03:19.044Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T23:03:19.045Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T23:03:19.046Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T23:03:19.047Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T23:03:19.047Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:03:19.049Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T23:03:19.049Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:03:19.053Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T23:03:19.053Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:03:19.054Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T23:03:19.054Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:03:19.055Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T23:03:19.055Z base_pts id=8 name=mask_1000 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:03:19.056Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T23:03:19.056Z base_pts id=9 name=mask_1001 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:03:19.057Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T23:03:19.057Z base_pts id=10 name=mask_1010 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:03:19.058Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T23:03:19.058Z base_pts id=11 name=mask_1011 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:03:19.059Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T23:03:19.059Z base_pts id=12 name=mask_1100 a=(31.00,0.00) c=(15.50,15.50) b=(0.00,31.00)
+2025-10-01T23:03:19.060Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T23:03:19.060Z base_pts id=13 name=mask_1101 a=(0.00,0.00) c=(15.50,15.50) b=(31.00,31.00)
+2025-10-01T23:03:19.061Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T23:03:19.062Z tile_14_mask_1110_fill=A alphaSum=261120
+2025-10-01T23:03:19.062Z tile_15_mask_1111_fill=B alphaSum=261120
+2025-10-01T23:03:19.067Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T23:03:24.250Z worker_start pattern=coast16 mode=procedural
+2025-10-01T23:03:24.251Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"zigzag"}
+2025-10-01T23:03:24.341Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T23:03:24.342Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T23:03:24.343Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T23:03:24.346Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T23:03:24.348Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T23:03:24.348Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:03:24.350Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T23:03:24.350Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:03:24.351Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T23:03:24.351Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:03:24.351Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T23:03:24.351Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:03:24.352Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T23:03:24.352Z base_pts id=8 name=mask_1000 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:03:24.353Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T23:03:24.353Z base_pts id=9 name=mask_1001 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:03:24.354Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T23:03:24.354Z base_pts id=10 name=mask_1010 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:03:24.355Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T23:03:24.355Z base_pts id=11 name=mask_1011 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:03:24.356Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T23:03:24.356Z base_pts id=12 name=mask_1100 a=(31.00,0.00) c=(15.50,15.50) b=(0.00,31.00)
+2025-10-01T23:03:24.357Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T23:03:24.358Z base_pts id=13 name=mask_1101 a=(0.00,0.00) c=(15.50,15.50) b=(31.00,31.00)
+2025-10-01T23:03:24.358Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T23:03:24.359Z tile_14_mask_1110_fill=A alphaSum=261120
+2025-10-01T23:03:24.359Z tile_15_mask_1111_fill=B alphaSum=261120
+2025-10-01T23:03:24.363Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T23:03:35.539Z worker_start pattern=coast16 mode=procedural
+2025-10-01T23:03:35.541Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"wavy_smooth"}
+2025-10-01T23:03:35.640Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T23:03:35.641Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T23:03:35.643Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T23:03:35.646Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T23:03:35.648Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T23:03:35.648Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:03:35.652Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T23:03:35.652Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:03:35.653Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T23:03:35.653Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:03:35.654Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T23:03:35.654Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:03:35.655Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T23:03:35.655Z base_pts id=8 name=mask_1000 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:03:35.656Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T23:03:35.656Z base_pts id=9 name=mask_1001 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:03:35.657Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T23:03:35.657Z base_pts id=10 name=mask_1010 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:03:35.658Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T23:03:35.658Z base_pts id=11 name=mask_1011 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:03:35.659Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T23:03:35.659Z base_pts id=12 name=mask_1100 a=(31.00,0.00) c=(15.50,15.50) b=(0.00,31.00)
+2025-10-01T23:03:35.660Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T23:03:35.660Z base_pts id=13 name=mask_1101 a=(0.00,0.00) c=(15.50,15.50) b=(31.00,31.00)
+2025-10-01T23:03:35.661Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T23:03:35.662Z tile_14_mask_1110_fill=A alphaSum=261120
+2025-10-01T23:03:35.662Z tile_15_mask_1111_fill=B alphaSum=261120
+2025-10-01T23:03:35.666Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T23:04:00.766Z worker_start pattern=coast16 mode=procedural
+2025-10-01T23:04:00.768Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":100,"lineStyle":"wavy_smooth"}
+2025-10-01T23:04:00.865Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T23:04:00.868Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=29,91,153,255 BCC=231,194,102,255 TCC=239,233,216,255
+2025-10-01T23:04:00.872Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=29,91,153,255 BCC=231,194,102,255 TCC=239,233,216,255
+2025-10-01T23:04:00.873Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T23:04:00.874Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=29,91,153,255 BCC=231,194,102,255 TCC=239,233,216,255
+2025-10-01T23:04:00.875Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:04:00.875Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T23:04:00.875Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:04:00.876Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T23:04:00.876Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:04:00.877Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T23:04:00.877Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:04:00.878Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T23:04:00.878Z base_pts id=8 name=mask_1000 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:04:00.879Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T23:04:00.879Z base_pts id=9 name=mask_1001 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:04:00.880Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T23:04:00.880Z base_pts id=10 name=mask_1010 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:04:00.881Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T23:04:00.881Z base_pts id=11 name=mask_1011 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:04:00.882Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T23:04:00.882Z base_pts id=12 name=mask_1100 a=(31.00,0.00) c=(15.50,15.50) b=(0.00,31.00)
+2025-10-01T23:04:00.883Z tile_12_mask_1100 alphaSum=261120
+2025-10-01T23:04:00.883Z base_pts id=13 name=mask_1101 a=(0.00,0.00) c=(15.50,15.50) b=(31.00,31.00)
+2025-10-01T23:04:00.884Z tile_13_mask_1101 alphaSum=261120
+2025-10-01T23:04:00.885Z tile_14_mask_1110_fill=A alphaSum=261120
+2025-10-01T23:04:00.885Z tile_15_mask_1111_fill=B alphaSum=261120
+2025-10-01T23:04:00.890Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T23:06:05.173Z worker_start pattern=coast16 mode=procedural
+2025-10-01T23:06:05.178Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T23:06:05.259Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T23:06:05.262Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T23:06:05.263Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T23:06:05.265Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T23:06:05.266Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=34,98,160,255 BCC=242,206,110,255 TCC=224,215,191,255
+2025-10-01T23:06:05.266Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:06:05.267Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T23:06:05.267Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:06:05.268Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T23:06:05.269Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:06:05.269Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T23:06:05.270Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:06:05.270Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T23:06:05.270Z base_pts id=8 name=mask_1000 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:06:05.271Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T23:06:05.271Z base_pts id=9 name=mask_1001 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:06:05.272Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T23:06:05.272Z base_pts id=10 name=mask_1010 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:06:05.273Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T23:06:05.273Z base_pts id=11 name=mask_1011 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:06:05.274Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T23:06:05.275Z tile_12_mask_1100_multi alphaSum=261120
+2025-10-01T23:06:05.276Z tile_13_mask_1101_multi alphaSum=261120
+2025-10-01T23:06:05.276Z tile_14_mask_1110_fill=A alphaSum=261120
+2025-10-01T23:06:05.277Z tile_15_mask_1111_fill=B alphaSum=261120
+2025-10-01T23:06:05.282Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T23:06:21.220Z worker_start pattern=coast16 mode=procedural
+2025-10-01T23:06:21.221Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":100,"lineStyle":"wavy_smooth"}
+2025-10-01T23:06:21.313Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T23:06:21.314Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=29,91,153,255 BCC=231,194,102,255 TCC=239,233,216,255
+2025-10-01T23:06:21.316Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=29,91,153,255 BCC=231,194,102,255 TCC=239,233,216,255
+2025-10-01T23:06:21.318Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T23:06:21.321Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=29,91,153,255 BCC=231,194,102,255 TCC=239,233,216,255
+2025-10-01T23:06:21.321Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:06:21.322Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T23:06:21.322Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:06:21.323Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T23:06:21.323Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:06:21.324Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T23:06:21.324Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:06:21.325Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T23:06:21.325Z base_pts id=8 name=mask_1000 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:06:21.326Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T23:06:21.326Z base_pts id=9 name=mask_1001 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:06:21.327Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T23:06:21.327Z base_pts id=10 name=mask_1010 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:06:21.328Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T23:06:21.328Z base_pts id=11 name=mask_1011 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:06:21.328Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T23:06:21.330Z tile_12_mask_1100_multi alphaSum=261120
+2025-10-01T23:06:21.331Z tile_13_mask_1101_multi alphaSum=261120
+2025-10-01T23:06:21.332Z tile_14_mask_1110_fill=A alphaSum=261120
+2025-10-01T23:06:21.332Z tile_15_mask_1111_fill=B alphaSum=261120
+2025-10-01T23:06:21.336Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png
+2025-10-01T23:13:11.832Z worker_start pattern=coast16 mode=procedural
+2025-10-01T23:13:11.834Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":100,"lineStyle":"wavy_smooth"}
+2025-10-01T23:13:11.908Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/procedural/transition.png (1024x1024)
+2025-10-01T23:13:11.915Z tile_0_mask_0000 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=29,91,153,255 BCC=231,194,102,255 TCC=239,233,216,255
+2025-10-01T23:13:11.917Z tile_1_mask_0001 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=29,91,153,255 BCC=231,194,102,255 TCC=239,233,216,255
+2025-10-01T23:13:11.919Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T23:13:11.920Z tile_3_mask_0011 alphaSum=261120 A00=21,68,124,255 B00=220,174,84,255 T00=222,213,189,255 ACC=29,91,153,255 BCC=231,194,102,255 TCC=239,233,216,255
+2025-10-01T23:13:11.920Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:13:11.921Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T23:13:11.921Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:13:11.922Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T23:13:11.922Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:13:11.923Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T23:13:11.923Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:13:11.924Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T23:13:11.924Z base_pts id=8 name=mask_1000 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:13:11.925Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T23:13:11.925Z base_pts id=9 name=mask_1001 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:13:11.926Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T23:13:11.926Z base_pts id=10 name=mask_1010 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:13:11.927Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T23:13:11.927Z base_pts id=11 name=mask_1011 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:13:11.928Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T23:13:11.930Z tile_12_mask_1100_multi alphaSum=261120
+2025-10-01T23:13:11.931Z tile_13_mask_1101_multi alphaSum=261120
+2025-10-01T23:13:11.932Z tile_14_mask_1110_fill=A alphaSum=261120
+2025-10-01T23:13:11.932Z tile_15_mask_1111_fill=B alphaSum=261120
+2025-10-01T23:13:11.953Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/newbeachproc/coast16_32.png

@@ -1,0 +1,451 @@
+2025-10-01T23:46:40.303Z enqueue pattern=coast16 mode=direct palette=roman_steampunk job=102
+2025-10-01T23:46:40.308Z worker_start pattern=coast16 mode=direct
+2025-10-01T23:46:40.670Z worker_failed job=102 error=401 Incorrect API key provided: sk-proj-********************************************************************************************************************************************************Ax8A. You can find your API key at https://platform.openai.com/account/api-keys.
+2025-10-01T23:50:35.198Z worker_start pattern=coast16 mode=procedural
+2025-10-01T23:50:35.200Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialB.png:true T=none:false settings={"tileSize":32,"bandWidth":2,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-01T23:50:35.276Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialB.png (1024x1024) T=none (missing)
+2025-10-01T23:50:35.282Z tile_0_mask_0000 alphaSum=261120 A00=217,179,217,255 B00=222,213,189,255 T00=0,0,0,0 ACC=213,172,215,255 BCC=224,215,191,255 TCC=0,0,0,0
+2025-10-01T23:50:35.286Z tile_1_mask_0001 alphaSum=261120 A00=217,179,217,255 B00=222,213,189,255 T00=0,0,0,0 ACC=213,172,215,255 BCC=224,215,191,255 TCC=0,0,0,0
+2025-10-01T23:50:35.288Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T23:50:35.290Z tile_3_mask_0011 alphaSum=261120 A00=217,179,217,255 B00=222,213,189,255 T00=0,0,0,0 ACC=213,172,215,255 BCC=224,215,191,255 TCC=0,0,0,0
+2025-10-01T23:50:35.290Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:50:35.291Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T23:50:35.291Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:50:35.291Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T23:50:35.291Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:50:35.292Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T23:50:35.292Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:50:35.293Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T23:50:35.293Z base_pts id=8 name=mask_1000 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:50:35.294Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T23:50:35.294Z base_pts id=9 name=mask_1001 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:50:35.295Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T23:50:35.295Z base_pts id=10 name=mask_1010 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:50:35.295Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T23:50:35.295Z base_pts id=11 name=mask_1011 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:50:35.296Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T23:50:35.297Z tile_12_mask_1100_multi alphaSum=261120
+2025-10-01T23:50:35.298Z tile_13_mask_1101_multi alphaSum=261120
+2025-10-01T23:50:35.299Z tile_14_mask_1110_fill=A alphaSum=261120
+2025-10-01T23:50:35.299Z tile_15_mask_1111_fill=B alphaSum=261120
+2025-10-01T23:50:35.320Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/coast16_32.png
+2025-10-01T23:50:47.662Z worker_start pattern=coast16 mode=procedural
+2025-10-01T23:50:47.664Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialB.png:true T=none:false settings={"tileSize":32,"bandWidth":2,"cornerStyle":"stepped","transitionMode":"texture","textureScale":99.7,"lineStyle":"straight_line"}
+2025-10-01T23:50:47.736Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialB.png (1024x1024) T=none (missing)
+2025-10-01T23:50:47.737Z tile_0_mask_0000 alphaSum=261120 A00=217,179,217,255 B00=222,213,189,255 T00=0,0,0,0 ACC=93,79,112,255 BCC=244,239,219,255 TCC=0,0,0,0
+2025-10-01T23:50:47.739Z tile_1_mask_0001 alphaSum=261120 A00=217,179,217,255 B00=222,213,189,255 T00=0,0,0,0 ACC=93,79,112,255 BCC=244,239,219,255 TCC=0,0,0,0
+2025-10-01T23:50:47.741Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T23:50:47.744Z tile_3_mask_0011 alphaSum=261120 A00=217,179,217,255 B00=222,213,189,255 T00=0,0,0,0 ACC=93,79,112,255 BCC=244,239,219,255 TCC=0,0,0,0
+2025-10-01T23:50:47.744Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:50:47.746Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T23:50:47.746Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:50:47.746Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T23:50:47.747Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:50:47.747Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T23:50:47.747Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:50:47.748Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T23:50:47.748Z base_pts id=8 name=mask_1000 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:50:47.749Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T23:50:47.749Z base_pts id=9 name=mask_1001 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:50:47.750Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T23:50:47.750Z base_pts id=10 name=mask_1010 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:50:47.750Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T23:50:47.750Z base_pts id=11 name=mask_1011 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:50:47.751Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T23:50:47.752Z tile_12_mask_1100_multi alphaSum=261120
+2025-10-01T23:50:47.753Z tile_13_mask_1101_multi alphaSum=261120
+2025-10-01T23:50:47.753Z tile_14_mask_1110_fill=A alphaSum=261120
+2025-10-01T23:50:47.754Z tile_15_mask_1111_fill=B alphaSum=261120
+2025-10-01T23:50:47.773Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/coast16_32.png
+2025-10-01T23:51:03.177Z worker_start pattern=coast16 mode=procedural
+2025-10-01T23:51:03.179Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialB.png:true T=none:false settings={"tileSize":32,"bandWidth":2,"cornerStyle":"stepped","transitionMode":"texture","textureScale":10,"lineStyle":"straight_line"}
+2025-10-01T23:51:03.249Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialB.png (1024x1024) T=none (missing)
+2025-10-01T23:51:03.250Z tile_0_mask_0000 alphaSum=261120 A00=217,179,217,255 B00=222,213,189,255 T00=0,0,0,0 ACC=126,100,166,255 BCC=243,237,219,255 TCC=0,0,0,0
+2025-10-01T23:51:03.253Z tile_1_mask_0001 alphaSum=261120 A00=217,179,217,255 B00=222,213,189,255 T00=0,0,0,0 ACC=126,100,166,255 BCC=243,237,219,255 TCC=0,0,0,0
+2025-10-01T23:51:03.258Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T23:51:03.259Z tile_3_mask_0011 alphaSum=261120 A00=217,179,217,255 B00=222,213,189,255 T00=0,0,0,0 ACC=126,100,166,255 BCC=243,237,219,255 TCC=0,0,0,0
+2025-10-01T23:51:03.259Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:51:03.259Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T23:51:03.260Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:51:03.260Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T23:51:03.260Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:51:03.261Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T23:51:03.261Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:51:03.262Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T23:51:03.262Z base_pts id=8 name=mask_1000 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:51:03.263Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T23:51:03.263Z base_pts id=9 name=mask_1001 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:51:03.264Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T23:51:03.264Z base_pts id=10 name=mask_1010 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:51:03.264Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T23:51:03.264Z base_pts id=11 name=mask_1011 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:51:03.265Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T23:51:03.266Z tile_12_mask_1100_multi alphaSum=261120
+2025-10-01T23:51:03.267Z tile_13_mask_1101_multi alphaSum=261120
+2025-10-01T23:51:03.268Z tile_14_mask_1110_fill=A alphaSum=261120
+2025-10-01T23:51:03.269Z tile_15_mask_1111_fill=B alphaSum=261120
+2025-10-01T23:51:03.288Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/coast16_32.png
+2025-10-01T23:51:13.556Z worker_start pattern=coast16 mode=procedural
+2025-10-01T23:51:13.558Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialB.png:true T=none:false settings={"tileSize":32,"bandWidth":2,"cornerStyle":"stepped","transitionMode":"texture","textureScale":20,"lineStyle":"straight_line"}
+2025-10-01T23:51:13.624Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialB.png (1024x1024) T=none (missing)
+2025-10-01T23:51:13.626Z tile_0_mask_0000 alphaSum=261120 A00=217,179,217,255 B00=222,213,189,255 T00=0,0,0,0 ACC=173,134,186,255 BCC=226,217,192,255 TCC=0,0,0,0
+2025-10-01T23:51:13.627Z tile_1_mask_0001 alphaSum=261120 A00=217,179,217,255 B00=222,213,189,255 T00=0,0,0,0 ACC=173,134,186,255 BCC=226,217,192,255 TCC=0,0,0,0
+2025-10-01T23:51:13.628Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T23:51:13.628Z tile_3_mask_0011 alphaSum=261120 A00=217,179,217,255 B00=222,213,189,255 T00=0,0,0,0 ACC=173,134,186,255 BCC=226,217,192,255 TCC=0,0,0,0
+2025-10-01T23:51:13.629Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:51:13.631Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T23:51:13.631Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:51:13.634Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T23:51:13.634Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:51:13.636Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T23:51:13.636Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:51:13.636Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T23:51:13.637Z base_pts id=8 name=mask_1000 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:51:13.637Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T23:51:13.637Z base_pts id=9 name=mask_1001 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:51:13.638Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T23:51:13.638Z base_pts id=10 name=mask_1010 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:51:13.639Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T23:51:13.639Z base_pts id=11 name=mask_1011 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:51:13.640Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T23:51:13.641Z tile_12_mask_1100_multi alphaSum=261120
+2025-10-01T23:51:13.642Z tile_13_mask_1101_multi alphaSum=261120
+2025-10-01T23:51:13.643Z tile_14_mask_1110_fill=A alphaSum=261120
+2025-10-01T23:51:13.644Z tile_15_mask_1111_fill=B alphaSum=261120
+2025-10-01T23:51:13.664Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/coast16_32.png
+2025-10-01T23:51:27.059Z worker_start pattern=coast16 mode=procedural
+2025-10-01T23:51:27.060Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialB.png:true T=none:false settings={"tileSize":32,"bandWidth":2,"cornerStyle":"stepped","transitionMode":"texture","textureScale":30,"lineStyle":"straight_line"}
+2025-10-01T23:51:27.131Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialB.png (1024x1024) T=none (missing)
+2025-10-01T23:51:27.132Z tile_0_mask_0000 alphaSum=261120 A00=217,179,217,255 B00=222,213,189,255 T00=0,0,0,0 ACC=163,122,179,255 BCC=224,218,194,255 TCC=0,0,0,0
+2025-10-01T23:51:27.133Z tile_1_mask_0001 alphaSum=261120 A00=217,179,217,255 B00=222,213,189,255 T00=0,0,0,0 ACC=163,122,179,255 BCC=224,218,194,255 TCC=0,0,0,0
+2025-10-01T23:51:27.135Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T23:51:27.137Z tile_3_mask_0011 alphaSum=261120 A00=217,179,217,255 B00=222,213,189,255 T00=0,0,0,0 ACC=163,122,179,255 BCC=224,218,194,255 TCC=0,0,0,0
+2025-10-01T23:51:27.137Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:51:27.140Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T23:51:27.140Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:51:27.141Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T23:51:27.141Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:51:27.142Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T23:51:27.142Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:51:27.143Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T23:51:27.143Z base_pts id=8 name=mask_1000 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:51:27.144Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T23:51:27.144Z base_pts id=9 name=mask_1001 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:51:27.144Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T23:51:27.145Z base_pts id=10 name=mask_1010 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:51:27.145Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T23:51:27.145Z base_pts id=11 name=mask_1011 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:51:27.146Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T23:51:27.147Z tile_12_mask_1100_multi alphaSum=261120
+2025-10-01T23:51:27.148Z tile_13_mask_1101_multi alphaSum=261120
+2025-10-01T23:51:27.149Z tile_14_mask_1110_fill=A alphaSum=261120
+2025-10-01T23:51:27.149Z tile_15_mask_1111_fill=B alphaSum=261120
+2025-10-01T23:51:27.168Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/coast16_32.png
+2025-10-01T23:51:48.348Z worker_start pattern=coast16 mode=procedural
+2025-10-01T23:51:48.350Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialA.png:true B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/transition.png:true settings={"tileSize":32,"bandWidth":2,"cornerStyle":"stepped","transitionMode":"texture","textureScale":30,"lineStyle":"straight_line"}
+2025-10-01T23:51:48.446Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialA.png (1024x1024) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/transition.png (1024x1024)
+2025-10-01T23:51:48.447Z tile_0_mask_0000 alphaSum=261120 A00=217,179,217,255 B00=222,213,189,255 T00=21,68,124,255 ACC=163,122,179,255 BCC=224,218,194,255 TCC=34,99,161,255
+2025-10-01T23:51:48.448Z tile_1_mask_0001 alphaSum=261120 A00=217,179,217,255 B00=222,213,189,255 T00=21,68,124,255 ACC=163,122,179,255 BCC=224,218,194,255 TCC=34,99,161,255
+2025-10-01T23:51:48.449Z tile_2_mask_0010 alphaSum=261120
+2025-10-01T23:51:48.450Z tile_3_mask_0011 alphaSum=261120 A00=217,179,217,255 B00=222,213,189,255 T00=21,68,124,255 ACC=163,122,179,255 BCC=224,218,194,255 TCC=34,99,161,255
+2025-10-01T23:51:48.450Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:51:48.453Z tile_4_mask_0100 alphaSum=261120
+2025-10-01T23:51:48.454Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:51:48.457Z tile_5_mask_0101 alphaSum=261120
+2025-10-01T23:51:48.457Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:51:48.458Z tile_6_mask_0110 alphaSum=261120
+2025-10-01T23:51:48.459Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:51:48.459Z tile_7_mask_0111 alphaSum=261120
+2025-10-01T23:51:48.459Z base_pts id=8 name=mask_1000 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:51:48.460Z tile_8_mask_1000 alphaSum=261120
+2025-10-01T23:51:48.460Z base_pts id=9 name=mask_1001 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:51:48.461Z tile_9_mask_1001 alphaSum=261120
+2025-10-01T23:51:48.461Z base_pts id=10 name=mask_1010 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:51:48.462Z tile_10_mask_1010 alphaSum=261120
+2025-10-01T23:51:48.462Z base_pts id=11 name=mask_1011 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:51:48.462Z tile_11_mask_1011 alphaSum=261120
+2025-10-01T23:51:48.463Z tile_12_mask_1100_multi alphaSum=261120
+2025-10-01T23:51:48.465Z tile_13_mask_1101_multi alphaSum=261120
+2025-10-01T23:51:48.465Z tile_14_mask_1110_fill=A alphaSum=261120
+2025-10-01T23:51:48.466Z tile_15_mask_1111_fill=B alphaSum=261120
+2025-10-01T23:51:48.485Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/coast16_32.png
+2025-10-01T23:52:16.029Z worker_start pattern=coast16 mode=procedural
+2025-10-01T23:52:16.031Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialA.png:true B=none:false T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/transition.png:true settings={"tileSize":32,"bandWidth":2,"cornerStyle":"stepped","transitionMode":"texture","textureScale":30,"lineStyle":"zigzag"}
+2025-10-01T23:52:16.106Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialA.png (1024x1024) B=none (missing) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/transition.png (1024x1024)
+2025-10-01T23:52:16.108Z tile_0_mask_0000 alphaSum=135405 A00=217,179,217,255 B00=0,0,0,0 T00=222,213,189,255 ACC=163,122,179,255 BCC=0,0,0,0 TCC=224,218,194,255
+2025-10-01T23:52:16.111Z tile_1_mask_0001 alphaSum=143310 A00=217,179,217,255 B00=0,0,0,0 T00=222,213,189,255 ACC=163,122,179,255 BCC=0,0,0,0 TCC=224,218,194,255
+2025-10-01T23:52:16.116Z tile_2_mask_0010 alphaSum=135150
+2025-10-01T23:52:16.118Z tile_3_mask_0011 alphaSum=143565 A00=217,179,217,255 B00=0,0,0,0 T00=222,213,189,255 ACC=163,122,179,255 BCC=0,0,0,0 TCC=224,218,194,255
+2025-10-01T23:52:16.118Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:52:16.119Z tile_4_mask_0100 alphaSum=72165
+2025-10-01T23:52:16.119Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:52:16.121Z tile_5_mask_0101 alphaSum=76245
+2025-10-01T23:52:16.121Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:52:16.122Z tile_6_mask_0110 alphaSum=80580
+2025-10-01T23:52:16.122Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:52:16.123Z tile_7_mask_0111 alphaSum=76245
+2025-10-01T23:52:16.123Z base_pts id=8 name=mask_1000 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-01T23:52:16.124Z tile_8_mask_1000 alphaSum=207060
+2025-10-01T23:52:16.124Z base_pts id=9 name=mask_1001 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-01T23:52:16.125Z tile_9_mask_1001 alphaSum=203235
+2025-10-01T23:52:16.125Z base_pts id=10 name=mask_1010 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-01T23:52:16.126Z tile_10_mask_1010 alphaSum=199155
+2025-10-01T23:52:16.126Z base_pts id=11 name=mask_1011 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-01T23:52:16.127Z tile_11_mask_1011 alphaSum=203235
+2025-10-01T23:52:16.128Z tile_12_mask_1100_multi alphaSum=147390
+2025-10-01T23:52:16.130Z tile_13_mask_1101_multi alphaSum=147390
+2025-10-01T23:52:16.130Z tile_14_mask_1110_fill=A alphaSum=261120
+2025-10-01T23:52:16.131Z tile_15_mask_1111_fill=B alphaSum=0
+2025-10-01T23:52:16.150Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/coast16_32.png
+2025-10-02T00:12:11.646Z worker_start pattern=coast16 mode=procedural
+2025-10-02T00:12:11.648Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialA.png:true B=none:false T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"straight_line"}
+2025-10-02T00:12:11.714Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialA.png (1024x1024) B=none (missing) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/transition.png (1024x1024)
+2025-10-02T00:12:11.717Z tile_0_mask_0000 alphaSum=146625 A00=217,179,217,255 B00=0,0,0,0 T00=222,213,189,255 ACC=213,172,215,255 BCC=0,0,0,0 TCC=224,215,191,255
+2025-10-02T00:12:11.718Z tile_1_mask_0001 alphaSum=154785 A00=217,179,217,255 B00=0,0,0,0 T00=222,213,189,255 ACC=213,172,215,255 BCC=0,0,0,0 TCC=224,215,191,255
+2025-10-02T00:12:11.720Z tile_2_mask_0010 alphaSum=146625
+2025-10-02T00:12:11.721Z tile_3_mask_0011 alphaSum=154785 A00=217,179,217,255 B00=0,0,0,0 T00=222,213,189,255 ACC=213,172,215,255 BCC=0,0,0,0 TCC=224,215,191,255
+2025-10-02T00:12:11.721Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-02T00:12:11.722Z tile_4_mask_0100 alphaSum=81855
+2025-10-02T00:12:11.722Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-02T00:12:11.723Z tile_5_mask_0101 alphaSum=86190
+2025-10-02T00:12:11.723Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-02T00:12:11.724Z tile_6_mask_0110 alphaSum=90780
+2025-10-02T00:12:11.724Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-02T00:12:11.725Z tile_7_mask_0111 alphaSum=86190
+2025-10-02T00:12:11.725Z base_pts id=8 name=mask_1000 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-02T00:12:11.726Z tile_8_mask_1000 alphaSum=218025
+2025-10-02T00:12:11.726Z base_pts id=9 name=mask_1001 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-02T00:12:11.727Z tile_9_mask_1001 alphaSum=214455
+2025-10-02T00:12:11.727Z base_pts id=10 name=mask_1010 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-02T00:12:11.727Z tile_10_mask_1010 alphaSum=210630
+2025-10-02T00:12:11.728Z base_pts id=11 name=mask_1011 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-02T00:12:11.728Z tile_11_mask_1011 alphaSum=214455
+2025-10-02T00:12:11.729Z tile_12_mask_1100_multi alphaSum=167790
+2025-10-02T00:12:11.730Z tile_13_mask_1101_multi alphaSum=167790
+2025-10-02T00:12:11.731Z tile_14_mask_1110_fill=A alphaSum=261120
+2025-10-02T00:12:11.732Z tile_15_mask_1111_fill=B alphaSum=0
+2025-10-02T00:12:11.750Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/coast16_32.png
+2025-10-02T00:12:25.718Z worker_start pattern=coast16 mode=procedural
+2025-10-02T00:12:25.720Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialA.png:true B=none:false T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":30,"lineStyle":"straight_line"}
+2025-10-02T00:12:25.790Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialA.png (1024x1024) B=none (missing) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/transition.png (1024x1024)
+2025-10-02T00:12:25.791Z tile_0_mask_0000 alphaSum=146625 A00=217,179,217,255 B00=0,0,0,0 T00=222,213,189,255 ACC=163,122,179,255 BCC=0,0,0,0 TCC=224,218,194,255
+2025-10-02T00:12:25.792Z tile_1_mask_0001 alphaSum=154785 A00=217,179,217,255 B00=0,0,0,0 T00=222,213,189,255 ACC=163,122,179,255 BCC=0,0,0,0 TCC=224,218,194,255
+2025-10-02T00:12:25.794Z tile_2_mask_0010 alphaSum=146625
+2025-10-02T00:12:25.795Z tile_3_mask_0011 alphaSum=154785 A00=217,179,217,255 B00=0,0,0,0 T00=222,213,189,255 ACC=163,122,179,255 BCC=0,0,0,0 TCC=224,218,194,255
+2025-10-02T00:12:25.795Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-02T00:12:25.797Z tile_4_mask_0100 alphaSum=81855
+2025-10-02T00:12:25.797Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-02T00:12:25.799Z tile_5_mask_0101 alphaSum=86190
+2025-10-02T00:12:25.800Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-02T00:12:25.801Z tile_6_mask_0110 alphaSum=90780
+2025-10-02T00:12:25.801Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-02T00:12:25.802Z tile_7_mask_0111 alphaSum=86190
+2025-10-02T00:12:25.802Z base_pts id=8 name=mask_1000 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-02T00:12:25.802Z tile_8_mask_1000 alphaSum=218025
+2025-10-02T00:12:25.803Z base_pts id=9 name=mask_1001 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-02T00:12:25.803Z tile_9_mask_1001 alphaSum=214455
+2025-10-02T00:12:25.803Z base_pts id=10 name=mask_1010 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-02T00:12:25.804Z tile_10_mask_1010 alphaSum=210630
+2025-10-02T00:12:25.804Z base_pts id=11 name=mask_1011 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-02T00:12:25.805Z tile_11_mask_1011 alphaSum=214455
+2025-10-02T00:12:25.806Z tile_12_mask_1100_multi alphaSum=167790
+2025-10-02T00:12:25.807Z tile_13_mask_1101_multi alphaSum=167790
+2025-10-02T00:12:25.807Z tile_14_mask_1110_fill=A alphaSum=261120
+2025-10-02T00:12:25.808Z tile_15_mask_1111_fill=B alphaSum=0
+2025-10-02T00:12:25.826Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/coast16_32.png
+2025-10-02T00:12:37.455Z worker_start pattern=coast16 mode=procedural
+2025-10-02T00:12:37.456Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialA.png:true B=none:false T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":30,"lineStyle":"zigzag"}
+2025-10-02T00:12:37.529Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialA.png (1024x1024) B=none (missing) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/transition.png (1024x1024)
+2025-10-02T00:12:37.530Z tile_0_mask_0000 alphaSum=146115 A00=217,179,217,255 B00=0,0,0,0 T00=222,213,189,255 ACC=163,122,179,255 BCC=0,0,0,0 TCC=224,218,194,255
+2025-10-02T00:12:37.533Z tile_1_mask_0001 alphaSum=154275 A00=217,179,217,255 B00=0,0,0,0 T00=222,213,189,255 ACC=163,122,179,255 BCC=0,0,0,0 TCC=224,218,194,255
+2025-10-02T00:12:37.535Z tile_2_mask_0010 alphaSum=146115
+2025-10-02T00:12:37.537Z tile_3_mask_0011 alphaSum=154275 A00=217,179,217,255 B00=0,0,0,0 T00=222,213,189,255 ACC=163,122,179,255 BCC=0,0,0,0 TCC=224,218,194,255
+2025-10-02T00:12:37.537Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-02T00:12:37.538Z tile_4_mask_0100 alphaSum=82365
+2025-10-02T00:12:37.538Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-02T00:12:37.539Z tile_5_mask_0101 alphaSum=86700
+2025-10-02T00:12:37.539Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-02T00:12:37.540Z tile_6_mask_0110 alphaSum=91290
+2025-10-02T00:12:37.541Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-02T00:12:37.542Z tile_7_mask_0111 alphaSum=86700
+2025-10-02T00:12:37.542Z base_pts id=8 name=mask_1000 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-02T00:12:37.543Z tile_8_mask_1000 alphaSum=215985
+2025-10-02T00:12:37.543Z base_pts id=9 name=mask_1001 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-02T00:12:37.544Z tile_9_mask_1001 alphaSum=212415
+2025-10-02T00:12:37.544Z base_pts id=10 name=mask_1010 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-02T00:12:37.545Z tile_10_mask_1010 alphaSum=208590
+2025-10-02T00:12:37.545Z base_pts id=11 name=mask_1011 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-02T00:12:37.546Z tile_11_mask_1011 alphaSum=212415
+2025-10-02T00:12:37.547Z tile_12_mask_1100_multi alphaSum=166005
+2025-10-02T00:12:37.548Z tile_13_mask_1101_multi alphaSum=166005
+2025-10-02T00:12:37.549Z tile_14_mask_1110_fill=A alphaSum=261120
+2025-10-02T00:12:37.549Z tile_15_mask_1111_fill=B alphaSum=0
+2025-10-02T00:12:37.567Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/coast16_32.png
+2025-10-02T00:12:44.068Z worker_start pattern=coast16 mode=procedural
+2025-10-02T00:12:44.069Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialA.png:true B=none:false T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":30,"lineStyle":"craggy"}
+2025-10-02T00:12:44.142Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialA.png (1024x1024) B=none (missing) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/transition.png (1024x1024)
+2025-10-02T00:12:44.144Z tile_0_mask_0000 alphaSum=146625 A00=217,179,217,255 B00=0,0,0,0 T00=222,213,189,255 ACC=163,122,179,255 BCC=0,0,0,0 TCC=224,218,194,255
+2025-10-02T00:12:44.146Z tile_1_mask_0001 alphaSum=146880 A00=217,179,217,255 B00=0,0,0,0 T00=222,213,189,255 ACC=163,122,179,255 BCC=0,0,0,0 TCC=224,218,194,255
+2025-10-02T00:12:44.150Z tile_2_mask_0010 alphaSum=138720
+2025-10-02T00:12:44.152Z tile_3_mask_0011 alphaSum=154785 A00=217,179,217,255 B00=0,0,0,0 T00=222,213,189,255 ACC=163,122,179,255 BCC=0,0,0,0 TCC=224,218,194,255
+2025-10-02T00:12:44.152Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-02T00:12:44.153Z tile_4_mask_0100 alphaSum=81855
+2025-10-02T00:12:44.153Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-02T00:12:44.154Z tile_5_mask_0101 alphaSum=86190
+2025-10-02T00:12:44.154Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-02T00:12:44.155Z tile_6_mask_0110 alphaSum=90780
+2025-10-02T00:12:44.155Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-02T00:12:44.156Z tile_7_mask_0111 alphaSum=86190
+2025-10-02T00:12:44.156Z base_pts id=8 name=mask_1000 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-02T00:12:44.157Z tile_8_mask_1000 alphaSum=211140
+2025-10-02T00:12:44.157Z base_pts id=9 name=mask_1001 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-02T00:12:44.158Z tile_9_mask_1001 alphaSum=207570
+2025-10-02T00:12:44.158Z base_pts id=10 name=mask_1010 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-02T00:12:44.159Z tile_10_mask_1010 alphaSum=203745
+2025-10-02T00:12:44.160Z base_pts id=11 name=mask_1011 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-02T00:12:44.161Z tile_11_mask_1011 alphaSum=207570
+2025-10-02T00:12:44.162Z tile_12_mask_1100_multi alphaSum=160905
+2025-10-02T00:12:44.164Z tile_13_mask_1101_multi alphaSum=160905
+2025-10-02T00:12:44.165Z tile_14_mask_1110_fill=A alphaSum=261120
+2025-10-02T00:12:44.166Z tile_15_mask_1111_fill=B alphaSum=0
+2025-10-02T00:12:44.185Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/coast16_32.png
+2025-10-02T00:12:50.036Z worker_start pattern=coast16 mode=procedural
+2025-10-02T00:12:50.037Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialA.png:true B=none:false T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/transition.png:true settings={"tileSize":32,"bandWidth":4,"cornerStyle":"stepped","transitionMode":"texture","textureScale":30,"lineStyle":"wavy_smooth"}
+2025-10-02T00:12:50.110Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialA.png (1024x1024) B=none (missing) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/transition.png (1024x1024)
+2025-10-02T00:12:50.112Z tile_0_mask_0000 alphaSum=145095 A00=217,179,217,255 B00=0,0,0,0 T00=222,213,189,255 ACC=163,122,179,255 BCC=0,0,0,0 TCC=224,218,194,255
+2025-10-02T00:12:50.113Z tile_1_mask_0001 alphaSum=153510 A00=217,179,217,255 B00=0,0,0,0 T00=222,213,189,255 ACC=163,122,179,255 BCC=0,0,0,0 TCC=224,218,194,255
+2025-10-02T00:12:50.114Z tile_2_mask_0010 alphaSum=145350
+2025-10-02T00:12:50.116Z tile_3_mask_0011 alphaSum=153255 A00=217,179,217,255 B00=0,0,0,0 T00=222,213,189,255 ACC=163,122,179,255 BCC=0,0,0,0 TCC=224,218,194,255
+2025-10-02T00:12:50.116Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-02T00:12:50.119Z tile_4_mask_0100 alphaSum=80325
+2025-10-02T00:12:50.119Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-02T00:12:50.121Z tile_5_mask_0101 alphaSum=84660
+2025-10-02T00:12:50.121Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-02T00:12:50.121Z tile_6_mask_0110 alphaSum=89250
+2025-10-02T00:12:50.122Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-02T00:12:50.123Z tile_7_mask_0111 alphaSum=84660
+2025-10-02T00:12:50.123Z base_pts id=8 name=mask_1000 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-02T00:12:50.123Z tile_8_mask_1000 alphaSum=217005
+2025-10-02T00:12:50.124Z base_pts id=9 name=mask_1001 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-02T00:12:50.124Z tile_9_mask_1001 alphaSum=213435
+2025-10-02T00:12:50.124Z base_pts id=10 name=mask_1010 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-02T00:12:50.125Z tile_10_mask_1010 alphaSum=209610
+2025-10-02T00:12:50.125Z base_pts id=11 name=mask_1011 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-02T00:12:50.126Z tile_11_mask_1011 alphaSum=213435
+2025-10-02T00:12:50.128Z tile_12_mask_1100_multi alphaSum=164730
+2025-10-02T00:12:50.129Z tile_13_mask_1101_multi alphaSum=164730
+2025-10-02T00:12:50.130Z tile_14_mask_1110_fill=A alphaSum=261120
+2025-10-02T00:12:50.130Z tile_15_mask_1111_fill=B alphaSum=0
+2025-10-02T00:12:50.148Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/coast16_32.png
+2025-10-02T00:34:03.744Z worker_start pattern=coast16 mode=procedural
+2025-10-02T00:34:03.746Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialA.png:true B=none:false T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/transition.png:true settings={"tileSize":32,"bandWidth":2,"cornerStyle":"stepped","transitionMode":"texture","textureScale":1,"lineStyle":"zigzag"}
+2025-10-02T00:34:03.812Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialA.png (1024x1024) B=none (missing) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/transition.png (1024x1024)
+2025-10-02T00:34:03.818Z tile_0_mask_0000 alphaSum=135405 A00=217,179,217,255 B00=0,0,0,0 T00=222,213,189,255 ACC=213,172,215,255 BCC=0,0,0,0 TCC=224,215,191,255
+2025-10-02T00:34:03.820Z tile_1_mask_0001 alphaSum=143310 A00=217,179,217,255 B00=0,0,0,0 T00=222,213,189,255 ACC=213,172,215,255 BCC=0,0,0,0 TCC=224,215,191,255
+2025-10-02T00:34:03.823Z tile_2_mask_0010 alphaSum=135150
+2025-10-02T00:34:03.824Z tile_3_mask_0011 alphaSum=143565 A00=217,179,217,255 B00=0,0,0,0 T00=222,213,189,255 ACC=213,172,215,255 BCC=0,0,0,0 TCC=224,215,191,255
+2025-10-02T00:34:03.824Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-02T00:34:03.825Z tile_4_mask_0100 alphaSum=72165
+2025-10-02T00:34:03.825Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-02T00:34:03.826Z tile_5_mask_0101 alphaSum=76245
+2025-10-02T00:34:03.826Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-02T00:34:03.827Z tile_6_mask_0110 alphaSum=80580
+2025-10-02T00:34:03.827Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-02T00:34:03.828Z tile_7_mask_0111 alphaSum=76245
+2025-10-02T00:34:03.828Z base_pts id=8 name=mask_1000 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-02T00:34:03.829Z tile_8_mask_1000 alphaSum=207060
+2025-10-02T00:34:03.829Z base_pts id=9 name=mask_1001 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-02T00:34:03.830Z tile_9_mask_1001 alphaSum=203235
+2025-10-02T00:34:03.830Z base_pts id=10 name=mask_1010 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-02T00:34:03.831Z tile_10_mask_1010 alphaSum=199155
+2025-10-02T00:34:03.831Z base_pts id=11 name=mask_1011 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-02T00:34:03.832Z tile_11_mask_1011 alphaSum=203235
+2025-10-02T00:34:03.834Z tile_12_mask_1100_multi alphaSum=147390
+2025-10-02T00:34:03.836Z tile_13_mask_1101_multi alphaSum=147390
+2025-10-02T00:34:03.836Z tile_14_mask_1110_fill=A alphaSum=261120
+2025-10-02T00:34:03.837Z tile_15_mask_1111_fill=B alphaSum=0
+2025-10-02T00:34:03.855Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/coast16_32.png
+2025-10-02T00:34:11.834Z worker_start pattern=coast16 mode=procedural
+2025-10-02T00:34:11.835Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialA.png:true B=none:false T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/transition.png:true settings={"tileSize":32,"bandWidth":2,"cornerStyle":"stepped","transitionMode":"texture","textureScale":30,"lineStyle":"zigzag"}
+2025-10-02T00:34:11.906Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialA.png (1024x1024) B=none (missing) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/transition.png (1024x1024)
+2025-10-02T00:34:11.908Z tile_0_mask_0000 alphaSum=135405 A00=217,179,217,255 B00=0,0,0,0 T00=222,213,189,255 ACC=163,122,179,255 BCC=0,0,0,0 TCC=224,218,194,255
+2025-10-02T00:34:11.909Z tile_1_mask_0001 alphaSum=143310 A00=217,179,217,255 B00=0,0,0,0 T00=222,213,189,255 ACC=163,122,179,255 BCC=0,0,0,0 TCC=224,218,194,255
+2025-10-02T00:34:11.910Z tile_2_mask_0010 alphaSum=135150
+2025-10-02T00:34:11.913Z tile_3_mask_0011 alphaSum=143565 A00=217,179,217,255 B00=0,0,0,0 T00=222,213,189,255 ACC=163,122,179,255 BCC=0,0,0,0 TCC=224,218,194,255
+2025-10-02T00:34:11.913Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-02T00:34:11.915Z tile_4_mask_0100 alphaSum=72165
+2025-10-02T00:34:11.916Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-02T00:34:11.917Z tile_5_mask_0101 alphaSum=76245
+2025-10-02T00:34:11.917Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-02T00:34:11.918Z tile_6_mask_0110 alphaSum=80580
+2025-10-02T00:34:11.918Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-02T00:34:11.919Z tile_7_mask_0111 alphaSum=76245
+2025-10-02T00:34:11.919Z base_pts id=8 name=mask_1000 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-02T00:34:11.920Z tile_8_mask_1000 alphaSum=207060
+2025-10-02T00:34:11.920Z base_pts id=9 name=mask_1001 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-02T00:34:11.921Z tile_9_mask_1001 alphaSum=203235
+2025-10-02T00:34:11.921Z base_pts id=10 name=mask_1010 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-02T00:34:11.922Z tile_10_mask_1010 alphaSum=199155
+2025-10-02T00:34:11.922Z base_pts id=11 name=mask_1011 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-02T00:34:11.923Z tile_11_mask_1011 alphaSum=203235
+2025-10-02T00:34:11.925Z tile_12_mask_1100_multi alphaSum=147390
+2025-10-02T00:34:11.926Z tile_13_mask_1101_multi alphaSum=147390
+2025-10-02T00:34:11.927Z tile_14_mask_1110_fill=A alphaSum=261120
+2025-10-02T00:34:11.927Z tile_15_mask_1111_fill=B alphaSum=0
+2025-10-02T00:34:11.945Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/coast16_32.png
+2025-10-02T00:34:30.171Z worker_start pattern=coast16 mode=procedural
+2025-10-02T00:34:30.172Z worker_proc_paths A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialA.png:true B=none:false T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/transition.png:true settings={"tileSize":32,"bandWidth":2,"cornerStyle":"stepped","transitionMode":"texture","textureScale":30,"lineStyle":"zigzag"}
+2025-10-02T00:34:30.245Z proc_inputs A=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialA.png (1024x1024) B=none (missing) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/transition.png (1024x1024)
+2025-10-02T00:34:30.247Z tile_0_mask_0000 alphaSum=135405 A00=217,179,217,255 B00=0,0,0,0 T00=222,213,189,255 ACC=163,122,179,255 BCC=0,0,0,0 TCC=224,218,194,255
+2025-10-02T00:34:30.248Z tile_1_mask_0001 alphaSum=143310 A00=217,179,217,255 B00=0,0,0,0 T00=222,213,189,255 ACC=163,122,179,255 BCC=0,0,0,0 TCC=224,218,194,255
+2025-10-02T00:34:30.249Z tile_2_mask_0010 alphaSum=135150
+2025-10-02T00:34:30.251Z tile_3_mask_0011 alphaSum=143565 A00=217,179,217,255 B00=0,0,0,0 T00=222,213,189,255 ACC=163,122,179,255 BCC=0,0,0,0 TCC=224,218,194,255
+2025-10-02T00:34:30.252Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-02T00:34:30.255Z tile_4_mask_0100 alphaSum=72165
+2025-10-02T00:34:30.255Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-02T00:34:30.256Z tile_5_mask_0101 alphaSum=76245
+2025-10-02T00:34:30.256Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-02T00:34:30.257Z tile_6_mask_0110 alphaSum=80580
+2025-10-02T00:34:30.257Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-02T00:34:30.258Z tile_7_mask_0111 alphaSum=76245
+2025-10-02T00:34:30.258Z base_pts id=8 name=mask_1000 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-02T00:34:30.259Z tile_8_mask_1000 alphaSum=207060
+2025-10-02T00:34:30.259Z base_pts id=9 name=mask_1001 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-02T00:34:30.260Z tile_9_mask_1001 alphaSum=203235
+2025-10-02T00:34:30.260Z base_pts id=10 name=mask_1010 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-02T00:34:30.261Z tile_10_mask_1010 alphaSum=199155
+2025-10-02T00:34:30.262Z base_pts id=11 name=mask_1011 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-02T00:34:30.263Z tile_11_mask_1011 alphaSum=203235
+2025-10-02T00:34:30.264Z tile_12_mask_1100_multi alphaSum=147390
+2025-10-02T00:34:30.265Z tile_13_mask_1101_multi alphaSum=147390
+2025-10-02T00:34:30.266Z tile_14_mask_1110_fill=A alphaSum=261120
+2025-10-02T00:34:30.266Z tile_15_mask_1111_fill=B alphaSum=0
+2025-10-02T00:34:30.286Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/coast16_32.png
+2025-10-02T00:36:47.689Z worker_start pattern=coast16 mode=procedural
+2025-10-02T00:36:47.697Z worker_proc_paths A=none:false B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialB.png:true T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/transition.png:true settings={"tileSize":32,"bandWidth":2,"cornerStyle":"stepped","transitionMode":"texture","textureScale":30,"lineStyle":"zigzag"}
+2025-10-02T00:36:47.765Z proc_inputs A=none (missing) B=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/materialB.png (1024x1024) T=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/procedural/transition.png (1024x1024)
+2025-10-02T00:36:47.767Z tile_0_mask_0000 alphaSum=143310 A00=0,0,0,0 B00=217,179,217,255 T00=222,213,189,255 ACC=0,0,0,0 BCC=163,122,179,255 TCC=224,218,194,255
+2025-10-02T00:36:47.768Z tile_1_mask_0001 alphaSum=135405 A00=0,0,0,0 B00=217,179,217,255 T00=222,213,189,255 ACC=0,0,0,0 BCC=163,122,179,255 TCC=224,218,194,255
+2025-10-02T00:36:47.770Z tile_2_mask_0010 alphaSum=143565
+2025-10-02T00:36:47.772Z tile_3_mask_0011 alphaSum=135150 A00=0,0,0,0 B00=217,179,217,255 T00=222,213,189,255 ACC=0,0,0,0 BCC=163,122,179,255 TCC=224,218,194,255
+2025-10-02T00:36:47.773Z base_pts id=4 name=mask_0100 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-02T00:36:47.776Z tile_4_mask_0100 alphaSum=207060
+2025-10-02T00:36:47.777Z base_pts id=5 name=mask_0101 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-02T00:36:47.779Z tile_5_mask_0101 alphaSum=203235
+2025-10-02T00:36:47.781Z base_pts id=6 name=mask_0110 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-02T00:36:47.783Z tile_6_mask_0110 alphaSum=199155
+2025-10-02T00:36:47.783Z base_pts id=7 name=mask_0111 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-02T00:36:47.784Z tile_7_mask_0111 alphaSum=203235
+2025-10-02T00:36:47.784Z base_pts id=8 name=mask_1000 a=(0.00,15.50) c=(15.50,15.50) b=(15.50,0.00)
+2025-10-02T00:36:47.785Z tile_8_mask_1000 alphaSum=72165
+2025-10-02T00:36:47.785Z base_pts id=9 name=mask_1001 a=(15.50,0.00) c=(15.50,15.50) b=(31.00,15.50)
+2025-10-02T00:36:47.785Z tile_9_mask_1001 alphaSum=76245
+2025-10-02T00:36:47.786Z base_pts id=10 name=mask_1010 a=(31.00,15.50) c=(15.50,15.50) b=(15.50,31.00)
+2025-10-02T00:36:47.786Z tile_10_mask_1010 alphaSum=80580
+2025-10-02T00:36:47.786Z base_pts id=11 name=mask_1011 a=(15.50,31.00) c=(15.50,15.50) b=(0.00,15.50)
+2025-10-02T00:36:47.787Z tile_11_mask_1011 alphaSum=76245
+2025-10-02T00:36:47.789Z tile_12_mask_1100_multi alphaSum=147900
+2025-10-02T00:36:47.790Z tile_13_mask_1101_multi alphaSum=147900
+2025-10-02T00:36:47.790Z tile_14_mask_1110_fill=A alphaSum=0
+2025-10-02T00:36:47.791Z tile_15_mask_1111_fill=B alphaSum=261120
+2025-10-02T00:36:47.809Z worker_done_procedural sheet=/Users/alexandredube-cote/entropy/pixelart-backbone/assets/tilesets/crystal-float/coast16_32.png

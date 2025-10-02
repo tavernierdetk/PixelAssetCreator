@@ -1,0 +1,281 @@
+{
+  "schema": "tileset.manifest/1.0",
+  "material": "procedural",
+  "engine_order": "coast16",
+  "grid": {
+    "cols": 4,
+    "rows": 4,
+    "tile": 32
+  },
+  "palette": {
+    "name": "roman_steampunk",
+    "rgb": [
+      [
+        248,
+        244,
+        232
+      ],
+      [
+        226,
+        212,
+        183
+      ],
+      [
+        200,
+        169,
+        120
+      ],
+      [
+        160,
+        120,
+        68
+      ],
+      [
+        214,
+        201,
+        177
+      ],
+      [
+        154,
+        138,
+        120
+      ],
+      [
+        110,
+        90,
+        68
+      ],
+      [
+        58,
+        42,
+        32
+      ],
+      [
+        246,
+        216,
+        122
+      ],
+      [
+        217,
+        164,
+        65
+      ],
+      [
+        180,
+        106,
+        41
+      ],
+      [
+        148,
+        82,
+        48
+      ],
+      [
+        122,
+        106,
+        100
+      ],
+      [
+        62,
+        58,
+        56
+      ],
+      [
+        194,
+        180,
+        132
+      ],
+      [
+        140,
+        122,
+        68
+      ],
+      [
+        94,
+        74,
+        40
+      ],
+      [
+        156,
+        182,
+        120
+      ],
+      [
+        92,
+        122,
+        68
+      ],
+      [
+        46,
+        74,
+        40
+      ],
+      [
+        160,
+        48,
+        48
+      ],
+      [
+        96,
+        32,
+        96
+      ],
+      [
+        42,
+        122,
+        120
+      ],
+      [
+        224,
+        112,
+        48
+      ],
+      [
+        184,
+        216,
+        232
+      ],
+      [
+        120,
+        176,
+        200
+      ],
+      [
+        60,
+        120,
+        150
+      ],
+      [
+        32,
+        56,
+        80
+      ],
+      [
+        26,
+        15,
+        13
+      ],
+      [
+        64,
+        40,
+        40
+      ],
+      [
+        120,
+        72,
+        72
+      ],
+      [
+        255,
+        255,
+        255
+      ]
+    ]
+  },
+  "openai": {
+    "model": "gpt-image-1",
+    "size": "1024x1024",
+    "transparent": true
+  },
+  "tiles": [
+    {
+      "id": 0,
+      "name": "mask_0000",
+      "file": "tiles_32/00_mask_0000_32.png"
+    },
+    {
+      "id": 1,
+      "name": "mask_0001",
+      "file": "tiles_32/01_mask_0001_32.png"
+    },
+    {
+      "id": 2,
+      "name": "mask_0010",
+      "file": "tiles_32/02_mask_0010_32.png"
+    },
+    {
+      "id": 3,
+      "name": "mask_0011",
+      "file": "tiles_32/03_mask_0011_32.png"
+    },
+    {
+      "id": 4,
+      "name": "mask_0100",
+      "file": "tiles_32/04_mask_0100_32.png"
+    },
+    {
+      "id": 5,
+      "name": "mask_0101",
+      "file": "tiles_32/05_mask_0101_32.png"
+    },
+    {
+      "id": 6,
+      "name": "mask_0110",
+      "file": "tiles_32/06_mask_0110_32.png"
+    },
+    {
+      "id": 7,
+      "name": "mask_0111",
+      "file": "tiles_32/07_mask_0111_32.png"
+    },
+    {
+      "id": 8,
+      "name": "mask_1000",
+      "file": "tiles_32/08_mask_1000_32.png"
+    },
+    {
+      "id": 9,
+      "name": "mask_1001",
+      "file": "tiles_32/09_mask_1001_32.png"
+    },
+    {
+      "id": 10,
+      "name": "mask_1010",
+      "file": "tiles_32/10_mask_1010_32.png"
+    },
+    {
+      "id": 11,
+      "name": "mask_1011",
+      "file": "tiles_32/11_mask_1011_32.png"
+    },
+    {
+      "id": 12,
+      "name": "mask_1100",
+      "file": "tiles_32/12_mask_1100_32.png"
+    },
+    {
+      "id": 13,
+      "name": "mask_1101",
+      "file": "tiles_32/13_mask_1101_32.png"
+    },
+    {
+      "id": 14,
+      "name": "mask_1110",
+      "file": "tiles_32/14_mask_1110_32.png"
+    },
+    {
+      "id": 15,
+      "name": "mask_1111",
+      "file": "tiles_32/15_mask_1111_32.png"
+    }
+  ],
+  "sheet": {
+    "file": "coast16_32.png",
+    "layout": "row-major"
+  },
+  "procedural": {
+    "pattern": "coast16",
+    "settings": {
+      "tileSize": 32,
+      "bandWidth": 4,
+      "cornerStyle": "stepped",
+      "transitionMode": "texture",
+      "textureScale": 100
+    },
+    "textures": {
+      "A": "procedural/materialA.png",
+      "B": "procedural/materialB.png",
+      "T": "procedural/transition.png"
+    }
+  }
+}

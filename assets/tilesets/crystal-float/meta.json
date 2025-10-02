@@ -1,0 +1,20 @@
+{
+  "schema": "tileset.meta/1.0",
+  "slug": "crystal-float",
+  "pattern": "coast16",
+  "tile_size": 32,
+  "palette": "roman_steampunk",
+  "created_at": "2025-10-01T23:46:40.296Z",
+  "procedural_textures": {
+    "transition": "procedural/transition.png",
+    "materialB": "procedural/materialB.png"
+  },
+  "procedural_settings": {
+    "tileSize": 32,
+    "bandWidth": 2,
+    "cornerStyle": "stepped",
+    "transitionMode": "texture",
+    "textureScale": 30,
+    "lineStyle": "zigzag"
+  }
+}

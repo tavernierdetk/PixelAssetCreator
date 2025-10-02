@@ -1,5 +1,4 @@
 
-
 > @pixelart/pipeline@0.1.0 build /Users/alexandredube-cote/entropy/pixelart-backbone/packages/pipeline
-> tsc -b tsconfig.json
+> tsc -b
 

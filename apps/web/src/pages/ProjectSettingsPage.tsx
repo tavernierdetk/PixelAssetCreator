@@ -2,24 +2,44 @@
 import { useEffect, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { BackHeader } from "@/components/BackHeader";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { getProjectSettings, updateProjectSettings } from "@/lib/api";
+import { type ImageSettings } from "@/components/settings/ImageProviderSelector";
+import { type LlmSettings } from "@/components/settings/LlmProviderSelector";
+import { ImageSettingsPanel } from "@/components/settings/ImageSettingsPanel";
+import { LlmSettingsPanel } from "@/components/settings/LlmSettingsPanel";
+import { GlobalSettingsPanel, type GlobalSettings } from "@/components/settings/GlobalSettingsPanel";
+import { TilesetPromptDefaultsPanel, type PromptDefaults } from "@/components/settings/TilesetPromptDefaultsPanel";
 
-type Size = { width: number; height: number };
 type ProjectSettings = {
   project_name?: string;
   aesthetics: string;
   pixel_scale?: number;
   resolutions: {
-    portrait: Size;
-    idle: Size;
-    animation_frame: Size;
+    portrait: { width: number; height: number };
+    idle: { width: number; height: number };
+    animation_frame: { width: number; height: number };
   };
   palette_path?: string;
+  // Tileset prompt defaults (v2)
+  promptDefaults?: PromptDefaults;
+  images?: {
+    provider?: "openai" | "sd" | "stub";
+    model?: string;
+    quality?: "low" | "standard" | "high";
+    sizeDefault?: "256x256" | "512x512" | "1024x1024" | "1536x1024" | "1024x1536" | "1792x1024" | "1024x1792" | "auto";
+    backgroundDefault?: "transparent" | "opaque";
+    sd?: {
+      baseURL?: string;
+      model?: string;
+      sampler?: string;
+      steps?: number;
+      cfgScale?: number;
+      negativePrompt?: string;
+      tiling?: boolean;
+    };
+  };
+  llm?: LlmSettings;
 };
 
 export default function ProjectSettingsPage() {
@@ -44,122 +64,40 @@ export default function ProjectSettingsPage() {
 
   return (
     <div className="space-y-6">
-      <BackHeader title="Project Settings" />
+      <BackHeader
+        title="Project Settings"
+        right={<Button type="button" onClick={() => saveM.mutate()} disabled={saveM.isPending || !form}>{saveM.isPending ? "Saving…" : "Save Settings"}</Button>}
+      />
 
-      <Card>
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <div className="font-medium">Aesthetics & Global Config</div>
-            <Button type="button" onClick={() => saveM.mutate()} disabled={saveM.isPending || !form}>
-              {saveM.isPending ? "Saving…" : "Save Settings"}
-            </Button>
-          </div>
-        </CardHeader>
-        <CardContent>
-          {loading ? (
-            <p className="text-sm text-slate-600">Loading…</p>
-          ) : (
-            <div className="grid gap-4">
-              <div>
-                <Label htmlFor="project_name">Project Name</Label>
-                <Input
-                  id="project_name"
-                  value={form!.project_name ?? ""}
-                  onChange={(e) => setForm({ ...form!, project_name: e.target.value })}
-                  placeholder="Optional name shown in UI"
-                />
-              </div>
+      {loading ? (
+        <p className="text-sm text-slate-600">Loading…</p>
+      ) : (
+        <div className="grid gap-4">
+          <GlobalSettingsPanel
+            value={form as GlobalSettings}
+            onChange={(next) => setForm({ ...(form as any), ...next })}
+            defaultOpen
+          />
 
-              <div>
-                <Label htmlFor="aesthetics">Aesthetic Description</Label>
-                <Textarea
-                  id="aesthetics"
-                  value={form!.aesthetics}
-                  onChange={(e) => setForm({ ...form!, aesthetics: e.target.value })}
-                  placeholder="Describe palette, mood, rendering rules, constraints…"
-                  rows={6}
-                />
-              </div>
+          <TilesetPromptDefaultsPanel
+            value={(form!.promptDefaults ?? {}) as PromptDefaults}
+            onChange={(next) => setForm({ ...form!, promptDefaults: next })}
+            defaultOpen
+          />
 
-              <fieldset className="grid sm:grid-cols-3 gap-4">
-                <SizeField
-                  label="Portrait Resolution"
-                  value={form!.resolutions.portrait}
-                  set={(v) => setForm({ ...form!, resolutions: { ...form!.resolutions, portrait: v } })}
-                />
-                <SizeField
-                  label="Idle Resolution"
-                  value={form!.resolutions.idle}
-                  set={(v) => setForm({ ...form!, resolutions: { ...form!.resolutions, idle: v } })}
-                />
-                <SizeField
-                  label="Animation Frame"
-                  value={form!.resolutions.animation_frame}
-                  set={(v) => setForm({ ...form!, resolutions: { ...form!.resolutions, animation_frame: v } })}
-                />
-              </fieldset>
+          <ImageSettingsPanel
+            value={(form!.images ?? {}) as ImageSettings}
+            onChange={(next) => setForm({ ...form!, images: next })}
+            defaultOpen
+          />
 
-              <fieldset className="grid sm:grid-cols-3 gap-4">
-                <div>
-                  <Label htmlFor="pixel_scale">Pixel Scale</Label>
-                  <Input
-                    id="pixel_scale"
-                    type="number"
-                    min={1}
-                    value={form!.pixel_scale ?? 1}
-                    onChange={(e) =>
-                      setForm({ ...form!, pixel_scale: Math.max(1, Number(e.target.value || 1)) })
-                    }
-                  />
-                </div>
-                <div className="sm:col-span-2">
-                  <Label htmlFor="palette_path">Palette Path (optional)</Label>
-                  <Input
-                    id="palette_path"
-                    value={form!.palette_path ?? ""}
-                    onChange={(e) => setForm({ ...form!, palette_path: e.target.value })}
-                    placeholder="e.g., project/palettes/main.gpl (under /assets)"
-                  />
-                </div>
-              </fieldset>
-            </div>
-          )}
-        </CardContent>
-      </Card>
-    </div>
-  );
-}
-
-function SizeField({
-  label,
-  value,
-  set,
-}: {
-  label: string;
-  value: Size;
-  set: (v: Size) => void;
-}) {
-  return (
-    <div>
-      <Label>{label}</Label>
-      <div className="flex gap-2">
-        <Input
-          type="number"
-          min={1}
-          value={value.width}
-          onChange={(e) => set({ ...value, width: Math.max(1, Number(e.target.value || 1)) })}
-          aria-label={`${label} width`}
-          placeholder="W"
-        />
-        <Input
-          type="number"
-          min={1}
-          value={value.height}
-          onChange={(e) => set({ ...value, height: Math.max(1, Number(e.target.value || 1)) })}
-          aria-label={`${label} height`}
-          placeholder="H"
-        />
-      </div>
+          <LlmSettingsPanel
+            value={(form!.llm ?? {}) as LlmSettings}
+            onChange={(next) => setForm({ ...form!, llm: next })}
+            defaultOpen={false}
+          />
+        </div>
+      )}
     </div>
   );
 }

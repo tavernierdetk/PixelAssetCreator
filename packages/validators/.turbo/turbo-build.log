@@ -1,21 +1,4 @@
 
-
 > @pixelart/validators@0.1.0 build /Users/alexandredube-cote/entropy/pixelart-backbone/packages/validators
-> tsc -p tsconfig.json
+> tsc -b
 
-[96msrc/ulpcBuild.ts[0m:[93m7[0m:[93m17[0m - [91merror[0m[90m TS2351: [0mThis expression is not constructable.
-  Type 'typeof import("/Users/alexandredube-cote/entropy/pixelart-backbone/node_modules/.pnpm/ajv@8.17.1/node_modules/ajv/dist/ajv")' has no construct signatures.
-
-[7m7[0m const ajv = new Ajv({ allErrors: true, strict: false });
-[7m [0m [91m                ~~~[0m
-
-[96msrc/ulpcBuild.ts[0m:[93m8[0m:[93m1[0m - [91merror[0m[90m TS2349: [0mThis expression is not callable.
-  Type 'typeof import("/Users/alexandredube-cote/entropy/pixelart-backbone/node_modules/.pnpm/ajv-formats@3.0.1_ajv@8.17.1/node_modules/ajv-formats/dist/index")' has no call signatures.
-
-[7m8[0m addFormats(ajv);
-[7m [0m [91m~~~~~~~~~~[0m
-
-
-Found 2 errors in the same file, starting at: src/ulpcBuild.ts[90m:7[0m
-
-[41m[30m ELIFECYCLE [39m[49m [31mCommand failed with exit code 2.[39m

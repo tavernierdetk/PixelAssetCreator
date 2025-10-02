@@ -1,0 +1,14 @@
+{
+  "schema": "tileset.meta/2.0",
+  "slug": "beach",
+  "pattern": "blob47",
+  "tile_size": 32,
+  "palette": "roman_steampunk",
+  "created_at": "2025-09-27T13:48:23.951Z",
+  "materials_text": "A = Sand — granular micro-noise; low contrast; no long streaks.\nB = Water — calm surface; subtle cellular noise; small specular flecks; no outlines.",
+  "palette_text": "Use ONLY these colors:\nSand: #F8F4E8,#E2D4B7,#C8A978,#A07844,#D6C9B1,#9A8A78,#6E5A44,#3A2A20\nWater: #B8D8E8,#78B0C8,#3C7896,#203850\nAccents (foam/wet band): #FFFFFF,#1A0F0D  (sparingly)",
+  "interface_text": "Shoreline at every A↔B boundary:\n• Foam: 1–2 tile-pixels on the B (water) side with sparse speckles.\n• Wet sand: 2–3 tile-pixels on the A side; slightly darker variant of Sand.\n• No contour outlines at shoreline; water never has outlines.",
+  "procedural_textures": {
+    "materialA": "procedural/materialA.png"
+  }
+}

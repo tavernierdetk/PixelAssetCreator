@@ -3,6 +3,7 @@ import { Router, type Request, type Response, type NextFunction } from "express"
 import { readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { runAssistantTurn, InvalidAssistantPayloadError } from "@pixelart/assistants";
+import { readProjectSettings } from "@pixelart/config";
 
 export const assistantRouter: import("express").Router = Router();
 
@@ -29,14 +30,15 @@ assistantRouter.post("/assistant/turn", async (req: Request, res: Response) => {
       return res.status(400).json({ ok: false, code: "BAD_REQUEST", message: "message required" });
     }
 
-      // Strict: require OpenAI config (no fallback)
-      const apiKey = process.env.OPENAI_API_KEY;
-      const assistantId = process.env.OPENAI_ASSISTANT_ID;
+      // Prefer project settings; fallback to env vars
+      const proj = (await readProjectSettings()) as any;
+      const apiKey = (proj?.llm?.apiKey as string) || process.env.OPENAI_API_KEY;
+      const assistantId = (proj?.llm?.chatAssistantId as string) || process.env.OPENAI_ASSISTANT_ID;
       if (!apiKey || !assistantId) {
         return res.status(400).json({
           ok: false,
           error: "missing_openai_config",
-          detail: "OPENAI_API_KEY and OPENAI_ASSISTANT_ID are required",
+          detail: "Missing OPENAI_API_KEY or chat assistant id (settings.llm.chatAssistantId or OPENAI_ASSISTANT_ID)",
         });
       }
 

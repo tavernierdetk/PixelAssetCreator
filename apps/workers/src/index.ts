@@ -5,6 +5,7 @@ import "dotenv/config";
 import "./portrait.worker";
 import "./idle.worker";
 import "./ulpc.worker";
+import "./tileset.worker";
 
 
 import pino from "pino";

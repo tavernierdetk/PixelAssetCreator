@@ -1,0 +1,34 @@
+{
+  "schema": "tileset.meta/2.0",
+  "slug": "newbeachproc",
+  "pattern": "coast16",
+  "tile_size": 32,
+  "palette": "roman_steampunk",
+  "created_at": "2025-10-01T19:45:03.268Z",
+  "procedural_textures": {
+    "materialA": "procedural/materialA.png",
+    "materialB": "procedural/materialB.png",
+    "transition": "procedural/transition.png"
+  },
+  "procedural_settings": {
+    "tileSize": 32,
+    "bandWidth": 4,
+    "cornerStyle": "stepped",
+    "transitionMode": "texture",
+    "textureScale": 100,
+    "lineStyle": "wavy_smooth"
+  },
+  "materials_text": "",
+  "palette_text": "",
+  "interface_text": "",
+  "materials_ab": {
+    "A": {
+      "name": "Land",
+      "vehicles": []
+    },
+    "B": {
+      "name": "Water",
+      "vehicles": []
+    }
+  }
+}

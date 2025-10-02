@@ -2,6 +2,7 @@
 import { createLogger } from "@pixelart/log";
 import type { CharacterLite } from "@pixelart/schemas";
 import { makeOpenAI } from "./openaiClient.js";
+import { generateSDImage, mapSizeToWH } from "./sd.js";
 
 const log = createLogger("@adapters/images");
 
@@ -24,21 +25,25 @@ export async function generatePortraitOpenAI(params: {
   prompt: string;
   size?: OpenAIImageSize;            // defaults to 1024x1024
   background?: "transparent";        // only pass when transparent
-  // quality?: "standard" | "high";  // optional: add if you want to surface this
+  quality?: "low" | "standard" | "high"; // "low" maps to API default (standard)
+  model?: string;                    // defaults to gpt-image-1
+  apiKey?: string;                   // optional per-request api key override
 }): Promise<Buffer> {
   const { prompt, background } = params;
   const size = normalizeSize(params.size);
+  const quality = params.quality === "low" ? undefined : params.quality; // omit to use baseline
+  const model = typeof params.model === "string" && params.model.trim() ? params.model : "gpt-image-1";
 
-  const openai = makeOpenAI();
+  const openai = makeOpenAI(params.apiKey);
   const t0 = Date.now();
-  log.info({ size, bg: background ?? "opaque", promptLen: prompt.length }, "images.generate start");
+  log.info({ size, bg: background ?? "opaque", promptLen: prompt.length, quality: params.quality ?? "standard" }, "images.generate start");
 
   const res = await openai.images.generate({
-    model: "gpt-image-1",
+    model,
     prompt,
     size,
     ...(background ? { background } : {}),
-    // ...(params.quality ? { quality: params.quality } : {}), // enable if desired
+    ...(quality ? { quality } : {}),
   });
 
   const b64 = res.data?.[0]?.b64_json;
@@ -83,4 +88,56 @@ function normalizeSize(s?: string): OpenAIImageSize {
   if (allowed[key]) return allowed[key];
   log.warn({ requested: s }, "Unsupported image size; defaulting to 1024x1024");
   return "1024x1024";
+}
+
+// ─────────────────────────── Generic provider facade ───────────────────────────
+export type ImageProvider = "openai" | "sd" | "stub";
+
+export async function generateImage(params: {
+  provider: ImageProvider;
+  prompt: string;
+  model?: string;
+  size?: OpenAIImageSize;
+  quality?: "low" | "standard" | "high";
+  background?: "transparent";
+  openaiApiKey?: string; // optional per-request api key override
+  sd?: {
+    baseURL: string;
+    sampler?: string;
+    steps?: number;
+    cfgScale?: number;
+    negativePrompt?: string;
+    tiling?: boolean;
+    timeoutMs?: number;
+  };
+}): Promise<Buffer> {
+  if (params.provider === "stub") {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return generatePortraitStub({} as any);
+  }
+  if (params.provider === "sd") {
+    const wh = mapSizeToWH(params.size);
+    return generateSDImage({
+      baseURL: params.sd?.baseURL || process.env.SD_BASE_URL || "http://localhost:7860",
+      prompt: params.prompt,
+      negativePrompt: params.sd?.negativePrompt,
+      width: wh.width,
+      height: wh.height,
+      steps: params.sd?.steps,
+      cfgScale: params.sd?.cfgScale,
+      sampler: params.sd?.sampler,
+      tiling: params.sd?.tiling,
+      model: params.model,
+      timeoutMs: params.sd?.timeoutMs,
+    });
+  }
+  // Default provider: openai
+  return generatePortraitOpenAI({
+    prompt: params.prompt,
+    size: params.size,
+    quality: params.quality,
+    background: params.background,
+    model: params.model,
+    apiKey: params.openaiApiKey,
+  });
 }

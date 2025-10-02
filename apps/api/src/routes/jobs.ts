@@ -1,5 +1,5 @@
 import { Router, type Request, type Response } from "express";
-import { portraitQ as portraitQueue, idleQ as idleQueue, ulpcQ } from "@pixelart/pipeline";
+import { portraitQ as portraitQueue, idleQ as idleQueue, ulpcQ, tilesetQ } from "@pixelart/pipeline";
 import type { Job, Queue } from "bullmq";
 
 import pino from "pino";
@@ -8,7 +8,7 @@ const log = pino({ name: "@api/jobs", transport: { target: "pino-pretty" }});
 
 
 export const jobs: import("express").Router = Router();
-const queues: Queue[] = [portraitQueue, idleQueue, ulpcQ].filter(Boolean) as Queue[];
+const queues: Queue[] = [portraitQueue, idleQueue, ulpcQ, tilesetQ].filter(Boolean) as Queue[];
 
 
 async function findJob(id: string): Promise<Job | null> {

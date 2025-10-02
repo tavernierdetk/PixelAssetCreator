@@ -1,5 +1,6 @@
 // apps/web/src/pages/TilesetsPage.tsx
 import { useEffect, useMemo, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 
@@ -46,6 +47,7 @@ type PatternInfo = {
 export default function TilesetsPage() {
   const qc = useQueryClient();
   const poll = useJobPolling();
+  const loc = useLocation();
 
   /** Available patterns for the dropdown */
   const patternsQ = useQuery({
@@ -68,6 +70,14 @@ export default function TilesetsPage() {
       setSelected(listQ.data!.slugs[0]);
     }
   }, [listQ.data, selected]);
+
+  // Scroll to creator when linked with hash
+  useEffect(() => {
+    if (loc.hash === "#create-tileset") {
+      const el = document.getElementById("create-tileset");
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [loc.hash]);
 
   /** Meta for the selected tileset (so we know its pattern) */
   const metaQ = useQuery({
@@ -207,11 +217,13 @@ export default function TilesetsPage() {
                 {sheet && (
                   <div>
                     <div className="text-sm text-slate-600 mb-1">Sheet</div>
-                    <img
-                      src={tilesetFileUrl(selected, sheet, bust)}
-                      alt="tileset sheet"
-                      className="w-full max-w-[640px] image-render-pixel border rounded-lg"
-                    />
+                    <div className="inline-block bg-checker p-1 border rounded-lg">
+                      <img
+                        src={tilesetFileUrl(selected, sheet, bust)}
+                        alt="tileset sheet"
+                        className="w-full max-w-[640px] image-render-pixel block"
+                      />
+                    </div>
                   </div>
                 )}
 
@@ -232,6 +244,7 @@ export default function TilesetsPage() {
       </div>
 
       {/* Creator */}
+      <div id="create-tileset">
       <TilesetCreator
         patterns={patternsQ.data ?? []}
         onCreate={(slug) => {
@@ -243,6 +256,7 @@ export default function TilesetsPage() {
         onQueue={(args) => mEnqueue.mutate(args)}
         enqueuePending={mEnqueue.isPending}
       />
+      </div>
     </div>
   );
 }
@@ -258,7 +272,6 @@ function TilesetCreator(props: {
   onQueue: (args: {
     slug: string;
     pattern: string;
-    material?: string;
     mode?: "direct" | "mask";
     paletteName?: string;
   }) => void;
@@ -267,7 +280,6 @@ function TilesetCreator(props: {
   const { patterns, onCreate, onQueue, enqueuePending } = props;
 
   const [name, setName] = useState("");
-  const [material, setMaterial] = useState("grass");
   const [mode, setMode] = useState<"direct" | "mask">("direct");
   const [pattern, setPattern] = useState<string>("blob47");
 
@@ -323,21 +335,7 @@ function TilesetCreator(props: {
             <div className="text-[10px] text-slate-500">Immutable per tileset</div>
           </div>
 
-          {/* Material */}
-          <div className="space-y-1">
-            <label className="text-xs text-slate-600">Material</label>
-            <select
-              className="border rounded px-2 py-2 w-full"
-              value={material}
-              onChange={(e) => setMaterial(e.target.value)}
-            >
-              <option value="grass">Grass</option>
-              <option value="dirt">Dirt</option>
-              <option value="stone">Stone</option>
-              <option value="sand">Sand</option>
-              <option value="water">Water</option>
-            </select>
-          </div>
+          {/* Material removed per request */}
 
           {/* Mode */}
           <div className="space-y-1">
@@ -368,13 +366,7 @@ function TilesetCreator(props: {
               alert("Enter a valid name");
               return;
             }
-            onQueue({
-              slug,
-              pattern: pattern || "blob47",
-              material,
-              mode,
-              paletteName: "roman_steampunk",
-            });
+            onQueue({ slug, pattern: pattern || "blob47", mode, paletteName: "roman_steampunk" });
             onCreate(slug);
           }}
           disabled={enqueuePending}

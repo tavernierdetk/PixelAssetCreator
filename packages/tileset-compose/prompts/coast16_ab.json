@@ -1,0 +1,56 @@
+{
+  "schema": "coast16.prompt/1.0-ab-stepped",
+  "pattern": "coast16",
+  "global_preamble": "[STYLE] Top-down pixel art; crisp clusters; minimal dithering; no text or watermark. [TILEABILITY] Seamless when cropped to 32×32 and repeated. [UNITS] 1 tile-pixel ≈ 3% of tile width (≈32 image px on a 1024×1024 canvas). [ALPHA] Canvas has transparency; any area not covered by A (Land) or B (Water) is fully transparent; no halos; no AA. [COVERAGE] Every pixel belongs to exactly one of: Land (A), Water (B), Shore-Foam (on B side), or Wet-Band (on A side). No background pixels inside the tile area. [OPACITY] Inside A/B/Shore areas, alpha is 100% (no semi-transparent pixels, no glows). [PALETTE] Use ONLY the project palette. Foam = pure #FFFFFF (or project foam); Wet-Band uses darkest Land swatches; optional specular flecks use lightest Water swatches. [OUTLINE RULE] No contour outlines on Water; no black contour at A↔B—Wet-Band is the only dark edge there. [COAST STYLE] Coastline is orthogonal and stepped with 2×2 tile-pixel crenellations repeating every 4 tile-pixels, phase aligned to the tile origin (top-left). [INTERFACE] Along every A↔B boundary: apply Shore-Foam 1 tile-px on the B side (sparse speckles) and Wet-Band 2 tile-px on the A side (slightly darker A). [ALIGNMENT] Straight coasts snap to x=16 or y=16 midlines; corners are right-angle stair turns consistent with the 2×2 crenellation grid; allow ≤1 tile-px jitter only inside the crenellation pattern (not at midline crossings).",
+  "mask_bits": { "order": ["NW", "NE", "SE", "SW"], "meaning": "1 = Water at that corner (Wang corner mask)" },
+  "tiles": [
+    { "id": 0,  "name": "mask_0000",
+      "prompt": "All Land: A covers 100%. No A↔B boundary; keep edge zones calm for clean joins." },
+
+    { "id": 1,  "name": "mask_0001",
+      "prompt": "Water at SW only. Create a stepped right-angle inlet occupying the SW quadrant, tangent to x=16 and y=16, using 2×2 tile-px crenellations. Apply Foam 1 on B side and Wet-Band 2 on A side along the concave stair arc. Rest is A." },
+
+    { "id": 2,  "name": "mask_0010",
+      "prompt": "Water at SE only. Stepped inlet in SE quadrant, tangent to x=16 and y=16, using 2×2 crenellations. Foam 1 (B side) + Wet 2 (A side) along the concave stair arc. Rest is A." },
+
+    { "id": 3,  "name": "mask_0011",
+      "prompt": "Water along the south edge (SE+SW). B occupies everything below y=16. Coastline is a straight orthogonal stair at y=16 using 2×2 crenellation units, phase-aligned to tile origin. Foam 1 (B side) and Wet 2 (A side) along the entire boundary." },
+
+    { "id": 4,  "name": "mask_0100",
+      "prompt": "Water at NE only. Stepped inlet in NE quadrant, tangent to x=16 and y=16, with 2×2 crenellations. Foam 1 (B) + Wet 2 (A) along the concave stair arc. Rest is A." },
+
+    { "id": 5,  "name": "mask_0101",
+      "prompt": "Water at N and SW (NE + SW). Form a pixel-snapped diagonal water channel from NE to SW using a staircase path with 2×2 steps. The channel crosses both midlines (x=16 and y=16). Apply Foam 1 + Wet 2 along both sides of the channel. No stray B elsewhere." },
+
+    { "id": 6,  "name": "mask_0110",
+      "prompt": "Water along the north edge (NE+SE). B occupies everything above y=16. Coastline is a straight stair at y=16 with 2×2 crenellations, phase-aligned. Foam 1 (B side), Wet 2 (A side) along the boundary." },
+
+    { "id": 7,  "name": "mask_0111",
+      "prompt": "Water at N+E+S (NE+SE+SW). A forms a small west-facing peninsula centered horizontally. Build the peninsula with orthogonal sides and 2×2 crenellations; width ≈12 tile-px at its narrowest. Shoreline (Foam 1 + Wet 2) along all peninsula contacts with B. West edge remains A↔A (no shore)." },
+
+    { "id": 8,  "name": "mask_1000",
+      "prompt": "Water at NW only. Stepped inlet in NW quadrant, tangent to x=16 and y=16, with 2×2 crenellations. Foam 1 + Wet 2 along the concave stair arc. Rest is A." },
+
+    { "id": 9,  "name": "mask_1001",
+      "prompt": "Water along the west edge (NW+SW). B occupies everything left of x=16. Coastline is a straight stair at x=16 with 2×2 crenellations, phase-aligned. Foam 1 (B side), Wet 2 (A side) along the boundary." },
+
+    { "id": 10, "name": "mask_1010",
+      "prompt": "Water at NW+SE (opposite corners). Create a diagonal water channel from NW to SE as a pixel-snapped staircase (2×2 steps) that crosses both midlines exactly. Foam 1 + Wet 2 along both sides; no isolated B specks." },
+
+    { "id": 11, "name": "mask_1011",
+      "prompt": "Water at W+S+N (NW+SW+SE). A forms a small east-facing peninsula centered vertically; orthogonal sides with 2×2 crenellations; minimum width ≈12 tile-px. Shoreline (Foam 1 + Wet 2) along the peninsula’s contacts; east edge A↔A (no shore)." },
+
+    { "id": 12, "name": "mask_1100",
+      "prompt": "Water at N+W (NW+NE). B occupies above y=16, and includes a continuous stair transition into the west side left of x=16 at the NW corner. Net result: a straight north coastline at y=16 plus a stepped recess at the NW corner that is tangent to x=16 and y=16. Foam 1 + Wet 2 along the full boundary." },
+
+    { "id": 13, "name": "mask_1101",
+      "prompt": "Water at N+W+SW. A forms a narrow diagonal land bridge from NE toward SW, thickness exactly 8 tile-px, built as an orthogonal staircase with 2×2 steps. The bridge crosses x=16 and y=16. Apply Foam 1 + Wet 2 along both sides where it meets B." },
+
+    { "id": 14, "name": "mask_1110",
+      "prompt": "Water at N+E+W. A forms a narrow diagonal land bridge from NW toward SE, thickness exactly 8 tile-px, using 2×2 stair steps, crossing both midlines. Foam 1 + Wet 2 along both sides." },
+
+    { "id": 15, "name": "mask_1111",
+      "prompt": "All Water: B covers 100%. Calm surface; no outlines; no A present." }
+  ]
+}
+
